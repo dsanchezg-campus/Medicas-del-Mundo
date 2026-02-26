@@ -7,13 +7,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Bienvenidas</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
     <header>
         <article class="logo">
-            <img src="estilos/imagenes/logo.jpg" alt="logo">
+            <img src="styles/img/logo.jpg" alt="logo">
         </article>
         <h1>Bienvenida</h1>
     </header>
@@ -21,7 +22,7 @@
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
                 <article class="imagen">
-                    <img src="estilos/imagenes/psicodelico.jpg" alt="Imagen1">
+                    <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
                 <article class="testo">
                     <h1>Titulo 1</h1>
@@ -35,7 +36,7 @@
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
                 <article class="imagen">
-                    <img src="estilos/imagenes/psicodelico.jpg" alt="Imagen1">
+                    <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
                 <article class="testo">
                     <h1>Titulo 1</h1>
@@ -50,7 +51,7 @@
         <section class="categoria">
             <a class="enlace-bloque" href="bloque.php">
                 <article class="imagen">
-                    <img src="estilos/imagenes/pensando.webp" alt="Imagen1">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
                 <article class="testo">
                     <h1>Contenido 1</h1>
@@ -66,7 +67,7 @@
         <section class="categoria">
             <a class="enlace-bloque" href="bloque.php">
                 <article class="imagen">
-                    <img src="estilos/imagenes/pensando.webp" alt="Imagen1">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
                 <article class="testo">
                     <h1>Contenido 1</h1>
@@ -82,7 +83,7 @@
 
     </main>
     <footer>
-
+        <p>Médicos del mundo</p>
     </footer>
 </body>
 </html>
