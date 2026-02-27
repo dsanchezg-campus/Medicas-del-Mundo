@@ -83,7 +83,12 @@
 
     </main>
     <footer>
-        <p>Médicos del mundo</p>
+        <p>Médicos del Mundo España</p>
+        <p>Conde de Vilches, 15</p>
+        <p>28028, Madrid</p>
+        <p>De lunes a viernes de 8h a 20h.</p>
+        <p>Teléfono 91 543 60 33</p>
+        <p>Email:informacion@medicosdelmundo.org</p>
     </footer>
 </body>
 </html>
