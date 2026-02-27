@@ -1,7 +1,7 @@
 /*para ver los bordes, comprobaciones*/
-*{
-    border: 1px solid red;
-}
+/**{*/
+/*    border: 1px solid red;*/
+/*}*/
 /* Colores de la pagina web */
 :root {
     --color-azul-oscuro-1: #0f143d ;
@@ -145,7 +145,10 @@ footer{
     background-color: var(--color-azul-oscuro-2);
     text-align: center;
     padding: 5px;
+    background-image: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/doves-pattern.jpg);
+    object-fit: cover;
 }
+
 footer p{
     margin: 0;
     padding: 0;
