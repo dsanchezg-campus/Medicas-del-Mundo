@@ -142,9 +142,9 @@ main{
 footer{
     margin: 0;
     padding: 0;
-    height: 10vh;
     background-color: var(--color-azul-oscuro-2);
     text-align: center;
+    padding: 5px;
 }
 footer p{
     margin: 0;
