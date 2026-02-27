@@ -22,10 +22,12 @@
 <main>
     <aside class="subcategorias-content">
         <section class="categoria-content">
+
             <a class="enlace-bloque-content" href="index.php?page=1">
                 <article class="imagen-content">
-                    <img src="styles/img/psicodelico.jpg" alt="Imagen1">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
+
                 <article class="testo-content">
                     <h1>Titulo 1</h1>
                     <p>Parrafo de texto texto texto texto texto texto texto
@@ -34,11 +36,142 @@
                 </article>
             </a>
         </section>
+
+        <section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section><section class="categoria-content">
+
+            <a class="enlace-bloque-content" href="index.php?page=1">
+                <article class="imagen-content">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+
+                <article class="testo-content">
+                    <h1>Titulo 1</h1>
+                    <p>Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section>
+        ------------------------------
     </aside>
 
 
 
-</main>    <footer>
+    <section class="conetenedor-contenido">
+        <article class="titulo">
+            <h1>TITULItits</h1>
+        </article>
+        <article class="parrafo">
+            <p>texto texto texto texto texto texto texto texto
+                texto texto texto texto texto texto texto texto texto texto
+                texto texto texto texto texto texto texto texto texto texto
+                texto texto texto</p>
+        </article>
+        <article class="enlace">
+            <img src="styles/img/psicodelico.jpg" alt="despcripcion">
+        </article>
+    <section>
+
+</main>
+<footer>
     <section class="footer-section">
         <h2>Médicos del Mundo España</h2>
         <p>Conde de Vilches, 15 · 28028, Madrid</p>
