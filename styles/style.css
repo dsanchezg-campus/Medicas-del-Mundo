@@ -113,7 +113,7 @@ main{
     font-size: 1vw;
     min-font-size: 500px;
 }
-
+/* bloques de categorias*/
 .categoria {
     margin: 2% auto 0 auto;
     padding: 0;
@@ -142,10 +142,11 @@ main{
 /*    box-shadow: 0 0 50px purple;*/
 /*    transform: scale(1.10);*/
 /*}*/
+/**/
 .testo {
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow: hidden auto;
     height: 40%;
 }
 
@@ -234,6 +235,10 @@ footer a:hover{
 }
 
 /*Pagina de CONTENIDO */
+.subcategorias-content{
+    overflow: hidden auto;
+    height: 100%;
+}
 .categoria-content {
     margin: 10px 10px 10px 10px;
     padding: 0;
@@ -258,26 +263,29 @@ footer a:hover{
 .testo-content {
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow: hidden;
+
     height: 100%;
     width: 65%;
     display: inline-block;
 }
 
-.testo-content h1, .testo-content p{
+.testo-content h1{
     margin: 0;
     padding: 0 5px 0 5px;
-    overflow-y: auto;
     color: var(--color-rojo-corporativo);
     font-weight: lighter;
+    overflow: hidden;
+
 }
 .testo-content p{
     margin: 0;
     padding: 0 5px 0 5px;
-    overflow-y: auto;
+    overflow: hidden;
     color: var(--color-azul-oscuro-2);
     font-weight: lighter;
 }
+
 .imagen-content{
     display: inline-block;
     margin: 0;
@@ -294,12 +302,33 @@ footer a:hover{
     height: 100%;
     object-fit: cover;
 }
-.subcategorias-content{
-    overflow: hidden auto;
-    height: 100%;
+.testo-content p ::-webkit-scrollbar {
+    display: none;
 }
-.conetenedor-contenido{
+
+.contenedor-contenido{
     margin: 0 0 0 1vw;
     padding: 0;
     width: 70vw;
+}
+
+.volver-inicio{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 87vh;
+    left: 95vw;
+    width: 4vw;
+    border-radius: 100%;
+    border: 7px solid var(--color-rojo-corporativo);
+}
+.volver-inicio img{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 5px solid var(--color-amarillo-corporativo);
+    background-color: var(--color-rojo-corporativo);
 }

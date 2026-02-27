@@ -155,7 +155,7 @@
 
 
 
-    <section class="conetenedor-contenido">
+    <section class="contenedor-contenido">
         <article class="titulo">
             <h1>TITULItits</h1>
         </article>
@@ -171,6 +171,7 @@
     <section>
 
 </main>
+
 <footer>
     <section class="footer-section">
         <h2>Médicos del Mundo España</h2>
@@ -181,5 +182,7 @@
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
     </section>
-</footer></body>
+</footer>
+<a href="index.php" class="volver-inicio"><img src="styles/img/casita.png" alt="regresa a inicio"></a>
+</body>
 </html>

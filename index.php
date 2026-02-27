@@ -50,7 +50,7 @@
 
 
         <section class="categoria">
-            <a class="enlace-bloque" href="bloque.php">
+            <a class="enlace-bloque" href="content.php">
                 <article class="imagen">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
@@ -66,7 +66,7 @@
         </section>
 
         <section class="categoria">
-            <a class="enlace-bloque" href="bloque.php">
+            <a class="enlace-bloque" href="content.php">
                 <article class="imagen">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
