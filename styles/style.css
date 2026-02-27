@@ -32,9 +32,15 @@ body {
     margin: 0;
     padding: 0;
     scrollbar-width: thin;
-    scrollbar-color: #0f143d white;
+    scrollbar-color: #0f143d rgba(15, 20, 61, 0);
     overflow-x: hidden;
     font-family: 'Anton', sans-serif;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+::-webkit-clear-button{
+    display: none;
 }
 a {
     text-decoration: none;
@@ -47,6 +53,7 @@ header{
     text-align: left;
     align-items: center;
     background-color: var(--color-blanco-corporativo);
+    background-image: url(https://i.imgur.com/g9oLc9N.jpeg);
 }
 .logo {
     margin: 0 38vw 0 2vw;
@@ -64,8 +71,29 @@ header h1{
     padding: 0;
     display: inline-block;
     font-weight: lighter;
+    margin-right: 30vw;
 }
 
+
+.input-nav {
+    padding: 10px;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.input-nav:focus {
+    border: 2px solid #555;
+    outline: none;
+    box-shadow: 0 0 5px rgba(85, 85, 85, 0.5);
+}
+
+.input-nav:disabled {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
+}
 /*CONTENIDO PRINCIPAL*/
 main{
     margin: 0;
@@ -76,8 +104,6 @@ main{
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) rgb(244, 244, 244);
     height: 80vh;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #0f143d white;
     font-size: 1vw;
     min-font-size: 500px;
 }
@@ -90,14 +116,15 @@ main{
     max-width: 20vw;
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-rojo-corporativo);
     display: flex;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
+    transition: transform 0.4s;
 }
 .categoria:hover {
-    box-shadow: 0 0 20px grey;
+    box-shadow: 0 0 15px grey;
     transform: scale(1.005);
     transition-duration: 0.4s;
-    transition: transform 0.2s;
+    transition: transform 0.4s;
 }
 .enlace-bloque{
     margin: 0;
@@ -118,7 +145,7 @@ main{
 
 .testo h1, .testo p{
     margin: 0;
-    padding: 0;
+    padding: 0 5px 0 5px;
     overflow-y: auto;
     color: white;
     font-weight: lighter;
@@ -141,18 +168,62 @@ main{
 
 footer{
     margin: 0;
-    padding: 0;
+    padding: 16px 24px;
     background-color: var(--color-azul-oscuro-2);
-    text-align: center;
-    padding: 5px;
     background-image: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/doves-pattern.jpg);
     object-fit: cover;
+    min-height: 10vh;
+    border-top: 3px solid var(--color-rojo-corporativo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-footer p{
+.footer-section{
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    gap: 4px;
+    text-align: center;
+}
+
+.footer-section h2{
+    margin: 0 0 2px 0;
+    color: var(--color-blanco-corporativo);
+    font-weight: normal;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-section p{
     margin: 0;
-    padding: 0;
-    font-family: Anton, sans-serif;
     color: var(--color-blanco-corporativo);
     font-weight: lighter;
+    font-size: 1rem;
+    line-height: 1.35;
 }
+
+footer a{
+    color: var(--color-amarillo-corporativo);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+footer a:hover{
+    color: var(--color-blanco-corporativo);
+}
+
+@media (max-width: 768px) {
+    footer{
+        padding: 14px 12px;
+    }
+
+    .footer-section h2{
+        font-size: 1.1rem;
+    }
+
+    .footer-section p{
+        font-size: 0.92rem;
+    }
+}
+

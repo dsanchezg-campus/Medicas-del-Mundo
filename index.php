@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ?>
 <!doctype html>
 <html lang="es">
@@ -17,6 +17,7 @@
             <img src="styles/img/logo.jpg" alt="logo">
         </article>
         <h1>Bienvenida</h1>
+            <input TYPE="text" CLASS="input-nav">
     </header>
     <main>
         <section class="categoria">
@@ -81,14 +82,16 @@
         </section>
 
 
-    </main>
-    <footer>
-        <p>Médicos del Mundo España</p>
-        <p>Conde de Vilches, 15</p>
-        <p>28028, Madrid</p>
-        <p>De lunes a viernes de 8h a 20h.</p>
-        <p>Teléfono 91 543 60 33</p>
-        <p>Email:informacion@medicosdelmundo.org</p>
-    </footer>
-</body>
+    </main>    <footer>
+        <section class="footer-section">
+            <h2>Médicos del Mundo España</h2>
+            <p>Conde de Vilches, 15 · 28028, Madrid</p>
+            <p>Lunes a viernes: 8:00 - 20:00</p>
+            <p>
+                Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
+                Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
+            </p>
+        </section>
+    </footer></body>
 </html>
+
