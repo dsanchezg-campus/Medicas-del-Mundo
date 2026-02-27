@@ -21,7 +21,7 @@
 @font-face {
     font-family: 'Anton';
     src: url('fonts/Anton-Regular.woff2') format('woff2'),
-        url('fonts/Anton-Regular.woff') format('woff');
+    url('fonts/Anton-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -85,8 +85,8 @@ main{
 .categoria {
     margin: 2% auto 0 auto;
     padding: 0;
-    height: 40vh;
     min-width: 20vw;
+    height: 40vh;
     max-width: 20vw;
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-rojo-corporativo);
     display: flex;
@@ -94,9 +94,10 @@ main{
     text-align: center;
 }
 .categoria:hover {
-    box-shadow: 0 0 50px purple;
-    transform: scale(1.10);
-    transition-duration: 0.2s;
+    box-shadow: 0 0 20px grey;
+    transform: scale(1.005);
+    transition-duration: 0.4s;
+    transition: transform 0.2s;
 }
 .enlace-bloque{
     margin: 0;
@@ -114,6 +115,7 @@ main{
     overflow: auto;
     height: 40%;
 }
+
 .testo h1, .testo p{
     margin: 0;
     padding: 0;
