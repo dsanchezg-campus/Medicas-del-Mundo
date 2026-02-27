@@ -1,7 +1,8 @@
 /*para ver los bordes, comprobaciones*/
-/**{*/
-/*    border: 1px solid red;*/
-/*}*/
+*{
+    border: 1px solid red;
+}
+
 /* Colores de la pagina web */
 :root {
     --color-azul-oscuro-1: #0f143d ;
@@ -48,12 +49,15 @@ a {
 }
 /*CABECERA */
 header{
+    margin: 0;
+    padding: 0;
     height: 10vh;
-    justify-content: left;
-    text-align: left;
-    align-items: center;
+    width: 100vw;
+    /*justify-content: left;*/
+    text-align: center;
     background-color: var(--color-blanco-corporativo);
     background-image: url(https://i.imgur.com/g9oLc9N.jpeg);
+    object-fit: cover;
 }
 .logo {
     margin: 0 38vw 0 2vw;
@@ -69,15 +73,17 @@ header{
 header h1{
     margin: auto;
     padding: 0;
+    width: 10vw;
     display: inline-block;
     font-weight: lighter;
-    margin-right: 30vw;
 }
 
 
 .input-nav {
-    padding: 10px;
-    margin: 8px;
+    display: inline-block;
+    margin: 0 0 0 30vw;
+    width: 10vw;
+    height: 6vh;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
