@@ -15,7 +15,7 @@
     <header>
         <article class="logo">
             <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-                <img src="styles/img/logo.jpg" alt="logo">
+                <img src="styles/img/logo.png" alt="logo">
             <a>
         </article>
         <h1>Bienvenida</h1>
@@ -97,6 +97,7 @@
                 Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
                 Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
             </p>
+            <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
 </body>
