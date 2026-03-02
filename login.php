@@ -17,7 +17,7 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
 <!--        Poner aqui cualquier imagen que apetecca-->
     </article>
     <article class="login_box">
-        <?php if (isset($mensaje_error)): ?>}
+        <?php if (isset($mensaje_error)): ?>
         <article class="mensaje_error"><?php echo htmlspecialchars($mensaje_error);?> </article>
         <?php endif; ?>
     </article>
