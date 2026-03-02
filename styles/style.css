@@ -323,21 +323,31 @@ footer a:hover{
     margin: 0;
     padding: 0;
     position: fixed;
-    top: 87vh;
+    top: 90vh;
     left: 95vw;
     width: 4vw;
     /*border-radius: 100%;*/
     /*border: 7px solid var(--color-rojo-corporativo);*/
 }
-.volver-inicio img{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+.volver-inicio img {
+    width: 70%;
+    height: 70%;
     object-fit: cover;
-    border-radius: 100%;
-    border: 5px solid var(--color-amarillo-corporativo);
     background-color: var(--color-rojo-corporativo);
+    margin: 0px;
+    padding: 10px;
+    border-radius: 100%;
+    transition: 500ms;
+}
+.volver-inicio:hover img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    background-color: rgb(238, 115, 72);
+    margin: 0px;
+    padding: 10px;
+    border-radius: 100%;
+    transition: 500ms;
 }
 
 @media (max-width: 768px) {
@@ -352,4 +362,5 @@ footer a:hover{
     .footer-section p{
         font-size: 0.92rem;
     }
+
 }
