@@ -14,10 +14,16 @@
 <body>
 <header>
     <article class="logo">
-        <img src="styles/img/logo.jpg" alt="logo">
+        <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
+            <img src="styles/img/logo.jpg" alt="logo">
+        </a>
     </article>
     <h1>Bienvenida</h1>
-    <input TYPE="text" CLASS="input-nav">
+    <form method="POST" action="" class="form-cabecera">
+        <input type="text" class="input-nav" placeholder="Buscar">
+        <input type="submit" class="boton-invisible" value="Buscar">
+    </form>
+
 </header>
 <main>
     <aside class="subcategorias-content">
@@ -157,7 +163,7 @@
 
     <section class="contenedor-contenido">
         <article class="titulo">
-            <h1>TITULItits</h1>
+            <h1>TITULItis</h1>
         </article>
         <article class="parrafo">
             <p>texto texto texto texto texto texto texto texto

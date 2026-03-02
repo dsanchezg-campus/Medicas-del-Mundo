@@ -14,18 +14,23 @@
 <body>
     <header>
         <article class="logo">
-            <img src="styles/img/logo.jpg" alt="logo">
+            <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
+                <img src="styles/img/logo.jpg" alt="logo">
+            <a>
         </article>
         <h1>Bienvenida</h1>
-            <input TYPE="text" CLASS="input-nav">
+        <form method="POST" action="" class="form-cabecera">
+            <input type="text" class="input-nav" placeholder="Buscar">
+            <input type="submit" class="boton-invisible" value="Buscar">
+        </form>
     </header>
     <main>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Titulo 1</h1>
                     <p>Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto.
@@ -36,10 +41,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Titulo 1</h1>
                     <p>Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto.
@@ -51,10 +56,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="content.php">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Contenido 1</h1>
                     <p> Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto
@@ -67,10 +72,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="content.php">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Contenido 1</h1>
                     <p> Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto
@@ -82,7 +87,8 @@
         </section>
 
 
-    </main>    <footer>
+    </main>
+    <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>
             <p>Conde de Vilches, 15 · 28028, Madrid</p>
@@ -92,6 +98,7 @@
                 Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
             </p>
         </section>
-    </footer></body>
+    </footer>
+</body>
 </html>
 
