@@ -19,7 +19,7 @@
         </a>
     </article>
     <h1>Bienvenida</h1>
-    <form method="POST" action="">
+    <form method="POST" action="" class="form-cabecera">
         <input type="text" class="input-nav" placeholder="Buscar">
         <input type="submit" class="boton-invisible" value="Buscar">
     </form>

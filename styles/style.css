@@ -184,6 +184,7 @@ main{
     object-fit: fill;
 }
 
+/*FOOTER. PIE DE PAGINA*/
 footer{
     margin: 0;
     padding: 16px 24px;
@@ -231,25 +232,15 @@ footer a:hover{
     color: var(--color-blanco-corporativo);
 }
 
-@media (max-width: 768px) {
-    footer{
-        padding: 14px 12px;
-    }
 
-    .footer-section h2{
-        font-size: 1.1rem;
-    }
-
-    .footer-section p{
-        font-size: 0.92rem;
-    }
-}
 
 /*Pagina de CONTENIDO */
+/* aside */
 .subcategorias-content{
     overflow: hidden auto;
     height: 100%;
 }
+/* bloques */
 .categoria-content {
     margin: 10px 10px 10px 10px;
     padding: 0;
@@ -271,6 +262,7 @@ footer a:hover{
     height: 100%;
     border-radius: 10px;
 }
+/*seccion de TEXTO*/
 .testo-content {
     margin: 0;
     padding: 0;
@@ -316,11 +308,14 @@ footer a:hover{
 .testo-content p ::-webkit-scrollbar {
     display: none;
 }
-
+/* descripción principal bloque*/
 .contenedor-contenido{
     margin: 0 0 0 1vw;
     padding: 0;
     width: 70vw;
+}
+.contenedor-contenido h1{
+    margin: auto;
 }
 
 /*BOTON volver a inicio*/
@@ -343,4 +338,18 @@ footer a:hover{
     border-radius: 100%;
     border: 5px solid var(--color-amarillo-corporativo);
     background-color: var(--color-rojo-corporativo);
+}
+
+@media (max-width: 768px) {
+    footer{
+        padding: 14px 12px;
+    }
+
+    .footer-section h2{
+        font-size: 1.1rem;
+    }
+
+    .footer-section p{
+        font-size: 0.92rem;
+    }
 }
