@@ -319,8 +319,8 @@ footer a:hover{
     top: 87vh;
     left: 95vw;
     width: 4vw;
-    border-radius: 100%;
-    border: 7px solid var(--color-rojo-corporativo);
+    /*border-radius: 100%;*/
+    /*border: 7px solid var(--color-rojo-corporativo);*/
 }
 .volver-inicio img{
     margin: 0;
