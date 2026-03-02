@@ -4,14 +4,14 @@ class Usuario {
     private $email;
     private $password;
     private $id_usuario;
-    private $id_rol;
-    public function __construct($nombre, $email, $password, $id_usuario, $id_rol)
+    private $rol;
+    public function __construct($nombre, $email, $password, $id_usuario, $rol)
     {
         $this->nombre = $nombre;
         $this->email = $email;
         $this->password = $password;
         $this->id_usuario = $id_usuario;
-        $this->id_rol = $id_rol;
+        $this->rol = $rol;
     }
     //GETTERS
     public function getNombre(){
@@ -26,27 +26,27 @@ class Usuario {
     public function getIdUsuario(){
         return $this->id_usuario;
     }
-    public function getIdRol(){
-        return $this->id_rol;
+    public function getRol(){
+        return $this->rol;
     }
     //SETTERS
     public function setNombre($nombre) {
-        $nombre->set($nombre);
+        $this->nombre = $nombre;
     }
     public function setEmail($email) {
-        $email->set($email);
+        $this->email = $email;
     }
     public function setPassword($password) {
-        $password->set($password);
+        $this->password = $password;
     }
     public function setIdUsuario($id_usuario) {
-        $id_usuario->set($id_usuario);
+        $this->id_usuario = $id_usuario;
     }
     public function setIdMadre($id_madre) {
-        $id_madre->set($id_madre);
+        $this->id_madre = $id_madre;
     }
-    public function setRol($id_rol) {
-        $id_rol->set($id_rol);
+    public function setRol($rol) {
+        $this->rol = $rol;
     }
 
     public function iniciarSesion() {
