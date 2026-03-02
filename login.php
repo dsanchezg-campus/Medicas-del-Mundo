@@ -4,8 +4,12 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/style.css">
+    <title>Bienvenidas</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
 <section class="login_container">
@@ -18,7 +22,7 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
         <?php endif; ?>
     </article>
     <form action="inicio_sesion.php" method="post">
-     <h3>Inicio de sesion</h3>
+     <h1>Inicio de sesion</h1>
         <article class="form_usuario">
             <label for="usuario">Usuario:</label>
             <input type="texo" id="usuario" name="usuario" required>
