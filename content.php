@@ -19,7 +19,11 @@
         </a>
     </article>
     <h1>Bienvenida</h1>
-    <input TYPE="text" CLASS="input-nav">
+    <form method="POST" action="">
+        <input type="text" class="input-nav" placeholder="Buscar">
+        <input type="submit" class="boton-invisible" value="Buscar">
+    </form>
+
 </header>
 <main>
     <aside class="subcategorias-content">

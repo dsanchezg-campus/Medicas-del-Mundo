@@ -19,7 +19,10 @@
             <a>
         </article>
         <h1>Bienvenida</h1>
-            <input TYPE="text" CLASS="input-nav">
+        <form method="POST" action="" class="form-cabecera">
+            <input type="text" class="input-nav" placeholder="Buscar">
+            <input type="submit" class="boton-invisible" value="Buscar">
+        </form>
     </header>
     <main>
         <section class="categoria">
