@@ -1,6 +1,5 @@
 <?php
-class Faq extends Categoria
-{
+class Faq {
     private $titulo;
     private $id_faq;
     private $pregunta;
@@ -16,15 +15,55 @@ class Faq extends Categoria
         $this->fecha_actualizacion=$fecha_actualizacion;
 
     }
-}   public function crearfaq(){
-    return $faq
-}
-public function modificarfaq(){
-    return $faq
-}
-public function eliminarfaq(){
-    return[delete$faq]
-}
-public function listarfaq(){
-    return $faq
+    //GETTERS
+    public function getTitulo(){
+        return $this->titulo;
+    }
+    public function getIdFaq(){
+        return $this->id_faq;
+    }
+    public function getPregunta(){
+        return $this->pregunta;
+    }
+    public function getRespuesta(){
+        return $this->respuesta;
+    }
+    public function getIdCategoria(){
+        return $this->id_categoria;
+    }
+    public function getFechaActualizacion(){
+        return $this->fecha_actualizacion;
+    }
+    //SETTERS
+    public function setTitulo($titulo){
+        $this->titulo=$titulo;
+    }
+    public function setIdFaq($id_faq){
+        $this->id_faq=$id_faq;
+    }
+    public function setPregunta($pregunta){
+        $this->pregunta=$pregunta;
+    }
+    public function setRespuesta($respuesta){
+        $this->respuesta=$respuesta;
+    }
+    public function setIdCategoria($id_categoria){
+        $this->id_categoria=$id_categoria;
+    }
+    public function setFechaActualizacion($fecha_actualizacion){
+        $this->fecha_actualizacion=$fecha_actualizacion;
+    }
+
+    public function crearfaq(){
+    }
+
+    public function modificarfaq(){
+
+    }
+    public function eliminarfaq(){
+
+    }
+    public function listarfaq(){
+
+    }
 }
