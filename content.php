@@ -14,7 +14,9 @@
 <body>
 <header>
     <article class="logo">
-        <img src="styles/img/logo.jpg" alt="logo">
+        <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
+            <img src="styles/img/logo.jpg" alt="logo">
+        </a>
     </article>
     <h1>Bienvenida</h1>
     <input TYPE="text" CLASS="input-nav">
