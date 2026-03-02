@@ -2,7 +2,7 @@
 $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -25,7 +25,7 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
      <h1>Inicio de sesion</h1>
         <article class="form_usuario">
             <label for="usuario">Usuario:</label>
-            <input type="texo" id="usuario" name="usuario" required>
+            <input type="texto" id="usuario" name="usuario" required>
         </article>
         <article class="form_password">
             <label for="password">Password:</label>
