@@ -22,10 +22,10 @@
     <main>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Titulo 1</h1>
                     <p>Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto.
@@ -36,10 +36,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/psicodelico.jpg" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Titulo 1</h1>
                     <p>Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto.
@@ -51,10 +51,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="content.php">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Contenido 1</h1>
                     <p> Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto
@@ -67,10 +67,10 @@
 
         <section class="categoria">
             <a class="enlace-bloque" href="content.php">
-                <article class="imagen">
+                <article class="imagen-categoria">
                     <img src="styles/img/pensando.webp" alt="Imagen1">
                 </article>
-                <article class="testo">
+                <article class="testo-categoria">
                     <h1>Contenido 1</h1>
                     <p> Parrafo de texto texto texto texto texto texto texto
                         texto texto texto texto texto texto texto texto texto texto texto texto

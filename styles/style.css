@@ -47,6 +47,7 @@ a {
     text-decoration: none;
     color: black;
 }
+
 /*CABECERA */
 header{
     margin: 0;
@@ -77,8 +78,6 @@ header h1{
     display: inline-block;
     font-weight: lighter;
 }
-
-
 .input-nav {
     display: inline-block;
     margin: 0 0 0 30vw;
@@ -142,22 +141,21 @@ main{
 /*    box-shadow: 0 0 50px purple;*/
 /*    transform: scale(1.10);*/
 /*}*/
-/**/
-.testo {
+/*descripción de las categorías*/
+.descripcion-categoria {
     margin: 0;
     padding: 0;
     overflow: hidden auto;
     height: 40%;
 }
-
-.testo h1, .testo p{
+.descripcion-categoria h1, .testo p{
     margin: 0;
     padding: 0 5px 0 5px;
     overflow-y: auto;
     color: white;
     font-weight: lighter;
 }
-.imagen{
+.imagen-categoria{
     margin: 0;
     padding: 0;
     width: 100%;
@@ -165,7 +163,7 @@ main{
     /*min-width: 30vw;*/
     /*max-width: 30vw;*/
 }
-.imagen img{
+.imagen-categoria img{
     margin: 0;
     padding: 0;
     width: 100%;
@@ -312,6 +310,7 @@ footer a:hover{
     width: 70vw;
 }
 
+/*BOTON volver a inicio*/
 .volver-inicio{
     margin: 0;
     padding: 0;
