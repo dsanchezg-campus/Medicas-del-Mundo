@@ -4,7 +4,7 @@ namespace classes;
 
 use classes\Categoria;
 
-class Bloque extends Categoria
+class Bloque
 {
     private $id_bloque;
     private $orden_bloque;
@@ -12,12 +12,20 @@ class Bloque extends Categoria
     private $descripcion_bloque;
     private $texto_bloque;
     private $id_madre_bloque;
+    private $id_categoria;
     private $fecha_actualizacion_bloque;
 
 
-    public function __construct($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion)
-    {
-        parent::__construct($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion);
+    public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria){
+        $this->id_bloque = $id_bloque;
+        $this->orden_bloque = $orden_bloque;
+        $this->titulo_bloque = $titulo_bloque;
+        $this->descripcion_bloque = $descripcion;
+        $this->texto_bloque = $texto_bloque;
+        $this->id_madre_bloque = $id_madre;
+        $this->fecha_actualizacion_bloque = $fecha_actualizacion;
+        $this->id_categoria = $id_categoria;
+
     }
 
     public function getIdBloque(){
@@ -62,6 +70,11 @@ class Bloque extends Categoria
     public function setFechaActualizacionBloque($fecha_actualizacion_bloque){
         $this->fecha_actualizacion_bloque = $fecha_actualizacion_bloque;
     }
-
+    public function getIdCategoria(){
+        return $this->id_categoria;
+    }
+    public function setIdCategoria($id_categoria){
+        $this->id_categoria = $id_categoria;
+    }
 
 }
