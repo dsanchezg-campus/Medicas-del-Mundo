@@ -155,13 +155,13 @@ main{
 /*    transform: scale(1.10);*/
 /*}*/
 /*descripción de las categorías*/
-.descripcion-categoria {
+.testo-categoria {
     margin: 0;
     padding: 0;
     overflow: hidden auto;
     height: 40%;
 }
-.descripcion-categoria h1, .testo p{
+.testo-categoria h1, .testo-categoria p{
     margin: 0;
     padding: 0 5px 0 5px;
     overflow-y: auto;
