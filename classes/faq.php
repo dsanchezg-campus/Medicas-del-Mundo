@@ -53,7 +53,6 @@ class Faq {
     public function setFechaActualizacion($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
-
     public function crearfaq(){
     }
 
