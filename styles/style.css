@@ -95,7 +95,7 @@ header{
 }
 .linea-nav h1{
     padding: 0;
-    margin: 0;
+    margin: 1.5vh 0;
     /*width: 10vw;*/
     font-weight: lighter;
 }
@@ -106,7 +106,7 @@ header{
 }
 .input-nav {
     padding: 0;
-    margin: 0;
+    margin: 1.5vh auto;
     width: 10vw;
     height: 6vh;
     box-sizing: border-box;
@@ -329,14 +329,18 @@ footer a:hover{
 }
 /* descripción principal bloque*/
 .contenedor-contenido{
-    margin: 0 0 0 1vw;
+    margin: 0;
     padding: 0;
-    width: 70vw;
+    width: 72%;
+    overflow: hidden auto;
+    height: 100%;
 }
 .contenedor-contenido h1{
     margin: auto;
 }
-
+.enlace {
+    width: 100%;
+}
 /*BOTON volver a inicio*/
 .volver-inicio{
     margin: 0;
