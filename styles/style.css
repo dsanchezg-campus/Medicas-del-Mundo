@@ -1,7 +1,7 @@
 /*para ver los bordes, comprobaciones*/
-*{
-    border: 1px solid red;
-}
+/**{*/
+/*    border: 1px solid red;*/
+/*}*/
 
 /* Colores de la pagina web */
 :root {
@@ -59,44 +59,54 @@ header{
     background-image: url(https://i.imgur.com/g9oLc9N.jpeg);
     object-fit: cover;
 }
-ul{
+.lista-nav{
     padding: 0;
     margin: 0;
+    height: 10vh;
     display: flex; /* Activa flexbox */
+    flex-direction: row;
     list-style-type: none; /* Quita los puntos de la lista */
-    padding: 0; /* Quita el margen izquierdo por defecto */
-    gap: 15px; /* Añade espacio entre elementos */
-    text-align: center;
-    justify-content: center;
+    text-align: left;
+    justify-content: left;
 }
-li{
-    padding: 5px;
+.linea-nav{
+    padding: 0;
     margin: auto;
     text-align: center;
+    /*width: 20vw;*/
+    height: 10vh;
     display: inline-block;
+    align-items: center;
 }
 .logo {
+    margin: 0;
     padding: 0;
     width: 4vw;
 }
-header a{
+.logo a{
     margin: 0;
     padding: 0;
     width: 100%;
 }
 .logo img{
+    padding: 0;
     margin: 0;
     width: 100%;
-    padding: 0;
 }
-header h1{
+.linea-nav h1{
     padding: 0;
-    width: 10vw;
+    margin: 0;
+    /*width: 10vw;*/
     font-weight: lighter;
 }
 .form-cabecera{
+    padding: 0;
+    margin: 0;
+    align-items: center;
 }
 .input-nav {
+    padding: 0;
+    margin: 0;
     width: 10vw;
     height: 6vh;
     box-sizing: border-box;
@@ -116,6 +126,8 @@ header h1{
     cursor: not-allowed;
 }
 .boton-invisible{
+    margin: 0;
+    padding: 0;
     display: none;
 }
 /*CONTENIDO PRINCIPAL*/
@@ -127,6 +139,7 @@ main{
     justify-content: left;
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) rgb(244, 244, 244);
     height: 90vh;
+    width: 100vw;
     overflow-y: auto;
     font-size: 1vw;
     min-font-size: 500px;
