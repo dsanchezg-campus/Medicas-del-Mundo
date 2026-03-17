@@ -33,14 +33,14 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
         </ul>
     </header>
     <main class="login-container">
-        <article class="login-section">
-    <!--        Poner aqui cualquier imagen que apetezca-->
-        </article>
-        <article class="login-box">
-            <?php if (isset($mensaje_error)){ ?>
-            <article class="mensaje_error"><?php echo htmlspecialchars($mensaje_error);?> </article>
-            <?php } ?>
-        </article>
+<!--        <article class="login-section">-->
+<!--      Poner aqui cualquier imagen que apetezca -->
+<!--        </article>-->
+<!--        <article class="login-box">-->
+<!--            --><?php //if (isset($mensaje_error)){ ?>
+<!--            <article class="mensaje_error">--><?php //echo htmlspecialchars($mensaje_error);?><!-- </article>-->
+<!--            --><?php //} ?>
+<!--        </article>-->
         <form action="inicio-sesion.php" method="post">
          <h1>Inicio de sesión</h1>
             <article class="form-usuario">

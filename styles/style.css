@@ -1,7 +1,7 @@
 /*para ver los bordes, comprobaciones*/
-/**{*/
-/*    border: 1px solid red;*/
-/*}*/
+*{
+    border: 1px solid red;
+}
 
 /* Colores de la pagina web */
 :root {
@@ -54,7 +54,8 @@ header{
     padding: 0;
     height: 10vh;
     width: 100vw;
-    /*justify-content: left;*/
+    justify-content: center;
+    text-align: center;
     background-color: var(--color-blanco-corporativo);
     background-image: url(https://i.imgur.com/g9oLc9N.jpeg);
     object-fit: cover;
@@ -63,19 +64,20 @@ header{
     padding: 0;
     margin: 0;
     height: 10vh;
+    width: 100vw;
     display: flex; /* Activa flexbox */
     flex-direction: row;
     list-style-type: none; /* Quita los puntos de la lista */
-    text-align: left;
-    justify-content: left;
+    text-align: center;
+    justify-content: center;
 }
 .linea-nav{
     padding: 0;
-    margin: auto;
+    margin: auto 5% auto 5%;
     text-align: center;
     /*width: 20vw;*/
     height: 10vh;
-    display: inline-block;
+    /*display: inline-block;*/
     align-items: center;
 }
 .logo {
@@ -96,7 +98,7 @@ header{
 .linea-nav h1{
     padding: 0;
     margin: 1.5vh 0;
-    /*width: 10vw;*/
+    width: 10vw;
     font-weight: lighter;
 }
 .form-cabecera{
@@ -106,7 +108,7 @@ header{
 }
 .input-nav {
     padding: 0;
-    margin: 1.5vh auto;
+    margin: 1.5vh 0;
     width: 10vw;
     height: 6vh;
     box-sizing: border-box;
@@ -265,7 +267,7 @@ footer a:hover{
     padding: 0;
     min-width: 10vw;
     max-width: 25vw;
-    background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) ;
+    background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png);
     background-color: rgba(222, 217, 217, 0.17);
     border-radius: 5px;
     text-align: left;
@@ -393,11 +395,16 @@ footer a:hover{
 .login-container{
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
 .login-container form{
     background-color: #B398E3;
     border-radius: 10%;
     padding: 5%;
+    width: 25%;
 }
 .form-usuario{
     margin: 10% auto;
