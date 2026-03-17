@@ -395,7 +395,7 @@ footer a:hover{
     align-items: center;
 }
 .login-container form{
-    background-color: var(--color-amarillo-corporativo);
+    background-color: #B398E3;
     border-radius: 10%;
     padding: 5%;
 }
