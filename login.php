@@ -32,26 +32,26 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
             </li>
         </ul>
     </header>
-    <main class="login_container">
-        <article class="login_section">
+    <main class="login-container">
+        <article class="login-section">
     <!--        Poner aqui cualquier imagen que apetezca-->
         </article>
-        <article class="login_box">
-            <?php if (isset($mensaje_error)): ?>
+        <article class="login-box">
+            <?php if (isset($mensaje_error)){ ?>
             <article class="mensaje_error"><?php echo htmlspecialchars($mensaje_error);?> </article>
-            <?php endif; ?>
+            <?php } ?>
         </article>
-        <form action="inicio_sesion.php" method="post">
-         <h1>Inicio de sesion</h1>
-            <article class="form_usuario">
-                <label for="usuario">Usuario:</label>
+        <form action="inicio-sesion.php" method="post">
+         <h1>Inicio de sesión</h1>
+            <article class="form-usuario">
+                <label for="usuario">Usuaria: </label>
                 <input type="texto" id="usuario" name="usuario" required>
             </article>
-            <article class="form_password">
-                <label for="password">Password:</label>
+            <article class="form-password">
+                <label for="password">Contraseña: </label>
                 <input type="password" id="password" name="password" required>
             </article>
-            <article class="boton_login">
+            <article class="boton-login">
                 <button type="submit">Login</button>
             </article>
         </form>
