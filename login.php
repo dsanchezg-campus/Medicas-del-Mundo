@@ -34,7 +34,7 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
     </header>
     <main class="login_container">
         <article class="login_section">
-    <!--        Poner aqui cualquier imagen que apetecca-->
+    <!--        Poner aqui cualquier imagen que apetezca-->
         </article>
         <article class="login_box">
             <?php if (isset($mensaje_error)): ?>
