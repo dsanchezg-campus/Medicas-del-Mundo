@@ -68,5 +68,6 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
+    <a href="index.php" class="volver-inicio"><img src="styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>
