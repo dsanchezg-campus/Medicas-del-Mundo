@@ -12,41 +12,50 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
-<header>
-    <article class="logo">
-        <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-            <img src="styles/img/logo.png" alt="logo">
-            <a>
-    </article>
-    <h1>Bienvenida</h1>
-    <form method="POST" action="" class="form-cabecera">
-        <input type="text" class="input-nav" placeholder="Buscar">
-        <input type="submit" class="boton-invisible" value="Buscar">
-    </form>
-</header>
-<section class="login_container">
-    <article class="login_section">
-<!--        Poner aqui cualquier imagen que apetecca-->
-    </article>
-    <article class="login_box">
-        <?php if (isset($mensaje_error)): ?>
-        <article class="mensaje_error"><?php echo htmlspecialchars($mensaje_error);?> </article>
-        <?php endif; ?>
-    </article>
-    <form action="inicio_sesion.php" method="post">
-     <h1>Inicio de sesion</h1>
-        <article class="form_usuario">
-            <label for="usuario">Usuario:</label>
-            <input type="texto" id="usuario" name="usuario" required>
+    <header>
+        <ul class="lista-nav">
+            <li class="linea-nav">
+                <article class="logo">
+                    <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
+                        <img src="styles/img/logo.png" alt="logo">
+                    </a>
+                </article>
+            </li>
+            <li class="linea-nav">
+                <h1>Bienvenida</h1>
+            </li>
+            <li class="linea-nav">
+                <form method="POST" action="" class="form-cabecera">
+                    <input type="text" class="input-nav" placeholder="Buscar">
+                    <input type="submit" class="boton-invisible" value="Buscar">
+                </form>
+            </li>
+        </ul>
+    </header>
+    <main class="login_container">
+        <article class="login_section">
+    <!--        Poner aqui cualquier imagen que apetecca-->
         </article>
-        <article class="form_password">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <article class="login_box">
+            <?php if (isset($mensaje_error)): ?>
+            <article class="mensaje_error"><?php echo htmlspecialchars($mensaje_error);?> </article>
+            <?php endif; ?>
         </article>
-        <article class="boton_login">
-            <button type="submit">Login</button>
-        </article>
-    </form>
+        <form action="inicio_sesion.php" method="post">
+         <h1>Inicio de sesion</h1>
+            <article class="form_usuario">
+                <label for="usuario">Usuario:</label>
+                <input type="texto" id="usuario" name="usuario" required>
+            </article>
+            <article class="form_password">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </article>
+            <article class="boton_login">
+                <button type="submit">Login</button>
+            </article>
+        </form>
+    </main>
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>
@@ -59,6 +68,5 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
-</section>
 </body>
 </html>
