@@ -52,7 +52,7 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
                 <input type="password" id="password" name="password" required>
             </article>
             <article class="boton-login">
-                <button type="submit">Login</button>
+                <button type="submit" class="input-login">LOGIN</button>
             </article>
         </form>
     </main>
