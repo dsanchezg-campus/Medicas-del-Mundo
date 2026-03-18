@@ -107,10 +107,10 @@ header{
     align-items: center;
 }
 .input-nav {
-    padding: 0;
-    margin: 1.5vh 0;
-    width: 10vw;
-    height: 6vh;
+    padding: 10px;
+    margin: 1.3vh 0;
+    width: 9vw;
+    height: 5vh;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -118,9 +118,11 @@ header{
 }
 
 .input-nav:focus {
-    border: 2px solid #555;
+    border: 2px solid #9fa5af;
     outline: none;
-    box-shadow: 0 0 5px rgba(85, 85, 85, 0.5);
+    box-shadow: 0 0 5px #9fa5af;
+    width: 10vw;
+    height: 6vh;
 }
 
 .input-nav:disabled {
