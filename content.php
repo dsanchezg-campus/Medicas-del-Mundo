@@ -171,7 +171,7 @@
 
         <section class="contenedor-contenido">
             <article class="titulo">
-                <h1>TITULItis</h1>
+                <h1>TITULItits</h1>
             </article>
             <article class="parrafo">
                 <p>texto texto texto texto texto texto texto texto

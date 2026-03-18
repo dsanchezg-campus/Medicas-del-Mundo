@@ -332,7 +332,8 @@ footer a:hover{
 /* descripción principal bloque*/
 .contenedor-contenido{
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    box-sizing: border-box;
     width: 72%;
     overflow: hidden auto;
     height: 100%;
