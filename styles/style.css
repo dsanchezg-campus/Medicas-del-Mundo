@@ -150,7 +150,7 @@ main{
 }
 /* bloques de categorias*/
 .categoria {
-    margin: 2% auto 0 auto;
+    margin: 2% 2% 0 2%;
     padding: 0;
     min-width: 20vw;
     height: 40vh;

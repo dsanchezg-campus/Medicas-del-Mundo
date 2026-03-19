@@ -93,6 +93,36 @@
                 </article>
             </a>
         </section>
+        <section class="categoria">
+            <a class="enlace-bloque" href="content.php">
+                <article class="imagen-categoria">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+                <article class="testo-categoria">
+                    <h1>Contenido 1</h1>
+                    <p> Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto
+                        texto texto texto texto texto textotexto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section>
+        <section class="categoria">
+            <a class="enlace-bloque" href="content.php">
+                <article class="imagen-categoria">
+                    <img src="styles/img/pensando.webp" alt="Imagen1">
+                </article>
+                <article class="testo-categoria">
+                    <h1>Contenido 1</h1>
+                    <p> Parrafo de texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto texto
+                        texto texto texto texto texto texto texto texto texto texto texto
+                        texto texto texto texto texto textotexto texto texto texto texto texto.
+                    </p>
+                </article>
+            </a>
+        </section>
 
 
     </main>
