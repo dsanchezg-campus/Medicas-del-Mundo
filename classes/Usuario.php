@@ -29,28 +29,40 @@ class Usuario {
     public function getRol(){
         return $this->rol;
     }
-    //SETTERS
-    public function setNombre($nombre) {
-        $this->nombre = $nombre;
-    }
-    public function setEmail($email) {
-        $this->email = $email;
-    }
-    public function setPassword($password) {
-        $this->password = $password;
-    }
-    public function setIdUsuario($id_usuario) {
-        $this->id_usuario = $id_usuario;
-    }
-    public function setIdMadre($id_madre) {
-        $this->id_madre = $id_madre;
-    }
-    public function setRol($rol) {
-        $this->rol = $rol;
-    }
+    public function controlUsuario(){
+        if (isset($_SESSION["rol"])) {
+            $rol = $_SESSION["rol"];
+            $usuario = $_SESSION["usuario"];
 
-    public function iniciarSesion() {
+            if ($rol != "admin") {
+                session_unset();
+                session_destroy();
+                header("location: ../login.php");
+                exit;
+            }
 
+        } else {
+            session_unset();
+            session_destroy();
+            header("location: ../login.php");
+            exit;
+        }
+    }
+    public function inicioSesion(){
+        if (isset($_SESSION["usuario"])) {
+            $rol = $_SESSION["rol"];
+            $usuario = $_SESSION["usuario"];
+
+            if ($rol == "admin") {
+                session_unset();
+                header("location: ../admin.php");
+                exit;
+            }else($rol == "editora"){
+                session_unset();
+                header("location: ../editora.php");
+                exit;
+            }
+        }
     }
     public function eliminarSesion() {
     }
