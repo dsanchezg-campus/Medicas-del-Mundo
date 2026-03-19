@@ -1,4 +1,8 @@
 ﻿<?php
+require_once "Classes/Categoria.php";
+require_once "Classes/Conexion.php";
+$db = new Conexion();
+$conn = $db->conectar();
 ?>
 <!doctype html>
 <html lang="es">
@@ -33,6 +37,47 @@
         </ul>
     </header>
     <main>
+        <?php
+        try {
+        if (isset($_GET['page'])){
+            $subcategorias = Categoria::getSubcategorias($conn, $_GET['page']);
+            foreach ($subcategorias as $subcategoria) {
+        ?>
+        <section class="categoria">
+            <a class="enlace-bloque" href="index.php?page=<?php $subcategoria->getIdCategoria(); ?>">
+                <article class="imagen-categoria">
+                    <img src="<?php $subcategoria->getImg(); ?>>" alt="Imagen1">
+                </article>
+                <article class="testo-categoria">
+                    <h1><?php $subcategoria->getNombre(); ?></h1>
+                    <p><?php $subcategoria->getDescripcion(); ?></p>
+                </article>
+            </a>
+        </section>
+        <?php
+            }
+        } else {
+            $categorias = Categoria::getCategorias($conn);
+            foreach ($categorias as $categoria) {
+        ?>
+        <section class="categoria">
+            <a class="enlace-bloque" href="<?php $categoria->getIdcategoria(); ?>">
+                <article class="imagen-categoria">
+                    <img src="<?php $categoria->getImg(); ?>" alt="Imagen1">
+                </article>
+                <article class="testo-categoria">
+                    <h1><?php $categoria->getNombre(); ?></h1>
+                    <p><?php $categoria->getDescripcion(); ?></p>
+                </article>
+            </a>
+        </section>
+        <?php
+            }
+        }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        ?>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=1">
                 <article class="imagen-categoria">

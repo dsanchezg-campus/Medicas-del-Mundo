@@ -14,12 +14,15 @@ class Categoria
         $this->conn = $db;
     }
 
-    public function setDatos($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion){
-        $this->id_categoria = $id_categoria;
+    public function setDatos($nombre, $descripcion, $img){
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
-        $this->id_madre = $id_madre;
-        $this->fecha_actualizacion = $fecha_actualizacion;
+        $this->img = $img;
+        $this->fecha_actualizacion = date("Y-m-d H:i:s");
+    }
+    public function InsertarCategoria(){
+        $stmt = $this->conn->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bindParam("ssiss", $this->nombre, $this->descripcion, $this->orden, $this->img, $this->fecha_actualizacion);
     }
     public function getIdCategoria(){
         return $this->id_categoria;
@@ -73,10 +76,12 @@ class Categoria
     }
     /*
      * Devuelve un array con los objetos de categoria que haya en la BD
+     *
+     * @param Conexion objeto de Conexion, conecta a la BD
      * @return array / string array de objetos Categoria o un string en caso de error
      */
-    public function getCategorias() {
-        $stmt = $this->conn->prepare("SELECT * FROM categoria WHERE id_madre = NULL");
+    public static function getCategorias(PDO $db) {
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = NULL");
         $stmt->execute();
         $categorias = array();
         try {
@@ -84,8 +89,28 @@ class Categoria
                 $categorias[] = $categoria;
             }
         } catch (PDOException $e) {
-            return "Error: " . $e->getMessage();
+            throw new PDOException($e->getMessage());
         }
         return $categorias;
+    }
+    /*
+     * Devuelve un array con las subcategorias pertenecientes a una categoria
+     *
+     * @param Conexion objeto de Conexion, conecta a la BD
+     * @param int id de la categoria madre a la que pertenece la subcategoria
+     * @return array / string array de objetos Categoria o string con el error de la consulta
+     */
+    public static function getSubcategorias($db, $id_madre) {
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = ?");
+        $stmt->execute([$id_madre]);
+        $subcategorias = array();
+        try {
+            while ($subcategoria = $stmt->fetchObject(__CLASS__)) {
+                $subcategorias[] = $subcategoria;
+            }
+        } catch (PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+        return $subcategorias;
     }
 }
