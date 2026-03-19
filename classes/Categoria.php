@@ -1,15 +1,19 @@
 <?php
 class Categoria
 {
-    private $id_categoria;
-    private $orden;
-    private $nombre;
-    private $descripcion;
-    private $img;
-    private $id_madre;
-    private $fecha_actualizacion;
+    private int $id_categoria;
+    private int $orden;
+    private string $nombre;
+    private string $descripcion;
+    private string $img;
+    private int $id_madre;
+    private string $fecha_actualizacion;
+    private $conn;
 
-    public function __construct($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion){
+    public function __construct($db){
+        $this->conn = $db;
+    }
+    public function setDatos($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion){
         $this->id_categoria = $id_categoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
@@ -59,5 +63,12 @@ class Categoria
         return $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
+    public function numeroCategorias(){
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM categoria WHERE id_madre = NULL");
+        $stmt->execute();
+    }
 
+    public function getCategorias(){
+
+    }
 }
