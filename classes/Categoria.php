@@ -1,7 +1,4 @@
 <?php
-
-namespace classes;
-
 class Categoria
 {
     private $id_categoria;

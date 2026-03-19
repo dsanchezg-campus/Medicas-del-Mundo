@@ -1,9 +1,4 @@
 <?php
-
-namespace classes;
-
-use classes\Categoria;
-
 class Bloque
 {
     private $id_bloque;
