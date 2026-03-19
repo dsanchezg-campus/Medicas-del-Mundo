@@ -9,7 +9,7 @@ class Conexion
         $this->servername = "localhost";
         $this->username = "root";
         $this->password = "";
-        $this->dbname = "bloque";
+        $this->dbname = "mdm_db";
     }
     public function conectar() {
             $conn = new PDO("mysql:host=$this->servername;dbname=,$this->dbname", $this->username, $this->password);

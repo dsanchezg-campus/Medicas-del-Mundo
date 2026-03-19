@@ -80,7 +80,7 @@ class Categoria
      * @param Conexion objeto de Conexion, conecta a la BD
      * @return array / string array de objetos Categoria o un string en caso de error
      */
-    public static function getCategorias(PDO $db) {
+    public static function getCategorias($db) {
         $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = NULL");
         $stmt->execute();
         $categorias = array();
