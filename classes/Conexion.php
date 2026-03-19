@@ -1,5 +1,5 @@
 <?php
-class Database
+class Conexion
 {
     private $servername;
     private $username;
@@ -11,13 +11,13 @@ class Database
         $this->password = "";
         $this->dbname = "bloque";
     }
-    public function conectar(){
+    public function conectar() {
         try {
             $conn = new PDO("mysql:host=$this->servername;dbname=,$this->dbname", $this->username, $this->password);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e){
-            echo "Connection failed: " . $e->getMessage();
+            return "Connection failed: " . $e->getMessage();
         }
         return $conn;
     }
