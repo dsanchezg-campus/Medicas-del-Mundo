@@ -5,7 +5,7 @@ class Categoria
     private string $nombre;
     private string $descripcion;
     private int $orden;
-    private string $img;
+    private string $img_cat;
     private int $id_madre;
     private string $fecha_actualizacion;
     private PDO $conn;
@@ -14,10 +14,13 @@ class Categoria
         $this->conn = $db;
     }
 
-    public function setDatos($nombre, $descripcion, $img){
+    public function setDatos($id_categoria, $nombre, $descripcion, $orden, $img, $id_madre, $fecha_actualizacion){
+        $this->id_categoria = $id_categoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
+        $this->orden = $orden;
         $this->img = $img;
+        $this->id_madre = $id_madre;
         $this->fecha_actualizacion = date("Y-m-d H:i:s");
     }
     public function InsertarCategoria(){
@@ -81,7 +84,7 @@ class Categoria
      * @return array / string array de objetos Categoria o un string en caso de error
      */
     public static function getCategorias($db) {
-        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = NULL");
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre IS NULL");
         $stmt->execute();
         $categorias = array();
         try {
