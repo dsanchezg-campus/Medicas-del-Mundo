@@ -2,17 +2,18 @@
 class Categoria
 {
     private int $id_categoria;
-    private int $orden;
     private string $nombre;
     private string $descripcion;
+    private int $orden;
     private string $img;
     private int $id_madre;
     private string $fecha_actualizacion;
-    private $conn;
+    private PDO $conn;
 
     public function __construct($db){
         $this->conn = $db;
     }
+
     public function setDatos($id_categoria, $nombre, $descripcion, $id_madre, $fecha_actualizacion){
         $this->id_categoria = $id_categoria;
         $this->nombre = $nombre;
@@ -62,13 +63,29 @@ class Categoria
     public function setFechaActualizacion($fecha_actualizacion){
         return $this->fecha_actualizacion = $fecha_actualizacion;
     }
-
-    public function numeroCategorias(){
+    /*
+     * Devuelve cantidad de categorias en la bd
+     * @return int
+     */
+    public function numeroCategorias() : int{
         $stmt = $this->conn->prepare("SELECT COUNT(*) FROM categoria WHERE id_madre = NULL");
-        $stmt->execute();
+        return $stmt->execute();
     }
-
-    public function getCategorias(){
-
+    /*
+     * Devuelve un array con los objetos de categoria que haya en la BD
+     * @return array / string array de objetos Categoria o un string en caso de error
+     */
+    public function getCategorias() {
+        $stmt = $this->conn->prepare("SELECT * FROM categoria WHERE id_madre = NULL");
+        $stmt->execute();
+        $categorias = array();
+        try {
+            while ($categoria = $stmt->fetchObject(__CLASS__)) {
+                $categorias[] = $categoria;
+            }
+        } catch (PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+        return $categorias;
     }
 }
