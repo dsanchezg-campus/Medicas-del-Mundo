@@ -6,12 +6,18 @@ class Categoria
     private string $descripcion;
     private int $orden;
     private string $img_cat;
-    private int $id_madre;
+    private $id_madre;
     private string $fecha_actualizacion;
     private PDO $conn;
 
-    public function __construct($db){
-        $this->conn = $db;
+    public function __construct($id_categoria,$nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion){
+        $this->id_categoria = $id_categoria;
+        $this->nombre = $nombre;
+        $this->descripcion = $descripcion;
+        $this->orden = $orden;
+        $this->img_cat = $img_cat;
+        $this->id_madre = $id_madre;
+        $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
     public function setDatos($id_categoria, $nombre, $descripcion, $orden, $img, $id_madre, $fecha_actualizacion){
@@ -52,10 +58,10 @@ class Categoria
         return $this->descripcion = $descripcion;
     }
     public function getImg(){
-        return $this->img;
+        return $this->img_cat;
     }
     public function setImg($img){
-        return $this->img = $img;
+        return $this->img_cat = $img;
     }
     public function getIdMadre(){
         return $this->id_madre;
@@ -88,7 +94,16 @@ class Categoria
         $stmt->execute();
         $categorias = array();
         try {
-            while ($categoria = $stmt->fetchObject(__CLASS__)) {
+            while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $categoria = new Categoria(
+                    $categoria['id_categoria'],
+                    $categoria['nombre'],
+                    $categoria['descripcion'],
+                    $categoria['orden'],
+                    $categoria['img_cat'],
+                    $categoria['id_madre'],
+                    $categoria['fecha_actualizacion']
+                );
                 $categorias[] = $categoria;
             }
         } catch (PDOException $e) {
@@ -108,7 +123,16 @@ class Categoria
         $stmt->execute([$id_madre]);
         $subcategorias = array();
         try {
-            while ($subcategoria = $stmt->fetchObject(__CLASS__)) {
+            while ($subcategoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $subcategoria = new Categoria(
+                    $subcategoria['id_categoria'],
+                    $subcategoria['nombre'],
+                    $subcategoria['descripcion'],
+                    $subcategoria['orden'],
+                    $subcategoria['img_cat'],
+                    $subcategoria['id_madre'],
+                    $subcategoria['fecha_actualizacion']
+                );
                 $subcategorias[] = $subcategoria;
             }
         } catch (PDOException $e) {

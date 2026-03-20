@@ -61,13 +61,13 @@ $conn = $db->conectar();
             foreach ($categorias as $categoria) {
         ?>
         <section class="categoria">
-            <a class="enlace-bloque" href="<?php $categoria->getIdcategoria(); ?>">
+            <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                 <article class="imagen-categoria">
-                    <img src="<?php $categoria->getImg(); ?>" alt="Imagen1">
+                    <img src="<?php echo $categoria->getImg(); ?>" alt="Imagen1">
                 </article>
                 <article class="testo-categoria">
-                    <h1><?php $categoria->getNombre(); ?></h1>
-                    <p><?php $categoria->getDescripcion(); ?></p>
+                    <h1><?php echo $categoria->getNombre(); ?></h1>
+                    <p><?php echo $categoria->getDescripcion(); ?></p>
                 </article>
             </a>
         </section>
@@ -78,98 +78,6 @@ $conn = $db->conectar();
             echo $e->getMessage();
         }
         ?>
-        <section class="categoria">
-            <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen-categoria">
-                    <img src="styles/img/psicodelico.jpg" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Titulo 1</h1>
-                    <p>Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-
-        <section class="categoria">
-            <a class="enlace-bloque" href="index.php?page=1">
-                <article class="imagen-categoria">
-                    <img src="styles/img/psicodelico.jpg" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Titulo 1</h1>
-                    <p>Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-
-
-        <section class="categoria">
-            <a class="enlace-bloque" href="content.php">
-                <article class="imagen-categoria">
-                    <img src="styles/img/pensando.webp" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Contenido 1</h1>
-                    <p> Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto textotexto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-
-        <section class="categoria">
-            <a class="enlace-bloque" href="content.php">
-                <article class="imagen-categoria">
-                    <img src="styles/img/pensando.webp" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Contenido 1</h1>
-                    <p> Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto textotexto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-        <section class="categoria">
-            <a class="enlace-bloque" href="content.php">
-                <article class="imagen-categoria">
-                    <img src="styles/img/pensando.webp" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Contenido 1</h1>
-                    <p> Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto textotexto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-        <section class="categoria">
-            <a class="enlace-bloque" href="content.php">
-                <article class="imagen-categoria">
-                    <img src="styles/img/pensando.webp" alt="Imagen1">
-                </article>
-                <article class="testo-categoria">
-                    <h1>Contenido 1</h1>
-                    <p> Parrafo de texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto texto texto texto texto texto texto
-                        texto texto texto texto texto textotexto texto texto texto texto texto.
-                    </p>
-                </article>
-            </a>
-        </section>
-
-
     </main>
     <footer>
         <section class="footer-section">
