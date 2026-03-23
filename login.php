@@ -1,5 +1,16 @@
 <?php
-$mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
+require_once "classes/Usuario.php";
+require_once "classes/Conexion.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
+    session_start();
+    $db = new Conexion();
+    $conn = $db->conectar();
+    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'], $db)){
+        header("Location:".$_SESSION['usuaria']->getRol().".php");
+    } else{
+        $error = "Credenciales incorrectas";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,19 +44,19 @@ $mensaje_error = isset($_POST['mensaje_error']) ? $_POST['mensaje_error'] : '';
         </ul>
     </header>
     <main class="login-container">
-<!--        <article class="login-section">-->
-<!--      Poner aqui cualquier imagen que apetezca -->
-<!--        </article>-->
-<!--        <article class="login-box">-->
-<!--            --><?php //if (isset($mensaje_error)){ ?>
-<!--            <article class="mensaje_error">--><?php //echo htmlspecialchars($mensaje_error);?><!-- </article>-->
-<!--            --><?php //} ?>
-<!--        </article>-->
-        <form action="inicio-sesion.php" method="post">
+        <article class="login-section">
+      Poner aqui cualquier imagen que apetezca
+        </article>
+        <?php if (isset($error)){ ?>
+        <article class="login-box">
+            <article class="mensaje_error"><?php echo $error;?> </article>
+        </article>
+        <?php } ?>
+        <form action="" method="post">
          <h1>Inicio de sesión</h1>
             <article class="form-usuario">
                 <label for="usuario">Usuaria: </label>
-                <input type="texto" id="usuario" name="usuario" required>
+                <input type="text" id="usuario" name="usuario" required>
             </article>
             <article class="form-password">
                 <label for="password">Contraseña: </label>

@@ -59,7 +59,7 @@ class Usuario
             return false;
         }
     }
-    public function InicioSesion($usuario, $password, $db) :bool
+    public static function InicioSesion($usuario, $password, $db) :bool
     {
         $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol FROM usuario LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
         $stmt->bind_param("ss", $usuario, $usuario);
@@ -69,10 +69,7 @@ class Usuario
             return false;
         }
         if (password_verify($password, $usuario['password'])) {
-            $_SESSION["usuaria"]['rol'] = $usuario['rol'];
-            $_SESSION["usuaria"]['nombre'] = $usuario['nombre'];
-            $_SESSION["usuaria"]['email'] = $usuario['email'];
-            $_SESSION["usuaria"]['id'] = $usuario['id_usuario'];
+            $_SESSION["usuaria"] = new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['rol']);
             return true;
         } else {
             return false;
