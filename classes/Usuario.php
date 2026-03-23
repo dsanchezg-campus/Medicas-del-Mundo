@@ -1,11 +1,11 @@
 <?php
 class Usuario
 {
-    private $nombre;
-    private $email;
-    private $password;
-    private $id_usuario;
-    private $rol;
+    private string $nombre;
+    private string $email;
+    private string $password;
+    private int $id_usuario;
+    private string $rol;
     public function __construct($nombre, $email, $password, $id_usuario, $rol)
     {
         $this->nombre = $nombre;
@@ -35,43 +35,44 @@ class Usuario
     {
         return $this->rol;
     }
-    public function controlUsuario()
+    public function controlUsuarioAdmin() :bool
     {
-        if (isset($_SESSION["rol"])) {
-            $rol = $_SESSION["rol"];
-            $usuario = $_SESSION["usuario"];
-
-            if ($rol != "admin") {
-                session_unset();
-                session_destroy();
-                header("location: ../login.php");
-                exit;
+        if (isset($_SESSION["usuaria"])) {
+            if ($_SESSION["usuaria"]['rol'] == "admin") {
+                return true;
+            } else{
+                return false;
             }
-
-        }
-        else {
-            session_unset();
-            session_destroy();
-            header("location: ../login.php");
-            exit;
+        } else {
+            return false;
         }
     }
-    public function inicioSesion()
+    public function controlUsuarioEditora() :bool
     {
-        if (isset($_SESSION["usuario"])) {
-            $rol = $_SESSION["rol"];
-            $usuario = $_SESSION["usuario"];
-
-            if ($rol == "admin") {
-                session_unset();
-                header("location: ../admin.php");
-                exit;
+        if (isset($_SESSION["usuaria"])) {
+            if ($_SESSION["usuaria"]['rol'] == "editora") {
+                return true;
+            } else{
+                return false;
             }
-            elseif ($rol == "editora") {
-                session_unset();
-                header("location: ../editora.php");
-                exit;
-            }
+        } else {
+            return false;
+        }
+    }
+    public static function InicioSesion($usuario, $password, $db) :bool
+    {
+        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol FROM usuario LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
+        $stmt->bind_param("ss", $usuario, $usuario);
+        $stmt->execute();
+        $usuario = $stmt->get_result();
+        if (!$usuario) {
+            return false;
+        }
+        if (password_verify($password, $usuario['password'])) {
+            $_SESSION["usuaria"] = new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['rol']);
+            return true;
+        } else {
+            return false;
         }
     }
     public function eliminarSesion()

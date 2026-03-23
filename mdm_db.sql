@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2026 a las 09:01:40
+-- Tiempo de generación: 23-03-2026 a las 12:48:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,17 +41,28 @@ CREATE TABLE `bloque` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoría`
+-- Estructura de tabla para la tabla `categoria`
 --
 
-CREATE TABLE `categoría` (
+CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `orden` int(11) NOT NULL,
   `img_cat` varchar(255) NOT NULL,
-  `id_madre` int(11) NOT NULL
+  `id_madre` int(11) DEFAULT NULL,
+  `fecha_actualizacion` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_categoria`, `nombre`, `descripcion`, `orden`, `img_cat`, `id_madre`, `fecha_actualizacion`) VALUES
+(9, 'holza', 'holzaholzaholzaholzaholzaholza', 1, 'images.jfif', 10, '2026-03-20'),
+(10, 'MARIA', 'MAMAMAMMAMAMAMAMMAMAMAMAMA', 1, 'https://cdn-imgix.headout.com/media/images/c9db3cea62133b6a6bb70597326b4a34-388-dubai-img-worlds-of-adventure-tickets-01.jpg?auto=format&w=1222.3999999999999&h=687.6&q=90&ar=16%3A9&crop=faces&fit=crop', NULL, '2026-03-20'),
+(11, 'ASFDFD', 'SDFFDFDSFDFDSDSFFDSFSFDSFDFDSFD', 0, 'https://media.licdn.com/dms/image/v2/D4E0BAQGuxNl1VKC8xg/company-logo_200_200/B4EZshSVofHcAM-/0/1765790014525/img_media_logo?e=2147483647&v=beta&t=IbmJ4UipXNuYyGHXmJAJUurD3tPxSk6s3qUuOSEpiqg', NULL, '2026-03-20'),
+(12, 'ASFDFD', 'SDFFDFDSFDFDSDSFFDSFSFDSFDFDSFD', 0, 'https://media.licdn.com/dms/image/v2/D4E0BAQGuxNl1VKC8xg/company-logo_200_200/B4EZshSVofHcAM-/0/1765790014525/img_media_logo?e=2147483647&v=beta&t=IbmJ4UipXNuYyGHXmJAJUurD3tPxSk6s3qUuOSEpiqg', NULL, '2026-03-20');
 
 -- --------------------------------------------------------
 
@@ -119,9 +130,9 @@ ALTER TABLE `bloque`
   ADD KEY `id_madre` (`id_madre`);
 
 --
--- Indices de la tabla `categoría`
+-- Indices de la tabla `categoria`
 --
-ALTER TABLE `categoría`
+ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`),
   ADD KEY `FOREIGN KEY` (`id_madre`);
 
@@ -160,13 +171,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `bloque`
 --
 ALTER TABLE `bloque`
-  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `categoría`
+-- AUTO_INCREMENT de la tabla `categoria`
 --
-ALTER TABLE `categoría`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `extra`
@@ -201,20 +212,14 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `bloque`
   ADD CONSTRAINT `bloque_ibfk_1` FOREIGN KEY (`id_madre`) REFERENCES `bloque` (`id_bloque`),
-  ADD CONSTRAINT `bloque_ibfk_2` FOREIGN KEY (`id_bloque`) REFERENCES `extra` (`id_bloque`);
-
---
--- Filtros para la tabla `categoría`
---
-ALTER TABLE `categoría`
-  ADD CONSTRAINT `categoría_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `bloque` (`id_categoria`),
-  ADD CONSTRAINT `categoría_ibfk_2` FOREIGN KEY (`id_madre`) REFERENCES `categoría` (`id_categoria`);
+  ADD CONSTRAINT `bloque_ibfk_2` FOREIGN KEY (`id_bloque`) REFERENCES `extra` (`id_bloque`),
+  ADD CONSTRAINT `fk_bloque_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
 -- Filtros para la tabla `faq`
 --
 ALTER TABLE `faq`
-  ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoría` (`id_categoria`);
+  ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
 
 --
 -- Filtros para la tabla `usuario`
