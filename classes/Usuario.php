@@ -1,5 +1,6 @@
 <?php
-class Usuario {
+class Usuario
+{
     private $nombre;
     private $email;
     private $password;
@@ -14,22 +15,28 @@ class Usuario {
         $this->rol = $rol;
     }
     //GETTERS
-    public function getNombre(){
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
-    public function getPassword(){
+    public function getPassword()
+    {
         return $this->password;
     }
-    public function getIdUsuario(){
+    public function getIdUsuario()
+    {
         return $this->id_usuario;
     }
-    public function getRol(){
+    public function getRol()
+    {
         return $this->rol;
     }
-    public function controlUsuario(){
+    public function controlUsuario()
+    {
         if (isset($_SESSION["rol"])) {
             $rol = $_SESSION["rol"];
             $usuario = $_SESSION["usuario"];
@@ -41,14 +48,16 @@ class Usuario {
                 exit;
             }
 
-        } else {
+        }
+        else {
             session_unset();
             session_destroy();
             header("location: ../login.php");
             exit;
         }
     }
-    public function inicioSesion(){
+    public function inicioSesion()
+    {
         if (isset($_SESSION["usuario"])) {
             $rol = $_SESSION["rol"];
             $usuario = $_SESSION["usuario"];
@@ -57,13 +66,15 @@ class Usuario {
                 session_unset();
                 header("location: ../admin.php");
                 exit;
-            }else($rol == "editora"){
+            }
+            elseif ($rol == "editora") {
                 session_unset();
                 header("location: ../editora.php");
                 exit;
             }
         }
     }
-    public function eliminarSesion() {
+    public function eliminarSesion()
+    {
     }
 }
