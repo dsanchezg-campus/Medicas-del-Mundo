@@ -44,13 +44,13 @@ $conn = $db->conectar();
             foreach ($subcategorias as $subcategoria) {
         ?>
         <section class="categoria">
-            <a class="enlace-bloque" href="index.php?page=<?php $subcategoria->getIdCategoria(); ?>">
+            <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                 <article class="imagen-categoria">
-                    <img src="<?php $subcategoria->getImg(); ?>>" alt="Imagen1">
+                    <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                 </article>
                 <article class="testo-categoria">
-                    <h1><?php $subcategoria->getNombre(); ?></h1>
-                    <p><?php $subcategoria->getDescripcion(); ?></p>
+                    <h1><?php echo $subcategoria->getNombre(); ?></h1>
+                    <p><?php echo $subcategoria->getDescripcion(); ?></p>
                 </article>
             </a>
         </section>
