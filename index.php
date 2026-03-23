@@ -48,7 +48,7 @@ $conn = $db->conectar();
             <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                 <article class="imagen-categoria">
                     <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
-                </article>
+                </article>sdtryudfsgzxzf
                 <article class="testo-categoria">
                     <h1><?php echo $subcategoria->getNombre(); ?></h1>
                     <p><?php echo $subcategoria->getDescripcion(); ?></p>
@@ -82,14 +82,16 @@ $conn = $db->conectar();
         <?php
         if (isset($_GET['page'])){
             $contenidos = Bloque::getBloques($conn, $_GET['page']);
+            echo "<section class='contenedor'>";
             foreach ($contenidos as $contenido) {
         ?>
-        <section class="categoria">
-            <a class="enlace-bloque" href="index.php?page=<?php echo $contenido->getIdBloque(); ?>">
-                <article class="imagen-categoria">
+
+        <section class="contenido-bloque">
+            <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
+                <article class="imagen-contenido">
                     <img src="<?php  ?>" alt="Imagen1">
                 </article>
-                <article class="testo-categoria">
+                <article class="testo-contenido">
                     <h1><?php echo $contenido->getTituloBloque(); ?></h1>
                     <p><?php echo $contenido->getDescripcionBloque(); ?></p>
                 </article>
@@ -97,6 +99,7 @@ $conn = $db->conectar();
         </section>
         <?php
             }
+            echo "</section>";
         }
         ?>
     </main>
