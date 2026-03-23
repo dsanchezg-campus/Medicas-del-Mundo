@@ -1,6 +1,7 @@
 ﻿<?php
 require_once "Classes/Categoria.php";
 require_once "Classes/Conexion.php";
+require_once "Classes/Bloque.php";
 $db = new Conexion();
 $conn = $db->conectar();
 ?>
