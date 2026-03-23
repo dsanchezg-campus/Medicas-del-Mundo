@@ -1,4 +1,9 @@
 <?php
+require_once "classes/Bloque.php";
+require_once "classes/Categoria.php";
+//conexion a la base de datos
+$db = new Conexion();
+$conn = $db->conectar();
 ?>
 <!doctype html>
 <html lang="es">
@@ -34,6 +39,27 @@
     </header>
     <main>
         <aside class="subcategorias-content">
+            <?php
+            if (isset($_GET['page'])) {
+                $bloques = Bloque::getBloques($conn, $_GET['page']);
+                foreach ($bloques as $bloque) {
+            ?>
+            <section class="categoria-content">
+                <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque->getIdBloque(); ?>">
+                    <article class="imagen-content">
+                        <img src="<?php echo $bloque->getImg(); ?>>" alt="Imagen1">
+                    </article>
+
+                    <article class="testo-content">
+                        <h1><?php echo $bloque->getTituloBloque(); ?></h1>
+                        <p><?php echo $bloque->getTextoBloque(); ?></p>
+                    </article>
+                </a>
+            </section>
+            <?php
+                }
+            }
+            ?>
             <section class="categoria-content">
 
                 <a class="enlace-bloque-content" href="index.php?page=1">
@@ -49,139 +75,25 @@
                     </article>
                 </a>
             </section>
-
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section><section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section><section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section><section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section><section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
-            ------------------------------
         </aside>
 
         <section class="contenedor-contenido">
+            <?php
+            if (isset($_GET['page'])) {
+                $bloque = Bloque::getBloqueById($conn, $_GET['page']);
+            ?>
             <article class="titulo">
-                <h1>TITULItits</h1>
+                <h1><?php echo $bloque->getTituloBloque();?></h1>
             </article>
             <article class="parrafo">
-                <p>texto texto texto texto texto texto texto texto
-                    texto texto texto texto texto texto texto texto texto texto
-                    texto texto texto texto texto texto texto texto texto texto
-                    texto texto texto</p>
+                <p><?php echo $bloque->getTextoBloque();?></p>
             </article>
             <article class="enlace">
-                <img src="styles/img/psicodelico.jpg" alt="despcripcion">
+                <img src="<?php echo $bloque->getImg(); ?>" alt="despcripcion">
             </article>
+            <?php
+            }
+            ?>
         <section>
 
     </main>

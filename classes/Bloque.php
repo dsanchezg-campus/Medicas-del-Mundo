@@ -9,6 +9,7 @@ class Bloque
     private $id_madre_bloque;
     private $id_categoria;
     private $fecha_actualizacion_bloque;
+    private $contenidos;
 
 
     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria){
@@ -90,7 +91,25 @@ class Bloque
             $bloques[] = $bloque;
         }
         return $bloques;
-
+    }
+    public static function getBloqueById($db, $id_bloque) :Bloque{
+        $stmt = $db->prepare("SELECT * FROM bloque b LEFT JOIN contenido c ON b.id_bloque=c.id_bloque WHERE id_bloque = ? ");
+        $stmt->execute([$id_bloque]);
+        $bloque = $stmt->fetch(PDO::FETCH_ASSOC);
+        $bloque_pasar = new Bloque(
+            $bloque['id_bloque'],
+            $bloque['orden'],
+            $bloque['titulo'],
+            $bloque['descripcion'],
+            $bloque['texto'],
+            $bloque['id_madre'],
+            $bloque['fecha_actualizacion'],
+            $bloque['id_categoria']
+        );
+        foreach(Contenido::getContenidoById($db, $id_bloque) as $contenido) {
+            $bloque_pasar->AgregarContenido($contenido);
+        }
+        return $bloque_pasar;
     }
 
 }
