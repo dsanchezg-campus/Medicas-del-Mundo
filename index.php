@@ -78,6 +78,24 @@ $conn = $db->conectar();
             echo $e->getMessage();
         }
         ?>
+        <?php
+        $contenidos = Bloque::getBloques($conn, $_GET['page']);
+        foreach ($contenidos as $contenido) {
+        ?>
+        <section class="categoria">
+            <a class="enlace-bloque" href="index.php?page=<?php echo $contenido->getIdBloque(); ?>">
+                <article class="imagen-categoria">
+                    <img src="<?php  ?>" alt="Imagen1">
+                </article>
+                <article class="testo-categoria">
+                    <h1><?php echo $contenido->getTituloBloque(); ?></h1>
+                    <p><?php echo $contenido->getDescripcionBloque(); ?></p>
+                </article>
+            </a>
+        </section>
+        <?php
+        }
+        ?>
     </main>
     <footer>
         <section class="footer-section">

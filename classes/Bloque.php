@@ -71,5 +71,26 @@ class Bloque
     public function setIdCategoria($id_categoria){
         $this->id_categoria = $id_categoria;
     }
+    public static function getBloques($db, $id_madre) :array{
+        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_ = ? ");
+        $stmt->execute([$id_madre]);
+        $bloques = array();
+
+        while ($bloque = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $bloque = new Bloque(
+                $bloque['id_bloque'],
+                $bloque['orden'],
+                $bloque['titulo'],
+                $bloque['descripcion'],
+                $bloque['texto'],
+                $bloque['id_madre'],
+                $bloque['fecha_actualizacion'],
+                $bloque['id_categoria']
+            );
+            $bloques[] = $bloque;
+        }
+        return $bloques;
+
+    }
 
 }
