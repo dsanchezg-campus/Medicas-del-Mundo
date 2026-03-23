@@ -72,7 +72,7 @@ class Bloque
         $this->id_categoria = $id_categoria;
     }
     public static function getBloques($db, $id_madre) :array{
-        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_ = ? ");
+        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_madre = ? ");
         $stmt->execute([$id_madre]);
         $bloques = array();
 
