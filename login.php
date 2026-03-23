@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     </header>
     <main class="login-container">
         <article class="login-section">
-      Poner aqui cualquier imagen que apetezca
+            <img src="" alt="Poner aqui cualquier imagen que apetezca">
         </article>
         <?php if (isset($error)){ ?>
         <article class="login-box">
