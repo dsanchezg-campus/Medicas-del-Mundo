@@ -80,8 +80,9 @@ $conn = $db->conectar();
         }
         ?>
         <?php
-        $contenidos = Bloque::getBloques($conn, $_GET['page']);
-        foreach ($contenidos as $contenido) {
+        if (isset($_GET['page'])){
+            $contenidos = Bloque::getBloques($conn, $_GET['page']);
+            foreach ($contenidos as $contenido) {
         ?>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=<?php echo $contenido->getIdBloque(); ?>">
@@ -95,6 +96,7 @@ $conn = $db->conectar();
             </a>
         </section>
         <?php
+            }
         }
         ?>
     </main>
