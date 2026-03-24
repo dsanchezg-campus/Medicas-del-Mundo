@@ -1,34 +1,36 @@
 <?php
 class Contenido{
-    private $id_extra;
-    private $id_bloque;
+    private $id_contenido;
+    private $titulo;
+    private $texto;
     private $descripcion;
-    private $url;
+    private $id_bloque;
     private $fecha_actualizacion;
 
-    public function __construct($id_extra, $id_bloque, $descripcion, $url, $fecha_actualizacion)
+    public function __construct($id_contenido, $titulo, $texto, $descripcion, $id_bloque, $fecha_actualizacion)
     {
-        $this->id_extra = $id_extra;
-        $this->id_bloque = $id_bloque;
+        $this->id_contenido = $id_contenido;
+        $this->titulo = $titulo;
+        $this->texto = $texto;
         $this->descripcion = $descripcion;
-        $this->url = $url;
+        $this->id_bloque = $id_bloque;
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
     //GETTERS
     public function getIdContenido()
     {
-        return $this->id_extra;
+        return $this->id_contenido;
     }
 
     public function getTitulo()
     {
-        return $this->descripcion;
+        return $this->titulo;
     }
 
-    public function getUrl()
+    public function getTexto()
     {
-        return $this->url;
+        return $this->texto;
     }
 
     public function getDescripcion()
@@ -47,14 +49,14 @@ class Contenido{
     }
 
     //SETTERS
-    public function setIdContenido($id_extra)
+    public function setIdContenido($id_contenido)
     {
-        $this->id_extra = $id_extra;
+        $this->id_contenido = $id_contenido;
     }
 
-    public function setTitulo($descripcion)
+    public function setTitulo($titulo)
     {
-        $this->descripcion = $descripcion;
+        $this->titulo = $titulo;
     }
 
     public function setUrl($url)
@@ -82,30 +84,31 @@ class Contenido{
 
     }
 
-    public function CrearContenido($id_extra)
+    public function CrearContenido($id_contenido)
     {
 
     }
 
-    public function ModificarContenido($id_extra)
+    public function ModificarContenido($id_contenido)
     {
 
     }
 
-    public function EliminarContenido($id_extra)
+    public function EliminarContenido($id_contenido)
     {
 
     }
     public static function getContenidoByBloque($db, $id_bloque) :array{
-        $stmt = $db->prepare("SELECT * FROM extra WHERE id_bloque = ? ");
+        $stmt = $db->prepare("SELECT * FROM contenido WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $contenidos = array();
         while ($consultaContenido = $stmt->fetch(PDO::FETCH_ASSOC)){
             $contenidos = new Contenido(
-                $consultaContenido['id_extra'],
-                $consultaContenido['id_bloque'],
+                $consultaContenido['id_contenido'],
+                $consultaContenido['titulo'],
+                $consultaContenido['texto'],
                 $consultaContenido['descripcion'],
-                $consultaContenido['url'],
+                $consultaContenido['id_bloque'],
                 $consultaContenido['fecha_actualizacion']
             );
         }
