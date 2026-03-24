@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2026 a las 12:48:19
+-- Tiempo de generación: 24-03-2026 a las 08:37:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,9 +34,16 @@ CREATE TABLE `bloque` (
   `descripcion` text NOT NULL,
   `texto` text NOT NULL,
   `orden` int(11) NOT NULL,
-  `id_madre` int(11) NOT NULL,
+  `id_madre` int(11) DEFAULT NULL,
   `fecha_actualizacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `bloque`
+--
+
+INSERT INTO `bloque` (`id_bloque`, `id_categoria`, `titulo`, `descripcion`, `texto`, `orden`, `id_madre`, `fecha_actualizacion`) VALUES
+(5, 10, 'NAtico', 'Cancion maria', '(Coro)\r\nMaría mírame, María mírame\r\nSi tú me miras, Él también me mirará\r\nMadre mía, mírame\r\nDe la mano llévame\r\nMuy cerca de Él\r\nQue ahí me quiero quedar. \r\n(Verso)\r\nNo tengo miedo, no, no tengo miedo\r\nPorque sé que tú me llevas de la mano\r\nAunque el mundo me diga que estoy loco\r\nY que el camino es difícil y lejano.\r\n(Coro)\r\nMaría mírame, María mírame\r\nSi tú me miras, Él también me mirará\r\nMadre mía, mírame\r\nDe la mano llévame\r\nMuy cerca de Él\r\nQue ahí me quiero quedar. ', 0, NULL, '2026-03-23');
 
 -- --------------------------------------------------------
 
@@ -171,7 +178,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `bloque`
 --
 ALTER TABLE `bloque`
-  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -212,8 +219,13 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `bloque`
   ADD CONSTRAINT `bloque_ibfk_1` FOREIGN KEY (`id_madre`) REFERENCES `bloque` (`id_bloque`),
-  ADD CONSTRAINT `bloque_ibfk_2` FOREIGN KEY (`id_bloque`) REFERENCES `extra` (`id_bloque`),
   ADD CONSTRAINT `fk_bloque_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+
+--
+-- Filtros para la tabla `extra`
+--
+ALTER TABLE `extra`
+  ADD CONSTRAINT `extra_ibfk_1` FOREIGN KEY (`id_bloque`) REFERENCES `bloque` (`id_bloque`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `faq`
