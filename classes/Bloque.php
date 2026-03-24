@@ -90,7 +90,21 @@ class Bloque
             $bloques[] = $bloque;
         }
         return $bloques;
-
     }
-
+    public static function getBloqueById($db, $id_bloque) :Bloque{
+        $stmt = $db->prepare("SELECT * FROM bloque b LEFT JOIN contenido c ON b.id_bloque=c.id_bloque WHERE id_bloque = ? ");
+        $stmt->execute([$id_bloque]);
+        $bloque = $stmt->fetch(PDO::FETCH_ASSOC);
+        $bloque_pasar = new Bloque(
+            $bloque['id_bloque'],
+            $bloque['orden'],
+            $bloque['titulo'],
+            $bloque['descripcion'],
+            $bloque['texto'],
+            $bloque['id_madre'],
+            $bloque['fecha_actualizacion'],
+            $bloque['id_categoria']
+        );
+        return $bloque_pasar;
+    }
 }
