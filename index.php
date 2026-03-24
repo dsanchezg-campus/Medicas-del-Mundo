@@ -97,9 +97,11 @@ $conn = $db->conectar();
                 </article>
             </a>
         </section>
+        
         <?php
             }
             echo "</section>";
+            echo "<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>";
         }
         ?>
     </main>
