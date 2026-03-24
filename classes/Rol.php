@@ -20,4 +20,29 @@ class Rol {
     public function setNombre($nombre){
         $this->nombre=$nombre;
     }
-}
+    public static function getRoles($db){
+        $stmt = $db->prepare("SELECT id_rol,nombre FROM rol");
+        $stmt->execute();
+        while ($consultaRol = $stmt->fetch(PDO::FETCH_ASSOC)){
+            echo "<option value='" . $consultaRol['id_rol'] . "'>" . $consultaRol['nombre'] . "</option>";
+        }
+    }
+    public static function getRolById($db, $id_rol){
+        $stmt = $db->prepare("SELECT id_rol,nombre FROM rol WHERE id_rol = ?");
+        $stmt->execute([$id_rol]);
+        $consultaRol = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Rol(
+            $consultaRol['id_rol'],
+            $consultaRol['nombre']
+        );
+    }
+    public static function getRolByNombre($db, $nombre){
+        $stmt = $db->prepare("SELECT id_rol,nombre FROM rol WHERE nombre = ?");
+        $stmt->execute([$nombre]);
+        $consultaRol = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Rol(
+            $consultaRol['id_rol'],
+            $consultaRol['nombre']
+        );
+    }
+}   
