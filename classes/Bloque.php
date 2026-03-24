@@ -92,7 +92,7 @@ class Bloque
         return $bloques;
     }
     public static function getBloqueById($db, $id_bloque) :Bloque{
-        $stmt = $db->prepare("SELECT * FROM bloque b LEFT JOIN contenido c ON b.id_bloque=c.id_bloque WHERE id_bloque = ? ");
+        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $bloque = $stmt->fetch(PDO::FETCH_ASSOC);
         $bloque_pasar = new Bloque(
