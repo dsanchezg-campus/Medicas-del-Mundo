@@ -49,34 +49,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
         </ul>
     </header>
     <main>
-        <article class="anadir-categoria">
-            <form action="" method="post" class="form-anadir">
-                <label for="nombre">Nombre: </label>
-                <input type="text" id="nombre" name="nombre" required>
-                <button type="submit">Añadir</button>
-            </form>
-        </article>
     <article class="anadir-contenido">
-        <form action="" method="post" class="form-anadir">
+        <form action="anadir_contenido.php" method="post" class="form-anadir">
             <label for="titulo">Titulo: </label>
-            <input type="text" id="titulo" name="titulo" required>
+            <input type="text" id="titulo" name="titulo" required><br>
             <label for="descripcion">Descripcion: </label>
-            <input type="text" id="descripcion" name="descripcion" required>
+            <input type="text" id="descripcion" name="descripcion" required><br>
             <label for="texto">Texto: </label>
-            <input type="text" id="texto" name="texto" required>
-            <label for="id_bloque">Pertenece al bloque: </label>
+            <input type="text" id="texto" name="texto" required><br>
+            <label for="id_bloque">Pertenece a la categoria: </label>
             <select name="id_bloque" id="id_bloque">
-                <?php
-                $bloques = Bloque::listarBloques($db);
-                foreach ($bloques as $bloque) {
-                    echo "<option value='" . $bloque->getIdBloque() . "'>" . $bloque->getNombre() . "</option>";
-                }
-                ?>
+
             </select><br>
             <label for="prioridad">Prioridad: </label>
-            <input type="number" id="prioridad" name="prioridad" required>
+            <input type="number" id="prioridad" name="prioridad" required><br>
             <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" required>
+            <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" required><br>
             <button type="submit">Añadir</button>
         </form>
     </article>
