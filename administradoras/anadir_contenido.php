@@ -1,6 +1,11 @@
 <?php
-require_once "classes/Usuario.php";
-require_once "classes/Conexion.php";
+require_once "../classes/Usuario.php";
+require_once "../classes/Conexion.php";
+require_once "../classes/Contenido.php";
+require_once "../classes/Categoria.php";
+require_once "../classes/Faq.php";
+require_once "../classes/Bloque.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
     $db = new Conexion();
@@ -18,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Bienvenidas</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
+    <link rel="icon" type="../styles/img/logo.png" sizes="32x32" href="../styles/img/logo.png">
 </head>
 <body>
     <header>
@@ -28,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             <li class="linea-nav">
                 <article class="logo">
                     <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-                        <img src="styles/img/logo.png" alt="logo">
+                        <img src="../styles/img/logo.png" alt="logo">
                     </a>
                 </article>
             </li>
@@ -67,31 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
                     echo "<option value='" . $bloque->getIdBloque() . "'>" . $bloque->getNombre() . "</option>";
                 }
                 ?>
-            </select>
+            </select><br>
             <label for="prioridad">Prioridad: </label>
             <input type="number" id="prioridad" name="prioridad" required>
-            <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" required>
-            <button type="submit">Añadir</button>
-        </form>
-    </article>
-    <article class="anadir-faq">
-        <form action="" method="post" class="form-anadir">
-            <label for="titulo">Titulo: </label>
-            <input type="text" id="titulo" name="titulo" required>
-            <label for="pregunta">Pregunta: </label>
-            <input type="text" id="pregunta" name="pregunta" required>
-            <label for="respuesta">Respuesta: </label>
-            <input type="text" id="respuesta" name="respuesta" required>
-            <label for="id_categoria">Pertenece a la categoria: </label>
-            <select name="id_categoria" id="id_categoria">
-                <?php
-                $categorias = Categoria::listarCategorias($db);
-                foreach ($categorias as $categoria) {
-                    echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
-                }
-                ?>
-            </select>
             <label for="fecha_actualizacion">Fecha Actualizacion: </label>
             <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" required>
             <button type="submit">Añadir</button>
@@ -148,6 +131,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
-    <a href="index.php" class="volver-inicio"><img src="styles/img/casita.png" alt="regresa a inicio"></a>
+    <a href="index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>

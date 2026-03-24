@@ -1,4 +1,5 @@
 <?php
+include_once "Conexion.php";
 class Bloque
 {
     private $id_bloque;
@@ -22,6 +23,36 @@ class Bloque
         $this->id_categoria = $id_categoria;
 
     }
+    public function CrearBloque($db){
+        $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $this->orden_bloque,
+            $this->titulo_bloque,
+            $this->descripcion_bloque,
+            $this->texto_bloque,
+            $this->id_madre_bloque,
+            $this->fecha_actualizacion_bloque,
+            $this->id_categoria
+        ]);
+    }
+    public function ActualizarBloque($db){
+        $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, id_madre = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
+        $stmt->execute([
+            $this->orden_bloque,
+            $this->titulo_bloque,
+            $this->descripcion_bloque,
+            $this->texto_bloque,
+            $this->id_madre_bloque,
+            $this->fecha_actualizacion_bloque,
+            $this->id_categoria,
+            $this->id_bloque
+        ]);
+    }
+    public function EliminarBloque($db){
+        $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
+        $stmt->execute([$this->id_bloque]);
+    }
+
 
     public function getIdBloque(){
         return $this->id_bloque;
@@ -72,7 +103,7 @@ class Bloque
         $this->id_categoria = $id_categoria;
     }
     public static function getBloques($db, $id_categoria) :array{
-        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ");
+        $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
         $stmt->execute([$id_categoria]);
         $bloques = array();
 
@@ -83,7 +114,7 @@ class Bloque
                 $bloque['titulo'],
                 $bloque['descripcion'],
                 $bloque['texto'],
-                $bloque['id_madre'],
+                $bloque['id_madre'],    
                 $bloque['fecha_actualizacion'],
                 $bloque['id_categoria']
             );
