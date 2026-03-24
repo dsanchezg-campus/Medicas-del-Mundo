@@ -69,7 +69,7 @@ header {
     align-items: center;
 }
 
-.logo { width: 4vw; }
+.logo { width: 4vw;margin-bottom: 15px; }
 .logo a, .logo img { width: 100%; }
 
 .linea-nav h1 {
