@@ -9,7 +9,6 @@ class Bloque
     private $id_madre_bloque;
     private $id_categoria;
     private $fecha_actualizacion_bloque;
-    private $contenidos;
 
 
     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria){
@@ -106,10 +105,6 @@ class Bloque
             $bloque['fecha_actualizacion'],
             $bloque['id_categoria']
         );
-        foreach(Contenido::getContenidoById($db, $id_bloque) as $contenido) {
-            $bloque_pasar->AgregarContenido($contenido);
-        }
         return $bloque_pasar;
     }
-
 }

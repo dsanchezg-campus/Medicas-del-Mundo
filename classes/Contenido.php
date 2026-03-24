@@ -98,4 +98,20 @@ class Contenido{
     {
 
     }
+    public static function getContenidoByBloque($db, $id_bloque) :array{
+        $stmt = $db->prepare("SELECT * FROM contenido WHERE id_bloque = ? ");
+        $stmt->execute([$id_bloque]);
+        $contenidos = array();
+        while ($consultaContenido = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $contenidos = new Contenido(
+                $consultaContenido['id_bloque'],
+                $consultaContenido['titulo'],
+                $consultaContenido['url'],
+                $consultaContenido['descripcion'],
+                $consultaContenido['id_bloque'],
+                $consultaContenido['fecha_actualizacion']
+            );
+        }
+        return $contenidos;
+    }
 }

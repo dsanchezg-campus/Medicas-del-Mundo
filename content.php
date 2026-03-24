@@ -81,6 +81,7 @@ $conn = $db->conectar();
             <?php
             if (isset($_GET['page'])) {
                 $bloque = Bloque::getBloqueById($conn, $_GET['page']);
+                $contenidos = Contenido::getContenidoByBloque($conn, $bloque->getIdBloque());
             ?>
             <article class="titulo">
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
@@ -88,10 +89,14 @@ $conn = $db->conectar();
             <article class="parrafo">
                 <p><?php echo $bloque->getTextoBloque();?></p>
             </article>
+                <?php
+                foreach ($contenidos as $contenido) {
+                    ?>
             <article class="enlace">
-                <img src="<?php echo $bloque->getImg(); ?>" alt="despcripcion">
+                <img src="<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
             </article>
             <?php
+                }
             }
             ?>
         <section>
