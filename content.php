@@ -80,7 +80,7 @@ require_once "classes/Contenido.php";
             <?php
             if (isset($_GET['page'])) {
                 $bloque = Bloque::getBloqueById($_GET['page']);
-                $contenidos = Contenido::getContenidoByBloque($conn, $bloque->getIdBloque());
+                $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
             <article class="titulo">
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
