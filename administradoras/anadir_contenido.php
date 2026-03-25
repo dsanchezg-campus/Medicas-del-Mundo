@@ -8,17 +8,13 @@ require_once "../classes/Bloque.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
-    $db_obj = new Conexion();
-    $conn = $db_obj->conectar();
-    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'], $db_obj)){
+    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
         header("Location:".$_SESSION['usuaria']->getRol().".php");
     } else{
         $error = "Credenciales incorrectas";
     }
 } else {
     session_start();
-    $db_obj = new Conexion();
-    $conn = $db_obj->conectar();
 }
 ?>
 <!DOCTYPE html>
@@ -73,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             <label for="id_categoria">Pertenece a la categoria: </label>
             <select name="id_categoria" id="id_categoria">
                 <?php
-                $categorias = Categoria::getCategorias($conn);
+                $categorias = Categoria::getCategorias();
                 foreach ($categorias as $categoria) {
                     echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
                 }
@@ -91,10 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         if ($_POST['action'] === 'contenido') {
             $bloque = new Bloque(null, $_POST['prioridad'], $_POST['titulo'], $_POST['descripcion'], $_POST['texto'], null, $_POST['fecha_actualizacion'], $_POST['id_categoria']);
-            $bloque->CrearBloque($conn);
+            $bloque->CrearBloque();
         } elseif ($_POST['action'] === 'categoria') {
             $categoria = new Categoria(null, $_POST['nombre'], '', 0, '', null, date("Y-m-d H:i:s"));
-            $categoria->InsertarCategoria($conn);
+            $categoria->InsertarCategoria();
         }
     }
     ?>

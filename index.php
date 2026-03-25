@@ -2,7 +2,6 @@
 require_once "Classes/Categoria.php";
 require_once "Classes/DB.php";
 require_once "Classes/Bloque.php";
-$conn = DB::conectar();
 ?>
 <!doctype html>
 <html lang="es">
@@ -40,7 +39,7 @@ $conn = DB::conectar();
         <?php
         try {
         if (isset($_GET['page'])){
-            $subcategorias = Categoria::getSubcategorias($conn, $_GET['page']);
+            $subcategorias = Categoria::getSubcategorias($_GET['page']);
             foreach ($subcategorias as $subcategoria) {
         ?>
         <section class="categoria">
@@ -57,7 +56,7 @@ $conn = DB::conectar();
         <?php
             }
         } else {
-            $categorias = Categoria::getCategorias($conn);
+            $categorias = Categoria::getCategorias();
             foreach ($categorias as $categoria) {
         ?>
         <section class="categoria">
@@ -80,7 +79,7 @@ $conn = DB::conectar();
         ?>
         <?php
         if (isset($_GET['page'])){
-            $contenidos = Bloque::getBloques($conn, $_GET['page']);
+            $contenidos = Bloque::getBloques($_GET['page']);
             echo "<section class='contenedor'>";
             foreach ($contenidos as $contenido) {
         ?>

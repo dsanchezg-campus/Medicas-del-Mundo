@@ -3,8 +3,7 @@ require_once "classes/Usuario.php";
 require_once "classes/DB.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
-    $conn = DB::conectar();
-    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'], $db)){
+    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
         header("Location:".$_SESSION['usuaria']->getRol().".php");
     } else{
         $error = "Credenciales incorrectas";
