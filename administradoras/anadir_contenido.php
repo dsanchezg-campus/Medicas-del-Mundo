@@ -1,6 +1,6 @@
 <?php
 require_once "../classes/Usuario.php";
-require_once "../classes/Conexion.php";
+require_once "../classes/DB.php";
 require_once "../classes/Contenido.php";
 require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
