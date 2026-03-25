@@ -50,6 +50,7 @@ class Categoria
      */
     public function InsertarCategoria()
     {
+        $db = DB::conectar();
         $stmt = $this->conn->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
         $stmt->bindParam("ssiss", $this->nombre, $this->descripcion, $this->orden, $this->img, $this->fecha_actualizacion);
     }
@@ -115,6 +116,7 @@ class Categoria
      */
     public function numeroCategorias(): int
     {
+        $db = DB::conectar();
         $stmt = $this->conn->prepare("SELECT COUNT(*) FROM categoria WHERE id_madre = NULL");
         $stmt->execute();
         return $stmt->fetch();
@@ -125,8 +127,9 @@ class Categoria
      * @param Conexion objeto de Conexion, conecta a la BD
      * @return array | string objetos Categoria o un string en caso de error
      */
-    public static function getCategorias($db) :array
+    public static function getCategorias() :array
     {
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre IS NULL");
         $stmt->execute();
         $categorias = array();
@@ -156,8 +159,9 @@ class Categoria
      * @param int id de la categoria madre a la que pertenece la subcategoria
      * @return array | string objetos Categoria o el error de la consulta
      */
-    public static function getSubcategorias($db, $id_madre) :array | string
+    public static function getSubcategorias($id_madre) :array | string
     {
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = ?");
         $stmt->execute([$id_madre]);
         $subcategorias = array();

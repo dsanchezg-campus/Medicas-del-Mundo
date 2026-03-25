@@ -107,7 +107,8 @@ class Contenido{
      * @param $id_bloque int identificador del Bloque al que pertenece el contenido
      * @return array
      */
-    public static function getContenidoByBloque($db, $id_bloque) :array{
+    public static function getContenidoByBloque($id_bloque) :array{
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM contenido WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $contenidos = array();
