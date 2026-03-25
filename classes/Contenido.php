@@ -1,9 +1,11 @@
 <?php
 class Contenido{
+    //identificador del objeto
     private $id_contenido;
     private $titulo;
     private $texto;
     private $descripcion;
+    // id del objeto Bloque al que pertenece
     private $id_bloque;
     private $fecha_actualizacion;
 
@@ -98,6 +100,13 @@ class Contenido{
     {
 
     }
+
+    /**
+     * Devuelve un array con los Contenidos pertenecientes a un Bloque
+     * @param $db PDO a la BD
+     * @param $id_bloque int identificador del Bloque al que pertenece el contenido
+     * @return array
+     */
     public static function getContenidoByBloque($db, $id_bloque) :array{
         $stmt = $db->prepare("SELECT * FROM contenido WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);

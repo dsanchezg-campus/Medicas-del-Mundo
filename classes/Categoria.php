@@ -1,15 +1,27 @@
 <?php
 class Categoria
 {
+    //identificador de la categoria
     private int $id_categoria;
     private string $nombre;
     private string $descripcion;
+    //orden en la que se muestre la categoria
     private int $orden;
     private string $img_cat;
+    //identificador de la categoria a la que pertenece
     private $id_madre;
     private string $fecha_actualizacion;
     private PDO $conn;
 
+    /**
+     * @param $id_categoria
+     * @param $nombre
+     * @param $descripcion
+     * @param $orden
+     * @param $img_cat
+     * @param $id_madre
+     * @param $fecha_actualizacion
+     */
     public function __construct($id_categoria, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion)
     {
         $this->id_categoria = $id_categoria;
@@ -27,10 +39,15 @@ class Categoria
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->orden = $orden;
-        $this->img = $img;
+        $this->img_cat = $img;
         $this->id_madre = $id_madre;
         $this->fecha_actualizacion = date("Y-m-d H:i:s");
     }
+
+    /**
+     * Añade el objeto a la BBDD
+     * @return void
+     */
     public function InsertarCategoria()
     {
         $stmt = $this->conn->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
@@ -106,9 +123,9 @@ class Categoria
      * Devuelve un array con los objetos de categoria que haya en la BD
      *
      * @param Conexion objeto de Conexion, conecta a la BD
-     * @return array / string array de objetos Categoria o un string en caso de error
+     * @return array | string objetos Categoria o un string en caso de error
      */
-    public static function getCategorias($db)
+    public static function getCategorias($db) :array
     {
         $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre IS NULL");
         $stmt->execute();
@@ -137,9 +154,9 @@ class Categoria
      *
      * @param Conexion objeto de Conexion, conecta a la BD
      * @param int id de la categoria madre a la que pertenece la subcategoria
-     * @return array / string array de objetos Categoria o string con el error de la consulta
+     * @return array | string objetos Categoria o el error de la consulta
      */
-    public static function getSubcategorias($db, $id_madre)
+    public static function getSubcategorias($db, $id_madre) :array | string
     {
         $stmt = $db->prepare("SELECT * FROM categoria WHERE id_madre = ?");
         $stmt->execute([$id_madre]);
