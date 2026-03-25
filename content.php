@@ -1,11 +1,10 @@
 <?php
 require_once "classes/Bloque.php";
 require_once "classes/Categoria.php";
-require_once "classes/Conexion.php";
+require_once "classes/DB.php";
 require_once "classes/Contenido.php";
 //conexion a la base de datos
-$db = new Conexion();
-$conn = $db->conectar();
+$conn = DB::conectar();
 ?>
 <!doctype html>
 <html lang="es">

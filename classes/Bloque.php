@@ -1,5 +1,5 @@
 <?php
-include_once "Conexion.php";
+include_once "DB.php";
 class Bloque
 {
     private $id_bloque;
