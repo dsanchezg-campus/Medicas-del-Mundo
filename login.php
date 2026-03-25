@@ -1,6 +1,6 @@
 <?php
 require_once "classes/Usuario.php";
-require_once "classes/Conexion.php";
+require_once "classes/DB.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
     $db = new Conexion();
