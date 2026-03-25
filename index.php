@@ -3,7 +3,6 @@ require_once "Classes/Categoria.php";
 require_once "Classes/DB.php";
 require_once "Classes/Bloque.php";
 $conn = DB::conectar();
-//*Saul pedazo
 ?>
 <!doctype html>
 <html lang="es">
