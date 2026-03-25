@@ -8,13 +8,17 @@ require_once "../classes/Bloque.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
-    $db = new Conexion();
-    $conn = $db->conectar();
-    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'], $db)){
+    $db_obj = new Conexion();
+    $conn = $db_obj->conectar();
+    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'], $db_obj)){
         header("Location:".$_SESSION['usuaria']->getRol().".php");
     } else{
         $error = "Credenciales incorrectas";
     }
+} else {
+    session_start();
+    $db_obj = new Conexion();
+    $conn = $db_obj->conectar();
 }
 ?>
 <!DOCTYPE html>
@@ -51,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     <main>
         <article class="anadir-categoria">
             <form action="" method="post" class="form-anadir">
+                <input type="hidden" name="action" value="categoria">
                 <label for="nombre">Nombre: </label>
                 <input type="text" id="nombre" name="nombre" required>
                 <button type="submit">Añadir</button>
@@ -58,18 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
         </article>
     <article class="anadir-contenido">
         <form action="" method="post" class="form-anadir">
+            <input type="hidden" name="action" value="contenido">
             <label for="titulo">Titulo: </label>
             <input type="text" id="titulo" name="titulo" required>
             <label for="descripcion">Descripcion: </label>
             <input type="text" id="descripcion" name="descripcion" required>
             <label for="texto">Texto: </label>
             <input type="text" id="texto" name="texto" required>
-            <label for="id_bloque">Pertenece al bloque: </label>
-            <select name="id_bloque" id="id_bloque">
+            <label for="id_categoria">Pertenece a la categoria: </label>
+            <select name="id_categoria" id="id_categoria">
                 <?php
-                $bloques = Bloque::listarBloques($db);
-                foreach ($bloques as $bloque) {
-                    echo "<option value='" . $bloque->getIdBloque() . "'>" . $bloque->getNombre() . "</option>";
+                $categorias = Categoria::getCategorias($conn);
+                foreach ($categorias as $categoria) {
+                    echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
                 }
                 ?>
             </select><br>
@@ -82,41 +88,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     </article>
     </main>
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $db = new Conexion();
-        $conn = $db->conectar();
-        $contenido = new Contenido(
-            $_POST['id_contenido'],
-            $_POST['titulo'],
-            $_POST['texto'],
-            $_POST['descripcion'],
-            $_POST['id_bloque'],
-            $_POST['fecha_actualizacion']
-        );
-        $contenido->CrearContenido($db);
-    }
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $db = new Conexion();
-        $conn = $db->conectar();
-        $faq = new Faq(
-            $_POST['id_faq'],
-            $_POST['titulo'],
-            $_POST['pregunta'],
-            $_POST['respuesta'],
-            $_POST['id_categoria'],
-            $_POST['fecha_actualizacion']
-        );
-        $faq->CrearFaq($db);
-    }
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $db = new Conexion();
-        $conn = $db->conectar();
-        $categoria = new Categoria(
-            $_POST['id_categoria'],
-            $_POST['nombre'],
-            $_POST['fecha_actualizacion']
-        );
-        $categoria->CrearCategoria($db);
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
+        if ($_POST['action'] === 'contenido') {
+            $bloque = new Bloque(
+                null,
+                $_POST['prioridad'],
+                $_POST['titulo'],
+                $_POST['descripcion'],
+                $_POST['texto'],
+                null,
+                $_POST['fecha_actualizacion'],
+                $_POST['id_categoria']
+            );
+            $bloque->CrearBloque($conn);
+        } elseif ($_POST['action'] === 'categoria') {
+            $categoria = new Categoria(
+                null,
+                $_POST['nombre'],
+                '',
+                0,
+                '',
+                null,
+                date("Y-m-d H:i:s")
+            );
+            $categoria->InsertarCategoria($conn);
+        }
     }
     ?>
     <footer>
