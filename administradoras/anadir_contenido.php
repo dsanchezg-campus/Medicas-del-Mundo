@@ -1,6 +1,6 @@
 <?php
 require_once "../classes/Usuario.php";
-require_once "../classes/Conexion.php";
+require_once "../classes/DB.php";
 require_once "../classes/Contenido.php";
 require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             <label for="prioridad">Prioridad: </label>
             <input type="number" id="prioridad" name="prioridad" required>
             <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" required>
+            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
             <button type="submit">Añadir</button>
         </form>
     </article>
@@ -90,27 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         if ($_POST['action'] === 'contenido') {
-            $bloque = new Bloque(
-                null,
-                $_POST['prioridad'],
-                $_POST['titulo'],
-                $_POST['descripcion'],
-                $_POST['texto'],
-                null,
-                $_POST['fecha_actualizacion'],
-                $_POST['id_categoria']
-            );
+            $bloque = new Bloque(null, $_POST['prioridad'], $_POST['titulo'], $_POST['descripcion'], $_POST['texto'], null, $_POST['fecha_actualizacion'], $_POST['id_categoria']);
             $bloque->CrearBloque($conn);
         } elseif ($_POST['action'] === 'categoria') {
-            $categoria = new Categoria(
-                null,
-                $_POST['nombre'],
-                '',
-                0,
-                '',
-                null,
-                date("Y-m-d H:i:s")
-            );
+            $categoria = new Categoria(null, $_POST['nombre'], '', 0, '', null, date("Y-m-d H:i:s"));
             $categoria->InsertarCategoria($conn);
         }
     }

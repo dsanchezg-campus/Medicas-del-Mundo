@@ -53,23 +53,27 @@ class Faq {
     public function setFechaActualizacion($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
-    public function crearfaq(){
+    public function crearFAQ(){
+        $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO faq (titulo, pregunta, respuesta, id_categoria, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion]);
         return $stmt->rowCount();
     }
 
-    public function modificarfaq(){
+    public function modificarFAQ(){
+        $db = DB::conectar();
         $stmt = $db->prepare("UPDATE faq SET titulo = ?, pregunta = ?, respuesta = ?, id_categoria = ?, fecha_actualizacion = ? WHERE id_faq = ?");
         $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion, $this->id_faq]);
         return $stmt->rowCount();
     }
-    public function eliminarfaq(){
+    public function eliminarFAQ(){
+        $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM faq WHERE id_faq = ?");
         $stmt->execute([$this->id_faq]);
         return $stmt->rowCount();
     }
-    public static function listarfaq($db){
+    public static function listarFAQ(){
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM faq");
         $stmt->execute();
         $faqs = array();

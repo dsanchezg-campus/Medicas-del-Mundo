@@ -3,8 +3,6 @@ require_once "classes/Bloque.php";
 require_once "classes/Categoria.php";
 require_once "classes/DB.php";
 require_once "classes/Contenido.php";
-//conexion a la base de datos
-$conn = DB::conectar();
 ?>
 <!doctype html>
 <html lang="es">
@@ -42,7 +40,7 @@ $conn = DB::conectar();
         <aside class="subcategorias-content">
             <?php
             if (isset($_GET['page'])) {
-                $bloques = Bloque::getBloques($conn, $_GET['page']);
+                $bloques = Bloque::getBloques($_GET['page']);
                 foreach ($bloques as $bloque) {
             ?>
             <section class="categoria-content">
@@ -81,8 +79,8 @@ $conn = DB::conectar();
         <section class="contenedor-contenido">
             <?php
             if (isset($_GET['page'])) {
-                $bloque = Bloque::getBloqueById($conn, $_GET['page']);
-                $contenidos = Contenido::getContenidoByBloque($conn, $bloque->getIdBloque());
+                $bloque = Bloque::getBloqueById($_GET['page']);
+                $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
             <article class="titulo">
                 <h1><?php echo $bloque->getTituloBloque();?></h1>

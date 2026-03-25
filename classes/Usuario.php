@@ -59,8 +59,9 @@ class Usuario
             return false;
         }
     }
-    public static function InicioSesion($usuario, $password, $db) :bool
+    public static function InicioSesion($usuario, $password) :bool
     {
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol FROM usuario LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
         $stmt->bind_param("ss", $usuario, $usuario);
         $stmt->execute();

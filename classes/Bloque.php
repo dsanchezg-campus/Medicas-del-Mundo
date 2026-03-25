@@ -23,7 +23,8 @@ class Bloque
         $this->id_categoria = $id_categoria;
 
     }
-    public function CrearBloque($db){
+    public function CrearBloque(){
+        $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $this->orden_bloque,
@@ -35,7 +36,8 @@ class Bloque
             $this->id_categoria
         ]);
     }
-    public function ActualizarBloque($db){
+    public function ActualizarBloque(){
+        $db = DB::conectar();
         $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, id_madre = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
         $stmt->execute([
             $this->orden_bloque,
@@ -48,7 +50,8 @@ class Bloque
             $this->id_bloque
         ]);
     }
-    public function EliminarBloque($db){
+    public function EliminarBloque(){
+        $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
         $stmt->execute([$this->id_bloque]);
     }
@@ -102,7 +105,8 @@ class Bloque
     public function setIdCategoria($id_categoria){
         $this->id_categoria = $id_categoria;
     }
-    public static function getBloques($db, $id_categoria) :array{
+    public static function getBloques($id_categoria) :array{
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
         $stmt->execute([$id_categoria]);
         $bloques = array();
@@ -122,7 +126,8 @@ class Bloque
         }
         return $bloques;
     }
-    public static function getBloqueById($db, $id_bloque) :Bloque{
+    public static function getBloqueById($id_bloque) :Bloque{
+        $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $bloque = $stmt->fetch(PDO::FETCH_ASSOC);
