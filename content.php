@@ -40,22 +40,27 @@ require_once "classes/Contenido.php";
         <aside class="subcategorias-content">
             <?php
             if (isset($_GET['page'])) {
-                $bloques = Bloque::getBloques($_GET['page']);
-                foreach ($bloques as $bloque) {
+                // obtenemos el bloque de contenido de la página
+                $bloque = Bloque::getBloqueById($_GET['page']);
+                // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
+                $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+                if (!$bloques_paralelos) {
+                    foreach ($bloques_paralelos as $bloque_paralelo) {
             ?>
             <section class="categoria-content">
-                <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque->getIdBloque(); ?>">
+                <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
                     <article class="imagen-content">
-                        <img src="<?php echo $bloque->getImg(); ?>>" alt="Imagen1">
+                        <img src="<?php echo $bloque_paralelo->getImg(); ?>" alt="Imagen1">
                     </article>
 
                     <article class="testo-content">
-                        <h1><?php echo $bloque->getTituloBloque(); ?></h1>
-                        <p><?php echo $bloque->getTextoBloque(); ?></p>
+                        <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
+                        <p><?php echo $bloque_paralelo->getTextoBloque(); ?></p>
                     </article>
                 </a>
             </section>
             <?php
+                    }
                 }
             }
             ?>
@@ -80,6 +85,7 @@ require_once "classes/Contenido.php";
             <?php
             if (isset($_GET['page'])) {
                 $bloque = Bloque::getBloqueById($_GET['page']);
+                //obtenemos los contenidos extra del bloque
                 $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
             <article class="titulo">

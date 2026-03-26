@@ -105,7 +105,7 @@ class Bloque
     public function setIdCategoria($id_categoria){
         $this->id_categoria = $id_categoria;
     }
-    public static function getBloques($id_categoria) :array{
+    public static function getBloquesByCategoria($id_categoria) :array{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
         $stmt->execute([$id_categoria]);
