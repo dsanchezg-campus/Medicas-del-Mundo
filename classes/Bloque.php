@@ -10,7 +10,7 @@ class Bloque
     private $id_madre_bloque;
     private $id_categoria;
     private $fecha_actualizacion_bloque;
-    private string $icono;
+    private $icono;
 
 
     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
