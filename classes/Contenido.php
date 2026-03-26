@@ -92,7 +92,6 @@ class Contenido{
 
     /**
      * Devuelve un array con los Contenidos pertenecientes a un Bloque
-     * @param $db PDO a la BD
      * @param $id_bloque int identificador del Bloque al que pertenece el contenido
      * @return array
      */
