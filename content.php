@@ -82,6 +82,7 @@ require_once "classes/Contenido.php";
         <section class="contenedor-contenido">
             <?php
             if (isset($_GET['page'])) {
+                $bloque = Bloque::getBloqueById($_GET['page']);
                 //obtenemos los contenidos extra del bloque
                 $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
