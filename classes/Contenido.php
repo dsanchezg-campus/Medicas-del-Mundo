@@ -101,13 +101,14 @@ class Contenido{
         $stmt->execute([$id_bloque]);
         $contenidos = array();
         while ($consultaContenido = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $contenidos = new Contenido(
+            $contenido = new Contenido(
                 $consultaContenido['id_extra'],
                 $consultaContenido['url'],
                 $consultaContenido['descripcion'],
                 $consultaContenido['id_bloque'],
                 $consultaContenido['fecha_actualizacion']
             );
+            $contenidos[] = $contenido;
         }
         return $contenidos;
     }
