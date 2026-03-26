@@ -1,38 +1,32 @@
 <?php
 class Contenido{
     //identificador del objeto
-    private $id_contenido;
-    private $titulo;
-    private $texto;
+    private $id_extra;
+    private $url;
     private $descripcion;
     // id del objeto Bloque al que pertenece
     private $id_bloque;
     private $fecha_actualizacion;
 
-    public function __construct($id_contenido, $titulo, $texto, $descripcion, $id_bloque, $fecha_actualizacion)
+    public function __construct($id_extra, $url, $descripcion, $id_bloque, $fecha_actualizacion)
     {
-        $this->id_contenido = $id_contenido;
-        $this->titulo = $titulo;
-        $this->texto = $texto;
+        $this->id_contenido = $id_extra;
+        $this->url = $url;
         $this->descripcion = $descripcion;
         $this->id_bloque = $id_bloque;
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
     //GETTERS
-    public function getIdContenido()
+    public function getIdExtra()
     {
         return $this->id_contenido;
     }
 
-    public function getTitulo()
-    {
-        return $this->titulo;
-    }
 
-    public function getTexto()
+    public function getUrl()
     {
-        return $this->texto;
+        return $this->url;
     }
 
     public function getDescripcion()
@@ -51,14 +45,9 @@ class Contenido{
     }
 
     //SETTERS
-    public function setIdContenido($id_contenido)
+    public function setIdExtra($id_extra)
     {
-        $this->id_contenido = $id_contenido;
-    }
-
-    public function setTitulo($titulo)
-    {
-        $this->titulo = $titulo;
+        $this->id_extra = $id_extra;
     }
 
     public function setUrl($url)
@@ -109,14 +98,13 @@ class Contenido{
      */
     public static function getContenidoByBloque($id_bloque) :array{
         $db = DB::conectar();
-        $stmt = $db->prepare("SELECT * FROM contenido WHERE id_bloque = ? ");
+        $stmt = $db->prepare("SELECT * FROM extra WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $contenidos = array();
         while ($consultaContenido = $stmt->fetch(PDO::FETCH_ASSOC)){
             $contenidos = new Contenido(
-                $consultaContenido['id_contenido'],
-                $consultaContenido['titulo'],
-                $consultaContenido['texto'],
+                $consultaContenido['id_extra'],
+                $consultaContenido['url'],
                 $consultaContenido['descripcion'],
                 $consultaContenido['id_bloque'],
                 $consultaContenido['fecha_actualizacion']
