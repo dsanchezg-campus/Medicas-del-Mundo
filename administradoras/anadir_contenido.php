@@ -6,15 +6,9 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
-    session_start();
-    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
-        header("Location:".$_SESSION['usuaria']->getRol().".php");
-    } else{
-        $error = "Credenciales incorrectas";
-    }
-} else {
-    session_start();
+if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
+    header("location: ../index.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>

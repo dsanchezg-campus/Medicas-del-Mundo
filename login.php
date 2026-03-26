@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     session_start();
     if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
         header("Location:".$_SESSION['usuaria']->getRol().".php");
+        exit;
     } else{
         $error = "Credenciales incorrectas";
     }

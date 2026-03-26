@@ -38,7 +38,7 @@ class Usuario
     public function controlUsuarioAdmin() :bool
     {
         if (isset($_SESSION["usuaria"])) {
-            if ($_SESSION["usuaria"]['rol'] == "admin") {
+            if ($_SESSION["usuaria"]->getRol() == "Admin") {
                 return true;
             } else{
                 return false;
@@ -50,7 +50,7 @@ class Usuario
     public function controlUsuarioEditora() :bool
     {
         if (isset($_SESSION["usuaria"])) {
-            if ($_SESSION["usuaria"]['rol'] == "editora") {
+            if ($_SESSION["usuaria"]->getRol() == "editora") {
                 return true;
             } else{
                 return false;
@@ -59,13 +59,12 @@ class Usuario
             return false;
         }
     }
-    public static function InicioSesion($usuario, $password) :bool
+    public static function InicioSesion($nombre, $password) :bool
     {
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol FROM usuario LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
-        $stmt->bind_param("ss", $usuario, $usuario);
-        $stmt->execute();
-        $usuario = $stmt->get_result();
+        $stmt->execute([$nombre, $nombre]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$usuario) {
             return false;
         }
