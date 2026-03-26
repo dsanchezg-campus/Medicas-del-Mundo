@@ -44,7 +44,7 @@ require_once "classes/Contenido.php";
                 $bloque = Bloque::getBloqueById($_GET['page']);
                 // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
                 $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
-                if (!empty($bloques_paralelos)) {
+                if (!$bloques_paralelos) {
                     foreach ($bloques_paralelos as $bloque_paralelo) {
             ?>
             <section class="categoria-content">
