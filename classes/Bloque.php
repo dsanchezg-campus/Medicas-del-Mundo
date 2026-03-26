@@ -10,9 +10,10 @@ class Bloque
     private $id_madre_bloque;
     private $id_categoria;
     private $fecha_actualizacion_bloque;
+    private $icono;
 
 
-    public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria){
+    public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
         $this->id_bloque = $id_bloque;
         $this->orden_bloque = $orden_bloque;
         $this->titulo_bloque = $titulo_bloque;
@@ -21,7 +22,7 @@ class Bloque
         $this->id_madre_bloque = $id_madre;
         $this->fecha_actualizacion_bloque = $fecha_actualizacion;
         $this->id_categoria = $id_categoria;
-
+        $this->icono = $icono;
     }
     public function CrearBloque(){
         $db = DB::conectar();
@@ -105,6 +106,9 @@ class Bloque
     public function setIdCategoria($id_categoria){
         $this->id_categoria = $id_categoria;
     }
+    public function getIcono(){
+        return $this->icono;
+    }
     public static function getBloquesByCategoria($id_categoria) :array{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
@@ -120,7 +124,8 @@ class Bloque
                 $bloque['texto'],
                 $bloque['id_madre'],    
                 $bloque['fecha_actualizacion'],
-                $bloque['id_categoria']
+                $bloque['id_categoria'],
+                $bloque['icono']
             );
             $bloques[] = $bloque_pasar;
         }
@@ -139,7 +144,8 @@ class Bloque
             $bloque['texto'],
             $bloque['id_madre'],
             $bloque['fecha_actualizacion'],
-            $bloque['id_categoria']
+            $bloque['id_categoria'],
+            $bloque['icono']
         );
         return $bloque_pasar;
     }

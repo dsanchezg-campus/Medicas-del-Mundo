@@ -44,13 +44,12 @@ require_once "classes/Contenido.php";
                 $bloque = Bloque::getBloqueById($_GET['page']);
                 // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
                 $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
-                if (!$bloques_paralelos) {
-                    foreach ($bloques_paralelos as $bloque_paralelo) {
+                foreach ($bloques_paralelos as $bloque_paralelo) {
             ?>
             <section class="categoria-content">
                 <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
                     <article class="imagen-content">
-                        <img src="<?php echo $bloque_paralelo->getImg(); ?>" alt="Imagen1">
+                        <img src="<?php echo $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
                     </article>
 
                     <article class="testo-content">
@@ -60,10 +59,10 @@ require_once "classes/Contenido.php";
                 </a>
             </section>
             <?php
-                    }
                 }
             }
             ?>
+
             <section class="categoria-content">
 
                 <a class="enlace-bloque-content" href="index.php?page=1">
