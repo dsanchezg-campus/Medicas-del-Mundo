@@ -112,7 +112,7 @@ class Bloque
         $bloques = array();
 
         while ($bloque = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $bloque = new Bloque(
+            $bloque_pasar = new Bloque(
                 $bloque['id_bloque'],
                 $bloque['orden'],
                 $bloque['titulo'],
@@ -122,7 +122,7 @@ class Bloque
                 $bloque['fecha_actualizacion'],
                 $bloque['id_categoria']
             );
-            $bloques[] = $bloque;
+            $bloques[] = $bloque_pasar;
         }
         return $bloques;
     }
