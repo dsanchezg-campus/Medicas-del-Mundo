@@ -79,7 +79,7 @@ require_once "Classes/Bloque.php";
         ?>
         <?php
         if (isset($_GET['page'])){
-            $contenidos = Bloque::getBloques($_GET['page']);
+            $contenidos = Bloque::getBloquesByCategoria($_GET['page']);
             echo "<section class='contenedor'>";
             foreach ($contenidos as $contenido) {
         ?>
