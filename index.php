@@ -1,9 +1,12 @@
 ﻿<?php
+// Incluir las clases necesarias para manejar categorías, base de datos y bloques de contenido
+
 require_once "Classes/Categoria.php";
 require_once "Classes/DB.php";
 require_once "Classes/Bloque.php";
 ?>
 <!doctype html>
+<!-- Página principal del sitio web de Médicos del Mundo, muestra categorías y contenido -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,6 +18,7 @@ require_once "Classes/Bloque.php";
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
+<!-- Cabecera del sitio con logo, título y barra de búsqueda -->
     <header>
         <ul class="lista-nav">
             <li class="linea-nav">
@@ -36,11 +40,16 @@ require_once "Classes/Bloque.php";
         </ul>
     </header>
     <main>
+        <!-- Contenido principal: muestra categorías o subcategorías y bloques de contenido según el parámetro 'page' -->
         <?php
+        // Manejo de excepciones para errores de base de datos
         try {
-        if (isset($_GET['page'])){
-            $subcategorias = Categoria::getSubcategorias($_GET['page']);
-            foreach ($subcategorias as $subcategoria) {
+            // Verificar si se ha pasado un parámetro 'page' en la URL para mostrar subcategorías o categorías raíz
+            if (isset($_GET['page'])){
+                // Obtener subcategorías de la categoría padre especificada por 'page'
+                $subcategorias = Categoria::getSubcategorias($_GET['page']);
+                // Iterar sobre cada subcategoría y mostrarla como una sección
+                foreach ($subcategorias as $subcategoria) {
         ?>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
@@ -56,8 +65,10 @@ require_once "Classes/Bloque.php";
         <?php
             }
         } else {
-            $categorias = Categoria::getCategorias();
-            foreach ($categorias as $categoria) {
+                // Si no hay parámetro 'page', mostrar todas las categorías raíz (padres)
+                $categorias = Categoria::getCategorias();
+                // Iterar sobre cada categoría raíz y mostrarla
+                foreach ($categorias as $categoria) {
         ?>
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
@@ -74,13 +85,18 @@ require_once "Classes/Bloque.php";
             }
         }
         } catch (PDOException $e) {
+            // Capturar y mostrar errores de conexión o consultas a la base de datos
             echo $e->getMessage();
         }
         ?>
         <?php
+        // Si hay parámetro 'page', mostrar los bloques de contenido de esa categoría
         if (isset($_GET['page'])){
+            // Obtener bloques de contenido asociados a la categoría especificada
             $contenidos = Bloque::getBloquesByCategoria($_GET['page']);
+            // Iniciar contenedor para los bloques
             echo "<section class='contenedor'>";
+            // Iterar sobre cada bloque y mostrarlo
             foreach ($contenidos as $contenido) {
         ?>
 
@@ -98,11 +114,14 @@ require_once "Classes/Bloque.php";
         
         <?php
             }
+            // Cerrar el contenedor de bloques
             echo "</section>";
+            // Enlace para volver al inicio (categorías raíz)
             echo "<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>";
         }
         ?>
     </main>
+<!-- Pie de página con información de contacto de Médicos del Mundo -->
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>

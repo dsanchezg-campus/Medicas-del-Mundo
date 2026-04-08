@@ -1,9 +1,11 @@
 <?php
+// Incluir clases necesarias para bloques, categorías, base de datos y contenido externo
 require_once "classes/Bloque.php";
 require_once "classes/Categoria.php";
 require_once "classes/DB.php";
 require_once "classes/Contenido.php";
 ?>
+<!-- Página para mostrar el contenido detallado de un bloque específico -->
 <!doctype html>
 <html lang="es">
 <head>
@@ -16,6 +18,7 @@ require_once "classes/Contenido.php";
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
+<!-- Cabecera con logo y barra de búsqueda -->
     <header>
         <ul class="lista-nav">
             <li class="linea-nav">
@@ -36,14 +39,17 @@ require_once "classes/Contenido.php";
             </li>
         </ul>
     </header>
+<!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
     <main>
         <aside class="subcategorias-content">
             <?php
+            // Verificar si se ha especificado un bloque por parámetro 'page'
             if (isset($_GET['page'])) {
                 // obtenemos el bloque de contenido de la página
                 $bloque = Bloque::getBloqueById($_GET['page']);
                 // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
                 $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+                // Iterar sobre los bloques paralelos y mostrarlos
                 foreach ($bloques_paralelos as $bloque_paralelo) {
             ?>
             <section class="categoria-content">
@@ -63,6 +69,7 @@ require_once "classes/Contenido.php";
             }
             ?>
 
+            <!-- Sección hardcoded para ejemplo (debería ser dinámica) -->
             <section class="categoria-content">
 
                 <a class="enlace-bloque-content" href="index.php?page=1">
@@ -80,11 +87,14 @@ require_once "classes/Contenido.php";
             </section>
         </aside>
 
+        <!-- Sección principal con el contenido detallado del bloque -->
         <section class="contenedor-contenido">
             <?php
+            // Mostrar contenido si hay parámetro 'page'
             if (isset($_GET['page'])) {
+                // Obtener el bloque nuevamente (podría optimizarse)
                 $bloque = Bloque::getBloqueById($_GET['page']);
-                //obtenemos los contenidos extra del bloque
+                // Obtener contenidos extra asociados al bloque
                 $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
             <article class="titulo">
@@ -94,6 +104,7 @@ require_once "classes/Contenido.php";
                 <p><?php echo $bloque->getTextoBloque();?></p>
             </article>
                 <?php
+                // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
                 foreach ($contenidos as $contenido) {
                     ?>
             <article class="enlace">
@@ -107,6 +118,7 @@ require_once "classes/Contenido.php";
 
     </main>
 
+<!-- Pie de página con información de contacto -->
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>

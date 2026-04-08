@@ -1,5 +1,7 @@
 <?php
+//Realizamos la conexion a base de dato
 include_once "DB.php";
+//Declaramos la clase bloque
 class Bloque
 {
     private $id_bloque;
