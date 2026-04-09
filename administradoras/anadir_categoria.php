@@ -79,6 +79,7 @@ require_once "../classes/Bloque.php";
             }
         }
         ?>
+
     </main>
     <footer>
         <section class="footer-section">

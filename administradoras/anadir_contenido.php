@@ -88,6 +88,7 @@ if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
         }
     }
     ?>
+
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>

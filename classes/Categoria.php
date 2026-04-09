@@ -1,6 +1,5 @@
 <?php
-class Categoria
-{
+class Categoria{
     //identificador de la categoria
     private int $id_categoria;
     private string $nombre;
