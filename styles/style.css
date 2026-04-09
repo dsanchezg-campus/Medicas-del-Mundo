@@ -448,7 +448,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 .form-anadir label {
     display: block;
-    margin: 10px;
+    margin: 13px;
 
 }
 .form-anadir input {
@@ -459,6 +459,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     color: #080709;
     font-size: 1rem;
     transition: 0.3s;
+    width: 100%;
 }
 .form-anadir input:hover {
     background-color: #ede9e9;
@@ -473,6 +474,10 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     font-weight: bolder;
     font-size: 1rem;
     transition: 0.3s;
+    width: 33%;
+    margin: 10px;
+    margin-left: 34%;
+
 }
 .form-anadir button:hover {
     background-color: #ede9e9;
@@ -486,6 +491,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     color: #080709;
     font-size: 1rem;
     transition: 0.3s;
+    width: 100%;
 }
 .form-anadir input[type="file"] {
     padding: 10px;
