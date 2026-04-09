@@ -113,7 +113,9 @@ class Usuario
     }
 
     // Metodo para eliminar la sesión (no implementado)
-    public function eliminarSesion()
-    {
+    public static function CerrarSesion() :void{
+        if (isset($_SESSION["usuaria"])) {
+            unset($_SESSION["usuaria"]);
+        }
     }
 }
