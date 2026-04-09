@@ -16,6 +16,7 @@ class Bloque
     private $fecha_actualizacion_bloque;
     private $icono;
     /**
+     * Inicializa todas las propiedades del objeto
      * @param $id_bloque
      * @param $orden_bloque
      * @param $titulo_bloque
@@ -26,9 +27,7 @@ class Bloque
      * @param $id_categoria
      * @param $icono
      */
-    // Constructor de la clase Bloque: Inicializa todas las propiedades del objeto
-    // Parámetros: id_bloque, orden_bloque, titulo_bloque, descripcion, texto_bloque, id_madre, fecha_actualizacion, id_categoria, icono
-    public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
+     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
         $this->id_bloque = $id_bloque;
         $this->orden_bloque = $orden_bloque;
         $this->titulo_bloque = $titulo_bloque;
@@ -40,9 +39,11 @@ class Bloque
         $this->icono = $icono;
     }
 
-    // Metodo para crear un nuevo bloque en la base de datos
-    // Inserta los datos del objeto actual en la tabla 'bloque'
-    public function InsertarBloque(){
+    /**
+     * Añade un nuevo bloque en la BD
+     * Inserta los datos del objeto actual en la tabla 'bloque'
+     */
+    public function InsertarBloque() :void{
         $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
@@ -55,9 +56,10 @@ class Bloque
             $this->id_categoria
         ]);
     }
-
-    //Metodo para actualizar un bloque existente en la base de datos
-    // Actualiza todos los campos del bloque basado en su id_bloque
+    /**
+     * Actualiza el bloque en la BD
+     * @return void
+     */
     public function ActualizarBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, id_madre = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
@@ -72,9 +74,10 @@ class Bloque
             $this->id_bloque
         ]);
     }
-
-    // Metodo para eliminar un bloque de la base de datos
-    // Borra el registro basado en su id_bloque
+    /**
+     * eliminar un bloque de la base de datos
+     * @return void
+     */
     public function EliminarBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
@@ -134,10 +137,11 @@ class Bloque
         return $this->icono;
     }
 
-    // Metodo estático para obtener todos los bloques de una categoría específica
-    // Ordenados por el campo 'orden' ascendente
-    // Parámetro: $id_categoria - ID de la categoría
-    // Retorna: Array de objetos Bloque
+    /**
+     * obtener todos los bloques de una categoría específica Ordenados por el campo 'orden' ascendente
+     * @param $id_categoria int id de la categoría
+     * @return array de objetos Bloque
+     */
     public static function getBloquesByCategoria($id_categoria) :array{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
@@ -161,9 +165,11 @@ class Bloque
         return $bloques;
     }
 
-    // Metodo estático para obtener un bloque específico por su ID
-    // Parámetro: $id_bloque - ID del bloque
-    // Retorna: Objeto Bloque
+    /**
+     * obtener un bloque específico por su ID
+     * @param $id_bloque int ID del bloque
+     * @return Bloque
+     */
     public static function getBloqueById($id_bloque) :Bloque{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_bloque = ? ");
