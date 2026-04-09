@@ -1,6 +1,8 @@
 <?php
+// Clase para manejar la conexión a la base de datos MySQL usando PDO
 class DB
 {
+    // Configuración de la base de datos: servidor, usuario, contraseña y nombre de la BD
     private static string $servername = "localhost";
     private static string $username  = "root";
     private static string $password = "";

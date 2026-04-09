@@ -1,11 +1,24 @@
 <?php
+// Clase Faq: Maneja las preguntas frecuentes (FAQ) del sistema.
+// Permite crear, modificar, eliminar y listar FAQs asociadas a categorías.
 class Faq {
+    // Propiedades privadas de la FAQ
     private $titulo;
     private $id_faq;
     private $pregunta;
     private $respuesta;
     private $id_categoria;
     private $fecha_actualizacion;
+    /**
+     * Constructor: Inicializa un objeto Faq con los datos proporcionados
+     * @param $titulo
+     * @param $id_faq
+     * @param $pregunta
+     * @param $respuesta
+     * @param $id_categoria
+     * @param $fecha_actualizacion
+     */
+
     public function __construct($titulo,$id_faq,$pregunta,$respuesta,$id_categoria,$fecha_actualizacion){
         $this->titulo=$titulo;
         $this->id_faq=$id_faq;
@@ -15,7 +28,8 @@ class Faq {
         $this->fecha_actualizacion=$fecha_actualizacion;
 
     }
-    //GETTERS
+
+    // Getters para acceder a las propiedades
     public function getTitulo(){
         return $this->titulo;
     }
@@ -34,7 +48,8 @@ class Faq {
     public function getFechaActualizacion(){
         return $this->fecha_actualizacion;
     }
-    //SETTERS
+
+    // Setters para modificar las propiedades
     public function setTitulo($titulo){
         $this->titulo=$titulo;
     }
@@ -53,6 +68,9 @@ class Faq {
     public function setFechaActualizacion($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
+
+    // Metodo para crear una nueva FAQ en la base de datos
+    // Inserta la FAQ y retorna el número de filas afectadas
     public function crearFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO faq (titulo, pregunta, respuesta, id_categoria, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
@@ -60,12 +78,17 @@ class Faq {
         return $stmt->rowCount();
     }
 
+    // Metodo para modificar una FAQ existente
+    // Actualiza la FAQ basada en su id_faq y retorna filas afectadas
     public function modificarFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("UPDATE faq SET titulo = ?, pregunta = ?, respuesta = ?, id_categoria = ?, fecha_actualizacion = ? WHERE id_faq = ?");
         $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion, $this->id_faq]);
         return $stmt->rowCount();
     }
+
+    // Metodo para eliminar una FAQ
+    // Borra la FAQ basada en su id_faq y retorna filas afectadas
     public function eliminarFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM faq WHERE id_faq = ?");
