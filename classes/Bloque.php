@@ -42,7 +42,7 @@ class Bloque
 
     // Metodo para crear un nuevo bloque en la base de datos
     // Inserta los datos del objeto actual en la tabla 'bloque'
-    public function CrearBloque(){
+    public function InsertarBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([

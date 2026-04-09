@@ -65,6 +65,16 @@ class Categoria{
             throw new PDOException($e->getMessage());
         }
     }
+
+    /**
+     * Elimina la categoria en la BD
+     * @return void
+     */
+    public function EliminarCategoria(){
+        $db = DB::conectar();
+        $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
+        $stmt->execute([$this->id_categoria]);
+    }
     public function getIdCategoria()
     {
         return $this->id_categoria;
