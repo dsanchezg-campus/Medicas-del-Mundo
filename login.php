@@ -2,11 +2,17 @@
 // Incluir clases necesarias para usuario y base de datos
 require_once "classes/Usuario.php";
 require_once "classes/DB.php";
+
+session_start();
+// para cuando te redirijan para cerrar la sesion, elimina la sesión
+Usuario::CerrarSesion();
 // Verificar si se envió el formulario de login
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
-    session_start();
+    $usuario = htmlspecialchars($_POST["usuario"]);
+    $password = htmlspecialchars($_POST["password"]);
     // Intentar iniciar sesión con las credenciales proporcionadas
-    if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
+    // Guarda la usuaria en SESSION['usuaria']
+    if (Usuario::InicioSesion($usuario, $password)){
         // Redirigir a la página según el rol del usuario
         header("Location:".$_SESSION['usuaria']->getRol().".php");
         exit;
@@ -86,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
                 Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
                 Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
             </p>
-            <p><a href="login.php">Iniciar Sesion</a></p>
+            <p><a href="login.php">Iniciar Sesión</a></p>
         </section>
     </footer>
 <!-- Enlace para volver al inicio -->
