@@ -1,26 +1,34 @@
 <?php
+// Clase Contenido: Representa contenido extra (enlaces, URLs) asociados a bloques de contenido.
+// Actualmente, solo implementa la recuperación de contenidos por bloque; otros métodos son stubs.
 class Contenido{
-    //identificador del objeto
     private $id_extra;
     private $url;
     private $descripcion;
-    // id del objeto Bloque al que pertenece
     private $id_bloque;
     private $fecha_actualizacion;
-
+    /**
+     * @param $id_extra
+     * @param $url
+     * @param $descripcion
+     * @param $id_bloque
+     * @param $fecha_actualizacion
+     */
+    // Constructor: Inicializa un objeto Contenido con los datos proporcionados
+    // Nota: Asigna $id_extra a $this->id_contenido, pero la propiedad es $id_extra
     public function __construct($id_extra, $url, $descripcion, $id_bloque, $fecha_actualizacion)
     {
-        $this->id_contenido = $id_extra;
+        $this->id_extra;
         $this->url = $url;
         $this->descripcion = $descripcion;
         $this->id_bloque = $id_bloque;
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
-    //GETTERS
+    // Getters para acceder a las propiedades
     public function getIdExtra()
     {
-        return $this->id_contenido;
+        return $this->id_extra;
     }
 
 
@@ -44,7 +52,7 @@ class Contenido{
         return $this->fecha_actualizacion;
     }
 
-    //SETTERS
+    // Setters para modificar las propiedades
     public function setIdExtra($id_extra)
     {
         $this->id_extra = $id_extra;
@@ -70,21 +78,25 @@ class Contenido{
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
+    // Metodo para listar contenido (no implementado)
     public function ListarContenido()
     {
 
     }
 
+    // Metodo para crear contenido (no implementado)
     public function CrearContenido($id_contenido)
     {
 
     }
 
+    //Metodo para modificar contenido (no implementado)
     public function ModificarContenido($id_contenido)
     {
 
     }
 
+    // Metodo para eliminar contenido (no implementado)
     public function EliminarContenido($id_contenido)
     {
 

@@ -1,17 +1,23 @@
 <?php
+// Incluir clases necesarias para usuario y base de datos
 require_once "classes/Usuario.php";
 require_once "classes/DB.php";
+// Verificar si se envió el formulario de login
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["password"])) {
     session_start();
+    // Intentar iniciar sesión con las credenciales proporcionadas
     if (Usuario::InicioSesion($_POST['usuario'], $_POST['password'])){
+        // Redirigir a la página según el rol del usuario
         header("Location:".$_SESSION['usuaria']->getRol().".php");
         exit;
     } else{
+        // Mostrar mensaje de error si las credenciales son incorrectas
         $error = "Credenciales incorrectas";
     }
 }
 ?>
 <!DOCTYPE html>
+<!-- Página de inicio de sesión para usuarios -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -22,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
+<!-- Cabecera con logo y barra de búsqueda -->
     <header>
         <ul class="lista-nav">
             <li class="linea-nav">
@@ -42,15 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             </li>
         </ul>
     </header>
+<!-- Contenido principal con formulario de login -->
     <main class="login-container">
         <article class="login-section">
             <img src="" alt="Poner aqui cualquier imagen que apetezca">
         </article>
+        <!-- Mostrar mensaje de error si las credenciales son incorrectas -->
         <?php if (isset($error)){ ?>
         <article class="login-box">
             <article class="mensaje_error"><?php echo $error;?> </article>
         </article>
         <?php } ?>
+        <!-- Formulario de inicio de sesión -->
         <form action="" method="post">
          <h1>Inicio de sesión</h1>
             <article class="form-usuario">
@@ -66,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             </article>
         </form>
     </main>
+<!-- Pie de página con información de contacto -->
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>
@@ -78,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
+<!-- Enlace para volver al inicio -->
     <a href="index.php" class="volver-inicio"><img src="styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>

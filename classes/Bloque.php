@@ -1,7 +1,11 @@
 <?php
+// Incluir la clase DB para la conexión a la base de datos
 include_once "DB.php";
+// Clase Bloque: Representa un bloque de contenido en el sistema de gestión de Médicos del Mundo.
+// Un bloque contiene texto, título, descripción, y pertenece a una categoría. Soporta jerarquía con id_madre_bloque.
 class Bloque
 {
+    // Propiedades privadas del bloque
     private $id_bloque;
     private $orden_bloque;
     private $titulo_bloque;
@@ -11,8 +15,19 @@ class Bloque
     private $id_categoria;
     private $fecha_actualizacion_bloque;
     private $icono;
-
-
+    /**
+     * @param $id_bloque
+     * @param $orden_bloque
+     * @param $titulo_bloque
+     * @param $descripcion
+     * @param $texto_bloque
+     * @param $id_madre
+     * @param $fecha_actualizacion
+     * @param $id_categoria
+     * @param $icono
+     */
+    // Constructor de la clase Bloque: Inicializa todas las propiedades del objeto
+    // Parámetros: id_bloque, orden_bloque, titulo_bloque, descripcion, texto_bloque, id_madre, fecha_actualizacion, id_categoria, icono
     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
         $this->id_bloque = $id_bloque;
         $this->orden_bloque = $orden_bloque;
@@ -24,6 +39,9 @@ class Bloque
         $this->id_categoria = $id_categoria;
         $this->icono = $icono;
     }
+
+    // Metodo para crear un nuevo bloque en la base de datos
+    // Inserta los datos del objeto actual en la tabla 'bloque'
     public function CrearBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -37,6 +55,9 @@ class Bloque
             $this->id_categoria
         ]);
     }
+
+    //Metodo para actualizar un bloque existente en la base de datos
+    // Actualiza todos los campos del bloque basado en su id_bloque
     public function ActualizarBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, id_madre = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
@@ -51,13 +72,16 @@ class Bloque
             $this->id_bloque
         ]);
     }
+
+    // Metodo para eliminar un bloque de la base de datos
+    // Borra el registro basado en su id_bloque
     public function EliminarBloque(){
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
         $stmt->execute([$this->id_bloque]);
     }
 
-
+    // Getters y setters para acceder y modificar las propiedades del bloque
     public function getIdBloque(){
         return $this->id_bloque;
     }
@@ -109,6 +133,11 @@ class Bloque
     public function getIcono(){
         return $this->icono;
     }
+
+    // Metodo estático para obtener todos los bloques de una categoría específica
+    // Ordenados por el campo 'orden' ascendente
+    // Parámetro: $id_categoria - ID de la categoría
+    // Retorna: Array de objetos Bloque
     public static function getBloquesByCategoria($id_categoria) :array{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_categoria = ? ORDER BY orden ASC");
@@ -131,6 +160,10 @@ class Bloque
         }
         return $bloques;
     }
+
+    // Metodo estático para obtener un bloque específico por su ID
+    // Parámetro: $id_bloque - ID del bloque
+    // Retorna: Objeto Bloque
     public static function getBloqueById($id_bloque) :Bloque{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_bloque = ? ");
