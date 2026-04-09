@@ -3,7 +3,7 @@ require_once "../Classes/Categoria.php";
 require_once "../Classes/DB.php";
 require_once "../Classes/Bloque.php";
 
-// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
+// if (!$_SESSION["usuaria"]->controlUsuarioAdmin) {
 //     header("location: ../index.php");
 //     exit();
 // }
@@ -125,7 +125,7 @@ require_once "../Classes/Bloque.php";
             Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
-        <p><a href="login.php">Iniciar Sesion</a></p>
+        <p><a href="../login.php">Cerrar Sesión</a></p>
     </section>
 </footer>
 </body>
