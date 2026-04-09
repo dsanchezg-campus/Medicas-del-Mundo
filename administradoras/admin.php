@@ -48,6 +48,8 @@ require_once "../Classes/Bloque.php";
             foreach ($subcategorias as $subcategoria) {
                 ?>
                 <section class="categoria">
+                    <a href="editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="eliminar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <article class="imagen-categoria">
                             <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
@@ -65,6 +67,8 @@ require_once "../Classes/Bloque.php";
             foreach ($categorias as $categoria) {
                 ?>
                 <section class="categoria">
+                    <a href="editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="eliminar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                         <article class="imagen-categoria">
                             <img src="<?php echo $categoria->getImg(); ?>" alt="Imagen1">
