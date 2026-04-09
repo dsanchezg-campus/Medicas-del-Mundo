@@ -1,6 +1,5 @@
 <?php
-class Categoria
-{
+class Categoria{
     //identificador de la categoria
     private int $id_categoria;
     private string $nombre;
@@ -48,11 +47,14 @@ class Categoria
      * Añade el objeto a la BBDD
      * @return void
      */
-    public function InsertarCategoria()
-    {
-        $db = DB::conectar();
-        $stmt = $this->conn->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bindParam("ssiss", $this->nombre, $this->descripcion, $this->orden, $this->img, $this->fecha_actualizacion);
+    public function InsertarCategoria(){
+        try {
+            $db = DB::conectar();
+            $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion]);
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage());
+        }
     }
     public function getIdCategoria()
     {
