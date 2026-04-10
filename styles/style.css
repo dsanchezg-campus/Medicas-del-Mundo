@@ -125,6 +125,7 @@ main {
     border-radius: 5px;
     text-align: center;
     transition: transform 0.4s;
+    position: relative;
 }
 
 .categoria:hover, .contenido-bloque:hover {
