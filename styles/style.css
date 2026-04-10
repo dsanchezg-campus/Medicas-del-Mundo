@@ -1,13 +1,22 @@
+/* =============================================
+   VARIABLES GLOBALES (Custom Properties)
+   Paleta de colores corporativos reutilizables
+   ============================================= */
 :root {
-    --color-azul-oscuro-1: #0f143d;
-    --color-azul-oscuro-2: #080d3e;
-    --color-azul-claro: #075faa;
-    --color-amarillo-corporativo: #fbe43c;
-    --color-rojo-corporativo: #e4683c;
+    --color-azul-oscuro-1: #0f143d;         /* Azul oscuro principal */
+    --color-azul-oscuro-2: #080d3e;         /* Azul oscuro secundario, más profundo */
+    --color-azul-claro: #075faa;            /* Azul medio para acentos */
+    --color-amarillo-corporativo: #fbe43c;  /* Amarillo para destacados y enlaces en footer */
+    --color-rojo-corporativo: #e4683c;      /* Rojo principal: fondos de tarjetas y acentos */
     --color-blanco-corporativo: #ffffff;
     --color-negro-corporativo: #000000;
 }
 
+/* =============================================
+   FUENTE ICÓNICA: Swiper
+   Fuente embebida en base64 para los iconos
+   del componente slider Swiper.js
+   ============================================= */
 @font-face {
     font-family: 'swiper-icons';
     src: url("data:application/font-woff;charset=utf-8;base64, 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");
@@ -15,37 +24,51 @@
     font-style: normal;
 }
 
+/* =============================================
+   FUENTE CORPORATIVA: Anton
+   Tipografía principal de la aplicación.
+   Se carga desde archivos locales en /fonts/
+   ============================================= */
 @font-face {
     font-family: 'Anton';
     src: url('fonts/Anton-Regular.woff2') format('woff2'),
-         url('fonts/Anton-Regular.woff') format('woff');
+    url('fonts/Anton-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: block;
+    font-display: block; /* Bloquea el renderizado hasta que la fuente esté disponible */
 }
 
+/* =============================================
+   RESET Y BASE GLOBAL
+   ============================================= */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* El padding y border se incluyen en el ancho/alto del elemento */
 }
 
 body {
-    scrollbar-width: thin;
-    scrollbar-color: #0f143d transparent;
-    overflow-x: hidden;
+    scrollbar-width: thin;                  /* Scrollbar delgada en Firefox */
+    scrollbar-color: #0f143d transparent;   /* Color del thumb / track en Firefox */
+    overflow-x: hidden;                     /* Evita scroll horizontal no deseado */
     font-family: 'Anton', sans-serif;
 }
 
+/* Oculta la scrollbar en navegadores WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar, ::-webkit-clear-button {
     display: none;
 }
 
+/* Elimina el subrayado y hereda el color negro en todos los enlaces */
 a {
     text-decoration: none;
     color: black;
 }
 
+/* =============================================
+   CABECERA / NAVEGACIÓN
+   Barra superior fija de 10vh de altura
+   ============================================= */
 header {
     height: 10vh;
     width: 100vw;
@@ -54,6 +77,7 @@ header {
     background-color: var(--color-blanco-corporativo);
 }
 
+/* Contenedor principal del menú de navegación en fila centrada */
 .lista-nav {
     height: 10vh;
     width: 100vw;
@@ -62,6 +86,7 @@ header {
     justify-content: center;
 }
 
+/* Cada ítem de la lista de navegación, centrado verticalmente */
 .linea-nav {
     margin: auto 5%;
     height: 10vh;
@@ -69,17 +94,21 @@ header {
     align-items: center;
 }
 
-.logo { width: 4vw;margin-bottom: 15px; }
+/* Logo: ancho relativo al viewport para ser responsivo */
+.logo { width: 4vw; margin-bottom: 15px; }
 .logo a, .logo img { width: 100%; }
 
+/* Título H1 dentro de la nav con peso de fuente ligero */
 .linea-nav h1 {
     margin: 1.5vh 0;
     width: 10vw;
     font-weight: lighter;
 }
 
+/* Formulario de búsqueda en la cabecera, alineado al centro */
 .form-cabecera { align-items: center; }
 
+/* Input de búsqueda en la barra de navegación */
 .input-nav {
     padding: 10px;
     margin: 1.3vh 0;
@@ -87,9 +116,10 @@ header {
     height: 5vh;
     border: 2px solid #ccc;
     border-radius: 4px;
-    transition: 0.3s;
+    transition: 0.3s; /* Suaviza la transición de tamaño y sombra al hacer focus */
 }
 
+/* Estado focus: resalta el campo y lo agranda ligeramente */
 .input-nav:focus {
     border-color: #9fa5af;
     outline: none;
@@ -98,23 +128,33 @@ header {
     height: 6vh;
 }
 
+/* Estado deshabilitado: fondo gris y cursor de no permitido */
 .input-nav:disabled {
     background-color: #f2f2f2;
     cursor: not-allowed;
 }
 
+/* Botón de envío del formulario oculto visualmente (se dispara con Enter) */
 .boton-invisible { display: none; }
 
+/* =============================================
+   CONTENIDO PRINCIPAL
+   Área scrollable con fondo texturizado
+   ============================================= */
 main {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;                /* Las tarjetas se distribuyen en múltiples filas */
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) rgb(244, 244, 244);
     height: 90vh;
     width: 100vw;
-    overflow-y: auto;
-    font-size: 1vw;
+    overflow-y: auto;               /* Scroll vertical interno */
+    font-size: 1vw;                 /* Tipografía fluida relativa al ancho de pantalla */
 }
 
+/* =============================================
+   TARJETAS DE CATEGORÍA (vista principal)
+   Tarjetas grandes con imagen y texto superpuesto
+   ============================================= */
 .categoria {
     margin: 2% 2% 0;
     min-width: 20vw;
@@ -124,20 +164,22 @@ main {
     display: flex;
     border-radius: 5px;
     text-align: center;
-    transition: transform 0.4s;
+    transition: transform 0.4s, box-shadow 0.4s; /* Animación suave en hover */
 }
 
+/* Efecto hover compartido: elevación con sombra y escala leve */
 .categoria:hover, .contenido-bloque:hover {
     box-shadow: 0 0 15px grey;
     transform: scale(1.005);
-    transition: transform 0.4s;
 }
 
+/* Enlace que cubre toda la tarjeta de categoría */
 .enlace-bloque {
     width: 100%;
     border-radius: 10px;
 }
 
+/* Zona de texto de la categoría: 40% inferior de la tarjeta con scroll si desborda */
 .testo-categoria {
     height: 40%;
     overflow-y: auto;
@@ -149,17 +191,24 @@ main {
     font-weight: lighter;
 }
 
+/* Zona de imagen: ocupa el 60% superior de la tarjeta */
 .imagen-categoria {
     width: 100%;
     height: 60%;
 }
 
+/* La imagen rellena su contenedor distorsionándose si es necesario (object-fit: fill) */
 .imagen-categoria img {
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
 
+/* =============================================
+   PIE DE PÁGINA
+   Fondo oscuro con textura de palomas (doves pattern)
+   y borde superior rojo corporativo
+   ============================================= */
 footer {
     padding: 16px 24px;
     background: var(--color-azul-oscuro-2) url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/doves-pattern.jpg);
@@ -170,6 +219,7 @@ footer {
     justify-content: center;
 }
 
+/* Grid interno del footer, centrado y con ancho máximo para legibilidad */
 .footer-section {
     width: 100%;
     max-width: 1200px;
@@ -193,19 +243,26 @@ footer {
     line-height: 1.35;
 }
 
+/* Los enlaces dentro del footer usan el amarillo corporativo */
 footer a {
     color: var(--color-amarillo-corporativo);
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
+/* Al hacer hover, el enlace pasa a blanco para contrastar sobre el amarillo */
 footer a:hover { color: var(--color-blanco-corporativo); }
 
+/* =============================================
+   VISTA DE SUBCATEGORÍAS
+   Contenedor scrollable con altura completa
+   ============================================= */
 .subcategorias-content {
     overflow-y: auto;
     height: 100%;
 }
 
+/* Tarjeta individual de subcategoría: más pequeña que .categoria */
 .categoria-content {
     margin: 10px;
     min-width: 10vw;
@@ -214,15 +271,17 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     border-radius: 5px;
     align-items: center;
     height: 15vh;
-    box-shadow: 0 0 4px #8c8989;
+    box-shadow: 0 0 4px #8c8989; /* Sombra sutil sin hover */
 }
 
+/* Enlace a tamaño completo dentro de la tarjeta de subcategoría */
 .enlace-bloque-content {
     width: 100%;
     height: 100%;
     border-radius: 10px;
 }
 
+/* Zona de texto de subcategoría: 65% del ancho, inline */
 .testo-content {
     overflow: hidden;
     height: 100%;
@@ -235,24 +294,31 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     font-weight: lighter;
 }
 
+/* Título con el rojo corporativo y descripción con el azul oscuro */
 .testo-content h1 { color: var(--color-rojo-corporativo); }
+.testo-content p  { color: var(--color-azul-oscuro-2); }
 
-.testo-content p { color: var(--color-azul-oscuro-2); }
-
+/* Oculta scrollbar interna del párrafo en WebKit */
 .testo-content p::-webkit-scrollbar { display: none; }
 
+/* Zona de imagen de subcategoría: 30% del ancho, inline */
 .imagen-content {
     display: inline-block;
     width: 30%;
     height: 100%;
 }
 
+/* La imagen recorta para ajustarse sin deformar (object-fit: cover) */
 .imagen-content img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* =============================================
+   CONTENEDOR DE CONTENIDO DETALLADO
+   Panel central que ocupa el 72% del ancho
+   ============================================= */
 .contenedor-contenido {
     padding: 10px;
     width: 72%;
@@ -261,12 +327,18 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 
 .contenedor-contenido h1 { margin: auto; }
+
+/* Enlace que ocupa el ancho completo de su contenedor */
 .enlace { width: 100%; }
 
+/* =============================================
+   BOTÓN FLOTANTE "VOLVER AL INICIO"
+   Posicionado en la esquina inferior derecha
+   ============================================= */
 .volver-inicio {
     position: fixed;
-    top: 91vh;
-    left: 95vw;
+    top: 91vh;    /* Justo por encima del margen inferior */
+    left: 95vw;   /* Pegado a la derecha */
     width: 4vw;
 }
 
@@ -275,19 +347,28 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     width: 70%;
     height: 70%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 50%;                          /* Convierte la imagen en círculo */
     background-color: var(--color-rojo-corporativo);
     transition: background-color 0.4s;
 }
 
+/* En hover, aclara el rojo para indicar interactividad */
 .volver-inicio img:hover { background-color: #ee7e55; }
 
+/* =============================================
+   MEDIA QUERY: MÓVIL (max-width: 768px)
+   Ajusta tamaños tipográficos del footer
+   ============================================= */
 @media (max-width: 768px) {
     footer { padding: 14px 12px; }
     .footer-section h2 { font-size: 1.1rem; }
-    .footer-section p { font-size: 0.92rem; }
+    .footer-section p  { font-size: 0.92rem; }
 }
 
+/* =============================================
+   PANTALLA DE LOGIN
+   Formulario centrado sobre fondo de la main
+   ============================================= */
 .login-container {
     justify-content: center;
     align-items: center;
@@ -295,6 +376,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     text-align: center;
 }
 
+/* Tarjeta del formulario con fondo lila/violeta */
 .login-container form {
     background-color: #B398E3;
     border-radius: 2%;
@@ -304,8 +386,10 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     margin: auto;
 }
 
+/* Espaciado generoso entre campos del formulario de login */
 .form-usuario, .form-password { margin: 10% auto; }
 
+/* Input del formulario de login: borde redondeado, tipografía en negrita */
 .input-login {
     padding: 2% 5%;
     border-radius: 5px;
@@ -317,17 +401,26 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     transition: 0.3s;
 }
 
+/* En hover, el fondo se vuelve gris claro y el texto adopta el color lila del form */
 .input-login:hover {
     background-color: #ede9e9;
     color: #B398E3;
 }
 
+/* =============================================
+   CONTENEDOR GENÉRICO DE FILA
+   Fila flexible con margen vertical
+   ============================================= */
 .contenedor {
     width: 100%;
     display: flex;
     margin: 15px 0;
 }
 
+/* =============================================
+   BLOQUES DE CONTENIDO (vista de resultados)
+   Tarjetas más anchas con fondo azul oscuro
+   ============================================= */
 .contenido-bloque {
     margin: 2% 2% 0;
     min-width: 40vw;
@@ -337,23 +430,25 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     color: white;
     display: inline-block;
     border-radius: 5px;
-    transition: transform 0.4s, box-shadow 0.4s;
-    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s; /* Animación compartida con .categoria en hover */
 }
 
+/* Enlace interno que actúa como layout flex para imagen + texto */
 .contenido-bloque .enlace-bloque {
     display: flex;
     height: 100%;
     width: 100%;
     text-decoration: none;
-    color: inherit;
+    color: inherit; /* Hereda el color blanco del bloque padre */
 }
 
+/* Imagen a la izquierda: ocupa 1/3 del ancho */
 .imagen-contenido {
     width: 33%;
     height: 100%;
 }
 
+/* border-radius solo en las esquinas izquierdas para encajar con la tarjeta */
 .imagen-contenido img {
     width: 100%;
     height: 100%;
@@ -361,203 +456,10 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     border-radius: 5px 0 0 5px;
 }
 
+/* Texto a la derecha: ocupa 2/3 del ancho, con scroll vertical si desborda */
 .testo-contenido {
     padding: 10px;
     width: 67%;
     height: 100%;
     overflow-y: auto;
-}
-.crear-categoria {
-    margin: 2% 2% 0;
-    min-width: 20vw;
-    max-width: 20vw;
-    height: 40vh;
-    background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-rojo-corporativo);
-    display: flex;
-    border-radius: 5px;
-    text-align: center;
-    transition: transform 0.4s, box-shadow 0.4s;
-}
-.enlace-crear-categoria {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-}
-.testo-crear-categoria {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-}
-.tamaño-variable{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-.tamaño-variable h3{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    visibility: visible;
-    opacity: 1;
-    font-size: 2.5vw;
-    transition: 0.4s;
-    color: white;
-    font-weight: lighter;
-    white-space: nowrap;
-}
-.tamaño-variable:hover h3{
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.4s;
-    font-size: 0;
-    font-weight: bold;
-}
-.tamaño-variable h1{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    visibility: hidden;
-    opacity: 0;
-    font-size: 10vw;
-    transition: 0.4s;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-}
-.tamaño-variable:hover h1{
-    visibility: visible;
-    opacity: 1;
-    font-size: 5vw;
-    transition: 0.4s;
-}
-/* Formulario crear contenido */
-.anadir-categoria {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 50%;
-    margin: auto;
-}
-.form-anadir label {
-    display: block;
-    margin: 13px;
-
-}
-.form-anadir input {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 100%;
-}
-.form-anadir input:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.form-anadir button {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #B398E3;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 33%;
-    margin: 10px;
-    margin-left: 34%;
-
-}
-.form-anadir button:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.form-anadir select {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 100%;
-}
-.form-anadir input[type="file"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 0.7rem;
-    transition: 0.3s;
-}
-.form-anadir input[type="file"]::-webkit-file-upload-button {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #B398E3;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-    transition: 0.3s;
-}
-.form-anadir input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-/* Botones eliminar y editar */
-.boton-editar {
-    position: absolute;
-    top: 1%;
-    right: 2%;
-    width: 30px;
-    height: 30px;
-    z-index: 1;
-    background-color: #9be398;
-    border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-}
-.boton-editar:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.boton-eliminar {
-    position: absolute;
-    top: 1%;
-    right: 15%;
-    width: 30px;
-    height: 30px;
-    z-index: 2;
-    background-color: #e39898;
-    border-radius: 5px;
-    padding: 5px;
-}
-.boton-eliminar:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.boton-editar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.boton-eliminar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
