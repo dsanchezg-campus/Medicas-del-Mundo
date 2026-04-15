@@ -6,14 +6,14 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
-// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
-//     header("location: ../index.php");
-//     exit();
-// }
+if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
+    header("location: ../index.php");
+    exit();
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
-    $cat = new Categoria($_POST["nombre"], $_POST["descripcion"]);
+    $cat = new Contenido($_POST["nombre"], $_POST["descripcion"]);
     try {
-        $cat->InsertarCategoria();
+        $cat->InsertarContenido();
     } catch (Exception $e){
         $error = $e->getMessage();
     }
@@ -54,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
         <?php
         if (isset($error)) {
             ?>
-        <article class="error">
-            <p class="error-p"><?php echo $error; ?></p>
-        </article>
-        <?php
+            <article class="error">
+                <p class="error-p"><?php echo $error; ?></p>
+            </article>
+            <?php
         }
         ?>
         <article class="anadir-categoria">
@@ -65,39 +65,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
                 <input type="hidden" name="action" value="categoria">
                 <label for="nombre">Nombre: </label>
                 <input type="text" id="nombre" name="nombre" required>
-                <label for="descripcion">Descripcion: </label>
-                <input type="text" id="descripcion" name="descripcion" required>
-                <label for="orden">Orden: </label>
-                <input type="number" id="orden" name="orden" required>
-                <label for="img">Imagen: </label>
-                <input type="file" id="img" name="img" accept="image/*" required>
-                <label for="id_categoria">Pertenece a la categoria: </label>
-                <select name="id_categoria" id="id_categoria">
-                    <option value="">Ninguna</option>
-                    <?php
-                    $categorias = Categoria::getCategorias();
-                    foreach ($categorias as $categoria) {
-                        echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
-                    }
-                    ?>
-                </select>
-                <label for="prioridad">Prioridad: </label>
-                <input type="number" id="prioridad" name="prioridad" required>
-                <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-                <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
                 <button type="submit">Añadir</button>
             </form>
-        </article>      
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
-            if ($_POST['action'] === 'categoria') {
-                $categoria = new Categoria(null, $_POST['nombre'], $_POST['descripcion'], $_POST['orden'], $_POST['img'], $_POST['id_categoria'], date("Y-m-d"));
-                $categoria->InsertarCategoria();
-            }
-        }
-        ?>
-
+        </article>
+    <article class="anadir-contenido">
+        <form action="" method="post" class="form-anadir">
+            <input type="hidden" name="action" value="contenido">
+            <label for="titulo">Titulo: </label>
+            <input type="text" id="titulo" name="titulo" required>
+            <label for="descripcion">Descripcion: </label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            <label for="texto">Texto: </label>
+            <input type="text" id="texto" name="texto" required>
+            <label for="id_categoria">Pertenece a la categoria: </label>
+            <select name="id_categoria" id="id_categoria">
+                <?php
+                $categorias = Categoria::getCategorias();
+                foreach ($categorias as $categoria) {
+                    echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
+                }
+                ?>
+            </select><br>
+            <label for="prioridad">Prioridad: </label>
+            <input type="number" id="prioridad" name="prioridad" required>
+            <label for="fecha_actualizacion">Fecha Actualizacion: </label>
+            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
+            <button type="submit">Añadir</button>
+        </form>
+    </article>
     </main>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
+        if ($_POST['action'] === 'contenido') {
+            $bloque = new Bloque(null, $_POST['prioridad'], $_POST['titulo'], $_POST['descripcion'], $_POST['texto'], null, $_POST['fecha_actualizacion'], $_POST['id_categoria']);
+            $bloque->CrearBloque();
+        } elseif ($_POST['action'] === 'categoria') {
+            $categoria = new Categoria(null, $_POST['nombre'], '', 0, '', null, date("Y-m-d H:i:s"));
+            $categoria->InsertarCategoria();
+        }
+    }
+    ?>
+
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>
@@ -110,6 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
-    <a href="../admin/index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
+    <a href="admin.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>

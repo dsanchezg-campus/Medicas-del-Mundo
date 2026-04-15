@@ -96,7 +96,7 @@ class Usuario
     {
         $db = DB::conectar();
         // Consulta para obtener usuario por email o nombre, uniendo con tabla rol
-        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol FROM usuario LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
+        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
         $stmt->execute([$nombre, $nombre]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$usuario) {

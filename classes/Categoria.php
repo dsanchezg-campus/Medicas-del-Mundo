@@ -59,8 +59,8 @@ class Categoria{
     public function InsertarCategoria(){
         try {
             $db = DB::conectar();
-            $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion]);
+            $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img_cat, id_madre, fecha_actualizacion) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion]);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }
@@ -70,10 +70,10 @@ class Categoria{
      * Elimina la categoria en la BD
      * @return void
      */
-    public function EliminarCategoria(){
+    public static function EliminarCategoria($id_categoria) :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
-        $stmt->execute([$this->id_categoria]);
+        $stmt->execute([$id_categoria]);
     }
     public function getIdCategoria()
     {
