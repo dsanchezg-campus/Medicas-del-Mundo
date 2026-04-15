@@ -31,6 +31,22 @@
         </ul>
     </header>
     <main>
+        <section class="lista-editoras">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Editora</th>
+                        <th>Email</th>
+                        <th>Eliminar</th>
+                        <th>Editar</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                </tbody>
+            </table>
+        </section>
     </main>
 </body>
