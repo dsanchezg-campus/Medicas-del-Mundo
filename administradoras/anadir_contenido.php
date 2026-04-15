@@ -10,6 +10,14 @@ if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
     header("location: ../index.php");
     exit();
 }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
+    $cat = new Contenido($_POST["nombre"], $_POST["descripcion"]);
+    try {
+        $cat->InsertarContenido();
+    } catch (Exception $e){
+        $error = $e->getMessage();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,6 +51,15 @@ if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
         </ul>
     </header>
     <main>
+        <?php
+        if (isset($error)) {
+            ?>
+            <article class="error">
+                <p class="error-p"><?php echo $error; ?></p>
+            </article>
+            <?php
+        }
+        ?>
         <article class="anadir-categoria">
             <form action="" method="post" class="form-anadir">
                 <input type="hidden" name="action" value="categoria">
