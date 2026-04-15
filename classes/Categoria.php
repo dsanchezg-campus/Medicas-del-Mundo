@@ -70,10 +70,10 @@ class Categoria{
      * Elimina la categoria en la BD
      * @return void
      */
-    public function EliminarCategoria(){
+    public static function EliminarCategoria($id_categoria) :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
-        $stmt->execute([$this->id_categoria]);
+        $stmt->execute([$id_categoria]);
     }
     public function getIdCategoria()
     {
