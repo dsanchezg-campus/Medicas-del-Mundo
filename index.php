@@ -136,4 +136,3 @@ require_once "Classes/Bloque.php";
     </footer>
 </body>
 </html>
-
