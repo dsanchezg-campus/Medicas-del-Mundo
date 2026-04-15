@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     // Guarda la usuaria en SESSION['usuaria']
     if (Usuario::InicioSesion($usuario, $password)){
         // Redirigir a la página según el rol del usuario
-        header("Location:".$_SESSION['usuaria']->getRol().".php");
+        header("Location:".$_SESSION['usuaria']->getRol()."/index.php");
         exit;
     } else{
         // Mostrar mensaje de error si las credenciales son incorrectas
