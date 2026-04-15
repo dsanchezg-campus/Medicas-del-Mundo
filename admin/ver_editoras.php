@@ -1,3 +1,12 @@
+<?php
+require_once "../classes/DB.php";
+require_once "../classes/Usuario.php" ;
+session_start();
+// if (!$_SESSION["usuaria"]->controlUsuarioAdmin) {
+//     header("location: ../index.php");
+//     exit();
+// }
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -44,7 +53,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                //Obtenemos todas usuarias
+                $usuarias = Usuario::ListarUsuarias();
+                //mostramos cada usuaria en la tabla
+                foreach ($usuarias as $usuaria) {
+                ?>
+                        <tr>
+                            <td><?php echo $usuaria->getNombre(); ?></td>
+                            <td><?php echo $usuaria->getEmail(); ?></td>
+                            <td>Aqui poner boton eliminar</td>
+                            <td>Aqui poner boton editar</td>
+                        </tr>
 
+                <?php
+                }
+                ?>
                 </tbody>
             </table>
         </section>
