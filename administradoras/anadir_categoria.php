@@ -63,7 +63,7 @@ require_once "../classes/Bloque.php";
                         echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
                     }
                     ?>
-                </select><br>
+                </select>
                 <label for="prioridad">Prioridad: </label>
                 <input type="number" id="prioridad" name="prioridad" required>
                 <label for="fecha_actualizacion">Fecha Actualizacion: </label>

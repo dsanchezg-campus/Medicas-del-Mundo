@@ -44,6 +44,15 @@ class Categoria{
     }
 
     /**
+     * Actualiza la categoria en la BD
+     * @return void
+     */
+    public function ActualizarCategoria(){
+        $db = DB::conectar();
+        $stmt = $db->prepare("UPDATE categorias SET nombre= ?, descripcion= ?, orden= ?, img= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
+        $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion, $this->id_categoria]);
+    }
+    /**
      * Añade el objeto a la BBDD
      * @return void
      */
@@ -55,6 +64,16 @@ class Categoria{
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }
+    }
+
+    /**
+     * Elimina la categoria en la BD
+     * @return void
+     */
+    public function EliminarCategoria(){
+        $db = DB::conectar();
+        $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
+        $stmt->execute([$this->id_categoria]);
     }
     public function getIdCategoria()
     {
