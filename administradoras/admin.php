@@ -48,8 +48,8 @@ require_once "../Classes/Bloque.php";
             foreach ($subcategorias as $subcategoria) {
                 ?>
                 <section class="categoria">
-                    <a href="editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
-                    <a href="eliminar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+                    <a href="editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="eliminar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <article class="imagen-categoria">
                             <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
@@ -116,6 +116,16 @@ require_once "../Classes/Bloque.php";
             <?php
         }
         echo "</section>";
+        ?>
+        <section class="crear-contenido">
+            <a class="enlace-crear-contenido" href="anadir_contenido.php">
+                <article class="testo-crear-categoria tamaño-variable">
+                    <h1>+</h1>
+                    <h3>Añadir Contenido</h3>
+                </article>
+            </a>
+        </section>
+    <?php
         echo "<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>";
     }
     ?>
