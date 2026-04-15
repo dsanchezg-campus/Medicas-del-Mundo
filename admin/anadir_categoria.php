@@ -102,6 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
             <p><a href="login.php">Iniciar Sesion</a></p>
         </section>
     </footer>
-    <a href="admin.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
+    <a href="../admin/index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>
