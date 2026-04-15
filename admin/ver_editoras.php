@@ -72,5 +72,14 @@ session_start();
                 </tbody>
             </table>
         </section>
+
+        <section class="anadir-editoras">
+            <a class="enlace-crear-editora" href="">
+                <article class="texto-crear-editora">
+                    <h1>+</h1>
+                    <h3>Añadir Editora</h3>
+                </article>
+            </a>
+        </section>
     </main>
 </body>
