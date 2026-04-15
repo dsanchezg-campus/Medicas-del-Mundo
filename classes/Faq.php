@@ -68,34 +68,39 @@ class Faq {
     public function setFechaActualizacion($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
-
-    // Metodo para crear una nueva FAQ en la base de datos
-    // Inserta la FAQ y retorna el número de filas afectadas
-    public function crearFAQ(){
+    /**
+     * Metodo para crear una nueva FAQ en la base de datos
+     * @return void
+     */
+    public function InsertarFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("INSERT INTO faq (titulo, pregunta, respuesta, id_categoria, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion]);
-        return $stmt->rowCount();
     }
-
-    // Metodo para modificar una FAQ existente
-    // Actualiza la FAQ basada en su id_faq y retorna filas afectadas
-    public function modificarFAQ(){
+    /**
+     * Metodo para modificar el FAQ de la BD
+     * @return void
+     */
+    public function ActualizarFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("UPDATE faq SET titulo = ?, pregunta = ?, respuesta = ?, id_categoria = ?, fecha_actualizacion = ? WHERE id_faq = ?");
         $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion, $this->id_faq]);
-        return $stmt->rowCount();
     }
-
-    // Metodo para eliminar una FAQ
-    // Borra la FAQ basada en su id_faq y retorna filas afectadas
-    public function eliminarFAQ(){
+    /**
+     * Metodo para eliminar FAQ de la BD
+     * @return void
+     */
+    public function EliminarFAQ(){
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM faq WHERE id_faq = ?");
         $stmt->execute([$this->id_faq]);
-        return $stmt->rowCount();
     }
-    public static function listarFAQ(){
+
+    /**
+     * Obtiene de la BD todos los FAQ
+     * @return array objetos Faq
+     */
+    public static function ListarFAQ() :array{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT * FROM faq");
         $stmt->execute();
@@ -112,4 +117,6 @@ class Faq {
         }
         return $faqs;
     }
+
+
 }
