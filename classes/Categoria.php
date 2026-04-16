@@ -52,15 +52,22 @@ class Categoria{
         $stmt = $db->prepare("UPDATE categorias SET nombre= ?, descripcion= ?, orden= ?, img= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
         $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion, $this->id_categoria]);
     }
+
     /**
-     * Añade el objeto a la BBDD
+     * Crea una nueva categoria en la BD
+     * @param $nombre string nombre de la categoria
+     * @param $descripcion string info de la categoria
+     * @param $orden int prioridad en la que se mostrara en la página
+     * @param $img_cat string imagen icono de la categoria
+     * @param $id_madre int||void id de una categoria si pertenece a alguna
+     * @param $fecha_actualizacion string fecha de creacion de la categoria
      * @return void
      */
-    public function InsertarCategoria(){
+    public static function InsertarCategoria($nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion) :void {
         try {
             $db = DB::conectar();
             $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img_cat, id_madre, fecha_actualizacion) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion]);
+            $stmt->execute([$nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion]);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }

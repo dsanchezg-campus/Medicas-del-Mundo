@@ -76,12 +76,13 @@ class Bloque
     }
     /**
      * eliminar un bloque de la base de datos
+     * @param $id_bloque int
      * @return void
      */
-    public function EliminarBloque(){
+    public static function EliminarBloque($id_bloque) :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
-        $stmt->execute([$this->id_bloque]);
+        $stmt->execute([$id_bloque]);
     }
 
     // Getters y setters para acceder y modificar las propiedades del bloque
