@@ -45,6 +45,7 @@ require_once "../classes/Bloque.php";
     </header>
     <main>
         <?php
+        //Comprobamos si se ha cargado el error
         if (isset($error)) {
             ?>
         <article class="error">
@@ -53,6 +54,7 @@ require_once "../classes/Bloque.php";
         <?php
         }
         ?>
+        //Formulario para añadir categoria
         <article class="anadir-categoria">
             <form action="../controladores/crear_categoria.php" method="post" class="form-anadir">
                 <input type="hidden" name="action" value="categoria">
@@ -73,6 +75,7 @@ require_once "../classes/Bloque.php";
                         echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
                     }
                     ?>
+                    //Añadimos para poder añadir prioridad,fecha actualización
                 </select>
                 <label for="prioridad">Prioridad: </label>
                 <input type="number" id="prioridad" name="prioridad" required>
@@ -82,6 +85,7 @@ require_once "../classes/Bloque.php";
             </form>
         </article>      
     </main>
+    //Footer con información de médicas del Mundo añadidos
     <footer>
         <section class="footer-section">
             <h2>Médicos del Mundo España</h2>
