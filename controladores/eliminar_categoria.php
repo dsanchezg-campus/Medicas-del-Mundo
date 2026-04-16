@@ -6,4 +6,5 @@ if ($_SESSION['usuaria']->ControlUsuariaEditora || $_SESSION['usuaria']->Control
         Bloque::EliminarBloque($_GET['contenido']);
     }
     header ("Location: ".$_SESSION['usuaria']->getRol()."/index.php");
+    exit();
 }
