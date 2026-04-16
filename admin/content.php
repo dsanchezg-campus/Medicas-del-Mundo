@@ -42,6 +42,7 @@ require_once "../classes/Contenido.php";
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
     <main>
         <aside class="subcategorias-content">
+            
             <?php
             // Verificar si se ha especificado un bloque por parámetro 'page'
             if (isset($_GET['page'])) {
@@ -68,27 +69,11 @@ require_once "../classes/Contenido.php";
                 }
             }
             ?>
-
-            <!-- Sección hardcoded para ejemplo (debería ser dinámica) -->
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="../styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
         </aside>
 
         <!-- Sección principal con el contenido detallado del bloque -->
         <section class="contenedor-contenido">
+            
             <?php
             // Mostrar contenido si hay parámetro 'page'
             if (isset($_GET['page'])) {
