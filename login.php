@@ -32,7 +32,7 @@ include_once "header.php";
         </article>
         <?php } ?>
         <!-- Formulario de inicio de sesión -->
-        <form action="" method="post">
+        <form action="controladores/inicio_sesion.php" method="post">
          <h1>Inicio de sesión</h1>
             <article class="form-usuario">
                 <label for="usuario">Usuaria: </label>
