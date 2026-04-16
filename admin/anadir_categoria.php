@@ -13,7 +13,6 @@ require_once "../classes/Bloque.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
     $cat = new Categoria( $_POST["id_categoria"] ,$_POST["nombre"], $_POST["descripcion"], $_POST["prioridad"], $_POST["img"], $_POST["id_categoria"] ?? null, $_POST["fecha_actualizacion"]);
     try {
-
         $cat->InsertarCategoria();
     } catch (Exception $e){
         $error = $e->getMessage();
