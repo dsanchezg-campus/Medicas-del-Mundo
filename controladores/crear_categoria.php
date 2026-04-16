@@ -15,7 +15,10 @@ if ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->Contr
             $error = $e->getMessage();
         }
     }
+    //volvemos al inicio según el rol de la usuaria
+    header("Location: ".$_SERVER['usuaria']->getRol()."/index.php");
+    exit();
 }
-//volvemos al inicio según el rol de la usuaria
-header("Location: ".$_SERVER['usuaria']->getRol()."/index.php");
+//volvemos al inicio si no hay sesion iniciada
+header("Location: ../index.php");
 exit();
