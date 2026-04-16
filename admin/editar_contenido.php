@@ -6,12 +6,12 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
-if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
-    header("location: ../index.php");
-    exit();
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
-    $cat = new Contenido($_POST["nombre"], $_POST["descripcion"]);
+// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
+//     header("location: ../index.php");
+//     exit();
+// }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id_bloque"], $_POST["url"])) {
+    $cat = new Contenido( $_POST["id_bloque"] ,$_POST["url"], $_POST["descripcion"], $_POST["orden"], $_POST["img"], $_POST["id_bloque"] ?? null, $_POST["fecha_actualizacion"]);
     try {
         $cat->InsertarContenido();
     } catch (Exception $e){
@@ -62,50 +62,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
     ?>
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir">
-            <input type="hidden" name="action" value="categoria">
-            <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" name="nombre" required>
-            <button type="submit">Añadir</button>
-        </form>
-    </article>
-    <article class="anadir-contenido">
-        <form action="" method="post" class="form-anadir">
             <input type="hidden" name="action" value="contenido">
-            <label for="titulo">Titulo: </label>
-            <input type="text" id="titulo" name="titulo" required>
+            <label for="id_bloque">Pertenece al bloque: </label>
+            <select name="id_bloque" id="id_bloque">
+                <option value="">Ninguno</option>
+                <?php
+                $bloques = Bloque::getBloques();
+                foreach ($bloques as $bloque) {
+                    echo "<option value='" . $bloque->getIdBloque() . "'>" . $bloque->getTituloBloque() . "</option>";
+                }
+                ?>
+            </select>
+            <label for="url">URL: </label>
+            <input type="text" id="url" name="url" required>
             <label for="descripcion">Descripcion: </label>
             <input type="text" id="descripcion" name="descripcion" required>
-            <label for="texto">Texto: </label>
-            <input type="text" id="texto" name="texto" required>
+            <label for="orden">Orden: </label>
+            <input type="number" id="orden" name="orden" required>
+            <label for="img">Imagen: </label>
+            <input type="file" id="img" name="img" accept="image/*" required>
             <label for="id_categoria">Pertenece a la categoria: </label>
-            <select name="id_categoria" id="id_categoria">
+            <select name="id_categoria" id="id_categoria" required>
+                <option value="">Ninguna</option>
                 <?php
                 $categorias = Categoria::getCategorias();
                 foreach ($categorias as $categoria) {
                     echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
                 }
                 ?>
-            </select><br>
-            <label for="prioridad">Prioridad: </label>
-            <input type="number" id="prioridad" name="prioridad" required>
+            </select>
             <label for="fecha_actualizacion">Fecha Actualizacion: </label>
             <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
-            <button type="submit">Añadir</button>
+            <button type="submit">Añadir Contenido</button>
         </form>
     </article>
 </main>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
-    if ($_POST['action'] === 'contenido') {
-        $bloque = new Bloque(null, $_POST['prioridad'], $_POST['titulo'], $_POST['descripcion'], $_POST['texto'], null, $_POST['fecha_actualizacion'], $_POST['id_categoria']);
-        $bloque->CrearBloque();
-    } elseif ($_POST['action'] === 'categoria') {
-        $categoria = new Categoria(null, $_POST['nombre'], '', 0, '', null, date("Y-m-d H:i:s"));
-        $categoria->InsertarCategoria();
-    }
-}
-?>
-
 <footer>
     <section class="footer-section">
         <h2>Médicos del Mundo España</h2>
