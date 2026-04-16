@@ -10,14 +10,7 @@ require_once "../classes/Bloque.php";
 //     header("location: ../index.php");
 //     exit();
 // }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
-    $cat = new Categoria( $_POST["id_categoria"] ,$_POST["nombre"], $_POST["descripcion"], $_POST["prioridad"], $_POST["img"], $_POST["id_categoria"] ?? null, $_POST["fecha_actualizacion"]);
-    try {
-        $cat->InsertarCategoria();
-    } catch (Exception $e){
-        $error = $e->getMessage();
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
         }
         ?>
         <article class="anadir-categoria">
-            <form action="" method="post" class="form-anadir">
+            <form action="../controladores/crear_categoria.php" method="post" class="form-anadir">
                 <input type="hidden" name="action" value="categoria">
                 <label for="nombre">Nombre: </label>
                 <input type="text" id="nombre" name="nombre" required>
