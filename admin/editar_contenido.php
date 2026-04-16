@@ -6,14 +6,35 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
+session_start();
+
 // if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
 //     header("location: ../index.php");
 //     exit();
 // }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id_bloque"], $_POST["url"])) {
-    $cat = new Contenido( $_POST["id_bloque"] ,$_POST["url"], $_POST["descripcion"], $_POST["orden"], $_POST["img"], $_POST["id_bloque"] ?? null, $_POST["fecha_actualizacion"]);
+
+$error = null;
+$bloque = null;
+
+if (isset($_GET['page'])) {
+    $bloque = Bloque::getBloqueById($_GET['page']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["action"] == "contenido") {
     try {
-        $cat->InsertarContenido();
+        $id_bloque = $_POST['id_bloque'];
+        $titulo = $_POST['titulo'];
+        $descripcion = $_POST['descripcion'];
+        $texto = $_POST['texto'];
+        $prioridad = $_POST['prioridad'];
+        $id_categoria = $_POST['id_categoria'];
+        $fecha_actualizacion = $_POST['fecha_actualizacion'];
+        
+        $bloqueEditado = new Bloque($id_bloque, $prioridad, $titulo, $descripcion, $texto, null, $fecha_actualizacion, $id_categoria, null);
+        $bloqueEditado->ActualizarBloque();
+        
+        header("Location: index.php?page=" . $id_categoria);
+        exit();
     } catch (Exception $e){
         $error = $e->getMessage();
     }
@@ -26,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id_bloque"], $_POST["u
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../styles/style.css">
-    <title>Bienvenidas</title>
+    <title>Bienvenidas - Editar Contenido</title>
     <link rel="icon" type="../styles/img/logo.png" sizes="32x32" href="../styles/img/logo.png">
 </head>
 <body>
@@ -55,47 +76,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id_bloque"], $_POST["u
     if (isset($error)) {
         ?>
         <article class="error">
-            <p class="error-p"><?php echo $error; ?></p>
+            <p class="error-p"><?php echo htmlspecialchars($error); ?></p>
         </article>
         <?php
     }
+    
+    if ($bloque) {
     ?>
-    <article class="anadir-categoria">
+    <article class="anadir-contenido">
         <form action="" method="post" class="form-anadir">
             <input type="hidden" name="action" value="contenido">
-            <label for="id_bloque">Pertenece al bloque: </label>
-            <select name="id_bloque" id="id_bloque">
-                <option value="">Ninguno</option>
-                <?php
-                $bloques = Bloque::getBloques();
-                foreach ($bloques as $bloque) {
-                    echo "<option value='" . $bloque->getIdBloque() . "'>" . $bloque->getTituloBloque() . "</option>";
-                }
-                ?>
-            </select>
-            <label for="url">URL: </label>
-            <input type="text" id="url" name="url" required>
+            <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
+            
+            <label for="titulo">Titulo: </label>
+            <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
+            
             <label for="descripcion">Descripcion: </label>
-            <input type="text" id="descripcion" name="descripcion" required>
-            <label for="orden">Orden: </label>
-            <input type="number" id="orden" name="orden" required>
-            <label for="img">Imagen: </label>
-            <input type="file" id="img" name="img" accept="image/*" required>
+            <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
+            
+            <label for="texto">Texto: </label>
+            <input type="text" id="texto" name="texto" value="<?php echo htmlspecialchars($bloque->getTextoBloque()); ?>" required>
+            
             <label for="id_categoria">Pertenece a la categoria: </label>
             <select name="id_categoria" id="id_categoria" required>
-                <option value="">Ninguna</option>
                 <?php
                 $categorias = Categoria::getCategorias();
                 foreach ($categorias as $categoria) {
-                    echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
+                    $selected = ($bloque->getIdCategoria() == $categoria->getIdCategoria()) ? "selected" : "";
+                    echo "<option value='" . $categoria->getIdCategoria() . "' $selected>" . htmlspecialchars($categoria->getNombre()) . "</option>";
                 }
                 ?>
-            </select>
+            </select><br>
+            
+            <label for="prioridad">Prioridad: </label>
+            <input type="number" id="prioridad" name="prioridad" value="<?php echo htmlspecialchars($bloque->getOrdenBloque()); ?>" required>
+            
             <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
-            <button type="submit">Añadir Contenido</button>
+            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" value="<?php echo date('Y-m-d', strtotime($bloque->getFechaActualizacionBloque())); ?>" required>
+            
+            <button type="submit">Editar Contenido</button>
         </form>
     </article>
+    <?php } else { ?>
+        <article class="error">
+            <p class="error-p">Contenido no encontrado. Por favor, selecciona un contenido para editar.</p>
+        </article>
+    <?php } ?>
 </main>
 <footer>
     <section class="footer-section">

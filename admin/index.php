@@ -102,6 +102,7 @@ require_once "../Classes/Bloque.php";
             ?>
 
             <section class="contenido-bloque">
+                <a href="editar_contenido.php?page=<?php echo $contenido->getIdBloque(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
                 <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                     <article class="imagen-contenido">
                         <img src="<?php  ?>" alt="Imagen1">
