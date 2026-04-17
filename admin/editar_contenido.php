@@ -51,26 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
     <link rel="icon" type="../styles/img/logo.png" sizes="32x32" href="../styles/img/logo.png">
 </head>
 <body>
-<header>
-    <ul class="lista-nav">
-        <li class="linea-nav">
-            <article class="logo">
-                <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-                    <img src="../styles/img/logo.png" alt="logo">
-                </a>
-            </article>
-        </li>
-        <li class="linea-nav">
-            <h1>Bienvenida</h1>
-        </li>
-        <li class="linea-nav">
-            <form method="POST" action="" class="form-cabecera">
-                <input type="text" class="input-nav" placeholder="Buscar">
-                <input type="submit" class="boton-invisible" value="Buscar">
-            </form>
-        </li>
-    </ul>
-</header>
+<?php
+require_once "../header.php";
+?>
 <main>
     <?php
     if (isset($error)) {

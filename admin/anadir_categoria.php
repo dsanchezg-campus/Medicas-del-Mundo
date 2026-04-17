@@ -44,30 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
 </head>
 <body>
 <!-- Encabezado con navegación -->
-<header>
-    <!-- Lista de navegación superior -->
-    <ul class="lista-nav">
-        <!-- Logo de Médicos del Mundo -->
-        <li class="linea-nav">
-            <article class="logo">
-                <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-                    <img src="../styles/img/logo.png" alt="logo">
-                </a>
-            </article>
-        </li>
-        <!-- Título de bienvenida -->
-        <li class="linea-nav">
-            <h1>Bienvenida</h1>
-        </li>
-        <!-- Formulario de búsqueda -->
-        <li class="linea-nav">
-            <form method="POST" action="" class="form-cabecera">
-                <input type="text" class="input-nav" placeholder="Buscar">
-                <input type="submit" class="boton-invisible" value="Buscar">
-            </form>
-        </li>
-    </ul>
-</header>
+<?php
+require_once "../header.php";
+?>
 <!-- Contenido principal -->
 <main>
     <!-- Mostrar mensaje de error si existe -->
