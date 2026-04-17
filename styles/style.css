@@ -155,7 +155,7 @@ main {
    TARJETAS DE CATEGORÍA (vista principal)
    Tarjetas grandes con imagen y texto superpuesto
    ============================================= */
-.categoria {
+.categoria, .crear-categoria {
     margin: 2% 2% 0;
     min-width: 20vw;
     max-width: 20vw;
@@ -164,12 +164,12 @@ main {
     display: flex;
     border-radius: 5px;
     text-align: center;
-    transition: transform 0.4s;
+    transition: transform 0.4s, box-shadow 0.4s;
     position: relative;
 }
 
 /* Efecto hover compartido: elevación con sombra y escala leve */
-.categoria:hover, .contenido-bloque:hover {
+.categoria:hover, .crear-categoria:hover, .contenido-bloque:hover {
     box-shadow: 0 0 15px grey;
     transform: scale(1.005);
     transition: transform 0.4s;
@@ -403,8 +403,13 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     transition: 0.3s;
 }
 
-/* En hover, el fondo se vuelve gris claro y el texto adopta el color lila del form */
-.input-login:hover {
+/* Hover styles unificados para elementos interactivos */
+.input-login:hover,
+.form-anadir input:hover,
+.form-anadir button:hover,
+.form-anadir input[type="file"]::-webkit-file-upload-button:hover,
+.boton-editar:hover,
+.boton-eliminar:hover {
     background-color: #ede9e9;
     color: #B398E3;
 }
@@ -465,17 +470,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     height: 100%;
     overflow-y: auto;
 }
-.crear-categoria {
-    margin: 2% 2% 0;
-    min-width: 20vw;
-    max-width: 20vw;
-    height: 40vh;
-    background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-rojo-corporativo);
-    display: flex;
-    border-radius: 5px;
-    text-align: center;
-    transition: transform 0.4s, box-shadow 0.4s;
-}
+/* .crear-categoria unificada con .categoria */
 .enlace-crear-categoria {
     width: 100%;
     height: 100%;
@@ -549,111 +544,71 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 .form-anadir label {
     display: block;
     margin: 13px;
+}
 
-}
-.form-anadir input {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 100%;
-}
-.form-anadir input:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.form-anadir button {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #B398E3;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 33%;
-    margin: 10px;
-    margin-left: 34%;
-
-}
-.form-anadir button:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.form-anadir select {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 1rem;
-    transition: 0.3s;
-    width: 100%;
-}
-.form-anadir input[type="file"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #080709;
-    font-size: 0.7rem;
-    transition: 0.3s;
-}
+/* Estilos comunes para inputs, selects y botones en form-anadir */
+.form-anadir input,
+.form-anadir select,
+.form-anadir button,
 .form-anadir input[type="file"]::-webkit-file-upload-button {
     padding: 10px;
     border-radius: 5px;
     border: none;
+    transition: 0.3s;
+}
+
+.form-anadir input,
+.form-anadir select {
+    background-color: white;
+    color: #080709;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.form-anadir button,
+.form-anadir input[type="file"]::-webkit-file-upload-button {
     background-color: #B398E3;
     color: white;
     font-weight: bolder;
     font-size: 1rem;
-    transition: 0.3s;
 }
-.form-anadir input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
+
+.form-anadir button {
+    width: 33%;
+    margin: 10px 0 10px 34%;
 }
+
+.form-anadir input[type="file"] {
+    font-size: 0.7rem;
+}
+
 /* Botones eliminar y editar */
-.boton-editar {
+.boton-editar, .boton-eliminar {
     position: absolute;
     top: 1%;
-    right: 2%;
     width: 30px;
     height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.boton-editar {
+    right: 2%;
     z-index: 1;
     background-color: #9be398;
-    border-radius: 5px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
 }
-.boton-editar:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
+
 .boton-eliminar {
-    position: absolute;
-    top: 1%;
     right: 15%;
-    width: 30px;
-    height: 30px;
     z-index: 2;
     background-color: #e39898;
-    border-radius: 5px;
-    padding: 5px;
 }
-.boton-eliminar:hover {
-    background-color: #ede9e9;
-    color: #B398E3;
-}
-.boton-editar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+
+/* Imágenes de los botones */
+.boton-editar-img,
 .boton-eliminar-img {
     width: 100%;
     height: 100%;
