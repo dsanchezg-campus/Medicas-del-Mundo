@@ -25,7 +25,7 @@ require_once "../header.php";
     }
     ?>
     <article class="anadir-contenido">
-        <form action="" method="post" class="form-anadir">
+        <form action="/controladores/editar_usuarias.php" method="post" class="form-anadir">
                 <?php
                 $usuaria = Usuario::getUsuaria($_GET["id_usuario"]);
                 ?>
