@@ -42,10 +42,8 @@ require_once "../header.php";
             <tr>
                 <th>Editora</th>
                 <th>Email</th>
-                <th>Eliminar</th>
                 <th>Editar</th>
-                <th></th>
-                <th></th>
+                <th>Eliminar</th>
             </tr>
             </thead>
             <!-- Cuerpo de la tabla con datos de editoras -->
@@ -62,9 +60,9 @@ require_once "../header.php";
                     <!-- Email de la editora -->
                     <td><?php echo $usuaria->getEmail(); ?></td>
                     <!-- Botón para eliminar a la editora (por implementar) -->
-                    <td>Aqui poner boton eliminar</td>
+                    <td><a href="editar_editora.php?page=<?php echo $usuaria->getId(); ?>">Editar</a></td>
                     <!-- Botón para editar datos de la editora (por implementar) -->
-                    <td>Aqui poner boton editar</td>
+                    <td><a href="eliminar_editora.php?page=<?php echo $usuaria->getId(); ?>">Eliminar</a></td>
                 </tr>
 
                 <?php
