@@ -4,7 +4,7 @@
             <li class="linea-nav">
                 <article class="logo">
                     <a href="https://www.medicosdelmundo.org/" class="enlace-medicos">
-                        <img src="styles/img/logo.png" alt="logo">
+                        <img src="/styles/img/logo.png" alt="logo">
                     </a>
                 </article>
             </li>
