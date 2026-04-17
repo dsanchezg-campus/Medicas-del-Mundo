@@ -148,4 +148,17 @@ class Usuario
         $stmt = $db->prepare("DELETE FROM usuario WHERE id_usuario = ?");
         $stmt->execute([$id_usuario]);
     }
+
+    /**
+     * Obtiene una usuario concreta de la BD
+     * @param $id_usuario
+     * @return Usuario
+     */
+    public static function getUsuaria($id_usuario) :Usuario{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT u.*, r.nombre_rol AS rol FROM usuario u JOIN rol r ON u.id_rol=r.id_rol WHERE id_usuario = ?");
+        $stmt->execute([$id_usuario]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['rol']);
+    }
 }
