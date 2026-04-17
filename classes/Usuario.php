@@ -126,7 +126,7 @@ class Usuario
     public static function ListarUsuarias() :array{
         $usuarias = array ();
         $db = DB::conectar();
-        $stmt = $db->prepare("SELECT u.*, r.nombre_rol AS rol FROM usuario JOIN rol r ON u.id_rol = r.id_rol");
+        $stmt = $db->prepare("SELECT u.*, r.nombre_rol AS rol FROM usuario u JOIN rol r ON u.id_rol = r.id_rol");
         $stmt->execute();
         while ($usuaria = $stmt->fetch(PDO::FETCH_ASSOC)){
             $usuarias[] = new Usuario($usuaria['nombre'],
