@@ -78,7 +78,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="<?php echo $categoria->getImg(); ?>" alt="Imagen1">
+                            <img src="<?php echo "/styles/img/".$categoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
