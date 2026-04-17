@@ -137,4 +137,15 @@ class Usuario
         }
         return $usuarias;
     }
+
+    /**
+     * Elimina a una usuaria de la BD
+     * @param $id_usuario identificador de una usuaria
+     * @return void
+     */
+    public static function EliminarUsuaria ($id_usuario) :void{
+        $db = DB::conectar();
+        $stmt = $db->prepare("DELETE FROM usuario WHERE id_usuario = ?");
+        $stmt->execute([$id_usuario]);
+    }
 }
