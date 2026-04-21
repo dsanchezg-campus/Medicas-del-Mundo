@@ -85,7 +85,7 @@ require_once "../header.php";
 
     if ($bloque) {
     ?>
-    <article class="anadir-contenido">
+    <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir">
             <input type="hidden" name="action" value="contenido">
             <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
