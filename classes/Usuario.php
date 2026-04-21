@@ -45,10 +45,7 @@ class Usuario
     {
         return $this->email;
     }
-    public function getPassword()
-    {
-        return $this->password;
-    }
+
     public function getIdUsuario()
     {
         return $this->id_usuario;
@@ -162,10 +159,10 @@ class Usuario
 
     /**
      * Elimina a una usuaria de la BD
-     * @param $id_usuario identificador de una usuaria
+     * @param $id_usuario int identificador de una usuaria
      * @return void
      */
-    public static function EliminarUsuaria ($id_usuario) :void{
+    public static function EliminarUsuaria (int $id_usuario) :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM usuario WHERE id_usuario = ?");
         $stmt->execute([$id_usuario]);
