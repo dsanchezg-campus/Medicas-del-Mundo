@@ -9,7 +9,7 @@ require_once "../classes/Bloque.php";
 
 // Validación: Verificar si el usuario actual tiene permisos de editora
 // Si no tiene permisos, redirige a la página principal
-if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
+if (!$_SESSION["usuaria"]->controlUsuarioAdmin()) {
     header("location: ../index.php");
     exit();
 }
