@@ -647,3 +647,13 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     height: 100%;
     object-fit: cover;
 }
+
+/* Botón flotante para crear nuevo contenido en esta categoría */
+.anadir-contenido {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+}
