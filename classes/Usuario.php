@@ -36,7 +36,7 @@ class Usuario
         $this->id_usuario = $id_usuario;
         $this->rol = $rol;
     }
-    //GETTERS
+    //************************GETTERS******************************//
     public function getNombre()
     {
         return $this->nombre;
@@ -45,10 +45,7 @@ class Usuario
     {
         return $this->email;
     }
-    public function getPassword()
-    {
-        return $this->password;
-    }
+
     public function getIdUsuario()
     {
         return $this->id_usuario;
@@ -57,6 +54,17 @@ class Usuario
     {
         return $this->rol;
     }
+    //**************************** SETTERS ***********************************//
+    public function setNombre($nombre):void{
+        $this->nombre = $nombre;
+    }
+    public function setEmail($email):void{
+        $this->email = $email;
+    }
+    public function setPassword($password):void{
+        $this->password = password_hash($password , PASSWORD_DEFAULT);
+    }
+    //********************** MÉTODOS *****************************//
 
     // Metodo para verificar si el usuario actual es Administrador
     // Retorna true si el rol es "Admin", false en caso contrario
@@ -139,11 +147,22 @@ class Usuario
     }
 
     /**
+     * Actualiza los datos de la usuaria en la BD
+     * @return bool
+     */
+    public function ActualizarUsuaria():bool{
+        $db = DB::conectar();
+        $stmt = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', password='$this->password' WHERE id_usuario=$this->id_usuario");
+        $result = $stmt->execute();
+        return $result>0;
+    }
+
+    /**
      * Elimina a una usuaria de la BD
-     * @param $id_usuario identificador de una usuaria
+     * @param $id_usuario int identificador de una usuaria
      * @return void
      */
-    public static function EliminarUsuaria ($id_usuario) :void{
+    public static function EliminarUsuaria (int $id_usuario) :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM usuario WHERE id_usuario = ?");
         $stmt->execute([$id_usuario]);
