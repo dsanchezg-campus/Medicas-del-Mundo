@@ -52,7 +52,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
+                            <img src="/styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
@@ -78,7 +78,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="<?php echo "/styles/img/".$categoria->getImg(); ?>" alt="Imagen1">
+                            <img src="<?php echo "../styles/img/".$categoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
@@ -145,7 +145,7 @@ require_once "../header.php";
         </section>
         <?php
         // Mostrar botón para regresar al inicio
-        echo "<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>";
+        echo "<a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>";
     }
     ?>
 </main>
