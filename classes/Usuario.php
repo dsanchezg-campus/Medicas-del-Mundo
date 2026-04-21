@@ -36,7 +36,7 @@ class Usuario
         $this->id_usuario = $id_usuario;
         $this->rol = $rol;
     }
-    //GETTERS
+    //************************GETTERS******************************//
     public function getNombre()
     {
         return $this->nombre;
@@ -57,6 +57,17 @@ class Usuario
     {
         return $this->rol;
     }
+    //**************************** SETTERS ***********************************//
+    public function setNombre($nombre):void{
+        $this->nombre = $nombre;
+    }
+    public function setEmail($email):void{
+        $this->email = $email;
+    }
+    public function setPassword($password):void{
+        $this->password = password_hash($password , PASSWORD_DEFAULT);
+    }
+    //********************** MÉTODOS *****************************//
 
     // Metodo para verificar si el usuario actual es Administrador
     // Retorna true si el rol es "Admin", false en caso contrario
@@ -136,6 +147,17 @@ class Usuario
                 $usuaria['rol']);
         }
         return $usuarias;
+    }
+
+    /**
+     * Actualiza los datos de la usuaria en la BD
+     * @return bool
+     */
+    public function ActualizarUsuaria():bool{
+        $db = DB::conectar();
+        $stmt = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', password='$this->password' WHERE id_usuario=$this->id_usuario");
+        $result = $stmt->execute();
+        return $result>0;
     }
 
     /**
