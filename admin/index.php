@@ -22,7 +22,7 @@ require_once "../Classes/Bloque.php";
     <!-- Compatibilidad con versiones antiguas de Internet Explorer -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Incluir CSS personalizado -->
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <title>Bienvenidas</title>
     <!-- Favicon de la página -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
@@ -45,9 +45,9 @@ require_once "../header.php";
                 ?>
                 <section class="categoria">
                     <!-- Botón para editar la categoría -->
-                    <a href="editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="/controladores/editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
                     <!-- Botón para eliminar la categoría -->
-                    <a href="eliminar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+                    <a href="/controladores/eliminar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar esta Categoría?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <!-- Enlace para ver subcategorías dentro de esta categoría -->
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <!-- Imagen de la categoría -->
@@ -71,9 +71,9 @@ require_once "../header.php";
                 ?>
                 <section class="categoria">
                     <!-- Botón para editar la categoría -->
-                    <a href="editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="/controladores/editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
                     <!-- Botón para eliminar la categoría -->
-                    <a href="eliminar_categoria.php?categoria=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+                    <a href="/controladores/eliminar_categoria.php?categoria=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar esta Categoría?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <!-- Enlace para ver subcategorías dentro de esta categoría -->
                     <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                         <!-- Imagen de la categoría -->
@@ -164,7 +164,7 @@ require_once "../header.php";
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
         <!-- Enlace para cerrar sesión -->
-        <p><a href="../login.php">Cerrar Sesión</a></p>
+        <p><a href="/login.php">Cerrar Sesión</a></p>
     </section>
 </footer>
 </body>
