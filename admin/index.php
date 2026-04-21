@@ -164,7 +164,7 @@ require_once "../header.php";
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
         <!-- Enlace para cerrar sesión -->
-        <p><a href="/login.php">Cerrar Sesión</a></p>
+        <p><a href="../controladores/cerrar_sesion.php">Cerrar Sesión</a></p>
     </section>
 </footer>
 </body>
