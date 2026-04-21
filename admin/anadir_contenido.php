@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
         <!-- Enlace a inicio de sesión -->
-        <p><a href="login.php">Iniciar Sesion</a></p>
+        <p><a href="../controladores/cerrar_sesion.php">Cerrar Sesion</a></p>
     </section>
 </footer>
 <!-- Enlace a inicio de sesión -->
