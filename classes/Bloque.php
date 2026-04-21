@@ -2,7 +2,7 @@
 // Incluir la clase DB para la conexión a la base de datos
 include_once "DB.php";
 // Clase Bloque: Representa un bloque de contenido en el sistema de gestión de Médicos del Mundo.
-// Un bloque contiene texto, título, descripción, y pertenece a una categoría. Soporta jerarquía con id_madre_bloque.
+// Un bloque contiene texto, título, descripción, y pertenece a una categoría.
 class Bloque
 {
     // Propiedades privadas del bloque
@@ -11,7 +11,6 @@ class Bloque
     private $titulo_bloque;
     private $descripcion_bloque;
     private $texto_bloque;
-    private $id_madre_bloque;
     private $id_categoria;
     private $fecha_actualizacion_bloque;
     private $icono;
@@ -22,18 +21,16 @@ class Bloque
      * @param $titulo_bloque
      * @param $descripcion
      * @param $texto_bloque
-     * @param $id_madre
      * @param $fecha_actualizacion
      * @param $id_categoria
      * @param $icono
      */
-     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $id_madre, $fecha_actualizacion, $id_categoria, $icono){
+     public function __construct($id_bloque, $orden_bloque, $titulo_bloque, $descripcion, $texto_bloque, $fecha_actualizacion, $id_categoria, $icono){
         $this->id_bloque = $id_bloque;
         $this->orden_bloque = $orden_bloque;
         $this->titulo_bloque = $titulo_bloque;
         $this->descripcion_bloque = $descripcion;
         $this->texto_bloque = $texto_bloque;
-        $this->id_madre_bloque = $id_madre;
         $this->fecha_actualizacion_bloque = $fecha_actualizacion;
         $this->id_categoria = $id_categoria;
         $this->icono = $icono;
@@ -45,13 +42,12 @@ class Bloque
      */
     public function InsertarBloque() :void{
         $db = DB::conectar();
-        $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, id_madre, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $this->orden_bloque,
             $this->titulo_bloque,
             $this->descripcion_bloque,
             $this->texto_bloque,
-            $this->id_madre_bloque,
             $this->fecha_actualizacion_bloque,
             $this->id_categoria
         ]);
@@ -62,13 +58,12 @@ class Bloque
      */
     public function ActualizarBloque(){
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, id_madre = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
+        $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
         $stmt->execute([
             $this->orden_bloque,
             $this->titulo_bloque,
             $this->descripcion_bloque,
             $this->texto_bloque,
-            $this->id_madre_bloque,
             $this->fecha_actualizacion_bloque,
             $this->id_categoria,
             $this->id_bloque
@@ -116,12 +111,6 @@ class Bloque
     public function setTextoBloque($texto_bloque){
         $this->texto_bloque = $texto_bloque;
     }
-    public function getIdMadreBloque(){
-        return $this->id_madre_bloque;
-    }
-    public function setIdMadreBloque($id_madre_bloque){
-        $this->id_madre_bloque = $id_madre_bloque;
-    }
     public function getFechaActualizacionBloque(){
         return $this->fecha_actualizacion_bloque;
     }
@@ -156,7 +145,6 @@ class Bloque
                 $bloque['titulo'],
                 $bloque['descripcion'],
                 $bloque['texto'],
-                $bloque['id_madre'],    
                 $bloque['fecha_actualizacion'],
                 $bloque['id_categoria'],
                 $bloque['icono']
@@ -176,17 +164,15 @@ class Bloque
         $stmt = $db->prepare("SELECT * FROM bloque WHERE id_bloque = ? ");
         $stmt->execute([$id_bloque]);
         $bloque = $stmt->fetch(PDO::FETCH_ASSOC);
-        $bloque_pasar = new Bloque(
+        return new Bloque(
             $bloque['id_bloque'],
             $bloque['orden'],
             $bloque['titulo'],
             $bloque['descripcion'],
             $bloque['texto'],
-            $bloque['id_madre'],
             $bloque['fecha_actualizacion'],
             $bloque['id_categoria'],
             $bloque['icono']
         );
-        return $bloque_pasar;
     }
 }
