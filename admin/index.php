@@ -116,10 +116,6 @@ require_once "../header.php";
             ?>
 
             <section class="contenido-bloque">
-                <!-- Botón para editar el contenido -->
-                <a href="editar_contenido.php?page=<?php echo $contenido->getIdBloque(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
-                <!-- Botón para eliminar el contenido -->
-                <a href="/controladores/eliminar_contenido.php?contenido=<?php echo $contenido->getIdBloque(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este Contenido?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                 <!-- Enlace para ver el contenido completo del bloque -->
                 <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                     <!-- Imagen asociada al bloque (actualmente vacía) -->
@@ -128,6 +124,11 @@ require_once "../header.php";
                     </article>
                     <!-- Título y descripción del bloque -->
                     <article class="testo-contenido">
+                        <!-- Botón para editar el contenido -->
+                        <a href="editar_contenido.php?page=<?php echo $contenido->getIdBloque(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                        <!-- Botón para eliminar el contenido -->
+                        <a href="/controladores/eliminar_contenido.php?contenido=<?php echo $contenido->getIdBloque(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este Contenido?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+
                         <h1><?php echo $contenido->getTituloBloque(); ?></h1>
                         <p><?php echo $contenido->getDescripcionBloque(); ?></p>
                     </article>
