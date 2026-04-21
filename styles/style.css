@@ -651,12 +651,13 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 /* Botón para crear nuevo contenido en esta categoría */
 .anadir-contenido {
     margin: 2% 2% 0;
-    min-width: 40vw;
-    max-width: 40vw;
+    min-width: 20vw;
+    max-width: 20vw;
     height: 25vh;
     background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-azul-oscuro-2);
     color: var(--color-blanco);
     display: inline-block;
     border-radius: 5px;
     transition: transform 0.4s, box-shadow 0.4s; /* Animación compartida con .categoria en hover */
+    margin-bottom: 10px;
 }
