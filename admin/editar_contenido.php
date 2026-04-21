@@ -97,7 +97,7 @@ require_once "../header.php";
             <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
 
             <label for="texto">Texto: </label>
-            <input type="text" id="texto" name="texto" value="<?php echo htmlspecialchars($bloque->getTextoBloque()); ?>" required>
+            <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
 
             <label for="id_categoria">Pertenece a la categoria: </label>
             <select name="id_categoria" id="id_categoria" required>
