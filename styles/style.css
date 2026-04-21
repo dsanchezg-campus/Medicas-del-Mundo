@@ -459,7 +459,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     color: var(--color-blanco);
     display: inline-block;
     border-radius: 5px;
-    transition: transform 0.4s, box-shadow 0.4s; /* Animación compartida con .categoria en hover */
+    transition: box-shadow 0.4s; /* Animación compartida con .categoria en hover */
 }
 
 /* Enlace interno que actúa como layout flex para imagen + texto */
@@ -650,14 +650,13 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 
 /* Botón para crear nuevo contenido en esta categoría */
 .anadir-contenido {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 20%;
-    height: 100%;
-    margin: auto;
-    background-color: var(--color-azul-oscuro-2);
-    border-radius: 10px;
-    padding: 10px;
-    transition: 0.4s;
+    margin: 2% 2% 0;
+    min-width: 40vw;
+    max-width: 40vw;
+    height: 25vh;
+    background: url(https://www.medicosdelmundo.org/app/themes/mdm/library/medias/images/textures/noise.png) var(--color-azul-oscuro-2);
+    color: var(--color-blanco);
+    display: inline-block;
+    border-radius: 5px;
+    transition: transform 0.4s, box-shadow 0.4s; /* Animación compartida con .categoria en hover */
 }
