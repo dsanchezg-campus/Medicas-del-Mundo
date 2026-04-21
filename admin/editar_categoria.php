@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
         // Instanciamos la categoría con los datos editados
         $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
 
-        // Llamamos al método que ejecuta el UPDATE en la BD
+        // Llamamos al metodo que ejecuta el UPDATE en la BD
         $categoriaEditada->ActualizarCategoria();
 
         // Redirigimos al inicio de admin o donde prefieras tras el éxito
