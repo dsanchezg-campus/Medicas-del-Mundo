@@ -22,7 +22,7 @@ require_once "../Classes/Bloque.php";
     <!-- Compatibilidad con versiones antiguas de Internet Explorer -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Incluir CSS personalizado -->
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Bienvenidas</title>
     <!-- Favicon de la página -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
