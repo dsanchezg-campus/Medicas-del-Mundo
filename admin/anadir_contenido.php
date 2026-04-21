@@ -7,19 +7,31 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
-// Validación: Verificar si el usuario actual tiene permisos de editora
+// Validación: Verificar si el usuario actual tiene permisos de admin
 // Si no tiene permisos, redirige a la página principal
 if (!$_SESSION["usuaria"]->controlUsuarioAdmin()) {
     header("location: ../index.php");
     exit();
 }
 // Verificar si se envió un formulario por POST con los datos del contenido
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
-    // Crear una nueva instancia de Contenido con los datos del formulario
-    $cat = new Contenido($_POST["nombre"], $_POST["descripcion"]);
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'], $_FILES["img"])) {
+    $titulo = $_POST["titulo"];
+    $descripcion = $_POST["descripcion"];
+    $texto = explode("\n\n", $_POST["texto"]);
+    $fecha = date("Y-m-d H:i:s", time());
+    //manejamos imagen, con nombre y ruta a guardar
+    $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
+    $target_dir = "../styles/img/";
+    $target_file = $target_dir . $imagen;
+    // Crear una nueva instancia de Bloque con los datos del formulario
+    $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguenteOrden($_POST['categoria']), $titulo, $descripcion, $texto, $fecha, $_POST['categoria'], $imagen);
     try {
-        // Intentar insertar el contenido en la base de datos
-        $cat->InsertarContenido();
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            // Intentar insertar el contenido en la base de datos
+            $bloque->InsertarBloque();
+        } else {
+            $error = "Ha habido un problema al subir el archivo";
+        }
     } catch (Exception $e){
         // Si ocurre un error, capturarlo y almacenarlo en la variable $error
         $error = $e->getMessage();
@@ -68,6 +80,8 @@ require_once "../header.php";
             <!-- Campo de título -->
             <label for="titulo">Titulo: </label>
             <input type="text" id="titulo" name="titulo" required>
+            <label for="img">Imagen ejemplo: </label>
+            <input type="file" id="img" name="img" accept="image/*">
             <!-- Campo de descripción -->
             <label for="descripcion">Descripcion: </label>
             <input type="text" id="descripcion" name="descripcion" required>
