@@ -650,18 +650,14 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 
 /* Botón para crear nuevo contenido en esta categoría */
 .anadir-contenido {
-    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 20%;
+    height: 100%;
     margin: auto;
-    background-color: var(--color-lila);
+    background-color: var(--color-azul-oscuro-2);
     border-radius: 10px;
     padding: 10px;
-    transition: 0.4s;
-}
-.anadir-contenido:hover {
-    background-color: var(--color-lila-hover);
     transition: 0.4s;
 }

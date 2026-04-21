@@ -133,20 +133,20 @@ require_once "../header.php";
                     </article>
                 </a>
             </section>
-
+            <section class="crear-contenido">
+                <a class="enlace-crear-contenido" href="anadir_contenido.php">
+                    <article class="testo-crear-categoria tamaño-variable">
+                        <h1>+</h1>
+                        <h3>Añadir Contenido</h3>
+                    </article>
+                </a>
+            </section>
             <?php
         }
         echo "</section>";
         ?>
-        <!-- Botón flotante para crear nuevo contenido en esta categoría -->
-        <section class="crear-contenido">
-            <a class="enlace-crear-contenido" href="anadir_contenido.php">
-                <article class="testo-crear-categoria tamaño-variable">
-                    <h1>+</h1>
-                    <h3>Añadir Contenido</h3>
-                </article>
-            </a>
-        </section>
+        <!-- Botón para crear nuevo contenido en esta categoría -->
+
         <?php
         // Mostrar botón para regresar al inicio
         echo "<a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>";
