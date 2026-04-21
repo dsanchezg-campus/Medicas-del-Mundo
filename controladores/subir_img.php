@@ -39,3 +39,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Si prefieres dejarlo NULL o no incluirlo, déjalo como está tu código original:
         // (Tu código original solo añade la imagen si se sube una, lo mantengo así).
     }
+}

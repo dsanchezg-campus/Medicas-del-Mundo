@@ -92,6 +92,11 @@ header {
     padding-top: 10px;
     text-align: center;
     background-color: var(--color-blanco-corporativo);
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Contenedor principal del menú de navegación en fila centrada */
