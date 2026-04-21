@@ -152,6 +152,14 @@ require_once "../header.php";
         echo "<a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>";
     }
     ?>
+    <section class="anadir-contenido">
+        <a class="enlace-anadir-contenido" href="anadir_contenido.php">
+            <article class="testo-anadir-contenido tamaño-variable">
+                <h1>+</h1>
+                <h3>Añadir Contenido</h3>
+            </article>
+        </a>
+    </section>
 </main>
 <!-- Pie de página con información de contacto -->
 <footer>
