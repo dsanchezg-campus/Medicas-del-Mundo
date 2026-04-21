@@ -133,33 +133,26 @@ require_once "../header.php";
                     </article>
                 </a>
             </section>
-            <section class="crear-contenido">
-                <a class="enlace-crear-contenido" href="anadir_contenido.php">
-                    <article class="testo-crear-categoria tamaño-variable">
-                        <h1>+</h1>
-                        <h3>Añadir Contenido</h3>
-                    </article>
-                </a>
-            </section>
             <?php
         }
-        echo "</section>";
         ?>
-        <!-- Botón para crear nuevo contenido en esta categoría -->
-
+        <!-- Añadir Contenido ubicado dentro del contenedor flex para alinearse con los otros -->
+        <section class="anadir-contenido">
+            <!-- Se añade el id de la categoría para preestablecerla en el select de añadir -->
+            <a class="enlace-crear-categoria" href="anadir_contenido.php?categoria=<?php echo $_GET['page']; ?>">
+                <article class="testo-crear-categoria tamaño-variable">
+                    <h1>+</h1>
+                    <h3>Añadir Contenido</h3>
+                </article>
+            </a>
+        </section>
         <?php
+        echo "</section>";
+
         // Mostrar botón para regresar al inicio
         echo "<a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>";
     }
     ?>
-    <section class="anadir-contenido">
-        <a class="enlace-anadir-contenido" href="anadir_contenido.php">
-            <article class="testo-anadir-contenido tamaño-variable">
-                <h1>+</h1>
-                <h3>Añadir Contenido</h3>
-            </article>
-        </a>
-    </section>
 </main>
 <!-- Pie de página con información de contacto -->
 <footer>
