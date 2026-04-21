@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
         $error = $e->getMessage();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,19 +63,8 @@ require_once "../header.php";
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir">
             <!-- Campo oculto para identificar la acción como 'categoria' -->
-            <input type="hidden" name="action" value="categoria">
-            <!-- Campo de nombre -->
-            <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" name="nombre" required>
-            <!-- Botón para enviar el formulario -->
-            <button type="submit">Añadir</button>
-        </form>
-    </article>
-    <!-- Formulario para agregar contenido/bloques -->
-    <article class="anadir-contenido">
-        <form action="" method="post" class="form-anadir">
-            <!-- Campo oculto para identificar la acción como 'contenido' -->
-            <input type="hidden" name="action" value="contenido">
+            <input type="hidden" name="categoria" value="<?= $_GET['page'] ?>">
+
             <!-- Campo de título -->
             <label for="titulo">Titulo: </label>
             <input type="text" id="titulo" name="titulo" required>
@@ -83,24 +73,8 @@ require_once "../header.php";
             <input type="text" id="descripcion" name="descripcion" required>
             <!-- Campo de texto/contenido principal -->
             <label for="texto">Texto: </label>
-            <input type="text" id="texto" name="texto" required>
-            <!-- Selector para elegir la categoría a la que pertenece este contenido -->
-            <label for="id_categoria">Pertenece a la categoria: </label>
-            <select name="id_categoria" id="id_categoria">
-                <?php
-                // Obtener todas las categorías y mostrarlas en el selector
-                $categorias = Categoria::getCategorias();
-                foreach ($categorias as $categoria) {
-                    echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
-                }
-                ?>
-            </select><br>
-            <!-- Campo de prioridad -->
-            <label for="prioridad">Prioridad: </label>
-            <input type="number" id="prioridad" name="prioridad" required>
-            <!-- Campo de fecha de actualización -->
-            <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
+            <textarea id="texto" name="texto" required></textarea>
+
             <!-- Botón para enviar el formulario -->
             <button type="submit">Añadir</button>
         </form>
