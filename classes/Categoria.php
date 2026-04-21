@@ -49,7 +49,7 @@ class Categoria{
      */
     public function ActualizarCategoria(){
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE categorias SET nombre= ?, descripcion= ?, orden= ?, img= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
+        $stmt = $db->prepare("UPDATE categoria SET nombre= ?, descripcion= ?, orden= ?, img= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
         $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion, $this->id_categoria]);
     }
 
