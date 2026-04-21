@@ -45,7 +45,7 @@ require_once "../header.php";
                 ?>
                 <section class="categoria">
                     <!-- Botón para editar la categoría -->
-                    <a href="/controladores/editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
                     <!-- Botón para eliminar la categoría -->
                     <a href="/controladores/eliminar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar esta Categoría?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <!-- Enlace para ver subcategorías dentro de esta categoría -->
@@ -71,7 +71,7 @@ require_once "../header.php";
                 ?>
                 <section class="categoria">
                     <!-- Botón para editar la categoría -->
-                    <a href="/controladores/editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="editar_categoria.php?page=<?php echo $categoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
                     <!-- Botón para eliminar la categoría -->
                     <a href="/controladores/eliminar_categoria.php?categoria=<?php echo $categoria->getIdcategoria(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar esta Categoría?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <!-- Enlace para ver subcategorías dentro de esta categoría -->
