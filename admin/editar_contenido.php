@@ -10,12 +10,9 @@ require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
 // 2. INICIO DE SESIÓN
-// Fundamental para poder acceder a las variables globales $_SESSION y saber quién está navegando.
 session_start();
 
 // 3. CONTROL DE ACCESO (Actualmente comentado)
-// Aquí se comprobaba si la usuaria actual tenía el rol/permisos de editora.
-// ALERTA: Al estar comentado, CUALQUIERA que acceda a esta URL podría editar contenido si sabe el ID.
 // if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
 //     header("location: ../index.php"); // Redirige al inicio si no tiene permisos
 //     exit(); // Detiene la ejecución del script por seguridad
