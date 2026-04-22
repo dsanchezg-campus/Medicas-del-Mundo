@@ -42,14 +42,16 @@ class Bloque
      */
     public function InsertarBloque() :void{
         $db = DB::conectar();
-        $stmt = $db->prepare("INSERT INTO bloque (orden, titulo, descripcion, texto, fecha_actualizacion, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO bloque (id_bloque, id_categoria, titulo, descripcion, texto, orden, fecha_actualizacion, icono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
-            $this->orden_bloque,
+            $this->id_bloque,
+            $this->id_categoria,
             $this->titulo_bloque,
             $this->descripcion_bloque,
             $this->texto_bloque,
+            $this->orden_bloque,
             $this->fecha_actualizacion_bloque,
-            $this->id_categoria
+            $this->icono
         ]);
     }
     /**
