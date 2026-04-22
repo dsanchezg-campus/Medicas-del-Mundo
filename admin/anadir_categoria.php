@@ -13,6 +13,7 @@ require_once "../classes/Bloque.php";
 //     exit();
 // }
 
+// Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
 
     // 1. MANEJO DE LA IMAGEN CON $_FILES
@@ -23,26 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
         // Ejemplo: move_uploaded_file($_FILES['img']['tmp_name'], '../ruta_a_tus_imagenes/' . $nombre_imagen);
     }
 
-    // 2. CORRECCIÓN DEL ID PADRE
-    $id_padre = !empty($_POST["id_categoria"]) ? $_POST["id_categoria"] : null;
-
-    // 3. INSTANCIACIÓN CORRECTA (Asegúrate de que este orden coincide con tu clase Categoria)
-    // He puesto 'null' en el primer campo asumiendo que el ID es autoincremental en la BD.
-    $cat = new Categoria(
-            null, // ID de esta nueva categoría
-            $_POST["nombre"],
-            $_POST["descripcion"],
-            $_POST["prioridad"], // ¿O querías usar $_POST["orden"] aquí?
-            $nombre_imagen,      // Pasamos el nombre del archivo, no el $_POST
-            $id_padre,           // ID de la categoría a la que pertenece
-            $_POST["fecha_actualizacion"]
-    );
+    // 2. CORRECCIÓN DEL ID MADRE
+    // Si en el select eligen "Ninguna" (value=""), lo pasamos como null a la BD
+    $id_madre = !empty($_POST["id_categoria"]) ? $_POST["id_categoria"] : null;
 
     try {
-        $cat->InsertarCategoria();
-        // Opcional: Redirigir a una página de éxito
-        // header("Location: exito.php");
+        // 3. LLAMADA CORRECTA AL MÉTODO ESTÁTICO CON SUS PARÁMETROS
+        // Se llama a la clase directamente con :: y se le pasan los datos del formulario
+        Categoria::InsertarCategoria(
+                $_POST["nombre"],
+                $_POST["descripcion"],
+                $_POST["orden"],
+                $nombre_imagen,
+                $id_madre,
+                $_POST["fecha_actualizacion"]
+        );
+        $exito = "Categoría añadida correctamente.";
     } catch (Exception $e){
+        // Si ocurre un error, capturarlo y almacenarlo en la variable $error
         $error = $e->getMessage();
     }
 }
@@ -60,8 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
 <body>
 <?php require_once "../header.php"; ?>
 <main>
+    <?php if (isset($exito)) { ?>
+        <article class="exito" style="color: green; padding: 10px;">
+            <p><?php echo $exito; ?></p>
+        </article>
+    <?php } ?>
+
     <?php if (isset($error)) { ?>
-        <article class="error">
+        <article class="error" style="color: red; padding: 10px;">
             <p class="error-p"><?php echo $error; ?></p>
         </article>
     <?php } ?>
@@ -86,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
             <select name="id_categoria" id="id_categoria">
                 <option value="">Ninguna</option>
                 <?php
-                // OJO: Asegúrate de que Categoria::getCategorias() está devolviendo datos correctamente
                 $categorias = Categoria::getCategorias();
                 if ($categorias) {
                     foreach ($categorias as $categoria) {
