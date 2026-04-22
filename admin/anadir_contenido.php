@@ -78,7 +78,7 @@ require_once "../header.php";
     ?>
     <!-- Formulario para agregar una nueva categoría más simple -->
     <article class="anadir-categoria">
-        <form action="" method="post" class="form-anadir">
+        <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
             <!-- Campo oculto para identificar la acción como 'categoria' -->
             <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>">
 
