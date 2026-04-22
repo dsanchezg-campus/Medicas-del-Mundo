@@ -4,6 +4,9 @@ require_once "../classes/Bloque.php";
 require_once "../classes/Categoria.php";
 require_once "../classes/DB.php";
 require_once "../classes/Contenido.php";
+
+// ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 ?>
 <!-- Página para mostrar el contenido detallado de un bloque específico -->
 <!doctype html>
