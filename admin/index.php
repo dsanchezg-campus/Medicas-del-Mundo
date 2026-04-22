@@ -49,7 +49,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="/styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
+                            <img src="..styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
@@ -121,7 +121,7 @@ require_once "../header.php";
                 <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                     <!-- Imagen asociada al bloque (actualmente vacía) -->
                     <article class="imagen-contenido">
-                        <img src="<?php  ?>" alt="Imagen1">
+                        <img src="../styles/img/<?php  echo $contenido->getImg(); ?>" alt="Imagen1">
                     </article>
                     <!-- Título y descripción del bloque -->
                     <article class="testo-contenido">
