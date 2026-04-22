@@ -175,4 +175,18 @@ class Bloque
             $bloque['icono']
         );
     }
+    public static function SiguienteId(){
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(id_bloque) as id_bloque FROM bloque");
+        $stmt->execute();
+        $id_bloque = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $id_bloque['id_bloque'] + 1;
+    }
+    public static function SiguienteOrden($id_categoria){
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(orden) as orden FROM bloque WHERE id_categoria = ?");
+        $stmt->execute($id_categoria);
+        $orden = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $orden['orden'] + 1;
+    }
 }
