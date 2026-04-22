@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['t
     $target_dir = "../styles/img/";
     $target_file = $target_dir . $imagen;
     // Crear una nueva instancia de Bloque con los datos del formulario
-    $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguenteOrden($_POST['categoria']), $titulo, $descripcion, $_POST['texto'], $fecha, $_POST['categoria'], $imagen);
+    $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguienteOrden($_POST['categoria']), $titulo, $descripcion, $_POST['texto'], $fecha, $_POST['categoria'], $imagen);
     try {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             // Intentar insertar el contenido en la base de datos
