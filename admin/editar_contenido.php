@@ -110,7 +110,7 @@ require_once "../header.php";
                     echo "<option value='" . $categoria->getIdCategoria() . "' $selected>" . htmlspecialchars($categoria->getNombre()) . "</option>";
                 }
                 ?>
-            </select><br>
+            </select>
 
             <label for="prioridad">Prioridad: </label>
             <input type="number" id="prioridad" name="prioridad" value="<?php echo htmlspecialchars($bloque->getOrdenBloque()); ?>" required>
