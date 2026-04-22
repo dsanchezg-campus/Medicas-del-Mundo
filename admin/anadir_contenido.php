@@ -6,7 +6,7 @@ require_once "../classes/Contenido.php";
 require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
-
+session_start();
 // Validación: Verificar si el usuario actual tiene permisos de admin
 // Si no tiene permisos, redirige a la página principal
 if (!$_SESSION["usuaria"]->controlUsuarioAdmin()) {
