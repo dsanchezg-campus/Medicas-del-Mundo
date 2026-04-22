@@ -13,6 +13,10 @@ if (isset($_SESSION['usuaria']) && !$_SESSION["usuaria"]->controlUsuarioAdmin())
     header("location: ../index.php");
     exit();
 }
+if (!isset($_GET['page'])){
+    header("location: index.php");
+    exit();
+}
 // Verificar si se envió un formulario por POST con los datos del contenido
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'], $_FILES["img"])) {
     $titulo = $_POST["titulo"];
