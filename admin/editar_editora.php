@@ -12,11 +12,8 @@ require_once "../classes/Bloque.php";
 // Fundamental para poder acceder a las variables globales $_SESSION y saber quién está navegando.
 session_start();
 
-// 3. CONTROL DE ACCESO
-//if (!$_SESSION["usuaria"]->controlUsuarioAdmin) {
-// header("location: ../index.php"); // Redirige al inicio si no tiene permisos
-// exit(); // Detiene la ejecución del script por seguridad
-//}
+// 3. CONTROL DE ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 //if (!isset($_GET['page'])) {
 //header ("location: ../index.php");
 //exit();

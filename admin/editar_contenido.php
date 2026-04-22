@@ -12,11 +12,8 @@ require_once "../classes/Bloque.php";
 // 2. INICIO DE SESIÓN
 session_start();
 
-// 3. CONTROL DE ACCESO (Actualmente comentado)
-// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
-//     header("location: ../index.php"); // Redirige al inicio si no tiene permisos
-//     exit(); // Detiene la ejecución del script por seguridad
-// }
+// 3. CONTROL DE ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 
 // 4. INICIALIZACIÓN DE VARIABLES
 $error = null; // Guardará los mensajes de error si la actualización falla.

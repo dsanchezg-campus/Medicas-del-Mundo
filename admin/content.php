@@ -4,6 +4,9 @@ require_once "../classes/Bloque.php";
 require_once "../classes/Categoria.php";
 require_once "../classes/DB.php";
 require_once "../classes/Contenido.php";
+
+// ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 ?>
 <!-- Página para mostrar el contenido detallado de un bloque específico -->
 <!doctype html>
@@ -39,7 +42,7 @@ require_once "../header.php";
             <section class="categoria-content">
                 <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
                     <article class="imagen-content">
-                        <img src="<?php echo $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
+                        <img src="../styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
                     </article>
 
                     <article class="testo-content">
@@ -69,7 +72,18 @@ require_once "../header.php";
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
             </article>
             <article class="parrafo">
-                <p><?php echo $bloque->getTextoBloque();?></p>
+                <?php
+                $texto = $bloque->getTextoBloque();
+                $parrafos = preg_split("/\r\n/", $texto);
+                foreach ($parrafos as $parrafo) {
+                    if ($parrafo != "") {
+                        echo "<p>" . htmlspecialchars($parrafo) . "</p>";
+                    } else {
+                        echo "<br>";
+                    }
+
+                }
+                ?>
             </article>
                 <?php
                 // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
@@ -96,6 +110,8 @@ require_once "../header.php";
                 Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
                 Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
             </p>
+            <!-- Enlace para cerrar sesión -->
+            <p><a href="../controladores/cerrar_sesion.php">Cerrar Sesión</a></p>
         </section>
     </footer>
     <a href="index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>

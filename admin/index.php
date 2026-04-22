@@ -4,12 +4,9 @@ require_once "../Classes/Categoria.php";
 require_once "../Classes/DB.php";
 require_once "../Classes/Bloque.php";
 
-// Validación comentada: Verificar si el usuario actual tiene permisos de administrador
+// CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
-// if (!$_SESSION["usuaria"]->controlUsuarioAdmin) {
-//     header("location: ../index.php");
-//     exit();
-// }
+require_once "../controladores/control_admin.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -52,7 +49,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="/styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
+                            <img src="..styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
@@ -95,6 +92,19 @@ require_once "../header.php";
         echo $e->getMessage();
     }
     ?>
+    <section class="categoria">
+        <a class="enlace-bloque" href="FaQ.php">
+            <!-- Imagen de la categoría -->
+            <article class="imagen-categoria">
+                <img src="../styles/img/logo.png" alt="Imagen1">
+            </article>
+            <!-- Nombre y descripción de la categoría -->
+            <article class="testo-categoria">
+                <h1>Preguntas y Respuestas</h1>
+                <p>Aqui obtendras las respuestas a dudas comunes</p>
+            </article>
+        </a>
+    </section>
     <!-- Botón flotante para crear una nueva categoría -->
     <section class="crear-categoria">
         <a class="enlace-crear-categoria" href="anadir_categoria.php">
@@ -124,7 +134,7 @@ require_once "../header.php";
                 <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                     <!-- Imagen asociada al bloque (actualmente vacía) -->
                     <article class="imagen-contenido">
-                        <img src="<?php  ?>" alt="Imagen1">
+                        <img src="../styles/img/<?php  echo $contenido->getImg(); ?>" alt="Imagen1">
                     </article>
                     <!-- Título y descripción del bloque -->
                     <article class="testo-contenido">

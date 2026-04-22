@@ -8,10 +8,8 @@ require_once "../classes/Bloque.php";
 
 session_start();
 
-// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
-//     header("location: ../index.php");
-//     exit();
-// }
+// CONTROL ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 
 $error = null;
 $categoria_edit = null;

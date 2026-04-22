@@ -4,12 +4,9 @@ require_once "../classes/DB.php";
 require_once "../classes/Usuario.php" ;
 // Iniciar la sesión para acceder a datos de usuario
 session_start();
-// Validación comentada: Verificar si el usuario actual tiene permisos de administrador
+// CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
-// if (!$_SESSION["usuaria"]->controlUsuarioAdmin) {
-//     header("location: ../index.php");
-//     exit();
-// }
+require_once "../controladores/control_admin.php";
 ?>
 <!doctype html>
 <html lang="es">

@@ -7,12 +7,9 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 session_start();
-// Validación: Verificar si el usuario actual tiene permisos de admin
+// CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
-if (isset($_SESSION['usuaria']) && !$_SESSION["usuaria"]->controlUsuarioAdmin()) {
-    header("location: ../index.php");
-    exit();
-}
+require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos del contenido
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'], $_FILES["img"])) {

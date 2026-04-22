@@ -7,11 +7,8 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
-// Validación comentada: Verificar si el usuario actual tiene permisos de editora
-// if (!$_SESSION["usuaria"]->controlUsuarioEditora) {
-//     header("location: ../index.php");
-//     exit();
-// }
+// CONTROL DE ACCESO ADMIN
+require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
