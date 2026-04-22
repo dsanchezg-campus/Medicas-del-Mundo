@@ -185,7 +185,7 @@ class Bloque
     public static function SiguienteOrden($id_categoria){
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT MAX(orden) as orden FROM bloque WHERE id_categoria = ?");
-        $stmt->execute($id_categoria);
+        $stmt->execute([$id_categoria]);
         $orden = $stmt->fetch(PDO::FETCH_ASSOC);
         return $orden['orden'] + 1;
     }
