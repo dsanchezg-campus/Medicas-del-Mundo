@@ -9,7 +9,7 @@ require_once "../classes/Bloque.php";
 session_start();
 // Validación: Verificar si el usuario actual tiene permisos de admin
 // Si no tiene permisos, redirige a la página principal
-if (!$_SESSION["usuaria"]->controlUsuarioAdmin()) {
+if (isset($_SESSION['usuaria']) && !$_SESSION["usuaria"]->controlUsuarioAdmin()) {
     header("location: ../index.php");
     exit();
 }
