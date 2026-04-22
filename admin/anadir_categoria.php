@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
     $id_madre = !empty($_POST["id_categoria"]) ? $_POST["id_categoria"] : null;
 
     try {
-        // 3. LLAMADA CORRECTA AL MÉTODO ESTÁTICO CON SUS PARÁMETROS
+        // 3. LLAMADA CORRECTA AL METODO ESTÁTICO CON SUS PARÁMETROS
         // Se llama a la clase directamente con :: y se le pasan los datos del formulario
         Categoria::InsertarCategoria(
                 $_POST["nombre"],
