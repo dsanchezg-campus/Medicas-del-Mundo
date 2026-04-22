@@ -13,26 +13,24 @@ if (isset($_SESSION['usuaria']) && !$_SESSION["usuaria"]->controlUsuarioAdmin())
     header("location: ../index.php");
     exit();
 }
-if (!isset($_GET['page'])){
-    header("location: index.php");
-    exit();
-}
+
 // Verificar si se envió un formulario por POST con los datos del contenido
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'], $_FILES["img"])) {
     $titulo = $_POST["titulo"];
     $descripcion = $_POST["descripcion"];
-    $texto = explode("\n\n", $_POST["texto"]);
+//    $texto = explode("\n\n", $_POST["texto"]);
     $fecha = date("Y-m-d H:i:s", time());
     //manejamos imagen, con nombre y ruta a guardar
     $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
     $target_dir = "../styles/img/";
     $target_file = $target_dir . $imagen;
     // Crear una nueva instancia de Bloque con los datos del formulario
-    $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguenteOrden($_POST['categoria']), $titulo, $descripcion, $texto, $fecha, $_POST['categoria'], $imagen);
+    $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguenteOrden($_POST['categoria']), $titulo, $descripcion, $_POST['texto'], $fecha, $_POST['categoria'], $imagen);
     try {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             // Intentar insertar el contenido en la base de datos
             $bloque->InsertarBloque();
+            header("location: index.php?page=". $bloque->getIdCategoria());
         } else {
             $error = "Ha habido un problema al subir el archivo";
         }
@@ -41,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['t
         $error = $e->getMessage();
     }
 }
-
+if (!isset($_GET['page'])){
+    header("location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
