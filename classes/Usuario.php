@@ -50,7 +50,7 @@ class Usuario
     {
         return $this->id_usuario;
     }
-    public function getRol()
+    public function getRol(): string
     {
         return $this->rol;
     }
@@ -70,10 +70,14 @@ class Usuario
     // Retorna true si el rol es "Admin", false en caso contrario
     public function controlUsuarioAdmin() :bool
     {
-        if (isset($_SESSION["usuaria"])) {
-            if ($_SESSION["usuaria"]->getRol() == "Admin") {
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT nombre_rol FROM rol WHERE id_rol = ?");
+        $stmt->execute([$this->rol]);
+        if ($stmt->rowCount() > 1) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result["nombre_rol"] == "admin") {
                 return true;
-            } else{
+            } else {
                 return false;
             }
         } else {
@@ -100,23 +104,23 @@ class Usuario
     // Verifica credenciales contra la base de datos y crea sesión si es válido
     // Parámetros: $nombre (puede ser email o nombre), $password
     // Retorna: true si login exitoso, false si falla
-    public static function InicioSesion($nombre, $password) :bool
+    public static function InicioSesion($nombre, $password) :Usuario|null
     {
+        session_start();
         $db = DB::conectar();
         // Consulta para obtener usuario por email o nombre, uniendo con tabla rol
-        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
+        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.id_rol, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
         $stmt->execute([$nombre, $nombre]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$usuario) {
-            return false; // Usuario no encontrado
+            return null; // Usuario no encontrado
         }
         // Verificar contraseña hasheada
         if (password_verify($password, $usuario['password'])) {
             // Crear sesión con objeto Usuario
-            $_SESSION["usuaria"] = new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['rol']);
-            return true;
+            return new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['id_rol']);
         } else {
-            return false; // Contraseña incorrecta
+            return null; // Contraseña incorrecta
         }
     }
 
@@ -134,7 +138,7 @@ class Usuario
     public static function ListarUsuarias() :array{
         $usuarias = array ();
         $db = DB::conectar();
-        $stmt = $db->prepare("SELECT u.*, r.nombre_rol AS rol FROM usuario u JOIN rol r ON u.id_rol = r.id_rol");
+        $stmt = $db->prepare("SELECT u.*, r.id_rol, r.nombre_rol AS rol FROM usuario u JOIN rol r ON u.id_rol = r.id_rol");
         $stmt->execute();
         while ($usuaria = $stmt->fetch(PDO::FETCH_ASSOC)){
             $usuarias[] = new Usuario($usuaria['nombre'],
