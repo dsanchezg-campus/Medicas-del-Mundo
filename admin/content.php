@@ -69,7 +69,18 @@ require_once "../header.php";
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
             </article>
             <article class="parrafo">
-                <p><?php echo $bloque->getTextoBloque();?></p>
+                <?php
+                $texto = $bloque->getTextoBloque();
+                $parrafos = preg_split("/\r\n/", $texto);
+                foreach ($parrafos as $parrafo) {
+                    if ($parrafo != "") {
+                        echo "<p>" . htmlspecialchars($parrafo) . "</p>";
+                    } else {
+                        echo "<br>";
+                    }
+
+                }
+                ?>
             </article>
                 <?php
                 // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
