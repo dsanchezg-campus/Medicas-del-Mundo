@@ -36,6 +36,8 @@ class Bloque
         $this->icono = $icono;
     }
 
+    /************************************* METODOS **************************************/
+
     /**
      * Añade un nuevo bloque en la BD
      * Inserta los datos del objeto actual en la tabla 'bloque'
@@ -58,16 +60,16 @@ class Bloque
      * Actualiza el bloque en la BD
      * @return void
      */
-    public function ActualizarBloque(){
+    public function ActualizarBloque(): void{
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE bloque SET orden = ?, titulo = ?, descripcion = ?, texto = ?, fecha_actualizacion = ?, id_categoria = ? WHERE id_bloque = ?");
+        $stmt = $db->prepare("UPDATE bloque SET titulo = ?, descripcion = ?, texto = ?, orden = ?, fecha_actualizacion = ?, icono = ? WHERE id_bloque = ?");
         $stmt->execute([
-            $this->orden_bloque,
             $this->titulo_bloque,
             $this->descripcion_bloque,
             $this->texto_bloque,
+            $this->orden_bloque,
             $this->fecha_actualizacion_bloque,
-            $this->id_categoria,
+            $this->icono,
             $this->id_bloque
         ]);
     }
@@ -80,53 +82,6 @@ class Bloque
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
         $stmt->execute([$id_bloque]);
-    }
-
-    // Getters y setters para acceder y modificar las propiedades del bloque
-    public function getIdBloque(){
-        return $this->id_bloque;
-    }
-    public function setIdBloque($id_bloque){
-        $this->id_bloque = $id_bloque;
-    }
-    public function getOrdenBloque(){
-        return $this->orden_bloque;
-    }
-    public function setOrdenBloque($orden_bloque){
-        $this->orden_bloque = $orden_bloque;
-    }
-    public function getTituloBloque(){
-        return $this->titulo_bloque;
-    }
-    public function setTituloBloque($titulo_bloque){
-        $this->titulo_bloque = $titulo_bloque;
-    }
-    public function getDescripcionBloque(){
-        return $this->descripcion_bloque;
-    }
-    public function setDescripcionBloque($descripcion_bloque){
-        $this->descripcion_bloque = $descripcion_bloque;
-    }
-    public function getTextoBloque(){
-        return $this->texto_bloque;
-    }
-    public function setTextoBloque($texto_bloque){
-        $this->texto_bloque = $texto_bloque;
-    }
-    public function getFechaActualizacionBloque(){
-        return $this->fecha_actualizacion_bloque;
-    }
-    public function setFechaActualizacionBloque($fecha_actualizacion_bloque){
-        $this->fecha_actualizacion_bloque = $fecha_actualizacion_bloque;
-    }
-    public function getIdCategoria(){
-        return $this->id_categoria;
-    }
-    public function setIdCategoria($id_categoria){
-        $this->id_categoria = $id_categoria;
-    }
-    public function getIcono(){
-        return $this->icono;
     }
 
     /**
@@ -191,4 +146,53 @@ class Bloque
         $orden = $stmt->fetch(PDO::FETCH_ASSOC);
         return $orden['orden'] + 1;
     }
+
+    /******************************** GETTER y SETTER *************************************/
+    public function getIdBloque(){
+        return $this->id_bloque;
+    }
+    public function setIdBloque($id_bloque){
+        $this->id_bloque = $id_bloque;
+    }
+    public function getOrdenBloque(){
+        return $this->orden_bloque;
+    }
+    public function setOrdenBloque($orden_bloque){
+        $this->orden_bloque = $orden_bloque;
+    }
+    public function getTituloBloque(){
+        return $this->titulo_bloque;
+    }
+    public function setTituloBloque($titulo_bloque){
+        $this->titulo_bloque = $titulo_bloque;
+    }
+    public function getDescripcionBloque(){
+        return $this->descripcion_bloque;
+    }
+    public function setDescripcionBloque($descripcion_bloque){
+        $this->descripcion_bloque = $descripcion_bloque;
+    }
+    public function getTextoBloque(){
+        return $this->texto_bloque;
+    }
+    public function setTextoBloque($texto_bloque){
+        $this->texto_bloque = $texto_bloque;
+    }
+    public function getFechaActualizacionBloque(){
+        return $this->fecha_actualizacion_bloque;
+    }
+    public function setFechaActualizacionBloque($fecha_actualizacion_bloque){
+        $this->fecha_actualizacion_bloque = $fecha_actualizacion_bloque;
+    }
+    public function getIdCategoria(){
+        return $this->id_categoria;
+    }
+    public function setIdCategoria($id_categoria){
+        $this->id_categoria = $id_categoria;
+    }
+    public function getIcono(){
+        return $this->icono;
+    }
+
+
 }
