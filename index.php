@@ -63,6 +63,19 @@ include_once "header.php";
                 </article>
             </a>
         </section>
+                    <section class="categoria">
+                        <a class="enlace-bloque" href="FaQ.php">
+                            <!-- Imagen de la categoría -->
+                            <article class="imagen-categoria">
+                                <img src="/styles/img/logo.png" alt="Imagen1">
+                            </article>
+                            <!-- Nombre y descripción de la categoría -->
+                            <article class="testo-categoria">
+                                <h1>Preguntas y Respuestas</h1>
+                                <p>Aqui obtendras las respuestas a dudas comunes</p>
+                            </article>
+                        </a>
+                    </section>
         <?php
             }
         }
