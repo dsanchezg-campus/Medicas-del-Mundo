@@ -75,7 +75,7 @@ require_once "../header.php";
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir">
             <!-- Campo oculto para identificar la acción como 'categoria' -->
-            <input type="hidden" name="categoria" value="<?= $_GET['page'] ?>">
+            <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>">
 
             <!-- Campo de título -->
             <label for="titulo">Titulo: </label>
