@@ -144,6 +144,7 @@ require_once "../header.php";
                 </a>
             </section>
             <?php
+            echo "</section>";
         }
         ?>
         <!-- Añadir Contenido ubicado dentro del contenedor flex para alinearse con los otros -->
