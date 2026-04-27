@@ -6,7 +6,7 @@ require_once ("DB.php");
 require_once ("Rol.php");
 require_once ("Usuario.php");
 
-session_status();
+session_start();
 //comprobamos que la sesion esta iniciada correctamente
 if ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->ControlUsuariaAdmin()) {
     //comprobamos que vamos a eliminar: contenidos o categoria
