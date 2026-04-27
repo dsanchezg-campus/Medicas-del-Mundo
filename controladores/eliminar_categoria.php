@@ -18,8 +18,12 @@ if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora(
 
     // Comprobamos qué vamos a eliminar: contenidos o categoria
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['categoria'])) {
+        $categoria = Categoria::getCategoriaById($_GET['categoria']);
+        unlink("../styles/img/".$categoria['img_cat']);
         Categoria::EliminarCategoria($_GET["categoria"]);
     } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['contenido'])) {
+        $bloque = Categoria::getCategoriaById($_GET['contenido']);
+        unlink("../styles/img/".$bloque['icono']);
         Bloque::EliminarBloque($_GET['contenido']);
     }
 
