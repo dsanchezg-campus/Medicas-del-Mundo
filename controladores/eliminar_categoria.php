@@ -1,10 +1,10 @@
 <?php
-require_once ("Bloque.php");
-require_once ("Categoria.php");
-require_once ("Contenido.php");
-require_once ("DB.php");
-require_once ("Rol.php");
-require_once ("Usuario.php");
+require_once ("../classes/Bloque.php");
+require_once ("../classes/Categoria.php");
+require_once ("../classes/Contenido.php");
+require_once ("../classes/DB.php");
+require_once ("../classes/Rol.php");
+require_once ("../classes/Usuario.php");
 
 session_start();
 //comprobamos que la sesion esta iniciada correctamente

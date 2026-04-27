@@ -20,29 +20,13 @@ $id_buscar = $_GET['id_categoria'] ?? $_GET['page'] ?? null;
 
 if ($id_buscar) {
     try {
-        // Hacemos una consulta directa para obtener los datos de la categoría ya que
-        // la clase Categoria no tiene un metodo getCategoriaById implementado.
-        $db = DB::conectar();
-        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_categoria = ?");
-        $stmt->execute([$id_buscar]);
-        $cat_data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($cat_data) {
-            $categoria_edit = new Categoria(
-                    $cat_data['id_categoria'],
-                    $cat_data['nombre'],
-                    $cat_data['descripcion'],
-                    $cat_data['orden'],
-                    $cat_data['img_cat'],
-                    $cat_data['id_madre'],
-                    $cat_data['fecha_actualizacion']
-            );
-        } else {
-            $error = "La categoría solicitada no existe.";
-        }
+        $categoria_edit = Categoria::getCategoriaById($id_buscar);
     } catch (Exception $e) {
         $error = "Error al buscar la categoría: " . $e->getMessage();
     }
+} else {
+    header ("location: index.php");
+    exit();
 }
 
 // Lógica para actualizar la categoría al enviar el formulario
@@ -54,17 +38,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
         $orden = $_POST['orden'];
         // Si no se selecciona categoría madre, lo dejamos en null
         $id_madre = !empty($_POST['id_madre']) ? $_POST['id_madre'] : null;
-        $fecha_actualizacion = $_POST['fecha_actualizacion'];
-        $img_cat = $_POST['img_cat'];
+        $fecha_actualizacion = date("Y-m-d H:i:s", time());
+        if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+            $img_cat = uniqid() . "_" . basename($_FILES['img']['name']);
+            $target_dir = "../styles/img/";
+            $target_file = $target_dir . $img_cat;
+            if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+                // Instanciamos la categoría con los datos editados
+                $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
 
-        // Instanciamos la categoría con los datos editados
-        $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
+                // Llamamos al metodo que ejecuta el UPDATE en la BD
+                $categoriaEditada->ActualizarCategoria();
+            }
+        } else{
+            $img_cat = $categoria_edit->getImg();
+            // Instanciamos la categoría con los datos editados
+            $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
 
-        // Llamamos al metodo que ejecuta el UPDATE en la BD
-        $categoriaEditada->ActualizarCategoria();
+            // Llamamos al metodo que ejecuta el UPDATE en la BD
+            $categoriaEditada->ActualizarCategoria();
+        }
 
-        // Redirigimos al inicio de admin o donde prefieras tras el éxito
-        header("Location: ../admin/index.php");
+        // Redirigimos al inicio de admin
+        header("Location: index.php");
         exit();
     } catch (Exception $e) {
         $error = "Error al actualizar: " . $e->getMessage();
@@ -114,13 +110,11 @@ require_once "../header.php";
                 <input type="text" id="descripcion" name="descripcion"
                        value="<?php echo htmlspecialchars($categoria_edit->getDescripcion()); ?>" required>
 
-                <label for="orden">Orden: </label>
-                <input type="number" id="orden" name="orden"
-                       value="<?php echo htmlspecialchars($categoria_edit->getOrden()); ?>" required>
+                <input type="hidden" id="orden" name="orden"
+                       value="<?php echo htmlspecialchars($categoria_edit->getOrden()); ?>">
 
                 <label for="img_cat">Imagen: </label>
-                <input type="text" id="img_cat" name="img_cat"
-                       value="<?php echo htmlspecialchars($categoria_edit->getImg()); ?>" required>
+                <input type="file" id="img_cat" name="img_cat">
 
                 <label for="id_madre">Pertenece a la categoría (Madre): </label>
                 <select name="id_madre" id="id_madre">
@@ -136,10 +130,6 @@ require_once "../header.php";
                     }
                     ?>
                 </select><br>
-
-                <label for="fecha_actualizacion">Fecha Actualización: </label>
-                <input type="date" id="fecha_actualizacion" name="fecha_actualizacion"
-                       value="<?php echo date('Y-m-d', strtotime($categoria_edit->getFechaActualizacion())); ?>" required>
 
                 <button type="submit">Guardar Cambios</button>
             </form>
@@ -159,7 +149,7 @@ require_once "../header.php";
             Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
-        <p><a href="login.php">Iniciar Sesión</a></p>
+        <p><a href="../controladores/cerrar_sesion.php">Cerrar Sesión</a></p>
     </section>
 </footer>
 <a href="../admin/index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
