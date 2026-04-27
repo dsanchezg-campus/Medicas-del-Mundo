@@ -32,15 +32,19 @@ class Categoria{
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
-    public function setDatos($id_categoria, $nombre, $descripcion, $orden, $img, $id_madre, $fecha_actualizacion)
-    {
-        $this->id_categoria = $id_categoria;
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->orden = $orden;
-        $this->img_cat = $img;
-        $this->id_madre = $id_madre;
-        $this->fecha_actualizacion = date("Y-m-d H:i:s");
+    public static function SiguienteId(){
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(id_categoria) as id_categoria FROM categoria");
+        $stmt->execute();
+        $id_bloque = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $id_bloque['id_bloque'] + 1;
+    }
+    public static function SiguienteOrden($id_categoria){
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(orden) as orden FROM categoria WHERE id_madre = ?");
+        $stmt->execute([$id_categoria]);
+        $orden = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $orden['orden'] + 1;
     }
 
     /**
@@ -55,19 +59,13 @@ class Categoria{
 
     /**
      * Crea una nueva categoria en la BD
-     * @param $nombre string nombre de la categoria
-     * @param $descripcion string info de la categoria
-     * @param $orden int prioridad en la que se mostrara en la página
-     * @param $img_cat string imagen icono de la categoria
-     * @param $id_madre int||void id de una categoria si pertenece a alguna
-     * @param $fecha_actualizacion string fecha de creacion de la categoria
      * @return void
      */
-    public static function InsertarCategoria($nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion) :void {
+    public function InsertarCategoria() :void {
         try {
             $db = DB::conectar();
             $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img_cat, id_madre, fecha_actualizacion) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion]);
+            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion]);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }
@@ -149,10 +147,9 @@ class Categoria{
         $stmt->execute();
         return $stmt->fetch();
     }
-    /*
+    /**
      * Devuelve un array con los objetos de categoria que haya en la BD
      *
-     * @param Conexion objeto de Conexion, conecta a la BD
      * @return array | string objetos Categoria o un string en caso de error
      */
     public static function getCategorias() :array
@@ -180,11 +177,10 @@ class Categoria{
         }
         return $categorias;
     }
-    /*
+    /**
      * Devuelve un array con las subcategorias pertenecientes a una categoria
      *
-     * @param Conexion objeto de Conexion, conecta a la BD
-     * @param int id de la categoria madre a la que pertenece la subcategoria
+     * @param $id_madre int id de la categoria madre a la que pertenece la subcategoria
      * @return array | string objetos Categoria o el error de la consulta
      */
     public static function getSubcategorias($id_madre) :array | string
@@ -211,5 +207,20 @@ class Categoria{
             return "Error: " . $e->getMessage();
         }
         return $subcategorias;
+    }
+    public static function getCategoriaById($id_categoria) :Categoria{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_categoria = ? ");
+        $stmt->execute([$id_categoria]);
+        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Categoria(
+            $categoria['id_categoria'],
+            $categoria['nombre'],
+            $categoria['descripcion'],
+            $categoria['orden'],
+            $categoria['img_cat'],
+            $categoria['id_madre'],
+            $categoria['fecha_actualizacion']
+        );
     }
 }

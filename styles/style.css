@@ -22,7 +22,7 @@
     --color-fondo-subcategoria: rgba(222, 217, 217, 0.17);
     --color-sombra-suave: #8c8989;
     --color-rojo-hover: #ee7e55;
-    --color-lila: #B398E3;
+    --color-lila: #0F253E;
     --color-texto-oscuro: #080709;
     --color-fondo-hover: #ede9e9;
     --color-verde-boton: #9be398;
@@ -663,241 +663,40 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     transition: transform 0.4s, box-shadow 0.4s; /* Animación compartida con .categoria en hover */
     margin-bottom: 10px;
 }
-/* CSS FAQ */
 /* =============================================
    PÁGINA FAQ - DISEÑO COMPLETO
    ============================================= */
-
-/* Contenedor principal de la página FAQ */
-.faq-container {
+.faq-container { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 0% 20%;
+    margin: auto;
 }
-
-/* Título principal de la página FAQ */
-.faq-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--color-lila);
-    text-align: center;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Contenedor de cada pregunta/respuesta */
 .faq-item {
-    background-color: var(--color-blanco);
+    background-color: var(--color-blanco-corporativo);
     border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px;
+    margin: 10px 0;
+    transition: 0.4s;
 }
-
-/* Efecto hover en los items FAQ */
-.faq-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-/* Botón de la pregunta (clickable) */
-.faq-question {
-    width: 100%;
-    padding: 20px;
-    background-color: transparent;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover en el botón de la pregunta */
-.faq-question:hover {
-    background-color: var(--color-fondo-hover);
-}
-
-/* Texto de la pregunta */
-.faq-question-text {
+.faq-item summary{
+    font-weight: bold;
     font-size: 1.2rem;
-    font-weight: 600;
     color: var(--color-texto-oscuro);
-    margin: 0;
-    flex: 1;
 }
-
-/* Icono de la pregunta (flecha) */
-.faq-icon {
-    font-size: 1.5rem;
+.faq-item p{
     color: var(--color-lila);
-    transition: transform 0.3s ease;
-    margin-left: 15px;
-}
-
-/* Rotación del icono cuando la respuesta está abierta */
-.faq-item.active .faq-icon {
-    transform: rotate(180deg);
-}
-
-/* Contenedor de la respuesta */
-.faq-answer {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
-    background-color: var(--color-fondo-claro);
-}
-
-/* Cuando el item está activo, mostrar la respuesta */
-.faq-item.active .faq-answer {
-    max-height: 500px;
-    opacity: 1;
-    padding: 20px;
-}
-
-/* Texto de la respuesta */
-.faq-answer-text {
+    font-weight: lighter;
     font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-texto-oscuro);
-    margin: 0;
 }
-
-/* Responsive para pantallas pequeñas */
-@media (max-width: 768px) {
-    .faq-title {
-        font-size: 2rem;
-        margin-bottom: 30px;
-    }
-    
-    .faq-item {
-        margin-bottom: 15px;
-    }
-    
-    .faq-question {
-        padding: 15px;
-    }
-    
-    .faq-question-text {
-        font-size: 1.1rem;
-    }
-    
-    .faq-answer-text {
-        font-size: 0.95rem;
-    }
+.faq-item:active{
+    transform: scale(1.05);
+    transition: 1s;
 }
-
-/* Responsive para pantallas muy pequeñas */
-@media (max-width: 480px) {
-    .faq-title {
-        font-size: 1.75rem;
-        margin-bottom: 20px;
-    }
-    
-    .faq-item {
-        margin-bottom: 10px;
-    }
-    
-    .faq-question {
-        padding: 12px;
-    }
-    
-    .faq-question-text {
-        font-size: 1rem;
-    }
-    
-    .faq-answer-text {
-        font-size: 0.9rem;
-    }
-}
-
-/* Estilos para el formulario de añadir FAQ (si aplica) */
-.faq-form-container {
-    background-color: var(--color-blanco);
-    border-radius: 10px;
-    padding: 30px;
-    margin-top: 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.faq-form-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-lila);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.faq-form-group {
-    margin-bottom: 20px;
-}
-
-.faq-form-group label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-texto-oscuro);
-    margin-bottom: 8px;
-}
-
-.faq-form-group input,
-.faq-form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--color-borde);
-    border-radius: 8px;
-    font-size: 1rem;
-    color: var(--color-texto-oscuro);
-    background-color: var(--color-fondo-claro);
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    box-sizing: border-box;
-}
-
-.faq-form-group input:focus,
-.faq-form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-lila);
-    background-color: var(--color-blanco);
-}
-
-.faq-form-group textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.faq-form-submit {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--color-lila);
-    color: var(--color-blanco);
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.faq-form-submit:hover {
-    background-color: var(--color-lila-oscuro);
-}
-
-/* Botones de editar/eliminar en FAQ (si aplica) */
-.faq-item .boton-editar,
-.faq-item .boton-eliminar {
-    position: absolute;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    padding: 6px;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.faq-item:hover{
+    transform: translateY(-10px);
+    transition: 0.4s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

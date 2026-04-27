@@ -58,6 +58,19 @@ require_once "../header.php";
                         </article>
                     </a>
                 </section>
+                <section class="categoria">
+                    <a class="enlace-bloque" href="../FaQ.php?categoria=<?php echo $subcategoria->getIdcategoria(); ?>">
+                        <!-- Imagen de la categoría -->
+                        <article class="imagen-categoria">
+                            <img src="../styles/img/logo.png" alt="Imagen1">
+                        </article>
+                        <!-- Nombre y descripción de la categoría -->
+                        <article class="testo-categoria">
+                            <h1>Preguntas y Respuestas</h1>
+                            <p>Aqui obtendras las respuestas a dudas comunes</p>
+                        </article>
+                    </a>
+                </section>
                 <?php
             }
         } else {
@@ -84,6 +97,19 @@ require_once "../header.php";
                         </article>
                     </a>
                 </section>
+                <section class="categoria">
+                    <a class="enlace-bloque" href="../FaQ.php?categoria=<?php echo $categoria->getIdcategoria(); ?>">
+                        <!-- Imagen de la categoría -->
+                        <article class="imagen-categoria">
+                            <img src="../styles/img/logo.png" alt="Imagen1">
+                        </article>
+                        <!-- Nombre y descripción de la categoría -->
+                        <article class="testo-categoria">
+                            <h1>Preguntas y Respuestas</h1>
+                            <p>Aqui obtendras las respuestas a dudas comunes</p>
+                        </article>
+                    </a>
+                </section>
                 <?php
             }
         }
@@ -92,19 +118,7 @@ require_once "../header.php";
         echo $e->getMessage();
     }
     ?>
-    <section class="categoria">
-        <a class="enlace-bloque" href="FaQ.php">
-            <!-- Imagen de la categoría -->
-            <article class="imagen-categoria">
-                <img src="../styles/img/logo.png" alt="Imagen1">
-            </article>
-            <!-- Nombre y descripción de la categoría -->
-            <article class="testo-categoria">
-                <h1>Preguntas y Respuestas</h1>
-                <p>Aqui obtendras las respuestas a dudas comunes</p>
-            </article>
-        </a>
-    </section>
+
     <!-- Botón flotante para crear una nueva categoría -->
     <section class="crear-categoria">
         <a class="enlace-crear-categoria" href="anadir_categoria.php<?php if(isset($_GET['page'])): echo "?page=".$_GET['page']; endif; ?>">
