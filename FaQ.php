@@ -22,31 +22,32 @@ require_once "Classes/Bloque.php";
 include_once "header.php";
 ?>
 <main>
-    <section>
+    <section class="faq-container">
 
-        <details>
-            <summary>COMO ACTUALIZO EL CURRICULO</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
+        <details class="faq-item">
+            <summary class="faq-question">COMO ACTUALIZO EL CURRICULO</summary>
+            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
                 vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
                 cupiditate?</p>
         </details>
 
-        <details>
-            <summary>COMO ME AFILIO A UN SINDICATO</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
+        <details class="faq-item">
+            <summary class="faq-question">COMO ME AFILIO A UN SINDICATO</summary>
+            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
                 vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
                 cupiditate?</p>
         </details>
 
-        <details>
-            <summary>SAUL A PUESTO MAL EL COSO</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
+        <details class="faq-item">
+            <summary class="faq-question">SAUL A PUESTO MAL EL COSO</summary>
+            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
                 vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
                 cupiditate?</p>
         </details>
 
     </section>
 </main>
+<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>
 <!-- Pie de página con información de contacto de Médicos del Mundo -->
 <footer>
     <section class="footer-section">
