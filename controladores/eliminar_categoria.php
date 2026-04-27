@@ -9,9 +9,6 @@ require_once ("../classes/Usuario.php");
 // 1. OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
 
-// Opcional pero necesario si no usas autoloader:
-// require_once 'tus_clases.php'; // Asegúrate de cargar las clases Categoria, Bloque y la de la usuaria.
-
 // 2. CRÍTICO: Primero comprobamos que la sesión 'usuaria' existe (isset).
 // Si no lo haces y alguien entra sin loguearse, el código "peta" al intentar llamar a un metodo de algo que no existe.
 if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora() || $_SESSION['usuaria']->controlUsuarioAdmin())) {
@@ -34,7 +31,7 @@ if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora(
     }
 
     // Redirigimos al inicio según su rol
-    header ("Location: ".$_SESSION['usuaria']->getRol()."/index.php");
+    header ("Location: ../".$_SESSION['usuaria']->getRol()."/index.php");
     exit();
 }
 
