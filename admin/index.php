@@ -134,7 +134,7 @@ require_once "../header.php";
                 <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                     <!-- Imagen asociada al bloque (actualmente vacía) -->
                     <article class="imagen-contenido">
-                        <img src="../styles/img/<?php  echo $contenido->getImg(); ?>" alt="Imagen1">
+                        <img src="../styles/img/<?php  echo $contenido->getIcono(); ?>" alt="Imagen1">
                     </article>
                     <!-- Título y descripción del bloque -->
                     <article class="testo-contenido">
@@ -144,7 +144,6 @@ require_once "../header.php";
                 </a>
             </section>
             <?php
-            echo "</section>";
         }
         ?>
         <!-- Añadir Contenido ubicado dentro del contenedor flex para alinearse con los otros -->
@@ -159,11 +158,10 @@ require_once "../header.php";
         </section>
         <?php
         echo "</section>";
-
-        // Mostrar botón para regresar al inicio
-        echo "<a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>";
     }
     ?>
+    <!-- Boton de regreso a inicio-->
+    <a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>
 </main>
 <!-- Pie de página con información de contacto -->
 <footer>
