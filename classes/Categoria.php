@@ -75,10 +75,17 @@ class Categoria{
      * Elimina la categoria en la BD
      * @return void
      */
-    public static function EliminarCategoria($id_categoria) :void{
-        $db = DB::conectar();
-        $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
-        $stmt->execute([$id_categoria]);
+    public static function EliminarCategoria($id_categoria) :void {
+        try {
+            $db = DB::conectar();
+            $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
+            $stmt->execute([$id_categoria]);
+        } catch (PDOException $e) {
+            // Aquí capturamos el error si la base de datos bloquea el borrado
+            // Puedes guardar el error en un log, o redirigir con un mensaje de error por GET
+            // Ejemplo: header("Location: error.php?msg=No puedes borrar una categoria con subcategorias");
+            error_log("Error al eliminar categoría: " . $e->getMessage());
+        }
     }
     public function getIdCategoria()
     {
