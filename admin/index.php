@@ -31,6 +31,17 @@ require_once "../header.php";
 ?>
 <!-- Contenido principal -->
 <main>
+    <?php 
+    if (isset($_GET['page'])){
+        echo '<section class="titulo-section"><h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
+        echo '<a href="FaQ.php?categoria=' . $_GET['page'] . '" class="faq-variable">';
+        echo '<span class="faq-link">?</span>';
+        echo '<span class="faq-link-hover">Preguntas Frecuentes</span>';
+        echo '</a></section>';
+    }else{
+        echo '';
+    }
+    ?>
     <!-- Mostrar categorías o subcategorías según el parámetro 'page' -->
     <?php
     try {
@@ -58,19 +69,7 @@ require_once "../header.php";
                         </article>
                     </a>
                 </section>
-                <section class="categoria">
-                    <a class="enlace-bloque" href="../FaQ.php?categoria=<?php echo $subcategoria->getIdcategoria(); ?>">
-                        <!-- Imagen de la categoría -->
-                        <article class="imagen-categoria">
-                            <img src="../styles/img/logo.png" alt="Imagen1">
-                        </article>
-                        <!-- Nombre y descripción de la categoría -->
-                        <article class="testo-categoria">
-                            <h1>Preguntas y Respuestas</h1>
-                            <p>Aqui obtendras las respuestas a dudas comunes</p>
-                        </article>
-                    </a>
-                </section>
+                
                 <?php
             }
         } else {
@@ -97,19 +96,7 @@ require_once "../header.php";
                         </article>
                     </a>
                 </section>
-                <section class="categoria">
-                    <a class="enlace-bloque" href="../FaQ.php?categoria=<?php echo $categoria->getIdcategoria(); ?>">
-                        <!-- Imagen de la categoría -->
-                        <article class="imagen-categoria">
-                            <img src="../styles/img/logo.png" alt="Imagen1">
-                        </article>
-                        <!-- Nombre y descripción de la categoría -->
-                        <article class="testo-categoria">
-                            <h1>Preguntas y Respuestas</h1>
-                            <p>Aqui obtendras las respuestas a dudas comunes</p>
-                        </article>
-                    </a>
-                </section>
+            
                 <?php
             }
         }
@@ -118,16 +105,6 @@ require_once "../header.php";
         echo $e->getMessage();
     }
     ?>
-
-    <!-- Botón flotante para crear una nueva categoría -->
-    <section class="crear-categoria">
-        <a class="enlace-crear-categoria" href="anadir_categoria.php<?php if(isset($_GET['page'])): echo "?page=".$_GET['page']; endif; ?>">
-            <article class="testo-crear-categoria tamaño-variable">
-                <h1>+</h1>
-                <h3>Añadir Categoria</h3>
-            </article>
-        </a>
-    </section>
 
     <!-- Si se seleccionó una categoría, mostrar su contenido/bloques -->
     <?php
