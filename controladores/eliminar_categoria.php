@@ -1,4 +1,11 @@
 <?php
+require_once ("Bloque.php");
+require_once ("Categoria.php");
+require_once ("Contenido.php");
+require_once ("DB.php");
+require_once ("Rol.php");
+require_once ("Usuario.php");
+
 session_status();
 //comprobamos que la sesion esta iniciada correctamente
 if ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->ControlUsuariaAdmin()) {
