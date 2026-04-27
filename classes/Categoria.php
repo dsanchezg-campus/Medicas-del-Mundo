@@ -147,10 +147,9 @@ class Categoria{
         $stmt->execute();
         return $stmt->fetch();
     }
-    /*
+    /**
      * Devuelve un array con los objetos de categoria que haya en la BD
      *
-     * @param Conexion objeto de Conexion, conecta a la BD
      * @return array | string objetos Categoria o un string en caso de error
      */
     public static function getCategorias() :array
@@ -178,11 +177,10 @@ class Categoria{
         }
         return $categorias;
     }
-    /*
+    /**
      * Devuelve un array con las subcategorias pertenecientes a una categoria
      *
-     * @param Conexion objeto de Conexion, conecta a la BD
-     * @param int id de la categoria madre a la que pertenece la subcategoria
+     * @param $id_madre int id de la categoria madre a la que pertenece la subcategoria
      * @return array | string objetos Categoria o el error de la consulta
      */
     public static function getSubcategorias($id_madre) :array | string
@@ -209,5 +207,20 @@ class Categoria{
             return "Error: " . $e->getMessage();
         }
         return $subcategorias;
+    }
+    public static function getCategoriaById($id_categoria) :Categoria{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE id_categoria = ? ");
+        $stmt->execute([$id_categoria]);
+        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Categoria(
+            $categoria['id_categoria'],
+            $categoria['nombre'],
+            $categoria['descripcion'],
+            $categoria['orden'],
+            $categoria['img_cat'],
+            $categoria['id_madre'],
+            $categoria['fecha_actualizacion']
+        );
     }
 }
