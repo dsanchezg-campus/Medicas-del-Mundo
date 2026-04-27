@@ -72,16 +72,8 @@ class Usuario
      */
     public function controlUsuarioAdmin() :bool
     {
-        $db = DB::conectar();
-        $stmt = $db->prepare("SELECT nombre_rol FROM rol WHERE id_rol = ?");
-        $stmt->execute([$this->rol]);
-        if ($stmt->rowCount() > 1) {
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($result["nombre_rol"] == "admin") {
-                return true;
-            } else {
-                return false;
-            }
+        if ($this->rol == 'admin') {
+            return true;
         } else {
             return false;
         }
@@ -93,12 +85,8 @@ class Usuario
      */
     public function controlUsuarioEditora() :bool
     {
-        if (isset($_SESSION["usuaria"])) {
-            if ($_SESSION["usuaria"]->getRol() == "editora") {
-                return true;
-            } else{
-                return false;
-            }
+        if ($this->rol == 'editora') {
+            return true;
         } else {
             return false;
         }
@@ -124,7 +112,7 @@ class Usuario
         // Verificar contraseña hasheada
         if (password_verify($password, $usuario['password'])) {
             // Crear sesión con objeto Usuario
-            return new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['id_rol']);
+            return new Usuario($usuario['nombre'], $usuario['email'], $usuario['password'], $usuario['id_usuario'], $usuario['rol']);
         } else {
             return null; // Contraseña incorrecta
         }
