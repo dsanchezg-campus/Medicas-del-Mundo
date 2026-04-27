@@ -36,8 +36,8 @@ class Categoria{
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT MAX(id_categoria) as id_categoria FROM categoria");
         $stmt->execute();
-        $id_bloque = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $id_bloque['id_bloque'] + 1;
+        $id_categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $id_categoria['id_categoria'] + 1;
     }
     public static function SiguienteOrden($id_categoria){
         $db = DB::conectar();
