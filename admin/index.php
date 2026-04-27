@@ -106,8 +106,18 @@ require_once "../header.php";
         echo $e->getMessage();
     }
     ?>
+        <!-- Botón flotante para crear una nueva categoría -->
+        <section class="crear-categoria">
+            <a class="enlace-crear-categoria" href="anadir_categoria.php">
+                <article class="testo-crear-categoria tamaño-variable">
+                    <h1>+</h1>
+                    <h3>Añadir Categoria</h3>
+                </article>
+            </a>
+        </section>
 
     </section>
+
     <!-- Si se seleccionó una categoría, mostrar su contenido/bloques -->
     <?php
     if (isset($_GET['page'])){
