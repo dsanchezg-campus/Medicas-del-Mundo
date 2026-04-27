@@ -34,7 +34,7 @@ require_once "../header.php";
     <?php 
     if (isset($_GET['page'])){
         echo '<section class="titulo-section"><h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
-        echo '<a href="FaQ.php?categoria=' . $_GET['page'] . '" class="faq-variable">';
+        echo "<a href='FaQ.php?categoria=" . $_GET['page'] . "' class='faq-variable'>";
         echo '<span class="faq-link">?</span>';
         echo '<span class="faq-link-hover">Preguntas Frecuentes</span>';
         echo '</a></section>';
@@ -43,6 +43,7 @@ require_once "../header.php";
     }
     ?>
     <!-- Mostrar categorías o subcategorías según el parámetro 'page' -->
+    <section class="contenedor">
     <?php
     try {
         // Si se envió el parámetro 'page', mostrar subcategorías de esa categoría
@@ -106,6 +107,7 @@ require_once "../header.php";
     }
     ?>
 
+    </section>
     <!-- Si se seleccionó una categoría, mostrar su contenido/bloques -->
     <?php
     if (isset($_GET['page'])){
