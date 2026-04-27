@@ -117,6 +117,27 @@ class Faq {
         }
         return $faqs;
     }
-
+    /**
+     * Obtiene de la BD todos los FAQ de una categoria especifica
+     * @param $id_categoria
+     * @return array objetos Faq
+     */
+    public static function ListarFAQPorCategoria($id_categoria) :array{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM faq WHERE id_categoria = ?");
+        $stmt->execute([$id_categoria]);
+        $faqs = array();
+        while ($consultaFaq = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $faqs[] = new Faq(
+                $consultaFaq['titulo'],
+                $consultaFaq['id_faq'],
+                $consultaFaq['pregunta'],
+                $consultaFaq['respuesta'],
+                $consultaFaq['id_categoria'],
+                $consultaFaq['fecha_actualizacion']
+            );
+        }
+        return $faqs;
+    }
 
 }

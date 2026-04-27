@@ -4,6 +4,7 @@
 require_once "Classes/Categoria.php";
 require_once "Classes/DB.php";
 require_once "Classes/Bloque.php";
+require_once "Classes/Faq.php";
 ?>
 <!doctype html>
 <!-- Página principal del sitio web de Médicos del Mundo, muestra categorías y contenido -->
@@ -24,26 +25,28 @@ include_once "header.php";
 <main>
     <section class="faq-container">
 
-        <details class="faq-item">
-            <summary class="faq-question">COMO ACTUALIZO EL CURRICULO</summary>
-            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-                vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-                cupiditate?</p>
-        </details>
+        <?php
+        // Verificar si se ha pasado un parámetro 'categoria'
+        if (isset($_GET['categoria'])) {
+            $faqs = Faq::ListarFAQPorCategoria($_GET['categoria']);
+        } else {
+            // Si no hay categoría, mostrar todos los FAQs (opcional)
+            $faqs = Faq::ListarFAQ();
+        }
 
-        <details class="faq-item">
-            <summary class="faq-question">COMO ME AFILIO A UN SINDICATO</summary>
-            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-                vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-                cupiditate?</p>
-        </details>
-
-        <details class="faq-item">
-            <summary class="faq-question">SAUL A PUESTO MAL EL COSO</summary>
-            <p class="faq-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt corporis quam labore saepe
-                vitae dolores quis ab cumque aut voluptates nemo eius suscipit odio, iusto, omnis animi architecto
-                cupiditate?</p>
-        </details>
+        if (count($faqs) > 0) {
+            foreach ($faqs as $faq) {
+                ?>
+                <details class="faq-item">
+                    <summary class="faq-question"><?php echo htmlspecialchars($faq->getPregunta()); ?></summary>
+                    <p class="faq-answer"><?php echo nl2br(htmlspecialchars($faq->getRespuesta())); ?></p>
+                </details>
+                <?php
+            }
+        } else {
+            echo "<p style='text-align: center;'>No hay preguntas frecuentes disponibles para esta categoría en este momento.</p>";
+        }
+        ?>
 
     </section>
 </main>
