@@ -700,3 +700,80 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     transition: 0.4s;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+/* =============================================
+   SECCIÓN: TÍTULO + ENLACE FAQ
+   Sección que contiene el título de la página
+   y el enlace a las preguntas frecuentes.
+   ============================================= */
+.titulo-section{
+    margin: 10px auto;
+    width: 96vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--color-blanco-corporativo);
+    border-radius: 10px;
+}
+.titulo-page{
+    font-size: 2rem;
+    font-weight: bolder;
+    color: var(--color-texto-oscuro);
+}
+
+/* transformacion de ? a Preguntas Frecuentes */
+.faq-variable {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 40px;
+}
+
+.faq-link{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+    opacity: 1;
+    font-size: 2rem;
+    font-weight: bolder;
+    color: var(--color-texto-oscuro);
+    transition: 0.4s;
+    margin: 0;
+}
+
+.faq-variable:hover .faq-link {
+    visibility: hidden;
+    opacity: 0;
+    font-size: 0;
+    transition: 0.4s;
+}
+
+.faq-link-hover{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 0;
+    font-weight: bolder;
+    color: var(--color-texto-oscuro);
+    padding: 10px;
+    border: 2px solid var(--color-lila);
+    border-radius: 10px;
+    transition: 0.4s;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.faq-variable:hover .faq-link-hover {
+    visibility: visible;
+    opacity: 1;
+    font-size: 1rem;
+    transition: 0.4s;
+}

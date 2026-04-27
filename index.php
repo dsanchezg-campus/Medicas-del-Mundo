@@ -24,10 +24,13 @@ include_once "header.php";
     <main>
     <?php 
     if (isset($_GET['page'])){
-        echo '<h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
-        echo '<a href="FaQ.php?page=' . $_GET['page'] . '" class="faq-link">Preguntas Frecuentes</a>';
+        echo '<section class="titulo-section"><h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
+        echo '<a href="FaQ.php?categoria=' . $_GET['page'] . '" class="faq-variable">';
+        echo '<span class="faq-link">?</span>';
+        echo '<span class="faq-link-hover">Preguntas Frecuentes</span>';
+        echo '</a></section>';
     }else{
-        echo '<h1 class="titulo-page">Categorias</h1>';
+        echo '';
     }
     ?>   
     <!-- Contenido principal: muestra categorías o subcategorías y bloques de contenido según el parámetro 'page' -->
@@ -49,19 +52,6 @@ include_once "header.php";
                 <article class="testo-categoria">
                     <h1><?php echo $subcategoria->getNombre(); ?></h1>
                     <p><?php echo $subcategoria->getDescripcion(); ?></p>
-                </article>
-            </a>
-        </section>
-        <section class="categoria">
-            <a class="enlace-bloque" href="FaQ.php?categoria=<?php echo $_GET['page']; ?>">
-                <!-- Imagen de la categoría -->
-                <article class="imagen-categoria">
-                    <img src="/styles/img/logo.png" alt="Imagen1">
-                </article>
-                <!-- Nombre y descripción de la categoría -->
-                <article class="testo-categoria">
-                    <h1>Preguntas y Respuestas</h1>
-                    <p>Aqui obtendras las respuestas a dudas comunes</p>
                 </article>
             </a>
         </section>
