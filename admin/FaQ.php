@@ -5,6 +5,7 @@ require_once "../classes/Categoria.php";
 require_once "../classes/DB.php";
 require_once "../classes/Bloque.php";
 require_once "../classes/Faq.php";
+require_once "../classes/Usuario.php";
 
 // OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
