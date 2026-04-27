@@ -5,7 +5,6 @@ require_once "../classes/Categoria.php";
 require_once "../classes/DB.php";
 require_once "../classes/Bloque.php";
 require_once "../classes/Faq.php";
-require_once "../classes/Usuario.php";
 
 // OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
@@ -31,13 +30,13 @@ if (!isset($_SESSION['usuaria']) || (!$_SESSION['usuaria']->controlUsuarioEditor
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Bienvenidas</title>
     <link rel="icon" type="image/png" sizes="32x32" href="https://www.medicosdelmundo.org/app/themes/mdm/library/medias/favicon/favicon-32x32.png">
 </head>
 <body>
 <?php
-include_once "header.php";
+include_once "../includes/header.php";
 ?>
 <main>
     <section class="faq-container">
