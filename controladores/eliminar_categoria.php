@@ -1,4 +1,5 @@
 <?php
+session_status();
 //comprobamos que la sesion esta iniciada correctamente
 if ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->ControlUsuariaAdmin()) {
     //comprobamos que vamos a eliminar: contenidos o categoria
