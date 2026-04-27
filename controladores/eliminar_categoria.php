@@ -6,19 +6,28 @@ require_once ("../classes/DB.php");
 require_once ("../classes/Rol.php");
 require_once ("../classes/Usuario.php");
 
+// 1. OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
-//comprobamos que la sesion esta iniciada correctamente
-if ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->ControlUsuariaAdmin()) {
-    //comprobamos que vamos a eliminar: contenidos o categoria
+
+// Opcional pero necesario si no usas autoloader:
+// require_once 'tus_clases.php'; // Asegúrate de cargar las clases Categoria, Bloque y la de la usuaria.
+
+// 2. CRÍTICO: Primero comprobamos que la sesión 'usuaria' existe (isset).
+// Si no lo haces y alguien entra sin loguearse, el código "peta" al intentar llamar a un método de algo que no existe.
+if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->ControlUsuariaEditora() || $_SESSION['usuaria']->ControlUsuariaAdmin())) {
+
+    // Comprobamos qué vamos a eliminar: contenidos o categoria
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['categoria'])) {
         Categoria::EliminarCategoria($_GET["categoria"]);
     } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['contenido'])) {
         Bloque::EliminarBloque($_GET['contenido']);
     }
-    //redirigimos al inicio de las usuarias
+
+    // Redirigimos al inicio según su rol
     header ("Location: ".$_SESSION['usuaria']->getRol()."/index.php");
     exit();
 }
-//si no hay sesion iniciada redirigimos al inicio
+
+// Si no hay sesión iniciada (o no es editora/admin), redirigimos al inicio
 header ("Location: ../index.php");
 exit();
