@@ -11,35 +11,33 @@ require_once "../classes/Bloque.php";
 require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos de la categoría
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["descripcion"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'
+        && isset($_POST["nombre"], $_POST["descripcion"], $_FILES["img"])) {
 
     // 1. MANEJO DE LA IMAGEN CON $_FILES
-    $nombre_imagen = "";
     if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-        $nombre_imagen = $_FILES['img']['name'];
-        // OJO: Aquí deberías añadir la lógica para guardar físicamente el archivo en tu servidor.
-        // Ejemplo: move_uploaded_file($_FILES['img']['tmp_name'], '../ruta_a_tus_imagenes/' . $nombre_imagen);
-    }
-
-    // 2. CORRECCIÓN DEL ID MADRE
-    // Si en el select eligen "Ninguna" (value=""), lo pasamos como null a la BD
-    $id_madre = !empty($_POST["id_categoria"]) ? $_POST["id_categoria"] : null;
-
-    try {
-        // 3. LLAMADA CORRECTA AL METODO ESTÁTICO CON SUS PARÁMETROS
-        // Se llama a la clase directamente con :: y se le pasan los datos del formulario
-        Categoria::InsertarCategoria(
-                $_POST["nombre"],
-                $_POST["descripcion"],
-                $_POST["orden"],
-                $nombre_imagen,
-                $id_madre,
-                $_POST["fecha_actualizacion"]
-        );
-        $exito = "Categoría añadida correctamente.";
-    } catch (Exception $e){
-        // Si ocurre un error, capturarlo y almacenarlo en la variable $error
-        $error = $e->getMessage();
+        $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
+        $target_dir = "../styles/img/";
+        $target_file = $target_dir . $imagen;
+        $fecha = date("Y-m-d H:i:s", time());
+        if (isset($_GET["page"])) {
+            $orden_cat = Categoria::SiguienteOrden($_GET["page"]);
+            $id_madre = $_GET["page"];
+        } else{
+            $id_madre = null;
+            $orden_cat = Categoria::SiguienteOrden($id_madre);
+        }
+        $categoria = new Categoria(Categoria::SiguienteId(), $_POST["nombre"], $_POST["descripcion"], $orden_cat, $imagen, $id_madre, $fecha);
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+            try {
+                $categoria->InsertarCategoria();
+                header ("location: index.php?page=". $categoria->getIdCategoria());
+                exit();
+            } catch (Exception $e) {
+                // Si ocurre un error, capturarlo y almacenarlo en la variable $error
+                $error = $e->getMessage();
+            }
+        }
     }
 }
 ?>
@@ -78,30 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["desc
             <label for="descripcion">Descripcion: </label>
             <input type="text" id="descripcion" name="descripcion" required>
 
-            <label for="orden">Orden: </label>
-            <input type="number" id="orden" name="orden" required>
-
             <label for="img">Imagen: </label>
             <input type="file" id="img" name="img" accept="image/*" required>
-
-            <label for="id_categoria">Pertenece a la categoria: </label>
-            <select name="id_categoria" id="id_categoria">
-                <option value="">Ninguna</option>
-                <?php
-                $categorias = Categoria::getCategorias();
-                if ($categorias) {
-                    foreach ($categorias as $categoria) {
-                        echo "<option value='" . $categoria->getIdCategoria() . "'>" . $categoria->getNombre() . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            <label for="prioridad">Prioridad: </label>
-            <input type="number" id="prioridad" name="prioridad" required>
-
-            <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required>
 
             <button type="submit">Añadir</button>
         </form>

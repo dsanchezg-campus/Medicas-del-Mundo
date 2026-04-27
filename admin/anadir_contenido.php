@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['t
             // Intentar insertar el contenido en la base de datos
             $bloque->InsertarBloque();
             header("location: index.php?page=". $bloque->getIdCategoria());
+            exit();
         } else {
             $error = "Ha habido un problema al subir el archivo";
         }
