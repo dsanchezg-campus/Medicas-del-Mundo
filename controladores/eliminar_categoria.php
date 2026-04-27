@@ -14,7 +14,7 @@ session_start();
 
 // 2. CRÍTICO: Primero comprobamos que la sesión 'usuaria' existe (isset).
 // Si no lo haces y alguien entra sin loguearse, el código "peta" al intentar llamar a un metodo de algo que no existe.
-if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuariaEditora() || $_SESSION['usuaria']->controlUsuariaAdmin())) {
+if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora() || $_SESSION['usuaria']->controlUsuarioAdmin())) {
 
     // Comprobamos qué vamos a eliminar: contenidos o categoria
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['categoria'])) {
