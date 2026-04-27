@@ -66,8 +66,10 @@ class Usuario
     }
     //********************** MÉTODOS *****************************//
 
-    // Metodo para verificar si el usuario actual es Administrador
-    // Retorna true si el rol es "Admin", false en caso contrario
+    /**
+     * verifica si el usuario actual es Administrador
+     * @return bool true si el rol es "Admin", false en caso contrario
+     */
     public function controlUsuarioAdmin() :bool
     {
         $db = DB::conectar();
@@ -85,8 +87,10 @@ class Usuario
         }
     }
 
-    // Metodo para verificar si el usuario actual es Editora
-    // Retorna true si el rol es "editora", false en caso contrario
+    /**
+     * verifica si el usuario actual es Editora
+     * @return bool true si el rol es "editora", false en caso contrario
+     */
     public function controlUsuarioEditora() :bool
     {
         if (isset($_SESSION["usuaria"])) {
@@ -100,10 +104,12 @@ class Usuario
         }
     }
 
-    // Metodo estático para iniciar sesión de un usuario
-    // Verifica credenciales contra la base de datos y crea sesión si es válido
-    // Parámetros: $nombre (puede ser email o nombre), $password
-    // Retorna: true si login exitoso, false si falla
+    /**
+     * Verifica credenciales de inicio sesion en la base de datos y te devuelve el Usuario si es válido
+     * @param $nombre string nombre o correo
+     * @param $password string
+     * @return Usuario|null
+     */
     public static function InicioSesion($nombre, $password) :Usuario|null
     {
         session_start();
@@ -124,15 +130,8 @@ class Usuario
         }
     }
 
-    // Metodo para eliminar la sesión (no implementado)
-    public static function CerrarSesion() :void{
-        if (isset($_SESSION["usuaria"])) {
-            unset($_SESSION["usuaria"]);
-        }
-    }
-
     /**
-     * Devuelve todos las usuarias
+     * Devuelve todas las usuarias
      * @return array de objetos Usuario
      */
     public static function ListarUsuarias() :array{
