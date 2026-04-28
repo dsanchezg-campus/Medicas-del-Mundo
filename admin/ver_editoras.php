@@ -39,12 +39,12 @@ require_once "../header.php";
     <section class="lista-editoras">
         <table>
             <!-- Encabezados de la tabla -->
-            <thead>
-            <tr>
-                <th>Editora</th>
-                <th>Email</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+            <thead class="cabecera-tabla">
+            <tr class="cabecera-tabla-tr">
+                <th class="cabecera-tabla-tr-th">Editora</th>
+                <th class="cabecera-tabla-tr-th">Email</th>
+                <th class="cabecera-tabla-tr-th">Editar</th>
+                <th class="cabecera-tabla-tr-th">Eliminar</th>
             </tr>
             </thead>
             <!-- Cuerpo de la tabla con datos de editoras -->
@@ -55,15 +55,17 @@ require_once "../header.php";
             // Iterar sobre cada usuaria y mostrar sus datos en una fila de la tabla
             foreach ($usuarias as $usuaria) {
                 ?>
-                <tr>
+                <tr class="cuerpo-tabla-tr">
                     <!-- Nombre de la editora -->
-                    <td><?php echo $usuaria->getNombre(); ?></td>
+                    <td class="cuerpo-tabla-tr-td">
+                    <?php echo $usuaria->getNombre(); ?></td>
                     <!-- Email de la editora -->
-                    <td><?php echo $usuaria->getEmail(); ?></td>
+                    <td class="cuerpo-tabla-tr-td">
+                    <?php echo $usuaria->getEmail(); ?></td>
                     <!-- Botón para eliminar a la editora (por implementar) -->
-                    <td><a href="editar_editora.php?page=<?php echo $usuaria->getId(); ?>">Editar</a></td>
+                    <td class="cuerpo-tabla-tr-td"><a class="boton-editar" href="editar_editora.php?page=<?php echo $usuaria->getId(); ?>">Editar</a></td>
                     <!-- Botón para editar datos de la editora (por implementar) -->
-                    <td><a href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getId(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
+                    <td class="cuerpo-tabla-tr-td"><a class="boton-eliminar" href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getId(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
                 </tr>
 
                 <?php
