@@ -78,10 +78,10 @@ class Bloque
      * @param $id_bloque int
      * @return void
      */
-    public static function EliminarBloque($id_bloque) :void{
+    public function EliminarBloque() :void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
-        $stmt->execute([$id_bloque]);
+        $stmt->execute([$this->id_bloque]);
     }
 
     /**
@@ -151,9 +151,6 @@ class Bloque
     public function getIdBloque(){
         return $this->id_bloque;
     }
-    public function setIdBloque($id_bloque){
-        $this->id_bloque = $id_bloque;
-    }
     public function getOrdenBloque(){
         return $this->orden_bloque;
     }
@@ -181,14 +178,9 @@ class Bloque
     public function getFechaActualizacionBloque(){
         return $this->fecha_actualizacion_bloque;
     }
-    public function setFechaActualizacionBloque($fecha_actualizacion_bloque){
-        $this->fecha_actualizacion_bloque = $fecha_actualizacion_bloque;
-    }
+
     public function getIdCategoria(){
         return $this->id_categoria;
-    }
-    public function setIdCategoria($id_categoria){
-        $this->id_categoria = $id_categoria;
     }
     public function getIcono(){
         return $this->icono;
