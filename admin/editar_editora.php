@@ -14,10 +14,10 @@ session_start();
 
 // 3. CONTROL DE ACCESO ADMIN
 require_once "../controladores/control_admin.php";
-//if (!isset($_GET['page'])) {
-//header ("location: index.php");
-//exit();
-//}
+if (!isset($_GET['page'])) {
+header ("location: index.php");
+exit();
+}
 
 // 4. INICIALIZACIÓN DE VARIABLES
 $error = null; // Guardará los mensajes de error si la actualización falla.
@@ -50,7 +50,7 @@ require_once "../header.php";
     <article class="anadir-contenido">
         <form action="../controladores/editar_usuarias.php" method="post" class="form-anadir">
                 <?php
-                $usuaria = Usuario::getUsuaria($_GET["id_usuario"]);
+                $usuaria = Usuario::getUsuaria($_GET["page"]);
                 ?>
 
             <label for="nombre"><?php echo $usuaria->getRol().": ". $usuaria->getNombre(); ?> </label>
