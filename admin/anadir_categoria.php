@@ -7,6 +7,7 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
+session_start();
 // CONTROL DE ACCESO ADMIN
 require_once "../controladores/control_admin.php";
 

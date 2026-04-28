@@ -1,10 +1,11 @@
 <?php
 // Incluir las clases necesarias para manejar categorías, base de datos y bloques de contenido
-
-require_once "../classes/Categoria.php";
+require_once "../classes/Usuario.php";
 require_once "../classes/DB.php";
-require_once "../classes/Bloque.php";
+require_once "../classes/Contenido.php";
+require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
+require_once "../classes/Bloque.php";
 
 // OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
@@ -32,9 +33,19 @@ require_once "../controladores/control_admin.php";
 </head>
 <body>
 <?php
-include_once "../includes/header.php";
+include_once "../header.php";
 ?>
 <main>
+    <?php
+    if (isset($_GET['categoria'])): ?>
+    <section class="titulo-section">
+        <a href="index.php?page=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás
+<!--            <span class="faq-link">⮌ Volver atrás</span>-->
+<!--            <span class="faq-link-hover">--><?php //= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?><!--</span>-->
+        </a>
+        <h1 class="titulo-page">Preguntas Frecuentes</h1>
+        </section>
+    <?php endif; ?>
     <section class="faq-container">
 
         <?php
@@ -73,7 +84,7 @@ include_once "../includes/header.php";
             Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
             Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
         </p>
-        <p><a href="login.php">Iniciar Sesion</a></p>
+        <p><a href="../login.php">Cerrar Sesion</a></p>
     </section>
 </footer>
 </body>

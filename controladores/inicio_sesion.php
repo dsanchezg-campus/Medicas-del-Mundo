@@ -13,7 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"], $_POST["pas
     if ($usuaria != null) {
         $_SESSION["usuaria"] = $usuaria;
         // Redirigir a la página según el rol del usuario
-        header("Location:../".$_SESSION['usuaria']->getRol()."/index.php");
+        if ($_SESSION['usuaria']->getRol() == "admin") {
+            header("Location:../admin/index.php");
+        } elseif ($_SESSION['usuaria']->getRol() == "editora") {
+            header("Location:../editora/index.php");
+        } else {
+            header("Location: cerrar_sesion.php");
+        }
         exit;
     } else{
         // Mostrar mensaje de error si las credenciales son incorrectas

@@ -1,7 +1,11 @@
 <?php
 // Incluir las clases necesarias para acceder a la base de datos y gestionar usuarios
+require_once "../classes/Usuario.php";
 require_once "../classes/DB.php";
-require_once "../classes/Usuario.php" ;
+require_once "../classes/Contenido.php";
+require_once "../classes/Categoria.php";
+require_once "../classes/Faq.php";
+require_once "../classes/Bloque.php";
 // Iniciar la sesión para acceder a datos de usuario
 session_start();
 // CONTROL DE ACCESO ADMIN

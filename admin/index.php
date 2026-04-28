@@ -1,9 +1,13 @@
 <?php
 // Incluir las clases necesarias para gestionar categorías, bloques y base de datos
-require_once "../Classes/Categoria.php";
-require_once "../Classes/DB.php";
-require_once "../Classes/Bloque.php";
+require_once "../classes/Usuario.php";
+require_once "../classes/DB.php";
+require_once "../classes/Contenido.php";
+require_once "../classes/Categoria.php";
+require_once "../classes/Faq.php";
+require_once "../classes/Bloque.php";
 
+session_start();
 // CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
 require_once "../controladores/control_admin.php";
@@ -33,13 +37,16 @@ require_once "../header.php";
 <main>
     <?php 
     if (isset($_GET['page'])){
-        echo '<section class="titulo-section"><h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
-        echo "<a href='FaQ.php?categoria=" . $_GET['page'] . "' class='faq-variable'>";
-        echo '<span class="faq-link">?</span>';
-        echo '<span class="faq-link-hover">Preguntas Frecuentes</span>';
-        echo '</a></section>';
-    }else{
-        echo '';
+        $categoria_actual = Categoria::getCategoriaById($_GET['page']);
+        ?>
+        <section class="titulo-section"><a href="index.php<?= $categoria_actual->getIdMadre() ? "?page=".$categoria_actual->getIdMadre(): null; ?>">
+                ⮌ Volver atrás</a>
+            <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
+            <a href="FaQ.php?categoria=<?= $_GET['page'];?>" class="faq-variable">
+            <span class="faq-link">?</span>
+            <span class="faq-link-hover">Preguntas Frecuentes</span>
+        </a></section>
+    <?php
     }
     ?>
     <!-- Mostrar categorías o subcategorías según el parámetro 'page' -->

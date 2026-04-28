@@ -1,10 +1,13 @@
 <?php
 // Incluir clases necesarias para bloques, categorías, base de datos y contenido externo
-require_once "../classes/Bloque.php";
-require_once "../classes/Categoria.php";
+require_once "../classes/Usuario.php";
 require_once "../classes/DB.php";
 require_once "../classes/Contenido.php";
+require_once "../classes/Categoria.php";
+require_once "../classes/Faq.php";
+require_once "../classes/Bloque.php";
 
+session_start();
 // ACCESO ADMIN
 require_once "../controladores/control_admin.php";
 ?>
