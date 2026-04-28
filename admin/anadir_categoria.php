@@ -13,7 +13,7 @@ require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST'
-        && isset($_POST["nombre"], $_POST["descripcion"], $_FILES["img"])) {
+        && isset($_POST["nombre"], $_POST["descripcion"], $_POST['categoria'])) {
 
     // 1. MANEJO DE LA IMAGEN CON $_FILES
     if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
         $target_dir = "../styles/img/";
         $target_file = $target_dir . $imagen;
         $fecha = date("Y-m-d H:i:s", time());
-        if (isset($_GET["page"])) {
-            $orden_cat = Categoria::SiguienteOrden($_GET["page"]);
-            $id_madre = $_GET["page"];
+        if ($_POST['categoria'] != null) {
+            $orden_cat = Categoria::SiguienteOrden($_POST["categoria"]);
+            $id_madre = $_POST["categoria"];
         } else{
             $id_madre = null;
             $orden_cat = Categoria::SiguienteOrden($id_madre);
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
 
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
-            <input type="hidden" name="action" value="categoria">
+            <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>" >
 
             <label for="nombre">Nombre: </label>
             <input type="text" id="nombre" name="nombre" required>
