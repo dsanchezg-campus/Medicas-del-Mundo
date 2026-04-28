@@ -114,7 +114,7 @@ require_once "../header.php";
         echo $e->getMessage();
     }
     ?>
-        <!-- Botón flotante para crear una nueva categoría -->
+        <!-- Botón flo tante para crear una nueva categoría -->
         <section class="crear-categoria">
             <a class="enlace-crear-categoria" href="anadir_categoria.php?page=<?= $_GET['page'] ?? null; ?>">
                 <article class="testo-crear-categoria tamaño-variable">
