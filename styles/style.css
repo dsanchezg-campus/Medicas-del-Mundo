@@ -715,6 +715,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     padding: 10px;
     background-color: var(--color-blanco-corporativo);
     border-radius: 10px;
+    max-width: 10%;
 }
 .titulo-page{
     font-size: 2rem;
