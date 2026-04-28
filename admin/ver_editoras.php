@@ -65,7 +65,7 @@ require_once "../header.php";
                     <!-- Botón para eliminar a la editora (por implementar) -->
                     <td class="cuerpo-tabla-tr-td"><a class="boton-editar-editoras" href="editar_editora.php?page=<?php echo $usuaria->getIdUsuario(); ?>">Editar</a></td>
                     <!-- Botón para editar datos de la editora (por implementar) -->
-                    <td class="cuerpo-tabla-tr-td"><a class="boton-eliminar-editoras" href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getId(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
+                    <td class="cuerpo-tabla-tr-td"><a class="boton-eliminar-editoras" href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getIdUsuario(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
                 </tr>
 
                 <?php
