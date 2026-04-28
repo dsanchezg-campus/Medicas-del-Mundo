@@ -11,7 +11,7 @@ session_start();
 
 // 2. CRÍTICO: Primero comprobamos que la sesión 'usuaria' existe (isset).
 // Si no lo haces y alguien entra sin loguearse, el código "peta" al intentar llamar a un metodo de algo que no existe.
-if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora() || $_SESSION['usuaria']->controlUsuarioAdmin())) {
+if (isset($_SESSION['usuaria']) && (($_SESSION['usuaria']->controlUsuarioEditora() || $_SESSION['usuaria']->controlUsuarioAdmin()))) {
 
     // Comprobamos qué vamos a eliminar: contenidos o categoria
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['categoria'])) {
@@ -20,14 +20,14 @@ if (isset($_SESSION['usuaria']) && ($_SESSION['usuaria']->controlUsuarioEditora(
         if (file_exists($file)) {
             unlink($file);
         }
-        Categoria::EliminarCategoria($_GET["categoria"]);
+        $categoria->EliminarCategoria();
     } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['contenido'])) {
-        $bloque = Categoria::getCategoriaById($_GET['contenido']);
-        $file = "../styles/img/".$bloque->getImg();
+        $bloque = Bloque::getBloqueById($_GET['contenido']);
+        $file = "../styles/img/".$bloque->getIcono();
         if (file_exists($file)) {
             unlink($file);
         }
-        Bloque::EliminarBloque($_GET['contenido']);
+        $bloque->EliminarBloque();
     }
 
     // Redirigimos al inicio según su rol
