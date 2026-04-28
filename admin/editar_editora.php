@@ -15,7 +15,7 @@ session_start();
 // 3. CONTROL DE ACCESO ADMIN
 require_once "../controladores/control_admin.php";
 //if (!isset($_GET['page'])) {
-//header ("location: ../index.php");
+//header ("location: index.php");
 //exit();
 //}
 

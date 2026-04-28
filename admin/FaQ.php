@@ -12,13 +12,9 @@ session_start();
 // Opcional pero necesario si no usas autoloader:
 // require_once 'tus_clases.php'; // Asegúrate de cargar las clases Categoria, Bloque y la de la usuaria.
 
-// CRÍTICO: Primero comprobamos que la sesión 'usuaria' existe (isset).
-// Si no lo haces y alguien entra sin loguearse, el código "peta" al intentar llamar a un metodo de algo que no existe.
-if (!isset($_SESSION['usuaria']) || (!$_SESSION['usuaria']->controlUsuarioEditora() && !$_SESSION['usuaria']->controlUsuarioAdmin())) {
-    // Si no hay sesión iniciada o no es editora/admin, redirigimos al inicio
-    header("Location: /Medicas-del-Mundo/login.php");
-    exit();
-}
+// CONTROL DE ACCESO ADMIN
+// Si no tiene permisos, redirige a la página principal
+require_once "../controladores/control_admin.php";
 
 
 ?>
