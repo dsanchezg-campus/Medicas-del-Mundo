@@ -8,6 +8,15 @@
                     </a>
                 </article>
             </li>
+            <?php if(isset($_SESSION['usuaria'])) { ?>
+            <li class="lista-nav">
+                <?php if (($_SESSION['usuaria'])->ControlUsuarioAdmin()):?>
+                <a href="/Medicas-del-Mundo/admin/ver_editoras.php">Ver editoras</a>
+                <?php elseif(($_SESSION['usuaria'])->ControlUsuarioEditora()):?>
+                <a href="/Medicas-del-Mundo/editora/perfil.php">Ver mi perfil</a>
+                <?php endif;?>
+            </li>
+            <?php } ?>
             <li class="linea-nav">
                 <h1>Bienvenida</h1>
             </li>
