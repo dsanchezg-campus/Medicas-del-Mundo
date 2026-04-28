@@ -46,7 +46,7 @@ class Usuario
         return $this->email;
     }
 
-    public function getIdUsuario()
+    public function getIdUsuario(): int
     {
         return $this->id_usuario;
     }
