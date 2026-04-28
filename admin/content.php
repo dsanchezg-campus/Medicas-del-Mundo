@@ -10,6 +10,17 @@ require_once "../classes/Bloque.php";
 session_start();
 // ACCESO ADMIN
 require_once "../controladores/control_admin.php";
+
+if (!isset($_GET['page'])) {
+    header("location: index.php");
+    exit();
+}
+// obtenemos el bloque de contenido de la página
+$bloque = Bloque::getBloqueById($_GET['page']);
+// obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
+$bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+// categorias pertenecientes a la misma categoria que el bloque
+$subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 ?>
 <!-- Página para mostrar el contenido detallado de un bloque específico -->
 <!doctype html>
@@ -30,15 +41,40 @@ require_once "../header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
     <main>
+        <?php
+        if (isset($_GET['page'])){
+            $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
+            ?>
+            <section class="titulo-section">
+                <a href="index.php?page=<?= $categoria_actual->getIdCategoria(); ?>">
+                    ⮌ Volver atrás
+                </a>
+                <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
+            </section>
+            <?php
+        }
+        ?>
+<!-- menu de navegación a la izquierda, muestra categorias y otros bloques pertenecientes a la misma categoria que este bloque-->
         <aside class="subcategorias-content">
-            
             <?php
             // Verificar si se ha especificado un bloque por parámetro 'page'
             if (isset($_GET['page'])) {
-                // obtenemos el bloque de contenido de la página
-                $bloque = Bloque::getBloqueById($_GET['page']);
-                // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
-                $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+                foreach ($subcategorias as $subcategoria) {
+            ?>
+                <section class="categoria-content">
+                    <a class="enlace-bloque-content" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
+                        <article class="imagen-content">
+                            <img src="../styles/img/<?= $subcategoria->getImg(); ?>" alt="Imagen1">
+                        </article>
+
+                        <article class="testo-content">
+                            <h1><?php echo $subcategoria->getNombre(); ?></h1>
+                            <p><?php echo $subcategoria->getDescripcion(); ?></p>
+                        </article>
+                    </a>
+                </section>
+            <?php
+                }
                 // Iterar sobre los bloques paralelos y mostrarlos
                 foreach ($bloques_paralelos as $bloque_paralelo) {
             ?>
@@ -50,7 +86,7 @@ require_once "../header.php";
 
                     <article class="testo-content">
                         <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
-                        <p><?php echo $bloque_paralelo->getTextoBloque(); ?></p>
+                        <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
                     </article>
                 </a>
             </section>

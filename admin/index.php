@@ -11,6 +11,7 @@ session_start();
 // CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
 require_once "../controladores/control_admin.php";
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -68,7 +69,7 @@ require_once "../header.php";
                     <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <!-- Imagen de la categoría -->
                         <article class="imagen-categoria">
-                            <img src="..styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
+                            <img src="../styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                         </article>
                         <!-- Nombre y descripción de la categoría -->
                         <article class="testo-categoria">
@@ -115,7 +116,7 @@ require_once "../header.php";
     ?>
         <!-- Botón flotante para crear una nueva categoría -->
         <section class="crear-categoria">
-            <a class="enlace-crear-categoria" href="anadir_categoria.php">
+            <a class="enlace-crear-categoria" href="anadir_categoria.php?page=<?= $_GET['page'] ?? null; ?>">
                 <article class="testo-crear-categoria tamaño-variable">
                     <h1>+</h1>
                     <h3>Añadir Categoria</h3>
