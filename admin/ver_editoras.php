@@ -86,6 +86,6 @@ require_once "../header.php";
         </table>
     </section>
 
-
+    <a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>
 </main>
 </body>
