@@ -22,9 +22,7 @@ include_once "header.php";
 ?>
 <!-- Contenido principal con formulario de login -->
     <main class="login-container">
-        <article class="login-section">
-            <img src="" alt="Poner aqui cualquier imagen que apetezca">
-        </article>
+
         <!-- Mostrar mensaje de error si las credenciales son incorrectas -->
         <?php if (isset($error)){ ?>
         <article class="login-box">

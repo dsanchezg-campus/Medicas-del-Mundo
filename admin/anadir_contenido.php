@@ -117,23 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
 }
 ?>
 <!-- Pie de página con información de contacto -->
-<footer>
-    <section class="footer-section">
-        <!-- Nombre de la organización -->
-        <h2>Médicos del Mundo España</h2>
-        <!-- Dirección -->
-        <p>Conde de Vilches, 15 · 28028, Madrid</p>
-        <!-- Horarios -->
-        <p>Lunes a viernes: 8:00 - 20:00</p>
-        <!-- Información de contacto: teléfono y email -->
-        <p>
-            Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
-            Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
-        </p>
-        <!-- Enlace a inicio de sesión -->
-        <p><a href="../controladores/cerrar_sesion.php">Cerrar Sesion</a></p>
-    </section>
-</footer>
+<!-- Pie de página con información de contacto de Médicos del Mundo -->
+<?php require_once "../footer.php"; ?>
 <!-- Enlace a inicio de sesión -->
 <a href="../admin/index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
 </body>

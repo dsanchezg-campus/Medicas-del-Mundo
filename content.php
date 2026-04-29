@@ -59,7 +59,7 @@ include "header.php";
                     <section class="categoria-content">
                         <a class="enlace-bloque-content" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                             <article class="imagen-content">
-                                <img src="../styles/img/<?= $subcategoria->getImg(); ?>" alt="Imagen1">
+                                <img src="styles/img/<?= $subcategoria->getImg(); ?>" alt="Imagen1">
                             </article>
 
                             <article class="testo-content">
@@ -76,7 +76,7 @@ include "header.php";
                     <section class="categoria-content">
                         <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
                             <article class="imagen-content">
-                                <img src="../styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
+                                <img src="styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
                             </article>
 
                             <article class="testo-content">

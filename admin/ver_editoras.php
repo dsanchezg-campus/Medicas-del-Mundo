@@ -88,4 +88,7 @@ require_once "../header.php";
 
     <a href='index.php' class='volver-inicio'><img src='/styles/img/casita.png' alt='regresa a inicio'></a>
 </main>
+<!-- Pie de página con información de contacto de Médicos del Mundo -->
+<?php require_once "../footer.php"; ?>
 </body>
+</html>
