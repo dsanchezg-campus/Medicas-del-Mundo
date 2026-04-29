@@ -714,40 +714,49 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 /* =============================================
    PÁGINA FAQ - DISEÑO COMPLETO
    ============================================= */
-/* .faq-container { 
+.faq-container { 
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
     padding: 0% 20%;
     margin: auto;
-    
-} */
-.faq-item {
     background-color: var(--color-blanco-corporativo);
+    
+} 
+/* Contenedor de botones dentro del FAQ */
+.faq-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    position: relative; /* Para controlar los botones internos */
+    height: 40px;
+}
+
+/* Ajuste de los botones para que no floten sobre el texto */
+.faq-item .boton-editar, 
+.faq-item .boton-eliminar {
+    position: relative; /* Cambiar de absolute a relative */
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    margin: 0;
+}
+.faq-item {
+    background-color: var(--color-blanco-corporativo); /* Asegura el fondo blanco */
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;          /* Más espacio interno para que respire */
+    margin: 15px 0;
+    width: 100%;            /* Ocupa el ancho del contenedor */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: 0.4s;
+}
+
+/* Estilo para que la respuesta no se pegue a los bordes */
+.faq-answer {
     margin: 10px 0;
-    transition: 0.4s;
-}
-.faq-item summary{
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--color-texto-oscuro);
-}
-.faq-item p{
-    color: var(--color-lila);
-    font-weight: lighter;
-    font-size: 1rem;
-}
-.faq-item:active{
-    transform: scale(1.05);
-    transition: 1s;
-}
-.faq-item:hover{
-    transform: translateY(-10px);
-    transition: 0.4s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
 }
 
 /* =============================================
@@ -783,9 +792,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 
 .faq-link{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     visibility: visible;
     opacity: 1;
     font-size: 2rem;
@@ -794,7 +800,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     margin: 0;
 }
 
-.faq-variable:hover .faq-link {
+.-variable:hover .faq-link {
     visibility: hidden;
     opacity: 0;
     font-size: 0;
@@ -803,7 +809,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 .faq-link-hover{
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     visibility: hidden;
     opacity: 0;
     font-size: 0;

@@ -59,10 +59,12 @@ include_once "../header.php";
             foreach ($faqs as $faq) {
                 ?>
                 <details class="faq-item">
-                    <a href="editar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
-                    <a href="/Medicas-del-Mundo/controladores/eliminar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este FAQ?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <summary class="faq-question"><?php echo htmlspecialchars($faq->getPregunta()); ?></summary>
                     <p class="faq-answer"><?php echo nl2br(htmlspecialchars($faq->getRespuesta())); ?></p>
+                    <article class="faq-acciones">
+                        <a href="editar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                        <a href="/Medicas-del-Mundo/controladores/eliminar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este FAQ?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+                    </article>
                 </details>
                 <?php
             }
