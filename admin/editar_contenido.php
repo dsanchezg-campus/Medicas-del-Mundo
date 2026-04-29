@@ -98,46 +98,48 @@ require_once "../header.php";
 
     if ($bloque) {
     ?>
-    <article class="anadir-categoria">
+    <article class="anadir-categoria anadir-contenido-container">
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
-            <article class="">
-                <input type="hidden" name="orden" value="<?= $bloque->getOrdenBloque();?>>">
-                <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
+            <input type="hidden" name="orden" value="<?= $bloque->getOrdenBloque();?>>">
+            <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
 
-                <label for="titulo">Titulo: </label>
-                <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
+            <div class="anadir-contenido-columnas">
+                <article class="anadir-contenido-izquierda">
 
-                <label for="descripcion">Descripcion: </label>
-                <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
+                    <label for="titulo">Titulo: </label>
+                    <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
 
-                <label for="img">Imagen ejemplo: </label>
-                <input type="file" id="img" name="img" accept="image/*">
+                    <label for="descripcion">Descripcion: </label>
+                    <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
 
-                <label for="id_categoria">Pertenece a la categoria: </label>
-                <select name="id_categoria" id="id_categoria" required>
-                    <?php
-                    $categoriaDelBloque = Categoria::getCategoriaById($bloque->getIdCategoria());
-                    echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
+                    <label for="img">Imagen ejemplo: </label>
+                    <input type="file" id="img" name="img" accept="image/*">
 
-                    // Carga dinámica de categorías desde la BD
-                    $categorias = Categoria::getCategorias();
-                    foreach ($categorias as $categoria) {
-                        echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
-                        $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
-                        foreach ($subcategorias as $subcategoria) {
-                            echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
+                    <label for="id_categoria">Pertenece a la categoria: </label>
+                    <select name="id_categoria" id="id_categoria" required>
+                        <?php
+                        $categoriaDelBloque = Categoria::getCategoriaById($bloque->getIdCategoria());
+                        echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
 
+                        // Carga dinámica de categorías desde la BD
+                        $categorias = Categoria::getCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
+                            $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
+                            foreach ($subcategorias as $subcategoria) {
+                                echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
+
+                            }
                         }
-                    }
-                    ?>
-                </select>
-            </article>
-            <article class"">
-                <label for="texto">Texto: </label>
-                <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
-            </article>
-
-            <button type="submit">Editar Contenido</button>
+                        ?>
+                    </select>
+                    <button type="submit">Editar Contenido</button>
+                </article>
+                <article class="anadir-contenido-derecha">
+                    <label for="texto">Texto: </label>
+                    <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
+                </article>
+            </div>
         </form>
     </article>
     <?php } else { ?>
