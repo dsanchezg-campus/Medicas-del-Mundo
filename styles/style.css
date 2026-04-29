@@ -714,14 +714,15 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 /* =============================================
    PÁGINA FAQ - DISEÑO COMPLETO
    ============================================= */
-.faq-container { 
+/* .faq-container { 
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
     padding: 0% 20%;
     margin: auto;
-}
+    
+} */
 .faq-item {
     background-color: var(--color-blanco-corporativo);
     border-radius: 10px;
@@ -782,7 +783,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 
 .faq-link{
-    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -791,7 +791,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     font-size: 2rem;
     font-weight: bolder;
     color: var(--color-texto-oscuro);
-    transition: 0.4s;
     margin: 0;
 }
 
@@ -799,11 +798,9 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     visibility: hidden;
     opacity: 0;
     font-size: 0;
-    transition: 0.4s;
 }
 
 .faq-link-hover{
-    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -815,7 +812,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     padding: 10px;
     border: 2px solid var(--color-lila);
     border-radius: 10px;
-    transition: 0.4s;
     margin: 0;
     white-space: nowrap;
 }
@@ -824,8 +820,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     visibility: visible;
     opacity: 1;
     font-size: 1rem;
-    transition: 0.4s;
-}
+} 
 /* Ver editoras en admin  */
 .lista-editoras {
     width: 100%;
@@ -991,4 +986,27 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 #content-container-main{
     overflow: hidden;
+}
+.anadir-faq{
+    background-color: var(--color-blanco-corporativo);
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 20%;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.faq-container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 0% 20%;
+    margin: auto;
 }

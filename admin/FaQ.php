@@ -74,14 +74,13 @@ include_once "../header.php";
         <?php
         $url_anadir = isset($_GET['categoria']) ? "anadir_faq.php?categoria=" . $_GET['categoria'] : "anadir_faq.php";
         ?>
+    <a class="enlace-crear-faq" href="<?php echo $url_anadir; ?>" >
         <section class="anadir-faq">
-            <a class="enlace-crear-faq" href="<?php echo $url_anadir; ?>" >
                 <article class="testo-crear-faq" >
-                    <h1>+</h1>
                     <h3>Añadir FAQ</h3>
                 </article>
-            </a>
-        </section>
+            </section>
+        </a>
 
     </section>
 </main>

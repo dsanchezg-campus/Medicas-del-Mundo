@@ -3,36 +3,30 @@
 // Permite crear, modificar, eliminar y listar FAQs asociadas a categorías.
 class Faq {
     // Propiedades privadas de la FAQ
-    private $titulo;
     private $id_faq;
+    private $id_categoria;
     private $pregunta;
     private $respuesta;
-    private $id_categoria;
     private $fecha_actualizacion;
     /**
      * Constructor: Inicializa un objeto Faq con los datos proporcionados
-     * @param $titulo
      * @param $id_faq
+     * @param $id_categoria
      * @param $pregunta
      * @param $respuesta
-     * @param $id_categoria
      * @param $fecha_actualizacion
      */
 
-    public function __construct($titulo,$id_faq,$pregunta,$respuesta,$id_categoria,$fecha_actualizacion){
-        $this->titulo=$titulo;
+    public function __construct($id_faq = null, $id_categoria, $pregunta, $respuesta, $fecha_actualizacion){
         $this->id_faq=$id_faq;
+        $this->id_categoria=$id_categoria;
         $this->pregunta=$pregunta;
         $this->respuesta=$respuesta;
-        $this->id_categoria=$id_categoria;
         $this->fecha_actualizacion=$fecha_actualizacion;
 
     }
 
     // Getters para acceder a las propiedades
-    public function getTitulo(){
-        return $this->titulo;
-    }
     public function getIdFaq(){
         return $this->id_faq;
     }
@@ -45,14 +39,11 @@ class Faq {
     public function getIdCategoria(){
         return $this->id_categoria;
     }
-    public function getFechaActualizacion(){
+    public function getFecha(){
         return $this->fecha_actualizacion;
     }
 
     // Setters para modificar las propiedades
-    public function setTitulo($titulo){
-        $this->titulo=$titulo;
-    }
     public function setIdFaq($id_faq){
         $this->id_faq=$id_faq;
     }
@@ -65,7 +56,7 @@ class Faq {
     public function setIdCategoria($id_categoria){
         $this->id_categoria=$id_categoria;
     }
-    public function setFechaActualizacion($fecha_actualizacion){
+    public function setFecha($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
     /**
@@ -74,8 +65,8 @@ class Faq {
      */
     public function InsertarFAQ(){
         $db = DB::conectar();
-        $stmt = $db->prepare("INSERT INTO faq (titulo, pregunta, respuesta, id_categoria, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion]);
+        $stmt = $db->prepare("INSERT INTO faq (id_categoria, pregunta, respuesta, fecha_actualizacion) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$this->id_categoria, $this->pregunta, $this->respuesta, $this->fecha_actualizacion]);
     }
     /**
      * Metodo para modificar el FAQ de la BD
@@ -83,8 +74,8 @@ class Faq {
      */
     public function ActualizarFAQ(){
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE faq SET titulo = ?, pregunta = ?, respuesta = ?, id_categoria = ?, fecha_actualizacion = ? WHERE id_faq = ?");
-        $stmt->execute([$this->titulo, $this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion, $this->id_faq]);
+        $stmt = $db->prepare("UPDATE faq SET pregunta = ?, respuesta = ?, id_categoria = ?, fecha_actualizacion = ? WHERE id_faq = ?");
+        $stmt->execute([$this->pregunta, $this->respuesta, $this->id_categoria, $this->fecha_actualizacion, $this->id_faq]);
     }
     /**
      * Metodo para eliminar FAQ de la BD
@@ -107,11 +98,10 @@ class Faq {
         $faqs = array();
         while ($consultaFaq = $stmt->fetch(PDO::FETCH_ASSOC)){
             $faqs[] = new Faq(
-                $consultaFaq['titulo'],
                 $consultaFaq['id_faq'],
+                $consultaFaq['id_categoria'],
                 $consultaFaq['pregunta'],
                 $consultaFaq['respuesta'],
-                $consultaFaq['id_categoria'],
                 $consultaFaq['fecha_actualizacion']
             );
         }
@@ -129,11 +119,10 @@ class Faq {
         $faqs = array();
         while ($consultaFaq = $stmt->fetch(PDO::FETCH_ASSOC)){
             $faqs[] = new Faq(
-                $consultaFaq['titulo'],
                 $consultaFaq['id_faq'],
+                $consultaFaq['id_categoria'],
                 $consultaFaq['pregunta'],
                 $consultaFaq['respuesta'],
-                $consultaFaq['id_categoria'],
                 $consultaFaq['fecha_actualizacion']
             );
         }

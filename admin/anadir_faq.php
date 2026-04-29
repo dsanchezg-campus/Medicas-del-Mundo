@@ -19,14 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
     && isset($_POST["pregunta"], $_POST["respuesta"], $_POST['categoria'])) {
         $pregunta = $_POST["pregunta"];
         $respuesta = $_POST["respuesta"];
-        $fecha_actualizacion = date("Y-m-d H:i:s", time());
-        $categoria = new Faq(Faq::SiguienteId(), $_POST["nombre"], $_POST["descripcion"], $orden_cat, $imagen, $id_madre, $fecha);
+        $fecha = date("Y-m-d H:i:s", time());
+        $faq = new Faq(null, $_GET['categoria'], '', $pregunta, $respuesta, $fecha);
             try {
-                $categoria->InsertarCategoria();
-                header ("location: index.php?page=". $categoria->getIdCategoria());
+                $faq->InsertarFAQ();
+                header ("location: FaQ.php?categoria=". $_GET['categoria']);
                 exit();
             } catch (Exception $e) {
-                // Si ocurre un error, capturarlo y almacenarlo en la variable $error
                 $error = $e->getMessage();
             }
 
