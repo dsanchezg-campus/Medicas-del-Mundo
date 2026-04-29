@@ -1,5 +1,4 @@
 <?php
-require "DB.php";
 // Clase Faq: Maneja las preguntas frecuentes (FAQ) del sistema.
 // Permite crear, modificar, eliminar y listar FAQs asociadas a categorías.
 class Faq {
