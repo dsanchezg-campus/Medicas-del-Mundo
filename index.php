@@ -58,6 +58,7 @@ require_once "header.php";
             *ESTAS EN INICIO CON CATEGORIAS INICIALES
          */
             if (!empty($_GET['buscar'])):
+                $buscar = $_GET['buscar'];
                 echo "<section class='contenedor'>";
                 $categorias = Categoria::BuscarCategorias($buscar);
                 foreach ($categorias as $categoria): ?>
