@@ -20,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
         $pregunta = $_POST["pregunta"];
         $respuesta = $_POST["respuesta"];
         $fecha = date("Y-m-d H:i:s", time());
-        $faq = new Faq(null, $_GET['categoria'], '', $pregunta, $respuesta, $fecha);
+        $faq = new Faq(Faq::SiguienteId(), $_GET['categoria'], $pregunta, $respuesta, $fecha);
             try {
                 $faq->InsertarFAQ();
                 header ("location: FaQ.php?categoria=". $_GET['categoria']);
                 exit();
             } catch (Exception $e) {
-                $error = $e->getMessage();
+                $error = "No se pudo guardar la pregunta";
             }
 
     }
