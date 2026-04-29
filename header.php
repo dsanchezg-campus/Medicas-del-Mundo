@@ -22,8 +22,8 @@
             </li>
             <li class="linea-nav">
                 <form method="GET" action="index.php" class="form-cabecera">
-                    <input type="text" name="busqueda" class="input-nav" placeholder="Buscar" required>
-                    <input type="submit" class="boton-invisible" value="Buscar">
+                    <input type="text" name="buscar" class="input-nav" placeholder="Buscar" value="<?php echo isset($_GET['buscar']) ? htmlspecialchars($_GET['buscar']) : ''; ?>">
+                    <input type="submit" class="boton-invisible" value="Busca">
                 </form>
             </li>
         </ul>

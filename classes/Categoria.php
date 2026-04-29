@@ -56,24 +56,30 @@ class Categoria{
         $orden = $stmt->fetch(PDO::FETCH_ASSOC);
         return $orden['orden'] + 1;
     }
-    public static function BuscarCategorias($termino) : array {
+    public static function BuscarCategorias(string $termino): array {
         $db = DB::conectar();
-        $stmt = $db->prepare("SELECT * FROM categoria WHERE nombre LIKE ?");
-        $stmt->execute(["%$termino%"]);
-        $resultados = array();
+        // Usamos LIKE para buscar coincidencias parciales en nombre o descripción
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE nombre LIKE ? OR descripcion LIKE ?");
+        $busqueda = "%" . $termino . "%";
+        $stmt->execute([$busqueda, $busqueda]);
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $resultados[] = new Categoria(
-                $row['id_categoria'],
-                $row['nombre'],
-                $row['descripcion'],
-                $row['orden'],
-                $row['img_cat'],
-                $row['id_madre'],
-                $row['fecha_actualizacion']
-            );
+        $categorias = array();
+        try {
+            while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $categorias[] = new Categoria(
+                    $categoria['id_categoria'],
+                    $categoria['nombre'],
+                    $categoria['descripcion'],
+                    $categoria['orden'],
+                    $categoria['img_cat'],
+                    $categoria['id_madre'],
+                    $categoria['fecha_actualizacion']
+                );
+            }
+        } catch (PDOException $e) {
+            error_log("Error en la búsqueda: " . $e->getMessage());
         }
-        return $resultados;
+        return $categorias;
     }
 
     /**
