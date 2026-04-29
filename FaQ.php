@@ -23,6 +23,14 @@ require_once "Classes/Faq.php";
 include_once "header.php";
 ?>
 <main>
+    <?php
+    if (isset($_GET['categoria'])): ?>
+    <section class="titulo-section">
+        <a href="index.php?page=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás</a>
+        <h1 class="faq-titulo-categoria"><?= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?></h1>
+        <h1 class="titulo-page">Preguntas Frecuentes</h1>
+    </section>
+    <?php endif; ?>
     <section class="faq-container">
 
         <?php
@@ -52,17 +60,6 @@ include_once "header.php";
 </main>
 <a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>
 <!-- Pie de página con información de contacto de Médicos del Mundo -->
-<footer>
-    <section class="footer-section">
-        <h2>Médicos del Mundo España</h2>
-        <p>Conde de Vilches, 15 · 28028, Madrid</p>
-        <p>Lunes a viernes: 8:00 - 20:00</p>
-        <p>
-            Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
-            Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
-        </p>
-        <p><a href="login.php">Iniciar Sesion</a></p>
-    </section>
-</footer>
+<?php require_once "footer.php"; ?>
 </body>
 </html>

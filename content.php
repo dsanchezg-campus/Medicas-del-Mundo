@@ -4,6 +4,18 @@ require_once "classes/Bloque.php";
 require_once "classes/Categoria.php";
 require_once "classes/DB.php";
 require_once "classes/Contenido.php";
+require_once "classes/Usuario.php";
+
+if (empty($_GET['page'])) {
+    header ("Location: index.php");
+    exit();
+}
+// obtenemos el bloque de contenido de la página
+$bloque = Bloque::getBloqueById($_GET['page']);
+// obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
+$bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+// categorias pertenecientes a la misma categoria que el bloque
+$subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 ?>
 <!-- Página para mostrar el contenido detallado de un bloque específico -->
 <!doctype html>
@@ -23,53 +35,63 @@ include "header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
     <main>
+        <?php
+        if (isset($_GET['page'])){
+            $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
+            ?>
+            <section class="titulo-section">
+                <a href="index.php?page=<?= $categoria_actual->getIdCategoria(); ?>">
+                    ⮌ Volver atrás
+                </a>
+                <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
+            </section>
+            <?php
+        }
+        ?>
+
+<!-- menu de navegación a la izquierda, muestra categorias y otros bloques pertenecientes a la misma categoria que este bloque-->
         <aside class="subcategorias-content">
             <?php
             // Verificar si se ha especificado un bloque por parámetro 'page'
             if (isset($_GET['page'])) {
-                // obtenemos el bloque de contenido de la página
-                $bloque = Bloque::getBloqueById($_GET['page']);
-                // obtenemos otros bloques pertenecientes a la misma categoria y que se mostraran en el aside
-                $bloques_paralelos = Bloque::getBloquesByCategoria($bloque->getIdCategoria());
+                foreach ($subcategorias as $subcategoria) {
+                    ?>
+                    <section class="categoria-content">
+                        <a class="enlace-bloque-content" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
+                            <article class="imagen-content">
+                                <img src="../styles/img/<?= $subcategoria->getImg(); ?>" alt="Imagen1">
+                            </article>
+
+                            <article class="testo-content">
+                                <h1><?php echo $subcategoria->getNombre(); ?></h1>
+                                <p><?php echo $subcategoria->getDescripcion(); ?></p>
+                            </article>
+                        </a>
+                    </section>
+                    <?php
+                }
                 // Iterar sobre los bloques paralelos y mostrarlos
                 foreach ($bloques_paralelos as $bloque_paralelo) {
-            ?>
-            <section class="categoria-content">
-                <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
-                    <article class="imagen-content">
-                        <img src="<?php echo $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
-                    </article>
+                    ?>
+                    <section class="categoria-content">
+                        <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
+                            <article class="imagen-content">
+                                <img src="../styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
+                            </article>
 
-                    <article class="testo-content">
-                        <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
-                        <p><?php echo $bloque_paralelo->getTextoBloque(); ?></p>
-                    </article>
-                </a>
-            </section>
-            <?php
+                            <article class="testo-content">
+                                <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
+                                <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
+                            </article>
+                        </a>
+                    </section>
+                    <?php
                 }
             }
             ?>
-
-            <!-- Sección hardcoded para ejemplo (debería ser dinámica) -->
-            <section class="categoria-content">
-
-                <a class="enlace-bloque-content" href="index.php?page=1">
-                    <article class="imagen-content">
-                        <img src="styles/img/pensando.webp" alt="Imagen1">
-                    </article>
-
-                    <article class="testo-content">
-                        <h1>Titulo 1</h1>
-                        <p>Parrafo de texto texto texto texto texto texto texto
-                            texto texto texto texto texto texto texto texto texto texto texto texto.
-                        </p>
-                    </article>
-                </a>
-            </section>
         </aside>
 
-        <!-- Sección principal con el contenido detallado del bloque -->
+<!-- Sección principal con el contenido detallado del bloque -->
         <section class="contenedor-contenido">
             <?php
             // Mostrar contenido si hay parámetro 'page'
@@ -83,8 +105,18 @@ include "header.php";
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
             </article>
             <article class="parrafo">
-                <p><?php echo $bloque->getTextoBloque();?></p>
-            </article>
+                <?php
+                $texto = $bloque->getTextoBloque();
+                $parrafos = preg_split("/\r\n/", $texto);
+                foreach ($parrafos as $parrafo) {
+                    if ($parrafo != "") {
+                        echo "<p>" . htmlspecialchars($parrafo) . "</p>";
+                    } else {
+                        echo "<br>";
+                    }
+
+                }
+                ?>            </article>
                 <?php
                 // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
                 foreach ($contenidos as $contenido) {
@@ -101,17 +133,7 @@ include "header.php";
     </main>
 
 <!-- Pie de página con información de contacto -->
-    <footer>
-        <section class="footer-section">
-            <h2>Médicos del Mundo España</h2>
-            <p>Conde de Vilches, 15 · 28028, Madrid</p>
-            <p>Lunes a viernes: 8:00 - 20:00</p>
-            <p>
-                Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
-                Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
-            </p>
-        </section>
-    </footer>
+<?php require_once "footer.php"; ?>
     <a href="index.php" class="volver-inicio"><img src="styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>

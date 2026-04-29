@@ -1,9 +1,10 @@
 <?php
-// Incluir las clases necesarias para manejar categorías, base de datos y bloques de contenido
-
-require_once "Classes/Categoria.php";
-require_once "Classes/DB.php";
-require_once "Classes/Bloque.php";
+// Incluir las clases necesarias para gestionar categorías, bloques y base de datos
+require_once "classes/Usuario.php";
+require_once "classes/Contenido.php";
+require_once "classes/Categoria.php";
+require_once "classes/Faq.php";
+require_once "classes/Bloque.php";
 ?>
 <!doctype html>
 <!-- Página principal del sitio web de Médicos del Mundo, muestra categorías y contenido -->
@@ -22,18 +23,22 @@ require_once "Classes/Bloque.php";
 include_once "header.php";
 ?>
     <main>
-    <?php 
-    if (isset($_GET['page'])){
-        echo '<section class="titulo-section"><h1 class="titulo-page">' . Categoria::getCategoriaById($_GET['page'])->getNombre() . '</h1>';
-        echo '<a href="FaQ.php?categoria=' . $_GET['page'] . '" class="faq-variable">';
-        echo '<span class="faq-link">?</span>';
-        echo '<span class="faq-link-hover">Preguntas Frecuentes</span>';
-        echo '</a></section>';
-    }else{
-        echo '';
+        <?php
+        if (isset($_GET['page'])){
+        $categoria_actual = Categoria::getCategoriaById($_GET['page']);
+        ?>
+        <section class="titulo-section"><a href="index.php<?= $categoria_actual->getIdMadre() ? "?page=".$categoria_actual->getIdMadre(): null; ?>">
+                ⮌ Volver atrás</a>
+            <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
+            <a href="FaQ.php?categoria=<?= $_GET['page'];?>" class="faq-variable">
+                <span class="faq-link">?</span>
+                <span class="faq-link-hover">Preguntas Frecuentes</span>
+            </a></section>
+        <?php
     }
-    ?>   
+    ?>
     <!-- Contenido principal: muestra categorías o subcategorías y bloques de contenido según el parámetro 'page' -->
+
         <?php
         // Manejo de excepciones para errores de base de datos
         try {
@@ -47,7 +52,7 @@ include_once "header.php";
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                 <article class="imagen-categoria">
-                    <img src="<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
+                    <img src="styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
                 </article>
                 <article class="testo-categoria">
                     <h1><?php echo $subcategoria->getNombre(); ?></h1>
@@ -66,7 +71,7 @@ include_once "header.php";
         <section class="categoria">
             <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
                 <article class="imagen-categoria">
-                    <img src="<?php echo $categoria->getImg(); ?>" alt="Imagen1">
+                    <img src="styles/img/<?php echo $categoria->getImg(); ?>" alt="Imagen1">
                 </article>
                 <article class="testo-categoria">
                     <h1><?php echo $categoria->getNombre(); ?></h1>
@@ -74,6 +79,7 @@ include_once "header.php";
                 </article>
             </a>
         </section>
+
         <?php
             }
         }
@@ -96,7 +102,7 @@ include_once "header.php";
         <section class="contenido-bloque">
             <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
                 <article class="imagen-contenido">
-                    <img src="<?php  ?>" alt="Imagen1">
+                    <img src="styles/img/<?= $contenido->getIcono(); ?>" alt="Imagen1">
                 </article>
                 <article class="testo-contenido">
                     <h1><?php echo $contenido->getTituloBloque(); ?></h1>
@@ -115,17 +121,6 @@ include_once "header.php";
         ?>
     </main>
 <!-- Pie de página con información de contacto de Médicos del Mundo -->
-    <footer>
-        <section class="footer-section">
-            <h2>Médicos del Mundo España</h2>
-            <p>Conde de Vilches, 15 · 28028, Madrid</p>
-            <p>Lunes a viernes: 8:00 - 20:00</p>
-            <p>
-                Tel: <a href="tel:+34915436033">91 543 60 33</a> ·
-                Email: <a href="mailto:informacion@medicosdelmundo.org">informacion@medicosdelmundo.org</a>
-            </p>
-            <p><a href="login.php">Iniciar Sesion</a></p>
-        </section>
-    </footer>
+    <?php require_once "footer.php"; ?>
 </body>
 </html>

@@ -38,12 +38,10 @@ include_once "../header.php";
 <main>
     <?php
     if (isset($_GET['categoria'])): ?>
-    <section class="titulo-section">
-        <a href="index.php?page=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás
-<!--            <span class="faq-link">⮌ Volver atrás</span>-->
-<!--            <span class="faq-link-hover">--><?php //= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?><!--</span>-->
-        </a>
-        <h1 class="titulo-page">Preguntas Frecuentes</h1>
+        <section class="titulo-section">
+            <a href="index.php?page=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás</a>
+            <h1 class="faq-titulo-categoria"><?= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?></h1>
+            <h1 class="titulo-page">Preguntas Frecuentes</h1>
         </section>
     <?php endif; ?>
     <section class="faq-container">
