@@ -40,7 +40,7 @@ $subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 require_once "../header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
-    <main>
+    <main id="content-container-main">
         <?php
         if (isset($_GET['page'])){
             $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());

@@ -989,3 +989,6 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 .faq-vacio{
     text-align: center;
 }
+#content-container-main{
+    overflow: hidden;
+}
