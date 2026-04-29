@@ -21,8 +21,8 @@
                 <h1>Bienvenida</h1>
             </li>
             <li class="linea-nav">
-                <form method="POST" action="" class="form-cabecera">
-                    <input type="text" class="input-nav" placeholder="Buscar">
+                <form method="GET" action="index.php" class="form-cabecera">
+                    <input type="text" name="busqueda" class="input-nav" placeholder="Buscar" required>
                     <input type="submit" class="boton-invisible" value="Buscar">
                 </form>
             </li>

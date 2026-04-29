@@ -56,6 +56,25 @@ class Categoria{
         $orden = $stmt->fetch(PDO::FETCH_ASSOC);
         return $orden['orden'] + 1;
     }
+    public static function BuscarCategorias($termino) : array {
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM categoria WHERE nombre LIKE ?");
+        $stmt->execute(["%$termino%"]);
+        $resultados = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $resultados[] = new Categoria(
+                $row['id_categoria'],
+                $row['nombre'],
+                $row['descripcion'],
+                $row['orden'],
+                $row['img_cat'],
+                $row['id_madre'],
+                $row['fecha_actualizacion']
+            );
+        }
+        return $resultados;
+    }
 
     /**
      * Actualiza la categoria en la BD
@@ -174,6 +193,7 @@ class Categoria{
             $categoria['fecha_actualizacion']
         );
     }
+
 
     /**************************************** GETTERS Y SETTERS **************************************/
     public function getIdCategoria()
