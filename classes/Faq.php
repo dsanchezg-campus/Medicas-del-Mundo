@@ -138,4 +138,23 @@ class Faq {
         $id_faq = $stmt->fetch(PDO::FETCH_ASSOC);
         return $id_faq['id_faq'] + 1;
     }
+
+    /**
+     * Devuelve un Faq segun su id
+     * @param $id_faq
+     * @return Faq
+     */
+    public static function getFaqById($id_faq): Faq{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM faq WHERE id_faq = ?");
+        $stmt->execute([$id_faq]);
+        $faq = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Faq(
+            $faq['id_faq'],
+            $faq['id_categoria'],
+            $faq['pregunta'],
+            $faq['respuesta'],
+            $faq['fecha_actualizacion']
+        );
+    }
 }
