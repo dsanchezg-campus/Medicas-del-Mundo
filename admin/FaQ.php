@@ -59,15 +59,29 @@ include_once "../header.php";
             foreach ($faqs as $faq) {
                 ?>
                 <details class="faq-item">
+                    <a href="editar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                    <a href="/Medicas-del-Mundo/controladores/eliminar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este FAQ?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
                     <summary class="faq-question"><?php echo htmlspecialchars($faq->getPregunta()); ?></summary>
                     <p class="faq-answer"><?php echo nl2br(htmlspecialchars($faq->getRespuesta())); ?></p>
                 </details>
                 <?php
             }
         } else {
-            echo "<p style='text-align: center;'>No hay preguntas frecuentes disponibles para esta categoría en este momento.</p>";
+            echo "<p class='faq-vacio'>No hay preguntas frecuentes disponibles para esta categoría en este momento.</p>";
         }
         ?>
+
+        <?php
+        $url_anadir = isset($_GET['categoria']) ? "anadir_faq.php?categoria=" . $_GET['categoria'] : "anadir_faq.php";
+        ?>
+        <section class="anadir-faq">
+            <a class="enlace-crear-faq" href="<?php echo $url_anadir; ?>" >
+                <article class="testo-crear-faq" >
+                    <h1>+</h1>
+                    <h3>Añadir FAQ</h3>
+                </article>
+            </a>
+        </section>
 
     </section>
 </main>
