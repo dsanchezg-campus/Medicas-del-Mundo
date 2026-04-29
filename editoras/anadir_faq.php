@@ -8,8 +8,7 @@ require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
 session_start();
-// CONTROL DE ACCESO ADMIN
-require_once "../controladores/control_admin.php";
+require_once "../controladores/control_editora.php";
 if (empty($_GET['categoria'])){
     header ("Location: index.php");
     exit();
@@ -17,19 +16,20 @@ if (empty($_GET['categoria'])){
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST'
     && isset($_POST["pregunta"], $_POST["respuesta"], $_POST['categoria'])) {
-        $pregunta = $_POST["pregunta"];
-        $respuesta = $_POST["respuesta"];
-        $fecha = date("Y-m-d H:i:s", time());
-        $faq = new Faq(Faq::SiguienteId(), $_GET['categoria'], $pregunta, $respuesta, $fecha);
-            try {
-                $faq->InsertarFAQ();
-                header ("location: FaQ.php?categoria=". $_GET['categoria']);
-                exit();
-            } catch (Exception $e) {
-                $error = "No se pudo guardar la pregunta";
-            }
-
+    $pregunta = $_POST["pregunta"];
+    $respuesta = $_POST["respuesta"];
+    $fecha_actualizacion = date("Y-m-d H:i:s", time());
+    $categoria = new Faq(Faq::SiguienteId(), $_POST["nombre"], $_POST["descripcion"], $orden_cat, $imagen, $id_madre, $fecha);
+    try {
+        $categoria->InsertarCategoria();
+        header ("location: index.php?page=". $categoria->getIdCategoria());
+        exit();
+    } catch (Exception $e) {
+        // Si ocurre un error, capturarlo y almacenarlo en la variable $error
+        $error = $e->getMessage();
     }
+
+}
 
 ?>
 <!DOCTYPE html>

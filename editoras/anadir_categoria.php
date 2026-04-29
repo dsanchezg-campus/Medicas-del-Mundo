@@ -9,28 +9,38 @@ require_once "../classes/Bloque.php";
 
 session_start();
 // CONTROL DE ACCESO ADMIN
-require_once "../controladores/control_admin.php";
-if (empty($_GET['categoria'])){
-    header ("Location: index.php");
-    exit();
-}
+require_once "../controladores/control_editora.php";
+
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST'
-    && isset($_POST["pregunta"], $_POST["respuesta"], $_POST['categoria'])) {
-        $pregunta = $_POST["pregunta"];
-        $respuesta = $_POST["respuesta"];
+    && isset($_POST["nombre"], $_POST["descripcion"], $_POST['categoria'])) {
+
+    // 1. MANEJO DE LA IMAGEN CON $_FILES
+    if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+        $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
+        $target_dir = "../styles/img/";
+        $target_file = $target_dir . $imagen;
         $fecha = date("Y-m-d H:i:s", time());
-        $faq = new Faq(Faq::SiguienteId(), $_GET['categoria'], $pregunta, $respuesta, $fecha);
+        if ($_POST['categoria'] != null) {
+            $orden_cat = Categoria::SiguienteOrden($_POST["categoria"]);
+            $id_madre = $_POST["categoria"];
+        } else{
+            $id_madre = null;
+            $orden_cat = Categoria::SiguienteOrden($id_madre);
+        }
+        $categoria = new Categoria(Categoria::SiguienteId(), $_POST["nombre"], $_POST["descripcion"], $orden_cat, $imagen, $id_madre, $fecha);
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
             try {
-                $faq->InsertarFAQ();
-                header ("location: FaQ.php?categoria=". $_GET['categoria']);
+                $categoria->InsertarCategoria();
+                header ("location: index.php?page=". $categoria->getIdCategoria());
                 exit();
             } catch (Exception $e) {
-                $error = "No se pudo guardar la pregunta";
+                // Si ocurre un error, capturarlo y almacenarlo en la variable $error
+                $error = $e->getMessage();
             }
-
+        }
     }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,13 +69,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
 
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
-            <input type="hidden" name="categoria" value="<?= $_GET['categoria']; ?>" >
+            <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>" >
 
-            <label for="pregunta">Pregunta: </label>
-            <input type="text" id="pregunta" name="pregunta" required>
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" name="nombre" required>
 
-            <label for="respuesta">Respuesta: </label>
-            <textarea id="respuesta" name="respuesta" required></textarea>
+            <label for="descripcion">Descripcion: </label>
+            <input type="text" id="descripcion" name="descripcion" required>
+
+            <label for="img">Imagen: </label>
+            <input type="file" id="img" name="img" accept="image/*" required>
 
             <button type="submit">Añadir</button>
         </form>
