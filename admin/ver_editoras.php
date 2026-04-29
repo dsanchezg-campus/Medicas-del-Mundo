@@ -67,22 +67,25 @@ require_once "../header.php";
                     <!-- Botón para editar datos de la editora (por implementar) -->
                     <td class="cuerpo-tabla-tr-td"><a class="boton-eliminar-editoras" href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getIdUsuario(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
                 </tr>
-
+                
                 <?php
             }
             ?>
+            <!-- Botón para agregar una nueva editora como fila de tabla -->
+            <tr class="anadir-editoras-row">
+                <td colspan="4" class="anadir-editoras-cell">
+                    <a class="enlace-crear-editora" href="crear_editora.php">
+                        <article class="texto-crear-editora tamaño-variable-fila">
+                            <h1>+</h1>
+                            <h3>Añadir Editora</h3>
+                        </article>
+                    </a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </section>
 
-    <!-- Botón para agregar una nueva editora -->
-    <section class="anadir-editoras">
-        <a class="enlace-crear-editora" href="">
-            <article class="texto-crear-editora">
-                <h1>+</h1>
-                <h3>Añadir Editora</h3>
-            </article>
-        </a>
-    </section>
+
 </main>
 </body>
