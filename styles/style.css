@@ -782,6 +782,7 @@ footer a:hover { color: var(--color-blanco-corporativo); }
 }
 
 /* transformacion de ? a Preguntas Frecuentes */
+/* Contenedor principal */
 .faq-variable {
     position: relative;
     display: flex;
@@ -789,43 +790,51 @@ footer a:hover { color: var(--color-blanco-corporativo); }
     align-items: center;
     width: 250px;
     height: 40px;
+    cursor: pointer;
 }
 
-.faq-link{
+/* La "?" - Estado inicial */
+.faq-link {
+    position: absolute; /* Para que no empuje al texto al aparecer */
     visibility: visible;
     opacity: 1;
     font-size: 2rem;
     font-weight: bolder;
     color: var(--color-texto-oscuro);
-    margin: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Transición suave */
 }
 
-.-variable:hover .faq-link {
+/* El texto "Preguntas Frecuentes" - Estado inicial (oculto) */
+.faq-link-hover {
+    position: absolute;
     visibility: hidden;
     opacity: 0;
-    font-size: 0;
-}
-
-.faq-link-hover{
-    top: 50%;
-    left: 50%;
-    visibility: hidden;
-    opacity: 0;
-    font-size: 0;
+    font-size: 1rem;
     font-weight: bolder;
     color: var(--color-texto-oscuro);
     padding: 10px;
     border: 2px solid var(--color-lila);
     border-radius: 10px;
-    margin: 0;
     white-space: nowrap;
+    transform: scale(0.8); /* Efecto de pequeño a grande */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
+/* --- EFECTO HOVER --- */
+
+/* Oculta la "?" suavemente */
+.faq-variable:hover .faq-link {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5);
+}
+
+/* Muestra el texto "Preguntas Frecuentes" suavemente */
 .faq-variable:hover .faq-link-hover {
     visibility: visible;
     opacity: 1;
-    font-size: 1rem;
-} 
+    transform: scale(1);
+}
 /* Ver editoras en admin  */
 .lista-editoras {
     width: 100%;
