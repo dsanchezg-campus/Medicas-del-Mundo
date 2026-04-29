@@ -79,19 +79,21 @@ require_once "../header.php";
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
             <!-- Campo oculto para identificar la acción como 'categoria' -->
             <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>">
-
+            <article class="anadir-contenido-izquierda">
             <!-- Campo de título -->
-            <label for="titulo">Titulo: </label>
-            <input type="text" id="titulo" name="titulo" required>
-            <label for="img">Imagen ejemplo: </label>
-            <input type="file" id="img" name="img" accept="image/*">
-            <!-- Campo de descripción -->
-            <label for="descripcion">Descripcion: </label>
-            <input type="text" id="descripcion" name="descripcion" required>
+                <label for="titulo">Titulo: </label>
+                <input type="text" id="titulo" name="titulo" required>
+                <label for="img">Imagen ejemplo: </label>
+                <input type="file" id="img" name="img" accept="image/*">
+                <!-- Campo de descripción -->
+                <label for="descripcion">Descripcion: </label>
+                <input type="text" id="descripcion" name="descripcion" required>
+            </article>
+            <article class="anadir-contenido-derecha">
             <!-- Campo de texto/contenido principal -->
-            <label for="texto">Texto: </label>
-            <textarea id="texto" name="texto" required></textarea>
-
+                <label for="texto">Texto: </label>
+                <textarea id="texto" name="texto" required></textarea>
+            </article>
             <!-- Botón para enviar el formulario -->
             <button type="submit">Añadir</button>
         </form>
