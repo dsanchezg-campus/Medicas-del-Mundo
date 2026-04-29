@@ -132,6 +132,33 @@ class Bloque
             $bloque['icono']
         );
     }
+    public static function BuscarBloques(string $termino): array {
+        $db = DB::conectar();
+        // Buscamos coincidencias en el título, descripción o el texto del contenido
+        $stmt = $db->prepare("SELECT * FROM bloque WHERE titulo LIKE ? OR descripcion LIKE ? OR texto LIKE ?");
+        $busqueda = "%" . $termino . "%";
+        $stmt->execute([$busqueda, $busqueda, $busqueda]);
+
+        $bloques = array();
+        try {
+            while ($bloque = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $bloques[] = new Bloque(
+                    $bloque['id_bloque'],
+                    $bloque['orden'],
+                    $bloque['titulo'],
+                    $bloque['descripcion'],
+                    $bloque['texto'],
+                    $bloque['fecha_actualizacion'],
+                    $bloque['id_categoria'],
+                    $bloque['icono']
+                );
+            }
+        } catch (PDOException $e) {
+            error_log("Error en la búsqueda de bloques: " . $e->getMessage());
+        }
+        return $bloques;
+    }
+
     public static function SiguienteId(){
         $db = DB::conectar();
         $stmt = $db->prepare("SELECT MAX(id_bloque) as id_bloque FROM bloque");
