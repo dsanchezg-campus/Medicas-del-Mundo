@@ -35,7 +35,7 @@ require_once "../header.php";
 ?>
 <!-- Contenido principal -->
 <main>
-    <!-- Tabla con lista de editoras registradas -->
+    <!-- Tabla con lista de editoras registradas  -->
     <section class="lista-editoras">
         <table>
             <!-- Encabezados de la tabla -->
