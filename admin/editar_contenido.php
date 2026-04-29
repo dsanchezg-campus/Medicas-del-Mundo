@@ -84,36 +84,33 @@ require_once "../header.php";
     ?>
     <article class="anadir-categoria">
         <form action="" method="post" class="form-anadir">
-            <input type="hidden" name="action" value="contenido">
-            <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
+            <article class="">
+                <input type="hidden" name="action" value="contenido">
+                <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
 
-            <label for="titulo">Titulo: </label>
-            <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
+                <label for="titulo">Titulo: </label>
+                <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
 
-            <label for="descripcion">Descripcion: </label>
-            <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
+                <label for="descripcion">Descripcion: </label>
+                <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
 
-            <label for="texto">Texto: </label>
-            <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
-
-            <label for="id_categoria">Pertenece a la categoria: </label>
-            <select name="id_categoria" id="id_categoria" required>
-                <?php
-                // Carga dinámica de categorías desde la BD
-                $categorias = Categoria::getCategorias();
-                foreach ($categorias as $categoria) {
-                    // Comprueba si la categoría actual del bucle es la que tiene asignada el bloque para pre-seleccionarla
-                    $selected = ($bloque->getIdCategoria() == $categoria->getIdCategoria()) ? "selected" : "";
-                    echo "<option value='" . $categoria->getIdCategoria() . "' $selected>" . htmlspecialchars($categoria->getNombre()) . "</option>";
-                }
-                ?>
-            </select>
-
-            <label for="prioridad">Prioridad: </label>
-            <input type="number" id="prioridad" name="prioridad" value="<?php echo htmlspecialchars($bloque->getOrdenBloque()); ?>" required>
-
-            <label for="fecha_actualizacion">Fecha Actualizacion: </label>
-            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" value="<?php echo date('Y-m-d', strtotime($bloque->getFechaActualizacionBloque())); ?>" required>
+                <label for="id_categoria">Pertenece a la categoria: </label>
+                <select name="id_categoria" id="id_categoria" required>
+                    <?php
+                    // Carga dinámica de categorías desde la BD
+                    $categorias = Categoria::getCategorias();
+                    foreach ($categorias as $categoria) {
+                        // Comprueba si la categoría actual del bucle es la que tiene asignada el bloque para pre-seleccionarla
+                        $selected = ($bloque->getIdCategoria() == $categoria->getIdCategoria()) ? "selected" : "";
+                        echo "<option value='" . $categoria->getIdCategoria() . "' $selected>" . htmlspecialchars($categoria->getNombre()) . "</option>";
+                    }
+                    ?>
+                </select>
+            </article>
+            <article class"">
+                <label for="texto">Texto: </label>
+                <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
+            </article>
 
             <button type="submit">Editar Contenido</button>
         </form>
