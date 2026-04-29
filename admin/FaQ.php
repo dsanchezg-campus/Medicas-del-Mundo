@@ -85,7 +85,7 @@ include_once "../header.php";
 
     </section>
 </main>
-<a href='index.php' class='volver-inicio'><img src='styles/img/casita.png' alt='regresa a inicio'></a>
+<a href='index.php' class='volver-inicio'><img src='../styles/img/casita.png' alt='regresa a inicio'></a>
 <!-- Pie de página con información de contacto de Médicos del Mundo -->
 <footer>
     <section class="footer-section">

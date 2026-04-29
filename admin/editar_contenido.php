@@ -21,8 +21,10 @@ $bloque = null; // Guardará el objeto Bloque que vamos a editar.
 
 // 5. CARGA DE DATOS (METODO GET)
 // Si la URL contiene '?page=X', se busca ese bloque en la base de datos.
-if (isset($_GET['page'])) {
+if (!empty($_GET['page'])) {
     $bloque = Bloque::getBloqueById($_GET['page']);
+} else{
+    header ("Location: index.php");
 }
 
 // 6. PROCESAMIENTO DEL FORMULARIO (METODO POST)
@@ -35,19 +37,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         $texto = $_POST['texto'];
-        $prioridad = $_POST['prioridad'];
         $id_categoria = $_POST['id_categoria'];
-        $fecha_actualizacion = $_POST['fecha_actualizacion'];
-
+        $fecha_actualizacion = date("Y-m-d H:i:s", time());
+        $orden = $bloque->getOrdenBloque();
+        //MANEJO DE LA IMAGEN SI SE VA A CAMBIAR
+        $subida_icono = true;
+        if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+            //manejamos imagen, con nombre y ruta a guardar
+            $icono = uniqid() . "_" . basename($_FILES['img']['name']);
+            $target_dir = "../styles/img/";
+            $target_file = $target_dir . $icono;
+            if(!move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+                $subida_icono = false;
+                $error = "Error al subir el archivo";
+            }
+        } else {
+            $icono = $bloque->getIcono();
+        }
         // Se instancia un nuevo objeto Bloque con los datos actualizados.
-        $bloqueEditado = new Bloque($id_bloque, $prioridad, $titulo, $descripcion, $texto, null, $fecha_actualizacion, $id_categoria, null);
+        $bloqueEditado = new Bloque($id_bloque, $orden, $titulo, $descripcion, $texto, $fecha_actualizacion, $id_categoria, $icono);
+        if ($subida_icono) {
+            // Se llama al metodo que ejecuta la consulta UPDATE en la base de datos.
+            $bloqueEditado->ActualizarBloque();
+            // Si sale bien, redirige al índice de esa categoría.
+            header("Location: index.php?page=" . $id_categoria);
+            exit();
+        }
 
-        // Se llama al metodo que ejecuta la consulta UPDATE en la base de datos.
-        $bloqueEditado->ActualizarBloque();
-
-        // Si odo sale bien, redirige al índice de esa categoría.
-        header("Location: index.php?page=" . $id_categoria);
-        exit();
     } catch (Exception $e){
         $error = $e->getMessage();
     }
@@ -82,37 +98,48 @@ require_once "../header.php";
 
     if ($bloque) {
     ?>
-    <article class="anadir-categoria">
-        <form action="" method="post" class="form-anadir">
-            <article class="">
-                <input type="hidden" name="action" value="contenido">
-                <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
+    <article class="anadir-categoria anadir-contenido-container">
+        <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
+            <input type="hidden" name="orden" value="<?= $bloque->getOrdenBloque();?>>">
+            <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
 
-                <label for="titulo">Titulo: </label>
-                <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
+            <div class="anadir-contenido-columnas">
+                <article class="anadir-contenido-izquierda">
 
-                <label for="descripcion">Descripcion: </label>
-                <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
+                    <label for="titulo">Titulo: </label>
+                    <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
 
-                <label for="id_categoria">Pertenece a la categoria: </label>
-                <select name="id_categoria" id="id_categoria" required>
-                    <?php
-                    // Carga dinámica de categorías desde la BD
-                    $categorias = Categoria::getCategorias();
-                    foreach ($categorias as $categoria) {
-                        // Comprueba si la categoría actual del bucle es la que tiene asignada el bloque para pre-seleccionarla
-                        $selected = ($bloque->getIdCategoria() == $categoria->getIdCategoria()) ? "selected" : "";
-                        echo "<option value='" . $categoria->getIdCategoria() . "' $selected>" . htmlspecialchars($categoria->getNombre()) . "</option>";
-                    }
-                    ?>
-                </select>
-            </article>
-            <article class"">
-                <label for="texto">Texto: </label>
-                <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
-            </article>
+                    <label for="descripcion">Descripcion: </label>
+                    <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
 
-            <button type="submit">Editar Contenido</button>
+                    <label for="img">Imagen ejemplo: </label>
+                    <input type="file" id="img" name="img" accept="image/*">
+
+                    <label for="id_categoria">Pertenece a la categoria: </label>
+                    <select name="id_categoria" id="id_categoria" required>
+                        <?php
+                        $categoriaDelBloque = Categoria::getCategoriaById($bloque->getIdCategoria());
+                        echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
+
+                        // Carga dinámica de categorías desde la BD
+                        $categorias = Categoria::getCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
+                            $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
+                            foreach ($subcategorias as $subcategoria) {
+                                echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
+
+                            }
+                        }
+                        ?>
+                    </select>
+                    <button type="submit">Editar Contenido</button>
+                </article>
+                <article class="anadir-contenido-derecha">
+                    <label for="texto">Texto: </label>
+                    <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
+                </article>
+            </div>
         </form>
     </article>
     <?php } else { ?>

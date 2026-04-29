@@ -89,6 +89,7 @@ require_once "../header.php";
                 <!-- Campo de descripción -->
                 <label for="descripcion">Descripcion: </label>
                 <input type="text" id="descripcion" name="descripcion" required>
+                    <!-- Botón para enviar el formulario -->
                 <button type="submit" class="btn-anadir-contenido">Añadir</button>
             </article>
             <article class="anadir-contenido-derecha">
@@ -97,7 +98,6 @@ require_once "../header.php";
                 <textarea id="texto" name="texto" required></textarea>
             </article>
             </div>
-            <!-- Botón para enviar el formulario -->
         </form>
     </article>
 </main>
