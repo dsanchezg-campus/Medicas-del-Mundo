@@ -39,31 +39,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
         // Si no se selecciona categoría madre, lo dejamos en null
         $id_madre = !empty($_POST['id_madre']) ? $_POST['id_madre'] : null;
         $fecha_actualizacion = date("Y-m-d H:i:s", time());
+        $imagen_subida = true;
         if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
             $img_cat = uniqid() . "_" . basename($_FILES['img']['name']);
             $target_dir = "../styles/img/";
             $target_file = $target_dir . $img_cat;
-            if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
-                // Instanciamos la categoría con los datos editados
-                $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
-
-                // Llamamos al metodo que ejecuta el UPDATE en la BD
-                $categoriaEditada->ActualizarCategoria();
+            if (!move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+                $imagen_subida = false;
             }
         } else{
             $img_cat = $categoria_edit->getImg();
+        }
+        if ($imagen_subida) {
             // Instanciamos la categoría con los datos editados
             $categoriaEditada = new Categoria($id_categoria_post, $nombre, $descripcion, $orden, $img_cat, $id_madre, $fecha_actualizacion);
 
             // Llamamos al metodo que ejecuta el UPDATE en la BD
             $categoriaEditada->ActualizarCategoria();
+            // Redirigimos al inicio de admin
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "No se pudo subir la imagen";
         }
 
-        // Redirigimos al inicio de admin
-        header("Location: index.php");
-        exit();
     } catch (Exception $e) {
-        $error = "Error al actualizar: " . $e->getMessage();
+        $error = "Error al actualizar";
     }
 }
 ?>
@@ -97,7 +98,7 @@ require_once "../header.php";
     if ($categoria_edit) {
         ?>
         <article class="anadir-categoria">
-            <form action="" method="post" class="form-anadir">
+            <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="editar_categoria">
                 <input type="hidden" name="id_categoria"
                        value="<?php echo htmlspecialchars($categoria_edit->getIdCategoria()); ?>">
@@ -113,8 +114,8 @@ require_once "../header.php";
                 <input type="hidden" id="orden" name="orden"
                        value="<?php echo htmlspecialchars($categoria_edit->getOrden()); ?>">
 
-                <label for="img_cat">Imagen: </label>
-                <input type="file" id="img_cat" name="img_cat">
+                <label for="img">Imagen: </label>
+                <input type="file" id="img" name="img" accept="image/*">
 
                 <label for="id_madre">Pertenece a la categoría (Madre): </label>
                 <select name="id_madre" id="id_madre">
