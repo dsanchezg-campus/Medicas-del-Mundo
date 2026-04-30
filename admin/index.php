@@ -21,7 +21,7 @@ if (!empty($_GET["page"]) && is_numeric($_GET["page"])) {
     $categoria_actual = Categoria::getCategoriaById($_GET['page']);
     $categorias = Categoria::getSubcategorias($_GET['page']);
     $contenidos = Bloque::getBloquesByCategoria($_GET['page']);
-} elseif (!empty($_POST["buscar"])) {
+} elseif (!empty($_GET["buscar"])) {
     $buscar = $_GET['buscar'];
     $categorias = Categoria::BuscarCategorias($buscar);
     $contenidos = Bloque::BuscarBloques($buscar);
