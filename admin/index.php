@@ -12,6 +12,22 @@ session_start();
 // Si no tiene permisos, redirige a la página principal
 require_once "../controladores/control_admin.php";
 
+/** COMPROBAMOS SI
+            *SE HA BUSCADO CON 'buscar'
+            *SE HA ENTRADO EN UNA CATEGORIA con 'page'
+            *ESTAS EN INICIO CON CATEGORIAS INICIALES
+ */
+if (!empty($_GET["page"]) && is_numeric($_GET["page"])) {
+    $categoria_actual = Categoria::getCategoriaById($_GET['page']);
+    $categorias = Categoria::getSubcategorias($_GET['page']);
+    $contenidos = Bloque::getBloquesByCategoria($_GET['page']);
+} elseif (!empty($_POST["buscar"])) {
+    $buscar = $_GET['buscar'];
+    $categorias = Categoria::BuscarCategorias($buscar);
+    $contenidos = Bloque::BuscarBloques($buscar);
+} else {
+    $categorias = Categoria::getCategorias();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -38,10 +54,9 @@ require_once "../header.php";
 <main>
     <!-- ***************** Mostrar categorias y bloques ********************* -->
     <?php
+    try {
     //************** Encabezado para navegacion y mostrar INFO de la pagina actual + enlace a FAQ ************//
-    if (isset($_GET['page'])){
-        $categoria_actual = Categoria::getCategoriaById($_GET['page']);
-        ?>
+    if (isset($categoria_actual)){ ?>
         <section class="titulo-section"><a href="index.php<?= $categoria_actual->getIdMadre() ? "?page=".$categoria_actual->getIdMadre(): null; ?>">
                 ⮌ Volver atrás</a>
             <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
@@ -50,7 +65,7 @@ require_once "../header.php";
                 <span class="faq-link-hover">Preguntas Frecuentes</span>
             </a></section>
         <?php
-    } elseif (!empty($_GET['buscar'])) { $buscar = $_GET['buscar'];?>
+    } elseif (!empty($_GET['buscar'])) { ?>
         <section class="titulo-section">
             <a href="index.php" class="faq-variable">
                 <span class="">Volver a Inicio</span>
@@ -64,16 +79,10 @@ require_once "../header.php";
 
     <?php
     // Manejo de excepciones para errores de base de datos
-    try {
-        /* COMPROBAMOS SI
-            *SE HA BUSCADO CON 'buscar'
-            *SE HA ENTRADO EN UNA CATEGORIA con 'page'
-            *ESTAS EN INICIO CON CATEGORIAS INICIALES
-         */
-        if (!empty($_GET['buscar'])):
-            $buscar = $_GET['buscar'];
+
+        if (isset($buscar)):
             echo "<section class='contenedor'>";
-            $categorias = Categoria::BuscarCategorias($buscar);
+
             foreach ($categorias as $categoria): ?>
                 <section class="categoria">
                     <!-- Botón para editar la categoría -->
@@ -95,7 +104,7 @@ require_once "../header.php";
                 </section>
             <?php endforeach;
             echo "</section><section class='contenedor'>";
-            $contenidos = Bloque::BuscarBloques($buscar);
+
             foreach ($contenidos as $contenido) { ?>
                 <section class="contenido-bloque">
                     <!-- Botón para editar el contenido -->
@@ -119,37 +128,9 @@ require_once "../header.php";
             }
             echo "</section>";
         // Verificar si se ha pasado un parámetro 'page' en la URL para mostrar subcategorías o categorías raíz
-        elseif (isset($_GET['page'])):
+        else:
             echo "<section class='contenedor'>";
-            // Obtener subcategorías de la categoría padre especificada por 'page'
-            $subcategorias = Categoria::getSubcategorias($_GET['page']);
-            // Iterar sobre cada subcategoría y mostrarla como una sección
-            foreach ($subcategorias as $subcategoria) {
-                ?>
-                <section class="categoria">
-                    <!-- Botón para editar la categoría -->
-                    <a href="editar_categoria.php?page=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
-                    <!-- Botón para eliminar la categoría -->
-                    <a href="/Medicas-del-Mundo/controladores/eliminar_categoria.php?categoria=<?php echo $subcategoria->getIdcategoria(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar esta Categoría?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
-                    <!-- Enlace para ver subcategorías dentro de esta categoría -->
-                    <a class="enlace-bloque" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
-                        <!-- Imagen de la categoría -->
-                        <article class="imagen-categoria">
-                            <img src="../styles/img/<?php echo $subcategoria->getImg(); ?>" alt="Imagen1">
-                        </article>
-                        <!-- Nombre y descripción de la categoría -->
-                        <article class="testo-categoria">
-                            <h1><?php echo $subcategoria->getNombre(); ?></h1>
-                            <p><?php echo $subcategoria->getDescripcion(); ?></p>
-                        </article>
-                    </a>
-                </section>
-            <?php }
-            echo "</section>";
-        else :
-            echo "<section class='contenedor'>";
-            // Si no hay parámetro 'page', mostrar todas las categorías raíz (padres)
-            $categorias = Categoria::getCategorias();
+
             // Iterar sobre cada categoría raíz y mostrarla
             foreach ($categorias as $categoria) {
                 ?>
@@ -172,35 +153,26 @@ require_once "../header.php";
                     </a>
                 </section>
                 <?php
-            } ?>
+            } endif; ?>
             <!-- Botón flo tante para crear una nueva categoría -->
-        <section class="crear-categoria">
-            <a class="enlace-crear-categoria" href="anadir_categoria.php?page=<?= $_GET['page'] ?? null; ?>">
-                <article class="testo-crear-categoria tamaño-variable">
-                    <h1>+</h1>
-                    <h3>Añadir Categoria</h3>
-                </article>
-            </a>
-        </section>
+            <section class="crear-categoria">
+                <a class="enlace-crear-categoria" href="anadir_categoria.php?page=<?= $_GET['page'] ?? null; ?>">
+                    <article class="testo-crear-categoria tamaño-variable">
+                        <h1>+</h1>
+                        <h3>Añadir Categoria</h3>
+                    </article>
+                </a>
+            </section>
     <?php
-            echo "</section>";
-        endif;
-    } catch (PDOException $e) {
-        // Capturar y mostrar errores de conexión o consultas a la base de datos
-        echo "<p>Ha ocurrido un error</p>";
-    }
-
-    //************** Si hay parámetro 'page' y no se ha buscado con 'buscar,
+    echo "</section>";
     //mostrar los bloques de contenido de esa categoría
     if (isset($_GET['page']) && !isset($_GET['buscar'])) {
         // Obtener bloques de contenido asociados a la categoría especificada
-        $contenidos = Bloque::getBloquesByCategoria($_GET['page']);
+
         // Iniciar contenedor para los bloques
         echo "<section class='contenedor'>";
         // Iterar sobre cada bloque y mostrarlo
-        foreach ($contenidos as $contenido) {
-            ?>
-
+        foreach ($contenidos as $contenido) { ?>
             <section class="contenido-bloque">
                 <!-- Botón para editar el contenido -->
                 <a href="editar_contenido.php?page=<?php echo $contenido->getIdBloque(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
@@ -237,6 +209,11 @@ require_once "../header.php";
         // Cerrar el contenedor de bloques
         echo "</section>";
         //
+
+    }
+    }catch (Exception $e){
+        // Capturar y mostrar errores de conexión o consultas a la base de datos
+        echo "<p>Ha ocurrido un error</p>";
     }
     ?>
     </main>

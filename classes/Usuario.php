@@ -100,7 +100,6 @@ class Usuario
      */
     public static function InicioSesion($nombre, $password) :Usuario|null
     {
-        session_start();
         $db = DB::conectar();
         // Consulta para obtener usuario por email o nombre, uniendo con tabla rol
         $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.id_rol, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
