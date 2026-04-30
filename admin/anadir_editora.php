@@ -12,11 +12,11 @@ session_start();
 require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos de la categoría
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["email"], $_POST["password"], $_POST["repite-password"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["email"], $_POST["password"], $_POST["repite_password"])) {
     try {
         $nombre = $_POST["nombre"];
         $email = $_POST["email"];
-        if ($_POST['password'] == $_POST['repite-password']) {
+        if ($_POST['password'] == $_POST['repite_password']) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $editora = new Usuario($nombre, $email, $password, Usuario::SiguienteId(), Usuario::RolEditora());
             if ($editora->InsertarEditora()) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["emai
     <?php } ?>
 
     <article class="anadir-categoria">
-        <form action="" method="POST" class="form-anadir">
+        <form action="anadir_editora.php" method="POST" class="form-anadir">
 
             <label for="nombre">Nombre: </label>
             <input type="text" id="nombre" name="nombre" required>
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["emai
             <label for="password">Contraseña: </label>
             <input type="password" id="password" name="password" required>
             <label for="repite-password">Repite la contraseña: </label>
-            <input type="password" id="repite-password" name="repite-password" required>
+            <input type="password" id="repite-password" name="repite_password" required>
 
             <button type="submit">Añadir</button>
         </form>
