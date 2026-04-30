@@ -137,6 +137,21 @@ class Usuario
     }
 
     /**
+     * Inserta una Editora en la BD
+     * @return bool
+     */
+    public function InsertarEditora():bool{
+        $db = DB::conectar();
+        $stmt = $db->query("SELECT * FROM rol WHERE nombre_rol = ?");
+        $stmt->execute([$this->rol]);
+        $rol = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id_rol = $rol['id_rol'];
+        $stmt = $db->query("INSERT INTO usuario(id_usuario, email, password, nombre, id_rol) VALUES ($this->id_usuario, '$this->email', '$this->password', '$this->nombre', $id_rol)");
+        $result = $stmt->execute();
+        return $result>0;
+    }
+
+    /**
      * Actualiza los datos de la usuaria en la BD
      * @return bool
      */
@@ -147,6 +162,29 @@ class Usuario
         return $result>0;
     }
 
+    /**
+     * Devuelve el siguiente identificador de Usuario segun BD
+     * @return int
+     */
+    public static function SiguienteId(): int{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(id_usuario) as id_usuario FROM usuario");
+        $stmt->execute();
+        $id_usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $id_usuario['id_usuario'] + 1;
+    }
+
+    /** Devuelve el rol de la Editora
+     * @return string
+     */
+    public static function RolEditora(): string
+    {
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT nombre_rol as rol FROM rol WHERE nombre_rol = ?");
+        $stmt->execute(['editora']);
+        $rol = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $rol['rol'];
+    }
     /**
      * Elimina a una usuaria de la BD
      * @param $id_usuario int identificador de una usuaria

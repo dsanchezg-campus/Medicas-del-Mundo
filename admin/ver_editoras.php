@@ -74,7 +74,7 @@ require_once "../header.php";
             <!-- Botón para agregar una nueva editora como fila de tabla -->
             <tr class="anadir-editoras-row">
                 <td colspan="4" class="anadir-editoras-cell">
-                    <a class="enlace-crear-editora" href="crear_editora.php">
+                    <a class="enlace-crear-editora" href="anadir_editora.php">
                         <article class="texto-crear-editora tamaño-variable-fila">
                             <h1>+</h1>
                             <h3>Añadir Editora</h3>
