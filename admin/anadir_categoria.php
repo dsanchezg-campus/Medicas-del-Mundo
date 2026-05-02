@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
             $imagen_subida = false;
         }
     } else {
-        $imagen = "medicas_placeholder.jpeg";
+        $imagen = "placeholder_categoria.jpg";
     }
     if ($_POST['categoria'] != null) {
         $orden_cat = Categoria::SiguienteOrden($_POST["categoria"]);

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['t
     $descripcion = $_POST["descripcion"];
     $fecha = date("Y-m-d H:i:s", time());
     //manejamos imagen, con nombre y ruta a guardar
-    $imagen_subida = false;
+    $imagen_subida = true;
     if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
         $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
         $target_dir = "../styles/img/";
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['t
             $imagen_subida = false;
         }
     } else {
-        $imagen = "medicas-placeholder.jpeg";
+        $imagen = "placeholder_bloque.png";
     }
     // Crear una nueva instancia de Bloque con los datos del formulario
     $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguienteOrden($_POST['categoria']), $titulo, $descripcion, $_POST['texto'], $fecha, $_POST['categoria'], $imagen);

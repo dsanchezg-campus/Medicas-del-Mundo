@@ -99,8 +99,8 @@ class Categoria{
     public function InsertarCategoria() :void {
         try {
             $db = DB::conectar();
-            $stmt = $db->prepare("INSERT INTO categoria(nombre, descripcion, orden, img_cat, id_madre, fecha_actualizacion) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion]);
+            $stmt = $db->prepare("INSERT INTO categoria(id_categoria, nombre, descripcion, orden, img_cat, id_madre, fecha_actualizacion) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$this->id_categoria, $this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion]);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }
