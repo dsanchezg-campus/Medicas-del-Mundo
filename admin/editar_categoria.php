@@ -30,14 +30,18 @@ if ($id_buscar) {
 }
 
 // Lógica para actualizar la categoría al enviar el formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["action"] == "editar_categoria") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"], $_POST['id_madre']) && $_POST["action"] == "editar_categoria") {
     try {
         $id_categoria_post = $_POST['id_categoria'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $orden = $_POST['orden'];
         // Si no se selecciona categoría madre, lo dejamos en null
-        $id_madre = !empty($_POST['id_madre']) ? $_POST['id_madre'] : null;
+        if (!empty($_POST['id_madre'])){
+            $id_madre = $_POST['id_madre'];
+        } else{
+            $id_madre = null;
+        }
         $fecha_actualizacion = date("Y-m-d H:i:s", time());
         $imagen_subida = true;
         if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
@@ -117,16 +121,23 @@ require_once "../header.php";
                 <label for="img">Imagen: </label>
                 <input type="file" id="img" name="img" accept="image/*">
 
-                <label for="id_madre">Pertenece a la categoría (Madre): </label>
+                <label for="id_madre">Pertenece a la categoría: </label>
                 <select name="id_madre" id="id_madre">
-                    <option value="">Ninguna</option>
                     <?php
-                    // Listamos las categorías para poder asignarle una categoría padre (que no sea ella misma)
+                    if ($categoria_edit->getIdMadre()) {
+                        $categoriaDelBloque = Categoria::getCategoriaById($categoria_edit->getIdMadre());
+                        echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
+                    } else {
+                        echo "<option value=''>Ninguna</option>";
+                    }
+                    // Carga dinámica de categorías desde la BD
                     $categorias = Categoria::getCategorias();
-                    foreach ($categorias as $cat_opcion) {
-                        if ($cat_opcion->getIdCategoria() != $categoria_edit->getIdCategoria()) {
-                            $selected = ($categoria_edit->getIdMadre() == $cat_opcion->getIdCategoria()) ? "selected" : "";
-                            echo "<option value='" . $cat_opcion->getIdCategoria() . "' $selected>" . htmlspecialchars($cat_opcion->getNombre()) . "</option>";
+                    foreach ($categorias as $categoria) {
+                        echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
+                        $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
+                        foreach ($subcategorias as $subcategoria) {
+                            echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
+
                         }
                     }
                     ?>

@@ -88,8 +88,8 @@ class Categoria{
      */
     public function ActualizarCategoria(): void{
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE categoria SET nombre= ?, descripcion= ?, orden= ?, img_cat= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
-        $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->fecha_actualizacion, $this->id_categoria]);
+        $stmt = $db->prepare("UPDATE categoria SET nombre= ?, descripcion= ?, orden= ?, img_cat= ?, id_madre= ?, fecha_actualizacion= ? WHERE id_categoria= ?");
+        $stmt->execute([$this->nombre, $this->descripcion, $this->orden, $this->img_cat, $this->id_madre, $this->fecha_actualizacion, $this->id_categoria]);
     }
 
     /**
