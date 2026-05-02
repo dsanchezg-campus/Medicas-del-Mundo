@@ -27,6 +27,8 @@ class Faq {
     }
 
     /************************************* GETTERS y SETTERS ***********************************/
+    /*******************************************************************************************/
+
     public function getIdFaq(){
         return $this->id_faq;
     }
@@ -56,6 +58,10 @@ class Faq {
     public function setFecha($fecha_actualizacion){
         $this->fecha_actualizacion=$fecha_actualizacion;
     }
+
+    /********************************* METODOS **********************************/
+    /****************************************************************************/
+
     /**
      * Metodo para crear una nueva FAQ en la base de datos
      * @return void
@@ -79,7 +85,7 @@ class Faq {
      * Metodo para eliminar FAQ de la BD
      * @return void
      */
-    public function EliminarFAQ(){
+    public function EliminarFAQ(): void{
         $db = DB::conectar();
         $stmt = $db->prepare("DELETE FROM faq WHERE id_faq = ?");
         $stmt->execute([$this->id_faq]);

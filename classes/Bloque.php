@@ -80,8 +80,15 @@ class Bloque
      */
     public function EliminarBloque() :void{
         $db = DB::conectar();
+        $contenidos = Contenido::getContenidoByBloque($this->id_bloque);
+        foreach ($contenidos as $contenido) {
+            $contenido->EliminarContenido();
+        }
         $stmt = $db->prepare("DELETE FROM bloque WHERE id_bloque = ?");
         $stmt->execute([$this->id_bloque]);
+        if (file_exists("/Medicas-del-Mundo/styles/img/". $this->icono) && $this->icono != "placeholder_bloque.png") {
+            unlink($this->icono);
+        }
     }
 
     /**

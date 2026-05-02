@@ -113,8 +113,23 @@ class Categoria{
     public function EliminarCategoria() :void {
         try {
             $db = DB::conectar();
+            $faqs = Faq::ListarFAQPorCategoria($this->id_categoria);
+            foreach ($faqs as $faq) {
+                $faq->EliminarFAQ();
+            }
+            $bloques = Bloque::getBloquesByCategoria($this->id_categoria);
+            foreach ($bloques as $bloque) {
+                $bloque->EliminarBloque();
+            }
+            $subcategorias = Categoria::getSubcategorias($this->id_categoria);
+            foreach ($subcategorias as $subcategoria) {
+                $subcategoria->EliminarCategoria();
+            }
             $stmt = $db->prepare("DELETE FROM categoria WHERE id_categoria = ?");
             $stmt->execute([$this->id_categoria]);
+            if (file_exists("/Medicas-del-Mundo/styles/img/". $this->img_cat) && $this->img_cat != "placeholder_categoria.jpg") {
+                unlink($this->img_cat);
+            }
         } catch (PDOException $e) {
             // Aquí capturamos el error si la base de datos bloquea el borrado
             // Puedes guardar el error en un log, o redirigir con un mensaje de error por GET
