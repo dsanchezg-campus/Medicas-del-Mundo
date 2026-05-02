@@ -142,11 +142,11 @@ class Usuario
      */
     public function InsertarEditora():bool{
         $db = DB::conectar();
-        $stmt = $db->query("SELECT * FROM rol WHERE nombre_rol = ?");
+        $stmt = $db->prepare("SELECT * FROM rol WHERE nombre_rol = ?");
         $stmt->execute([$this->rol]);
         $rol = $stmt->fetch(PDO::FETCH_ASSOC);
         $id_rol = $rol['id_rol'];
-        $stmt = $db->query("INSERT INTO usuario(id_usuario, email, password, nombre, id_rol) VALUES ($this->id_usuario, '$this->email', '$this->password', '$this->nombre', $id_rol)");
+        $stmt = $db->prepare("INSERT INTO usuario(id_usuario, email, password, nombre, id_rol) VALUES ($this->id_usuario, '$this->email', '$this->password', '$this->nombre', $id_rol)");
         $result = $stmt->execute();
         return $result>0;
     }
@@ -157,7 +157,7 @@ class Usuario
      */
     public function ActualizarUsuaria():bool{
         $db = DB::conectar();
-        $stmt = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', password='$this->password' WHERE id_usuario=$this->id_usuario");
+        $stmt = $db->prepare("UPDATE usuario SET nombre='$this->nombre', email='$this->email', password='$this->password' WHERE id_usuario=$this->id_usuario");
         $result = $stmt->execute();
         return $result>0;
     }

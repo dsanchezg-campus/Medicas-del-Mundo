@@ -13,7 +13,6 @@ require_once "../controladores/control_admin.php";
 
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["email"], $_POST["password"], $_POST["repite_password"])) {
-    try {
         $nombre = $_POST["nombre"];
         $email = $_POST["email"];
         if ($_POST['password'] == $_POST['repite_password']) {
@@ -28,9 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["emai
         } else {
             $error = "Las contraseñas no coinciden";
         }
-    } catch (Exception $e) {
-        $error = "No se pudo añadir la editora";
-    }
+
+
 } else {
     $error = "No se pudo enviar datos";
 }
