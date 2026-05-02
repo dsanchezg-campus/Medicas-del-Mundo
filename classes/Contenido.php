@@ -14,8 +14,14 @@ class Contenido{
      * @param $id_bloque
      * @param $fecha_actualizacion
      */
-    // Constructor: Inicializa un objeto Contenido con los datos proporcionados
-    // Nota: Asigna $id_extra a $this->id_contenido, pero la propiedad es $id_extra
+
+    /**
+     * @param $id_extra
+     * @param $url
+     * @param $descripcion
+     * @param $id_bloque
+     * @param $fecha_actualizacion
+     */
     public function __construct($id_extra, $url, $descripcion, $id_bloque, $fecha_actualizacion)
     {
         $this->id_extra;
@@ -25,12 +31,13 @@ class Contenido{
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
-    // Getters para acceder a las propiedades
+    /************************* GETTERS y SETTERS ****************************************/
+    /************************************************************************************/
+
     public function getIdExtra()
     {
         return $this->id_extra;
     }
-
 
     public function getUrl()
     {
@@ -52,7 +59,6 @@ class Contenido{
         return $this->fecha_actualizacion;
     }
 
-    // Setters para modificar las propiedades
     public function setIdExtra($id_extra)
     {
         $this->id_extra = $id_extra;
@@ -78,28 +84,39 @@ class Contenido{
         $this->fecha_actualizacion = $fecha_actualizacion;
     }
 
-    // Metodo para listar contenido (no implementado)
-    public function ListarContenido()
-    {
+    /*********************************** METODOS ****************************************/
+    /************************************************************************************/
 
+    /**
+     * Añade un nuevo contenido a la BD
+     */
+    public function InsertarContenido(): void
+    {
+        $db = DB::conectar();
+        $stmt = $db->prepare("INSERT INTO extra(id_extra, id_bloque, descripcion, url, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$this->id_extra, $this->id_bloque, $this->descripcion, $this->url, $this->fecha_actualizacion]);
     }
 
-    // Metodo para crear contenido (no implementado)
-    public function CrearContenido($id_contenido)
+    /**
+     * Actualiza un contenido de la BD
+     * @return void
+     */
+    public function ActualizarContenido(): void
     {
-
+        $db = DB::conectar();
+        $stmt = $db->prepare("UPDATE extra SET id_bloque = ?, descripcion = ?, url = ?, fecha_actualizacion = ? WHERE id_extra = ? ");
+        $stmt->execute([$this->id_bloque, $this->descripcion, $this->url, $this->fecha_actualizacion, $this->id_extra]);
     }
 
-    //Metodo para modificar contenido (no implementado)
-    public function ModificarContenido($id_contenido)
+    /**
+     * Eliminar un contenido de la BD
+     * @return void
+     */
+    public function EliminarContenido(): void
     {
-
-    }
-
-    // Metodo para eliminar contenido (no implementado)
-    public function EliminarContenido($id_contenido)
-    {
-
+        $db = DB::conectar();
+        $stmt = $db->prepare("DELETE FROM extra WHERE id_extra = ?");
+        $stmt->execute([$this->id_extra]);
     }
 
     /**
