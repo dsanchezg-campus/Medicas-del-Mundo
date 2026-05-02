@@ -5,6 +5,7 @@ require_once "classes/Contenido.php";
 require_once "classes/Categoria.php";
 require_once "classes/Faq.php";
 require_once "classes/Bloque.php";
+require_once "classes/DB.php";
 ?>
 <!doctype html>
 <!-- Página principal del sitio web de Médicos del Mundo, muestra categorías y contenido -->

@@ -1,10 +1,11 @@
 <?php
-require_once ("../classes/Bloque.php");
-require_once ("../classes/Categoria.php");
-require_once ("../classes/Contenido.php");
-require_once ("../classes/DB.php");
-require_once ("../classes/Rol.php");
-require_once ("../classes/Usuario.php");
+// Incluir las clases necesarias para gestionar categorías, bloques y base de datos
+require_once "classes/Usuario.php";
+require_once "classes/Contenido.php";
+require_once "classes/Categoria.php";
+require_once "classes/Faq.php";
+require_once "classes/Bloque.php";
+require_once "classes/DB.php";
 
 // 1. OBLIGATORIO: Iniciar la sesión antes de hacer nada con $_SESSION
 session_start();
