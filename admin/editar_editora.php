@@ -18,7 +18,27 @@ if (!isset($_GET['page'])) {
 header ("location: index.php");
 exit();
 }
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $error = false;
+    $usuaria = Usuario::getUsuaria($_GET['page']);
+    if (!empty($_POST['nombre'])) {
+        $usuaria->setNombre($_POST['nombre']);
+    }
+    if (!empty($_POST['email'])) {
+        $usuaria->setEmail($_POST['email']);
+    }
+    if (!empty($_POST['password']) && !empty($_POST['repitePassword'])) {
+        if ($_POST['repitePassword'] == $_POST['password']) {
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $usuaria->setPassword($password);
+        } else {
+            $error = "Contraseñas no coinciden";
+        }
+    }
+    if (!$error) {
+        $usuaria->ActualizarUsuaria();
+    }
+}
 // 4. INICIALIZACIÓN DE VARIABLES
 $error = null; // Guardará los mensajes de error si la actualización falla.
 ?>
@@ -37,7 +57,7 @@ $error = null; // Guardará los mensajes de error si la actualización falla.
 // Inclusión de la cabecera
 require_once "../header.php";
 ?>
-<main>
+<main style="justify-content: center; text-align: center;">
     <?php
     if (isset($error)) {
         ?>
@@ -48,7 +68,7 @@ require_once "../header.php";
     }
     ?>
     <article class="anadir-contenido">
-        <form action="../controladores/editar_usuarias.php" method="post" class="form-anadir">
+        <form action="" method="post" class="form-anadir">
                 <?php
                 $usuaria = Usuario::getUsuaria($_GET["page"]);
                 ?>
@@ -59,9 +79,9 @@ require_once "../header.php";
             <label for="email">Email: <?php echo $usuaria->getEmail();?> </label>
             <input type="email" id="email" name="email" placeholder="Cambiar Email">
 
-            <label for="password">Cambiar contraseña: </label>
-            <input type="password" id="password" name="password[]" placeholder="Introduzca nueva contraseña">
-            <input type="password" id="password" name="password[]" placeholder="Repite la contraseña">
+            <label for="password" style="color: black">Cambiar contraseña: </label>
+            <input type="password" id="password" name="password" placeholder="Introduzca nueva contraseña">
+            <input type="password" id="password" name="repitePassword" placeholder="Repite la contraseña">
             <button type="submit">Editar usuaria</button>
         </form>
     </article>

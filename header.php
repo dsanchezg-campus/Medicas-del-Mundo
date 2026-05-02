@@ -9,7 +9,7 @@
                 </article>
             </li>
             <?php if(isset($_SESSION['usuaria'])) { ?>
-            <li class="lista-nav">
+            <li class="linea-nav">
                 <?php if (($_SESSION['usuaria'])->ControlUsuarioAdmin()):?>
                 <a href="/Medicas-del-Mundo/admin/ver_editoras.php">Ver editoras</a>
                 <?php elseif(($_SESSION['usuaria'])->ControlUsuarioEditora()):?>

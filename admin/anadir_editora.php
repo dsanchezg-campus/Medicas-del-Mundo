@@ -29,10 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["nombre"], $_POST["emai
         }
 
 
-} else {
-    $error = "No se pudo enviar datos";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
