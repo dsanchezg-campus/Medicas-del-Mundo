@@ -16,7 +16,10 @@ session_start();
 // CONTROL DE ACCESO ADMIN
 // Si no tiene permisos, redirige a la página principal
 require_once "../controladores/control_editora.php";
-
+if (!isset($_GET["categoria"])) {
+    header("Location: index.php");
+    exit();
+}
 
 ?>
 <!doctype html>
@@ -44,7 +47,7 @@ include_once "../header.php";
             <h1 class="titulo-page">Preguntas Frecuentes</h1>
         </section>
     <?php endif; ?>
-    <section class="faq-container">
+    <section class="faq-container" style="margin-top: 0">
 
         <?php
         // Verificar si se ha pasado un parámetro 'categoria'
@@ -59,10 +62,12 @@ include_once "../header.php";
             foreach ($faqs as $faq) {
                 ?>
                 <details class="faq-item">
-                    <a href="editar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
-                    <a href="/Medicas-del-Mundo/controladores/eliminar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este FAQ?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
-                    <summary class="faq-question"><?php echo htmlspecialchars($faq->getPregunta()); ?></summary>
+                    <summary class="faq-question" style="font-weight: normal; font-size: x-large;"><?php echo htmlspecialchars($faq->getPregunta()); ?></summary>
                     <p class="faq-answer"><?php echo nl2br(htmlspecialchars($faq->getRespuesta())); ?></p>
+                    <article class="faq-acciones">
+                        <a href="editar_faq.php?faq=<?php echo $faq->getIdFaq(); ?>" class="boton-editar"><img src="../styles/img/lapiz.png" alt="Editar" class="boton-editar-img"></a>
+                        <a href="/Medicas-del-Mundo/controladores/eliminar_faq.php?id=<?php echo $faq->getIdFaq(); ?>" class="boton-eliminar" onclick="return confirm('¿Estás segura de eliminar este FAQ?');"><img src="../styles/img/basura.png" alt="Eliminar" class="boton-eliminar-img"></a>
+                    </article>
                 </details>
                 <?php
             }
@@ -74,14 +79,13 @@ include_once "../header.php";
         <?php
         $url_anadir = isset($_GET['categoria']) ? "anadir_faq.php?categoria=" . $_GET['categoria'] : "anadir_faq.php";
         ?>
+    <a class="enlace-crear-faq" href="<?php echo $url_anadir; ?>" >
         <section class="anadir-faq">
-            <a class="enlace-crear-faq" href="<?php echo $url_anadir; ?>" >
                 <article class="testo-crear-faq" >
-                    <h1>+</h1>
-                    <h3>Añadir FAQ</h3>
+                    <h3 style="font-weight: normal">Añadir FAQ</h3>
                 </article>
-            </a>
-        </section>
+            </section>
+        </a>
 
     </section>
 </main>

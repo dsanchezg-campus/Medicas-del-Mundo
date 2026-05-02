@@ -10,37 +10,27 @@ require_once "../classes/Bloque.php";
 session_start();
 // CONTROL DE ACCESO ADMIN
 require_once "../controladores/control_editora.php";
-
+if (empty($_GET['categoria'])){
+    header ("Location: index.php");
+    exit();
+}
 // Verificar si se envió un formulario por POST con los datos de la categoría
 if ($_SERVER['REQUEST_METHOD'] == 'POST'
-    && isset($_POST["nombre"], $_POST["descripcion"], $_POST['categoria'])) {
-
-    // 1. MANEJO DE LA IMAGEN CON $_FILES
-    if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-        $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
-        $target_dir = "../styles/img/";
-        $target_file = $target_dir . $imagen;
+    && isset($_POST["pregunta"], $_POST["respuesta"], $_POST['categoria'])) {
+        $pregunta = $_POST["pregunta"];
+        $respuesta = $_POST["respuesta"];
         $fecha = date("Y-m-d H:i:s", time());
-        if ($_POST['categoria'] != null) {
-            $orden_cat = Categoria::SiguienteOrden($_POST["categoria"]);
-            $id_madre = $_POST["categoria"];
-        } else{
-            $id_madre = null;
-            $orden_cat = Categoria::SiguienteOrden($id_madre);
-        }
-        $categoria = new Categoria(Categoria::SiguienteId(), $_POST["nombre"], $_POST["descripcion"], $orden_cat, $imagen, $id_madre, $fecha);
-        if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+        $faq = new Faq(Faq::SiguienteId(), $_GET['categoria'], $pregunta, $respuesta, $fecha);
             try {
-                $categoria->InsertarCategoria();
-                header ("location: index.php?page=". $categoria->getIdCategoria());
+                $faq->InsertarFAQ();
+                header ("location: FaQ.php?categoria=". $_GET['categoria']);
                 exit();
             } catch (Exception $e) {
-                // Si ocurre un error, capturarlo y almacenarlo en la variable $error
-                $error = $e->getMessage();
+                $error = "No se pudo guardar la pregunta";
             }
-        }
+
     }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,6 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
 <body>
 <?php require_once "../header.php"; ?>
 <main>
+    <?php
+    if (isset($_GET['categoria'])): ?>
+        <section class="titulo-section">
+            <a href="FaQ.php?categoria=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás</a>
+            <h1 class="faq-titulo-categoria"><?= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?></h1>
+            <h1 class="titulo-page">Preguntas Frecuentes</h1>
+        </section>
+    <?php endif; ?>
     <?php if (isset($exito)) { ?>
         <article class="exito" style="color: green; padding: 10px;">
             <p><?php echo $exito; ?></p>
@@ -67,18 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
         </article>
     <?php } ?>
 
-    <article class="anadir-categoria">
+    <article class="anadir-categoria" style="margin-top: 0;">
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
-            <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>" >
+            <input type="hidden" name="categoria" value="<?= $_GET['categoria']; ?>" >
 
-            <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" name="nombre" required>
+            <label for="pregunta">Pregunta: </label>
+            <input type="text" id="pregunta" name="pregunta" required>
 
-            <label for="descripcion">Descripcion: </label>
-            <input type="text" id="descripcion" name="descripcion" required>
-
-            <label for="img">Imagen: </label>
-            <input type="file" id="img" name="img" accept="image/*" required>
+            <label for="respuesta">Respuesta: </label>
+            <textarea id="respuesta" name="respuesta" required></textarea>
 
             <button type="submit">Añadir</button>
         </form>

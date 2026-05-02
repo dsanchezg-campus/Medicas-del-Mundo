@@ -8,8 +8,8 @@ require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 
 session_start();
-// ACCESO Editoras
-require_once "../controladores/control.php";
+// ACCESO ADMIN
+require_once "../controladores/control_editora.php";
 
 if (!isset($_GET['page'])) {
     header("location: index.php");
@@ -40,27 +40,27 @@ $subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 require_once "../header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
-<main id="content-container-main">
-    <?php
-    if (isset($_GET['page'])){
-        $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
+    <main id="content-container-main">
+        <?php
+        if (isset($_GET['page'])){
+            $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
+            ?>
+            <section class="titulo-section">
+                <a href="index.php?page=<?= $categoria_actual->getIdCategoria(); ?>">
+                    ⮌ Volver atrás
+                </a>
+                <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
+            </section>
+            <?php
+        }
         ?>
-        <section class="titulo-section">
-            <a href="index.php?page=<?= $categoria_actual->getIdCategoria(); ?>">
-                ⮌ Volver atrás
-            </a>
-            <h1 class="titulo-page"><?= $categoria_actual->getNombre(); ?></h1>
-        </section>
-        <?php
-    }
-    ?>
-    <!-- menu de navegación a la izquierda, muestra categorias y otros bloques pertenecientes a la misma categoria que este bloque-->
-    <aside class="subcategorias-content">
-        <?php
-        // Verificar si se ha especificado un bloque por parámetro 'page'
-        if (isset($_GET['page'])) {
-            foreach ($subcategorias as $subcategoria) {
-                ?>
+<!-- menu de navegación a la izquierda, muestra categorias y otros bloques pertenecientes a la misma categoria que este bloque-->
+        <aside class="subcategorias-content">
+            <?php
+            // Verificar si se ha especificado un bloque por parámetro 'page'
+            if (isset($_GET['page'])) {
+                foreach ($subcategorias as $subcategoria) {
+            ?>
                 <section class="categoria-content">
                     <a class="enlace-bloque-content" href="index.php?page=<?php echo $subcategoria->getIdCategoria(); ?>">
                         <article class="imagen-content">
@@ -73,39 +73,39 @@ require_once "../header.php";
                         </article>
                     </a>
                 </section>
-                <?php
+            <?php
+                }
+                // Iterar sobre los bloques paralelos y mostrarlos
+                foreach ($bloques_paralelos as $bloque_paralelo) {
+            ?>
+            <section class="categoria-content">
+                <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
+                    <article class="imagen-content">
+                        <img src="../styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
+                    </article>
+
+                    <article class="testo-content">
+                        <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
+                        <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
+                    </article>
+                </a>
+            </section>
+            <?php
+                }
             }
-            // Iterar sobre los bloques paralelos y mostrarlos
-            foreach ($bloques_paralelos as $bloque_paralelo) {
-                ?>
-                <section class="categoria-content">
-                    <a class="enlace-bloque-content" href="content.php?page=<?php echo $bloque_paralelo->getIdBloque(); ?>">
-                        <article class="imagen-content">
-                            <img src="../styles/img/<?= $bloque_paralelo->getIcono(); ?>" alt="Imagen1">
-                        </article>
+            ?>
+        </aside>
 
-                        <article class="testo-content">
-                            <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
-                            <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
-                        </article>
-                    </a>
-                </section>
-                <?php
-            }
-        }
-        ?>
-    </aside>
-
-    <!-- Sección principal con el contenido detallado del bloque -->
-    <section class="contenedor-contenido">
-
-        <?php
-        // Mostrar contenido si hay parámetro 'page'
-        if (isset($_GET['page'])) {
-            // Obtener el bloque nuevamente (podría optimizarse)
-            $bloque = Bloque::getBloqueById($_GET['page']);
-            // Obtener contenidos extra asociados al bloque
-            $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
+        <!-- Sección principal con el contenido detallado del bloque -->
+        <section class="contenedor-contenido">
+            
+            <?php
+            // Mostrar contenido si hay parámetro 'page'
+            if (isset($_GET['page'])) {
+                // Obtener el bloque nuevamente (podría optimizarse)
+                $bloque = Bloque::getBloqueById($_GET['page']);
+                // Obtener contenidos extra asociados al bloque
+                $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
             <article class="titulo">
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
@@ -124,24 +124,24 @@ require_once "../header.php";
                 }
                 ?>
             </article>
-            <?php
-            // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
-            foreach ($contenidos as $contenido) {
-                ?>
-                <article class="enlace">
-                    <img src="<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
-                </article>
                 <?php
+                // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
+                foreach ($contenidos as $contenido) {
+                    ?>
+            <article class="enlace">
+                <img src="<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
+            </article>
+            <?php
+                }
             }
-        }
-        ?>
-    </section>
+            ?>
+        </section>
 
-</main>
+    </main>
 
 <!-- Pie de página con información de contacto -->
 <!-- Pie de página con información de contacto de Médicos del Mundo -->
 <?php require_once "../footer.php"; ?>
-<a href="index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
+    <a href="index.php" class="volver-inicio"><img src="../styles/img/casita.png" alt="regresa a inicio"></a>
 </body>
 </html>

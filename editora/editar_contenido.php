@@ -29,7 +29,7 @@ if (!empty($_GET['page'])) {
 
 // 6. PROCESAMIENTO DEL FORMULARIO (METODO POST)
 // Verifica si se ha enviado el formulario por POST y si la acción es "contenido".
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["action"] == "contenido") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["titulo"], $_POST["descripcion"], $_POST["texto"])) {
     try {
         // Se recogen todos los datos enviados por el usuario desde el formulario.
         // MEJORA: Faltaría sanear o validar estos datos (trim, filtros) antes de usarlos.
@@ -67,10 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
     } catch (Exception $e){
         $error = $e->getMessage();
     }
+} else{
+    echo "no llego formulaio";
 }
 ?>
-    <!DOCTYPE html>
-    <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -97,51 +99,51 @@ require_once "../header.php";
     }
 
     if ($bloque) {
-        ?>
-        <article class="anadir-categoria anadir-contenido-container">
-            <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
-                <input type="hidden" name="orden" value="<?= $bloque->getOrdenBloque();?>>">
-                <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
+    ?>
+    <article class="anadir-categoria anadir-contenido-container">
+        <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
+            <input type="hidden" name="orden" value="<?= $bloque->getOrdenBloque();?>>">
+            <input type="hidden" name="id_bloque" value="<?php echo htmlspecialchars($bloque->getIdBloque()); ?>">
 
-                <div class="anadir-contenido-columnas">
-                    <article class="anadir-contenido-izquierda">
+            <div class="anadir-contenido-columnas">
+                <article class="anadir-contenido-izquierda">
 
-                        <label for="titulo">Titulo: </label>
-                        <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
+                    <label for="titulo">Titulo: </label>
+                    <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($bloque->getTituloBloque()); ?>" required>
 
-                        <label for="descripcion">Descripcion: </label>
-                        <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
+                    <label for="descripcion">Descripcion: </label>
+                    <input type="text" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($bloque->getDescripcionBloque()); ?>" required>
 
-                        <label for="img">Imagen ejemplo: </label>
-                        <input type="file" id="img" name="img" accept="image/*">
+                    <label for="img">Imagen ejemplo: </label>
+                    <input type="file" id="img" name="img" accept="image/*">
 
-                        <label for="id_categoria">Pertenece a la categoria: </label>
-                        <select name="id_categoria" id="id_categoria" required>
-                            <?php
-                            $categoriaDelBloque = Categoria::getCategoriaById($bloque->getIdCategoria());
-                            echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
+                    <label for="id_categoria">Pertenece a la categoria: </label>
+                    <select name="id_categoria" id="id_categoria" required>
+                        <?php
+                        $categoriaDelBloque = Categoria::getCategoriaById($bloque->getIdCategoria());
+                        echo "<option value='" . $categoriaDelBloque->getIdCategoria() . "'>" . htmlspecialchars($categoriaDelBloque->getNombre()) . "</option>";
 
-                            // Carga dinámica de categorías desde la BD
-                            $categorias = Categoria::getCategorias();
-                            foreach ($categorias as $categoria) {
-                                echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
-                                $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
-                                foreach ($subcategorias as $subcategoria) {
-                                    echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
+                        // Carga dinámica de categorías desde la BD
+                        $categorias = Categoria::getCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='" . $categoria->getIdCategoria() ."'>Categoria: " . htmlspecialchars($categoria->getNombre()) . "</option>";
+                            $subcategorias = Categoria::getSubCategorias($categoria->getIdCategoria());
+                            foreach ($subcategorias as $subcategoria) {
+                                echo "<option value='" . $subcategoria->getIdCategoria() ."'>Subcategoria: " . htmlspecialchars($subcategoria->getNombre()) . "</option>";
 
-                                }
                             }
-                            ?>
-                        </select>
-                        <button type="submit">Editar Contenido</button>
-                    </article>
-                    <article class="anadir-contenido-derecha">
-                        <label for="texto">Texto: </label>
-                        <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
-                    </article>
-                </div>
-            </form>
-        </article>
+                        }
+                        ?>
+                    </select>
+                    <button type="submit">Editar Contenido</button>
+                </article>
+                <article class="anadir-contenido-derecha">
+                    <label for="texto">Texto: </label>
+                    <textarea id="texto" name="texto" required><?php echo htmlspecialchars($bloque->getTextoBloque()); ?></textarea>
+                </article>
+            </div>
+        </form>
+    </article>
     <?php } else { ?>
         <article class="error">
             <p class="error-p">Contenido no encontrado. Por favor, selecciona un contenido para editar.</p>

@@ -33,8 +33,8 @@ include_once "header.php";
         <form action="controladores/inicio_sesion.php" method="post">
          <h1>Inicio de sesión</h1>
             <article class="form-usuario">
-                <label for="usuario">Usuaria: </label>
-                <input type="text" id="usuario" name="usuario" required>
+                <label for="usuario">Email: </label>
+                <input type="email" id="usuario" name="usuario" required>
             </article>
             <article class="form-password">
                 <label for="password">Contraseña: </label>

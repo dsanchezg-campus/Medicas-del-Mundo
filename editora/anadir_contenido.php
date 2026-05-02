@@ -7,39 +7,47 @@ require_once "../classes/Categoria.php";
 require_once "../classes/Faq.php";
 require_once "../classes/Bloque.php";
 session_start();
-
+// CONTROL DE ACCESO ADMIN
+// Si no tiene permisos, redirige a la página principal
 require_once "../controladores/control_editora.php";
-
+if (!isset($_GET['page'])){
+    header("location: index.php");
+    exit();
+}
 // Verificar si se envió un formulario por POST con los datos del contenido
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'], $_FILES["img"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["categoria"], $_POST['titulo'], $_POST["descripcion"], $_POST['texto'])) {
     $titulo = $_POST["titulo"];
     $descripcion = $_POST["descripcion"];
-//    $texto = explode("\n\n", $_POST["texto"]);
     $fecha = date("Y-m-d H:i:s", time());
     //manejamos imagen, con nombre y ruta a guardar
-    $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
-    $target_dir = "../styles/img/";
-    $target_file = $target_dir . $imagen;
+    $imagen_subida = true;
+    if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+        $imagen = uniqid() . "_" . basename($_FILES['img']['name']);
+        $target_dir = "../styles/img/";
+        $target_file = $target_dir . $imagen;
+        if (!move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+            $imagen_subida = false;
+        }
+    } else {
+        $imagen = "placeholder_bloque.png";
+    }
     // Crear una nueva instancia de Bloque con los datos del formulario
     $bloque = new Bloque (Bloque::SiguienteId(), Bloque::SiguienteOrden($_POST['categoria']), $titulo, $descripcion, $_POST['texto'], $fecha, $_POST['categoria'], $imagen);
     try {
-        if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+        if ($imagen_subida) {
             // Intentar insertar el contenido en la base de datos
             $bloque->InsertarBloque();
             header("location: index.php?page=". $bloque->getIdCategoria());
             exit();
         } else {
-            $error = "Ha habido un problema al subir el archivo";
+            $error = "No se pudo subir la imagen";
         }
     } catch (Exception $e){
         // Si ocurre un error, capturarlo y almacenarlo en la variable $error
-        $error = $e->getMessage();
+        $error = "Ha ocurrido un error";
     }
 }
-if (!isset($_GET['page'])){
-    header("location: index.php");
-    exit();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,22 +88,22 @@ require_once "../header.php";
             <input type="hidden" name="categoria" value="<?= $_GET['page']; ?>">
             <div class="anadir-contenido-columnas">
                 <article class="anadir-contenido-izquierda">
-                    <!-- Campo de título -->
-                    <label for="titulo">Titulo: </label>
-                    <input type="text" id="titulo" name="titulo" required>
-                    <label for="img">Imagen ejemplo: </label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                    <!-- Campo de descripción -->
-                    <label for="descripcion">Descripcion: </label>
-                    <input type="text" id="descripcion" name="descripcion" required>
+            <!-- Campo de título -->
+                <label for="titulo">Titulo: </label>
+                <input type="text" id="titulo" name="titulo" required>
+                <label for="img">Imagen ejemplo: </label>
+                <input type="file" id="img" name="img" accept="image/*">
+                <!-- Campo de descripción -->
+                <label for="descripcion">Descripcion: </label>
+                <input type="text" id="descripcion" name="descripcion" required>
                     <!-- Botón para enviar el formulario -->
-                    <button type="submit" class="btn-anadir-contenido">Añadir</button>
-                </article>
-                <article class="anadir-contenido-derecha">
-                    <!-- Campo de texto/contenido principal -->
-                    <label for="texto">Texto: </label>
-                    <textarea id="texto" name="texto" required></textarea>
-                </article>
+                <button type="submit" class="btn-anadir-contenido">Añadir</button>
+            </article>
+            <article class="anadir-contenido-derecha">
+            <!-- Campo de texto/contenido principal -->
+                <label for="texto">Texto: </label>
+                <textarea id="texto" name="texto" required></textarea>
+            </article>
             </div>
         </form>
     </article>

@@ -54,6 +54,9 @@ class Usuario
     {
         return $this->rol;
     }
+    public function getPassword(): string{
+        return $this->password;
+    }
     //**************************** SETTERS ***********************************//
     public function setNombre($nombre):void{
         $this->nombre = $nombre;
@@ -62,7 +65,7 @@ class Usuario
         $this->email = $email;
     }
     public function setPassword($password):void{
-        $this->password = password_hash($password , PASSWORD_DEFAULT);
+        $this->password = $password;
     }
     //********************** MÉTODOS *****************************//
 
@@ -98,12 +101,12 @@ class Usuario
      * @param $password string
      * @return Usuario|null
      */
-    public static function InicioSesion($nombre, $password) :Usuario|null
+    public static function InicioSesion($email, $password) :Usuario|null
     {
         $db = DB::conectar();
         // Consulta para obtener usuario por email o nombre, uniendo con tabla rol
-        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.id_rol, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ? OR nombre = ?");
-        $stmt->execute([$nombre, $nombre]);
+        $stmt = $db->prepare("SELECT u.email, u.password, u.nombre, r.id_rol, r.nombre_rol AS rol, u.id_usuario FROM usuario u LEFT JOIN rol r ON u.id_rol = r.id_rol WHERE email = ?");
+        $stmt->execute([$email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$usuario) {
             return null; // Usuario no encontrado
