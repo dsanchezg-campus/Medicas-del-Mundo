@@ -29,7 +29,7 @@ if (!empty($_GET['page'])) {
 
 // 6. PROCESAMIENTO DEL FORMULARIO (METODO POST)
 // Verifica si se ha enviado el formulario por POST y si la acción es "contenido".
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["action"] == "contenido") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["titulo"], $_POST["descripcion"], $_POST["texto"])) {
     try {
         // Se recogen todos los datos enviados por el usuario desde el formulario.
         // MEJORA: Faltaría sanear o validar estos datos (trim, filtros) antes de usarlos.
@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["action"]) && $_POST["a
     } catch (Exception $e){
         $error = $e->getMessage();
     }
+} else{
+    echo "no llego formulaio";
 }
 ?>
 <!DOCTYPE html>
