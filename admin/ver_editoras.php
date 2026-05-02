@@ -54,7 +54,7 @@ require_once "../header.php";
             $usuarias = Usuario::ListarUsuarias();
             // Iterar sobre cada usuaria y mostrar sus datos en una fila de la tabla
             foreach ($usuarias as $usuaria) {
-                ?>
+                if ($usuaria->getRol() == "editora"):?>
                 <tr class="cuerpo-tabla-tr">
                     <!-- Nombre de la editora -->
                     <td class="cuerpo-tabla-tr-td">
@@ -64,11 +64,11 @@ require_once "../header.php";
                     <?php echo $usuaria->getEmail(); ?></td>
                     <!-- Botón para eliminar a la editora (por implementar) -->
                     <td class="cuerpo-tabla-tr-td"><a class="boton-editar-editoras" href="editar_editora.php?page=<?php echo $usuaria->getIdUsuario(); ?>">Editar</a></td>
+
                     <!-- Botón para editar datos de la editora (por implementar) -->
                     <td class="cuerpo-tabla-tr-td"><a class="boton-eliminar-editoras" href="/controladores/eliminar_editora.php?page=<?php echo $usuaria->getIdUsuario(); ?>" onclick="return confirm('¿Estás segura de eliminar esta Editora?');">Eliminar</a></td>
                 </tr>
-                
-                <?php
+                <?php endif;
             }
             ?>
             <!-- Botón para agregar una nueva editora como fila de tabla -->

@@ -91,6 +91,14 @@ require_once "../header.php";
 ?>
 <main>
     <?php
+    if (isset($_GET['page'])): ?>
+        <section class="titulo-section">
+            <a href="index.php?page=<?= $_GET['page'];?>" class="faq-variable">⮌ Volver atrás</a>
+            <h1 class="faq-titulo-categoria"><?= Categoria::getCategoriaById($_GET['page'])->getNombre();?></h1>
+            <h1 class="titulo-page">Preguntas Frecuentes</h1>
+        </section>
+    <?php endif;
+
     if (isset($error)) {
         ?>
         <article class="error">
@@ -101,7 +109,7 @@ require_once "../header.php";
 
     if ($categoria_edit) {
         ?>
-        <article class="anadir-categoria">
+        <article class="anadir-categoria" style="margin-top: 1px;">
             <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="editar_categoria">
                 <input type="hidden" name="id_categoria"

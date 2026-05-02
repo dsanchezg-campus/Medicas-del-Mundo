@@ -45,6 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
 <body>
 <?php require_once "../header.php"; ?>
 <main>
+    <?php
+    if (isset($_GET['categoria'])): ?>
+        <section class="titulo-section">
+            <a href="FaQ.php?categoria=<?= $_GET['categoria'];?>" class="faq-variable">⮌ Volver atrás</a>
+            <h1 class="faq-titulo-categoria"><?= Categoria::getCategoriaById($_GET['categoria'])->getNombre();?></h1>
+            <h1 class="titulo-page">Preguntas Frecuentes</h1>
+        </section>
+    <?php endif; ?>
     <?php if (isset($exito)) { ?>
         <article class="exito" style="color: green; padding: 10px;">
             <p><?php echo $exito; ?></p>
@@ -57,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
         </article>
     <?php } ?>
 
-    <article class="anadir-categoria">
+    <article class="anadir-categoria" style="margin-top: 0;">
         <form action="" method="post" class="form-anadir" enctype="multipart/form-data">
             <input type="hidden" name="categoria" value="<?= $_GET['categoria']; ?>" >
 
