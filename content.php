@@ -34,7 +34,7 @@ $subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 include "header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
-    <main>
+    <main id="content-container-main">
         <?php
         if (isset($_GET['page'])){
             $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
@@ -50,7 +50,7 @@ include "header.php";
         ?>
 
 <!-- menu de navegación a la izquierda, muestra categorias y otros bloques pertenecientes a la misma categoria que este bloque-->
-        <aside class="subcategorias-content">
+        <aside class="subcategorias-content" style="min-width: 25%;">
             <?php
             // Verificar si se ha especificado un bloque por parámetro 'page'
             if (isset($_GET['page'])) {
@@ -92,7 +92,7 @@ include "header.php";
         </aside>
 
 <!-- Sección principal con el contenido detallado del bloque -->
-        <section class="contenedor-contenido">
+        <section class="contenedor-contenido" style="overflow-y: scroll; height: 79vh;">
             <?php
             // Mostrar contenido si hay parámetro 'page'
             if (isset($_GET['page'])) {
@@ -101,8 +101,18 @@ include "header.php";
                 // Obtener contenidos extra asociados al bloque
                 $contenidos = Contenido::getContenidoByBloque($bloque->getIdBloque());
             ?>
-            <article class="titulo">
+            <article class="titulo" style="margin-bottom: 2%; text-align: center">
                 <h1><?php echo $bloque->getTituloBloque();?></h1>
+                <p><?= $bloque->getDescripcionBloque();?></p>
+            </article>
+                <article style="margin-bottom: 2%;">
+                    <p>Enlaces de referencia :
+                        <?php foreach($contenidos as $contenido){
+                            if ($contenido->getTipo() == "enlace"): ?>
+                                <a style="text-decoration: underline;" href="<?= $contenido->getUrl(); ?>"><?= $contenido->getDescripcion(); ?></a>
+                            <?php endif;
+                        }?>
+                    </p>
             </article>
             <article class="parrafo">
                 <?php
@@ -110,7 +120,7 @@ include "header.php";
                 $parrafos = preg_split("/\r\n/", $texto);
                 foreach ($parrafos as $parrafo) {
                     if ($parrafo != "") {
-                        echo "<p>" . htmlspecialchars($parrafo) . "</p>";
+                        echo "<p style='font-weight: lighter;'>" . htmlspecialchars($parrafo) . "</p>";
                     } else {
                         echo "<br>";
                     }
@@ -120,11 +130,13 @@ include "header.php";
                 <?php
                 // Iterar sobre los contenidos extra y mostrarlos como enlaces o imágenes
                 foreach ($contenidos as $contenido) {
+                    if ($contenido->getTipo() == "imagen") {
                     ?>
             <article class="enlace">
-                <img src="<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
+                <img src="../styles/img/<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
             </article>
             <?php
+                    }
                 }
             }
             ?>

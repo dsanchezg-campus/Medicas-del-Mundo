@@ -7,13 +7,7 @@ class Contenido{
     private $descripcion;
     private $id_bloque;
     private $fecha_actualizacion;
-    /**
-     * @param $id_extra
-     * @param $url
-     * @param $descripcion
-     * @param $id_bloque
-     * @param $fecha_actualizacion
-     */
+    private $tipo;
 
     /**
      * @param $id_extra
@@ -21,14 +15,16 @@ class Contenido{
      * @param $descripcion
      * @param $id_bloque
      * @param $fecha_actualizacion
+     * @param $tipo
      */
-    public function __construct($id_extra, $url, $descripcion, $id_bloque, $fecha_actualizacion)
+    public function __construct($id_extra, $id_bloque, $descripcion, $url, $fecha_actualizacion, $tipo)
     {
-        $this->id_extra;
+        $this->id_extra = $id_extra;
         $this->url = $url;
         $this->descripcion = $descripcion;
         $this->id_bloque = $id_bloque;
         $this->fecha_actualizacion = $fecha_actualizacion;
+        $this->tipo = $tipo;
     }
 
     /************************* GETTERS y SETTERS ****************************************/
@@ -57,6 +53,10 @@ class Contenido{
     public function getFechaActualizacion()
     {
         return $this->fecha_actualizacion;
+    }
+
+    public function getTipo(){
+        return $this->tipo;
     }
 
     public function setIdExtra($id_extra)
@@ -89,12 +89,13 @@ class Contenido{
 
     /**
      * Añade un nuevo contenido a la BD
+     * @return void
      */
     public function InsertarContenido(): void
     {
         $db = DB::conectar();
-        $stmt = $db->prepare("INSERT INTO extra(id_extra, id_bloque, descripcion, url, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$this->id_extra, $this->id_bloque, $this->descripcion, $this->url, $this->fecha_actualizacion]);
+        $stmt = $db->prepare("INSERT INTO extra(id_extra, id_bloque, descripcion, url, fecha_actualizacion, tipo) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$this->id_extra, $this->id_bloque, $this->descripcion, $this->url, $this->fecha_actualizacion, $this->tipo]);
     }
 
     /**
@@ -115,6 +116,11 @@ class Contenido{
     public function EliminarContenido(): void
     {
         $db = DB::conectar();
+        if ($this->tipo == "imagen"){
+            if (file_exists("../styles/img/". $this->url)){
+                unlink("../styles/img/". $this->url);
+            }
+        }
         $stmt = $db->prepare("DELETE FROM extra WHERE id_extra = ?");
         $stmt->execute([$this->id_extra]);
     }
@@ -132,13 +138,70 @@ class Contenido{
         while ($consultaContenido = $stmt->fetch(PDO::FETCH_ASSOC)){
             $contenido = new Contenido(
                 $consultaContenido['id_extra'],
-                $consultaContenido['url'],
-                $consultaContenido['descripcion'],
                 $consultaContenido['id_bloque'],
-                $consultaContenido['fecha_actualizacion']
+                $consultaContenido['descripcion'],
+                $consultaContenido['url'],
+                $consultaContenido['fecha_actualizacion'],
+                $consultaContenido['tipo']
             );
             $contenidos[] = $contenido;
         }
         return $contenidos;
+    }
+
+    /**
+     * Devuelve el contenido de la BD segun su id
+     * @param $id_contenido int
+     * @return Contenido
+     */
+    public static function getContenidoById($id_contenido) :Contenido{
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT * FROM extra WHERE id_extra = ?");
+        $stmt->execute([$id_contenido]);
+        $nuevoContenido = $stmt->fetch(PDO::FETCH_ASSOC);
+        return new Contenido(
+            $nuevoContenido['id_extra'],
+            $nuevoContenido['id_bloque'],
+            $nuevoContenido['descripcion'],
+            $nuevoContenido['url'],
+            $nuevoContenido['fecha_actualizacion'],
+            $nuevoContenido['tipo']
+        );
+    }
+
+    /**
+     * Obtiene el id para insertar en la BD
+     *
+     * @return int
+     */
+    public static function SiguienteId() :int
+    {
+        $db = DB::conectar();
+        $stmt = $db->prepare("SELECT MAX(id_extra) as id_extra FROM extra");
+        $stmt->execute();
+        $id_extra = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($id_extra){
+            return $id_extra['id_extra'] + 1;
+        } else {
+            return 1;
+        }
+    }
+
+    /**
+     * Para controlar el tipo añadido a la BD en un futuro
+     * @return string
+     */
+    public static function Imagen() :string
+    {
+        return "imagen";
+    }
+
+    /**
+     * Para controlar el tipo añadido a la BD en un futuro
+     * @return string
+     */
+    public static function Enlace() :string
+    {
+        return "enlace";
     }
 }
