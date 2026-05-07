@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2026 a las 08:37:44
+-- Tiempo de generación: 07-05-2026 a las 21:00:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,16 +34,16 @@ CREATE TABLE `bloque` (
   `descripcion` text NOT NULL,
   `texto` text NOT NULL,
   `orden` int(11) NOT NULL,
-  `id_madre` int(11) DEFAULT NULL,
-  `fecha_actualizacion` date NOT NULL
+  `fecha_actualizacion` date NOT NULL,
+  `icono` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `bloque`
 --
 
-INSERT INTO `bloque` (`id_bloque`, `id_categoria`, `titulo`, `descripcion`, `texto`, `orden`, `id_madre`, `fecha_actualizacion`) VALUES
-(5, 10, 'NAtico', 'Cancion maria', '(Coro)\r\nMaría mírame, María mírame\r\nSi tú me miras, Él también me mirará\r\nMadre mía, mírame\r\nDe la mano llévame\r\nMuy cerca de Él\r\nQue ahí me quiero quedar. \r\n(Verso)\r\nNo tengo miedo, no, no tengo miedo\r\nPorque sé que tú me llevas de la mano\r\nAunque el mundo me diga que estoy loco\r\nY que el camino es difícil y lejano.\r\n(Coro)\r\nMaría mírame, María mírame\r\nSi tú me miras, Él también me mirará\r\nMadre mía, mírame\r\nDe la mano llévame\r\nMuy cerca de Él\r\nQue ahí me quiero quedar. ', 0, NULL, '2026-03-23');
+INSERT INTO `bloque` (`id_bloque`, `id_categoria`, `titulo`, `descripcion`, `texto`, `orden`, `fecha_actualizacion`, `icono`) VALUES
+(1, 1, 'Indefinidos', 'Sin duracion determinada', 'En España, el **contrato indefinido** es el acuerdo laboral sin fecha de finalización prevista y constituye la forma ordinaria de contratación.\r\n\r\n### Características principales\r\n\r\n* **Duración:** No tiene límite temporal.\r\n* **Jornada:** Puede ser completa, parcial o fija-discontinua.\r\n* **Formalización:** Puede ser verbal, aunque suele hacerse por escrito; algunas modalidades exigen forma escrita obligatoria.\r\n* **Periodo de prueba:** Según convenio o Estatuto de los Trabajadores.\r\n* **Despido:** Requiere causa legal o indemnización correspondiente.\r\n* **Seguridad Social:** Alta obligatoria por parte de la empresa.\r\n\r\n### Ventajas\r\n\r\n**Para el trabajador:**\r\n\r\n* Mayor estabilidad laboral\r\n* Derecho a indemnización en caso de despido improcedente\r\n* Mejor acceso a financiación o alquiler\r\n\r\n**Para la empresa:**\r\n\r\n* Posibles bonificaciones en determinados supuestos\r\n* Mayor retención de talento\r\n\r\n### Tipos frecuentes\r\n\r\n* Ordinario\r\n* Fijo-discontinuo\r\n* Indefinido adscrito a obra (sectores específicos)\r\n\r\n### Extinción\r\n\r\nPuede finalizar por:\r\n\r\n* Baja voluntaria\r\n* Jubilación\r\n* Despido disciplinario\r\n* Despido objetivo\r\n* Mutuo acuerdo\r\n\r\n### Marco legal\r\n\r\nRegulado principalmente por el Estatuto de los Trabajadores.\r\n', 1, '2026-04-28', '69f082f308d24_dream_xdkhnl2zpel.jpg');
 
 -- --------------------------------------------------------
 
@@ -66,10 +66,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nombre`, `descripcion`, `orden`, `img_cat`, `id_madre`, `fecha_actualizacion`) VALUES
-(9, 'holza', 'holzaholzaholzaholzaholzaholza', 1, 'images.jfif', 10, '2026-03-20'),
-(10, 'MARIA', 'MAMAMAMMAMAMAMAMMAMAMAMAMA', 1, 'https://cdn-imgix.headout.com/media/images/c9db3cea62133b6a6bb70597326b4a34-388-dubai-img-worlds-of-adventure-tickets-01.jpg?auto=format&w=1222.3999999999999&h=687.6&q=90&ar=16%3A9&crop=faces&fit=crop', NULL, '2026-03-20'),
-(11, 'ASFDFD', 'SDFFDFDSFDFDSDSFFDSFSFDSFDFDSFD', 0, 'https://media.licdn.com/dms/image/v2/D4E0BAQGuxNl1VKC8xg/company-logo_200_200/B4EZshSVofHcAM-/0/1765790014525/img_media_logo?e=2147483647&v=beta&t=IbmJ4UipXNuYyGHXmJAJUurD3tPxSk6s3qUuOSEpiqg', NULL, '2026-03-20'),
-(12, 'ASFDFD', 'SDFFDFDSFDFDSDSFFDSFSFDSFDFDSFD', 0, 'https://media.licdn.com/dms/image/v2/D4E0BAQGuxNl1VKC8xg/company-logo_200_200/B4EZshSVofHcAM-/0/1765790014525/img_media_logo?e=2147483647&v=beta&t=IbmJ4UipXNuYyGHXmJAJUurD3tPxSk6s3qUuOSEpiqg', NULL, '2026-03-20');
+(1, 'Contratos', 'tipos de contratos', 1, '69f0816b58b3e_Mapa de Empatia.png', NULL, '2026-04-28'),
+(2, 'Nominas', 'pa calcular tu salario', 1, '69f08286e0707_Gemini_Generated_Image_4w5r24w5r24w5r24.png', NULL, '2026-04-28');
 
 -- --------------------------------------------------------
 
@@ -82,8 +80,16 @@ CREATE TABLE `extra` (
   `id_bloque` int(11) NOT NULL,
   `descripcion` text NOT NULL,
   `url` text NOT NULL,
-  `fecha_actualizacion` date NOT NULL
+  `fecha_actualizacion` date NOT NULL,
+  `tipo` enum('imagen','enlace') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `extra`
+--
+
+INSERT INTO `extra` (`id_extra`, `id_bloque`, `descripcion`, `url`, `fecha_actualizacion`, `tipo`) VALUES
+(1, 1, 'Medicos', '69f723ac5b024_placeholder_bloque.png', '2026-05-03', 'imagen');
 
 -- --------------------------------------------------------
 
@@ -99,6 +105,13 @@ CREATE TABLE `faq` (
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `faq`
+--
+
+INSERT INTO `faq` (`id_faq`, `pregunta`, `respuesta`, `fecha_actualizacion`, `id_categoria`) VALUES
+(1, 'hoa', 'frf', '2026-05-02', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +122,14 @@ CREATE TABLE `rol` (
   `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
+(1, 'admin'),
+(2, 'editora');
 
 -- --------------------------------------------------------
 
@@ -125,6 +146,14 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `email`, `password`, `nombre`, `id_rol`) VALUES
+(2, 'medica@gmail.es', '$2y$10$TiIgnXN4bFTG.gqu.MNUYOB8z9BizZDCVckooUhbyn2m75gCb.pEO', 'Admin25', 1),
+(3, 'algo2@gmail.com', '$2y$10$YzNkz.96pEaYFx.OKpTkBur.5XeeeiHA1X016JsDm4Eqf5no7tBdG', 'David', 2);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -133,29 +162,28 @@ CREATE TABLE `usuario` (
 --
 ALTER TABLE `bloque`
   ADD PRIMARY KEY (`id_bloque`),
-  ADD UNIQUE KEY `id_categoria` (`id_categoria`),
-  ADD KEY `id_madre` (`id_madre`);
+  ADD KEY `fk_id_categoria_bloque` (`id_categoria`);
 
 --
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`),
-  ADD KEY `FOREIGN KEY` (`id_madre`);
+  ADD KEY `fk_id_madre` (`id_madre`);
 
 --
 -- Indices de la tabla `extra`
 --
 ALTER TABLE `extra`
   ADD PRIMARY KEY (`id_extra`),
-  ADD KEY `id_bloque` (`id_bloque`);
+  ADD KEY `fk_id_bloque` (`id_bloque`);
 
 --
 -- Indices de la tabla `faq`
 --
 ALTER TABLE `faq`
   ADD PRIMARY KEY (`id_faq`),
-  ADD KEY `FOREIGN KEY` (`id_categoria`);
+  ADD KEY `fk_id_categoria_faq` (`id_categoria`);
 
 --
 -- Indices de la tabla `rol`
@@ -168,6 +196,7 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `usuario_email` (`email`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
@@ -178,37 +207,31 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `bloque`
 --
 ALTER TABLE `bloque`
-  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_bloque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `extra`
 --
 ALTER TABLE `extra`
-  MODIFY `id_extra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_extra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id_faq` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_faq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -218,20 +241,25 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `bloque`
 --
 ALTER TABLE `bloque`
-  ADD CONSTRAINT `bloque_ibfk_1` FOREIGN KEY (`id_madre`) REFERENCES `bloque` (`id_bloque`),
-  ADD CONSTRAINT `fk_bloque_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+  ADD CONSTRAINT `fk_id_categoria_bloque` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD CONSTRAINT `fk_id_madre` FOREIGN KEY (`id_madre`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `extra`
 --
 ALTER TABLE `extra`
-  ADD CONSTRAINT `extra_ibfk_1` FOREIGN KEY (`id_bloque`) REFERENCES `bloque` (`id_bloque`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_bloque` FOREIGN KEY (`id_bloque`) REFERENCES `bloque` (`id_bloque`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `faq`
 --
 ALTER TABLE `faq`
-  ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+  ADD CONSTRAINT `fk_id_categoria_faq` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
