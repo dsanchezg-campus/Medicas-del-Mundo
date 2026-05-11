@@ -133,7 +133,7 @@ include "header.php";
                     if ($contenido->getTipo() == "imagen") {
                     ?>
             <article class="enlace">
-                <img src="styles/img/<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
+                <img src="styles/img/<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>" style="max-width: 70%; height: auto;">
             </article>
             <?php
                     }
