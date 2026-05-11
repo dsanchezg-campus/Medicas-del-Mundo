@@ -46,14 +46,14 @@
    Tipografía principal de la aplicación.
    Se carga desde archivos locales en /fonts/
    ============================================= */
-@font-face {
-    font-family: 'Anton';
-    src: url('fonts/Anton-Regular.woff2') format('woff2'),
-    url('fonts/Anton-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block; /* Bloquea el renderizado hasta que la fuente esté disponible */
-}
+/*@font-face {*/
+/*    font-family: 'Anton';*/
+/*    src: url('fonts/Anton-Regular.woff2') format('woff2'),*/
+/*    url('fonts/Anton-Regular.woff') format('woff');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*    font-display: block; !* Bloquea el renderizado hasta que la fuente esté disponible *!*/
+/*}*/
 
 /* =============================================
    RESET Y BASE GLOBAL

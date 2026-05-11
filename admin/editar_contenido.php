@@ -67,8 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["titulo"], $_POST["desc
     } catch (Exception $e){
         $error = $e->getMessage();
     }
-} else{
-    echo "no llego formulaio";
 }
 ?>
 <!DOCTYPE html>

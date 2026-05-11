@@ -64,7 +64,7 @@ include "header.php";
 
                             <article class="testo-content">
                                 <h1><?php echo $subcategoria->getNombre(); ?></h1>
-                                <p><?php echo $subcategoria->getDescripcion(); ?></p>
+                                <p><?php //echo $subcategoria->getDescripcion(); ?></p>
                             </article>
                         </a>
                     </section>
@@ -81,7 +81,7 @@ include "header.php";
 
                             <article class="testo-content">
                                 <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
-                                <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
+                                <p><?php //echo $bloque_paralelo->getDescripcionBloque(); ?></p>
                             </article>
                         </a>
                     </section>
@@ -133,7 +133,7 @@ include "header.php";
                     if ($contenido->getTipo() == "imagen") {
                     ?>
             <article class="enlace">
-                <img src="../styles/img/<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
+                <img src="styles/img/<?php echo $contenido->getUrl(); ?>" alt="<?php echo $contenido->getDescripcion(); ?>">
             </article>
             <?php
                     }

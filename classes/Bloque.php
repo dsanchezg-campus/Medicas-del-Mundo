@@ -62,8 +62,9 @@ class Bloque
      */
     public function ActualizarBloque(): void{
         $db = DB::conectar();
-        $stmt = $db->prepare("UPDATE bloque SET titulo = ?, descripcion = ?, texto = ?, orden = ?, fecha_actualizacion = ?, icono = ? WHERE id_bloque = ?");
+        $stmt = $db->prepare("UPDATE bloque SET id_categoria = ?,titulo = ?, descripcion = ?, texto = ?, orden = ?, fecha_actualizacion = ?, icono = ? WHERE id_bloque = ?");
         $stmt->execute([
+            $this->id_categoria,
             $this->titulo_bloque,
             $this->descripcion_bloque,
             $this->texto_bloque,

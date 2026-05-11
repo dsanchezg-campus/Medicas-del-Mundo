@@ -61,7 +61,7 @@ $subcategorias = Categoria::getSubcategorias($bloque->getIdCategoria());
 require_once "../header.php";
 ?>
 <!-- Contenido principal dividido en aside para bloques relacionados y sección para el contenido detallado -->
-    <main id="content-container-main">
+    <main id="content-container-main" style="overflow-y: auto">
         <?php
         if (isset($_GET['page'])){
             $categoria_actual = Categoria::getCategoriaById($bloque->getIdCategoria());
@@ -90,7 +90,7 @@ require_once "../header.php";
 
                         <article class="testo-content">
                             <h1><?php echo $subcategoria->getNombre(); ?></h1>
-                            <p><?php echo $subcategoria->getDescripcion(); ?></p>
+                            <p><?php //echo $subcategoria->getDescripcion(); ?></p>
                         </article>
                     </a>
                 </section>
@@ -107,7 +107,7 @@ require_once "../header.php";
 
                     <article class="testo-content">
                         <h1><?php echo $bloque_paralelo->getTituloBloque(); ?></h1>
-                        <p><?php echo $bloque_paralelo->getDescripcionBloque(); ?></p>
+                        <p><?php //echo $bloque_paralelo->getDescripcionBloque(); ?></p>
                     </article>
                 </a>
             </section>

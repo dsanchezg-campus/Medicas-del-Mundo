@@ -53,15 +53,17 @@ require_once "header.php";
         <?php
         // Manejo de excepciones para errores de base de datos
         try {
-        /* COMPROBAMOS SI
-            *SE HA BUSCADO CON 'buscar'
-            *SE HA ENTRADO EN UNA CATEGORIA con 'page'
-            *ESTAS EN INICIO CON CATEGORIAS INICIALES
-         */
-            if (!empty($_GET['buscar'])):
+            /* COMPROBAMOS SI
+                *SE HA BUSCADO CON 'buscar'
+                *SE HA ENTRADO EN UNA CATEGORIA con 'page'
+                *ESTAS EN INICIO CON CATEGORIAS INICIALES
+             */
+            if (!empty($_GET['buscar'])){
                 $buscar = $_GET['buscar'];
-                echo "<section class='contenedor'>";
                 $categorias = Categoria::BuscarCategorias($buscar);
+                if ($categorias) {
+                    echo "<section class='contenedor'>";
+                }
                 foreach ($categorias as $categoria): ?>
                 <section class="categoria">
                     <a class="enlace-bloque" href="index.php?page=<?php echo $categoria->getIdcategoria(); ?>">
@@ -75,8 +77,13 @@ require_once "header.php";
                     </a>
                 </section>
             <?php endforeach;
-                echo "</section><section class='contenedor'>";
+                if ($categorias) {
+                    echo "</section>";
+                }
                 $contenidos = Bloque::BuscarBloques($buscar);
+                if ($contenidos) {
+                    echo "<section class='contenedor'>";
+                }
                 foreach ($contenidos as $contenido) { ?>
                     <section class="contenido-bloque">
                         <a class="enlace-bloque" href="content.php?page=<?php echo $contenido->getIdBloque(); ?>">
@@ -91,9 +98,11 @@ require_once "header.php";
                     </section>
             <?php
                 }
-                echo "</section>";
+                if ($contenidos) {
+                    echo "</section>";
+                }
             // Verificar si se ha pasado un parámetro 'page' en la URL para mostrar subcategorías o categorías raíz
-            elseif (isset($_GET['page'])):
+            }elseif (isset($_GET['page'])){
                 echo "<section class='contenedor'>";
                 // Obtener subcategorías de la categoría padre especificada por 'page'
                 $subcategorias = Categoria::getSubcategorias($_GET['page']);
@@ -113,7 +122,7 @@ require_once "header.php";
             </section>
             <?php }
                 echo "</section>";
-                else :
+            }else{
                     echo "<section class='contenedor'>";
                     // Si no hay parámetro 'page', mostrar todas las categorías raíz (padres)
                     $categorias = Categoria::getCategorias();
@@ -134,7 +143,7 @@ require_once "header.php";
             <?php
                     }
                     echo "</section>";
-                endif;
+            }
         } catch (PDOException $e) {
             // Capturar y mostrar errores de conexión o consultas a la base de datos
             echo "<p>Ha ocurrido un error</p>";
